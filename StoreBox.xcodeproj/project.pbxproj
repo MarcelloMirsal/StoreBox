@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		FB13EAD1245FB6E600C9CC33 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB13EAD0245FB6E600C9CC33 /* AppDelegate.swift */; };
 		FB13EAD3245FB6E600C9CC33 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB13EAD2245FB6E600C9CC33 /* SceneDelegate.swift */; };
-		FB13EAD5245FB6E600C9CC33 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB13EAD4245FB6E600C9CC33 /* ViewController.swift */; };
 		FB13EAD8245FB6E600C9CC33 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB13EAD6245FB6E600C9CC33 /* Main.storyboard */; };
 		FB13EADA245FB6E600C9CC33 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FB13EAD9245FB6E600C9CC33 /* Assets.xcassets */; };
 		FB13EADD245FB6E600C9CC33 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB13EADB245FB6E600C9CC33 /* LaunchScreen.storyboard */; };
@@ -30,7 +29,6 @@
 		FB13EACD245FB6E600C9CC33 /* StoreBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StoreBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB13EAD0245FB6E600C9CC33 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FB13EAD2245FB6E600C9CC33 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		FB13EAD4245FB6E600C9CC33 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		FB13EAD7245FB6E600C9CC33 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FB13EAD9245FB6E600C9CC33 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FB13EADC245FB6E600C9CC33 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -79,12 +77,9 @@
 		FB13EACF245FB6E600C9CC33 /* StoreBox */ = {
 			isa = PBXGroup;
 			children = (
-				FB13EAD0245FB6E600C9CC33 /* AppDelegate.swift */,
-				FB13EAD2245FB6E600C9CC33 /* SceneDelegate.swift */,
-				FB13EAD4245FB6E600C9CC33 /* ViewController.swift */,
+				FB416B862460E3060062C387 /* AppDelegate */,
 				FB13EAD6245FB6E600C9CC33 /* Main.storyboard */,
-				FB13EAD9245FB6E600C9CC33 /* Assets.xcassets */,
-				FB13EADB245FB6E600C9CC33 /* LaunchScreen.storyboard */,
+				FB416B872460E31B0062C387 /* Assets */,
 				FB13EADE245FB6E600C9CC33 /* Info.plist */,
 			);
 			path = StoreBox;
@@ -97,6 +92,24 @@
 				FB13EAE9245FB6E700C9CC33 /* Info.plist */,
 			);
 			path = StoreBoxTests;
+			sourceTree = "<group>";
+		};
+		FB416B862460E3060062C387 /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				FB13EAD0245FB6E600C9CC33 /* AppDelegate.swift */,
+				FB13EAD2245FB6E600C9CC33 /* SceneDelegate.swift */,
+			);
+			path = AppDelegate;
+			sourceTree = "<group>";
+		};
+		FB416B872460E31B0062C387 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				FB13EAD9245FB6E600C9CC33 /* Assets.xcassets */,
+				FB13EADB245FB6E600C9CC33 /* LaunchScreen.storyboard */,
+			);
+			path = Assets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -200,7 +213,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FB13EAD5245FB6E600C9CC33 /* ViewController.swift in Sources */,
 				FB13EAD1245FB6E600C9CC33 /* AppDelegate.swift in Sources */,
 				FB13EAD3245FB6E600C9CC33 /* SceneDelegate.swift in Sources */,
 			);
@@ -365,6 +377,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 45VBTWJ842;
 				INFOPLIST_FILE = StoreBox/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -383,6 +396,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 45VBTWJ842;
 				INFOPLIST_FILE = StoreBox/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
