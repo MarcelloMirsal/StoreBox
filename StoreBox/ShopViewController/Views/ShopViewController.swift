@@ -12,28 +12,24 @@ class ShopViewController: UIViewController {
     
     
     @IBOutlet weak var contentsView: UIView!
-    
     @IBOutlet weak var categoriesViewHeightConstraint: NSLayoutConstraint!
+    let categoriesViewId = "CategoriesViewController"
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        if segue.identifier == "CategoriesViewController" {
-        let vc = segue.destination as! CategoriesViewController
-            vc.dynamicSizeDelegate = self
-        }
+    func setupSearchController() {
+        navigationItem.searchController = .init()
     }
-    
-    
     
     // MARK:- View LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupSearchController()
-        categoriesViewHeightConstraint.constant = 0
     }
     
-    func setupSearchController() {
-        navigationItem.searchController = .init()
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == categoriesViewId {
+        let vc = segue.destination as! CategoriesViewController
+            vc.dynamicSizeDelegate = self
+        }
     }
     
 }
@@ -41,9 +37,6 @@ class ShopViewController: UIViewController {
 extension ShopViewController: UICollectionViewDynamicSizeDelegate {
     func collectionView(setDynamicSize dynamicSize: CGSize) {
         categoriesViewHeightConstraint.constant = dynamicSize.height
-        print(dynamicSize.height)
         contentsView.layoutIfNeeded()
     }
-    
-    
 }

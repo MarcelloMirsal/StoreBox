@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 protocol UICollectionViewDynamicSizeDelegate: class {
     func collectionView(setDynamicSize dynamicSize: CGSize)
 }
@@ -25,19 +24,23 @@ class CategoriesViewController: UICollectionViewController, UICollectionViewDele
         return calculator.get(aspectWidth: 4, aspectHeight: 5)
     }()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    func setupCollectionView() {
         let nib = UINib(nibName: "CategoryCollectionViewCell", bundle: nil)
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
         collectionView.register(nib, forCellWithReuseIdentifier: cellId)
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupCollectionView()
+    }
+    
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        let numberOfItems = 7
+        let numberOfItems = 4
         let numberOfRowsPerColumn = ceil(Float(numberOfItems) / 2.0)
         let height = numberOfRowsPerColumn * Float(cellSize.height) + (numberOfRowsPerColumn-1) * 16
-        DispatchQueue.global().asyncAfter(deadline: .now() + 5) {
+        DispatchQueue.global().asyncAfter(deadline: .now()) {
             DispatchQueue.main.async {
                 self.dynamicSizeDelegate!.collectionView(setDynamicSize: CGSize(width: self.collectionView.frame.width, height: CGFloat(height)))
             }

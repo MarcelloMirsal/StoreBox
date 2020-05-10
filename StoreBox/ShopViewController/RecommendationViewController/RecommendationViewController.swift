@@ -13,17 +13,21 @@ class RecommendationViewController: UICollectionViewController, UICollectionView
     let cellId = "cellId"
     
     lazy var cellSize: CGSize = {
-        let width = (collectionView.frame.width - 32 - 16) / 2
+        let width = (collectionView.frame.width) / 2.45
         let calculator = AspectRatioCalculator(width: width)
-        return calculator.get(aspectWidth: 9, aspectHeight: 16)
+        return calculator.get(aspectWidth: 1, aspectHeight: 2)
     }()
+    
+    func setupCollectionView() {
+        let nib = UINib(name: "ProductCollectionViewCell")
+        collectionView.register(nib, forCellWithReuseIdentifier: cellId)
+        collectionView.contentInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+    }
     
     // MARK:- LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        let nib = UINib(nibName: "ProductCollectionViewCell", bundle: nil)
-        collectionView.register(nib, forCellWithReuseIdentifier: "cellId")
-        collectionView.contentInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+        setupCollectionView()
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

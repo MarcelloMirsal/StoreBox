@@ -29,12 +29,12 @@ class ProductsAdCollectionViewCell: UICollectionViewCell {
     
 
     func setupLayers() {
-        contentView.layer.cornerRadius = 8
+        contentView.layer.cornerRadius = 12
         contentView.layer.masksToBounds = true
+        layer.shadowOffset = .init(width: 0, height: 16)
         layer.shadowColor = UIColor.lightGray.cgColor
-        layer.shadowOpacity = 0.40
-        layer.shadowOffset = CGSize(width: 0, height: 20)
-        layer.shadowRadius = 12
+        layer.shadowOpacity = 0.75
+        layer.shadowRadius = 10
         layer.masksToBounds = false
     }
     

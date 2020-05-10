@@ -10,23 +10,28 @@ import UIKit
 
 class ProductsAdsController: UICollectionViewController , UICollectionViewDelegateFlowLayout {
     
+    let cellId = "cellId"
+    
     lazy var ShiftedSize: CGSize = {
-        let width = (collectionView.frame.size.width - 32) - 32
+        let width = (collectionView.frame.size.width - 48)
         let calculator = AspectRatioCalculator(width: width)
         let calculatedSize = calculator.get(aspectWidth: 3, aspectHeight: 4)
         return CGSize(width: calculatedSize.width, height: calculatedSize.height)
     }()
     
+    func setupCollectionView() {
+        let nib = UINib(name: "ProductsAdCollectionViewCell")
+        collectionView.register(nib, forCellWithReuseIdentifier: cellId)
+    }
+    
+    // MARK:- View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionView.contentInset = UIEdgeInsets(top: 16, left: 0, bottom: 32, right: 0)
-        let nib = UINib(nibName: "ProductsAdCollectionViewCell", bundle: nil)
-        collectionView.register(nib, forCellWithReuseIdentifier: "cellId")
-        collectionView.backgroundColor = .red
+        setupCollectionView()
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! ProductsAdCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! ProductsAdCollectionViewCell
         return cell
     }
     
@@ -42,5 +47,5 @@ class ProductsAdsController: UICollectionViewController , UICollectionViewDelega
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 16
     }
-    
+
 }

@@ -26,12 +26,12 @@
 		FB13EADA245FB6E600C9CC33 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FB13EAD9245FB6E600C9CC33 /* Assets.xcassets */; };
 		FB13EADD245FB6E600C9CC33 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB13EADB245FB6E600C9CC33 /* LaunchScreen.storyboard */; };
 		FB1C8024246212CE00BFE29F /* UIHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1C8023246212CE00BFE29F /* UIHelpers.swift */; };
-		FB2E029C24628F3A002CACDE /* RecommendationViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB2E029B24628F3A002CACDE /* RecommendationViewController.storyboard */; };
 		FB2E029E24628F73002CACDE /* RecommendationViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2E029D24628F73002CACDE /* RecommendationViewControllerTests.swift */; };
-		FB2E02A024629051002CACDE /* RecommendationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2E029F24629051002CACDE /* RecommendationViewController.swift */; };
 		FB2E02A224629FBA002CACDE /* ProductCollectionViewCellTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2E02A124629FBA002CACDE /* ProductCollectionViewCellTests.swift */; };
 		FB2E02A524629FE5002CACDE /* ProductCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2E02A324629FE5002CACDE /* ProductCollectionViewCell.swift */; };
 		FB2E02A624629FE5002CACDE /* ProductCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB2E02A424629FE5002CACDE /* ProductCollectionViewCell.xib */; };
+		FBE2CB1224682FB300DF52C4 /* RecommendationViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FBE2CB1124682FB300DF52C4 /* RecommendationViewController.storyboard */; };
+		FBE2CB1424682FE700DF52C4 /* RecommendationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE2CB1324682FE700DF52C4 /* RecommendationViewController.swift */; };
 		FBE8DCB92464B2EF009BA11E /* CategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE8DCB82464B2EF009BA11E /* CategoriesViewController.swift */; };
 		FBE8DCBB2464B61A009BA11E /* CategoriesViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FBE8DCBA2464B61A009BA11E /* CategoriesViewController.storyboard */; };
 		FBE8DCBE2464B683009BA11E /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE8DCBC2464B683009BA11E /* CategoryCollectionViewCell.swift */; };
@@ -75,13 +75,15 @@
 		FB13EADE245FB6E600C9CC33 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FB13EAE3245FB6E700C9CC33 /* StoreBoxTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StoreBoxTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB13EAE9245FB6E700C9CC33 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FB1C8023246212CE00BFE29F /* UIHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHelpers.swift; sourceTree = SOURCE_ROOT; };
-		FB2E029B24628F3A002CACDE /* RecommendationViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = RecommendationViewController.storyboard; path = Pods/RecommendationViewController.storyboard; sourceTree = SOURCE_ROOT; };
+		FB1C8023246212CE00BFE29F /* UIHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UIHelpers.swift; path = "StoreBox/Extensions And Helpers/UIHelpers.swift"; sourceTree = SOURCE_ROOT; };
+		FB2E029B24628F3A002CACDE /* RecommendationViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = RecommendationViewController.storyboard; path = "StoreBox/ShopViewController/New Group/RecommendationViewController.storyboard"; sourceTree = SOURCE_ROOT; };
 		FB2E029D24628F73002CACDE /* RecommendationViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationViewControllerTests.swift; sourceTree = "<group>"; };
-		FB2E029F24629051002CACDE /* RecommendationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RecommendationViewController.swift; path = StoreBoxTests/ShopViewControllerTests/RecommendationViewController.swift; sourceTree = SOURCE_ROOT; };
+		FB2E029F24629051002CACDE /* RecommendationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RecommendationViewController.swift; path = StoreBox/ShopViewController/ProductsAdController/RecommendationViewController.swift; sourceTree = SOURCE_ROOT; };
 		FB2E02A124629FBA002CACDE /* ProductCollectionViewCellTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCollectionViewCellTests.swift; sourceTree = "<group>"; };
 		FB2E02A324629FE5002CACDE /* ProductCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCollectionViewCell.swift; sourceTree = "<group>"; };
 		FB2E02A424629FE5002CACDE /* ProductCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductCollectionViewCell.xib; sourceTree = "<group>"; };
+		FBE2CB1124682FB300DF52C4 /* RecommendationViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = RecommendationViewController.storyboard; sourceTree = "<group>"; };
+		FBE2CB1324682FE700DF52C4 /* RecommendationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationViewController.swift; sourceTree = "<group>"; };
 		FBE8DCB82464B2EF009BA11E /* CategoriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesViewController.swift; sourceTree = "<group>"; };
 		FBE8DCBA2464B61A009BA11E /* CategoriesViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CategoriesViewController.storyboard; sourceTree = "<group>"; };
 		FBE8DCBC2464B683009BA11E /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -120,25 +122,12 @@
 		FB06C0FE24614DFE006F589A /* ShopViewController */ = {
 			isa = PBXGroup;
 			children = (
-				FBE8DCB82464B2EF009BA11E /* CategoriesViewController.swift */,
-				FBE8DCBA2464B61A009BA11E /* CategoriesViewController.storyboard */,
-				FBE8DCBC2464B683009BA11E /* CategoryCollectionViewCell.swift */,
-				FBE8DCBD2464B683009BA11E /* CategoryCollectionViewCell.xib */,
-				FB06C0FF24615DE0006F589A /* AdsCollectionView.swift */,
-				FB06C10A24616E6C006F589A /* AdsCollectionViewCell.swift */,
-				FB06C10B24616E6C006F589A /* AdsCollectionViewCell.xib */,
-				FB06C10824616DA3006F589A /* AdsViewController.storyboard */,
-				FB2E02A324629FE5002CACDE /* ProductCollectionViewCell.swift */,
-				FB2E02A424629FE5002CACDE /* ProductCollectionViewCell.xib */,
-				FB06C110246172E7006F589A /* ProductsAdCollectionViewCell.swift */,
-				FB06C111246172E7006F589A /* ProductsAdCollectionViewCell.xib */,
-				FB06C10E2461726D006F589A /* ProductsAdsController.storyboard */,
-				FB06C114246177D9006F589A /* ProductsAdsController.swift */,
-				FB2E029B24628F3A002CACDE /* RecommendationViewController.storyboard */,
-				FB2E029F24629051002CACDE /* RecommendationViewController.swift */,
-				FB06C0FB24614DF3006F589A /* ShopViewController.storyboard */,
-				FB06C10124615EFD006F589A /* ShopViewController.swift */,
-				FB1C8023246212CE00BFE29F /* UIHelpers.swift */,
+				FBE2CB152468305F00DF52C4 /* RecommendationViewController */,
+				FBE2CAF5246825CB00DF52C4 /* AdsViewController */,
+				FBE2CAF82468262200DF52C4 /* CategoriesViewController */,
+				FBE2CB042468281100DF52C4 /* RecommendationViewController */,
+				FBE2CAFB2468267300DF52C4 /* ProductsAdController */,
+				FBE2CB082468289300DF52C4 /* Views */,
 			);
 			path = ShopViewController;
 			sourceTree = "<group>";
@@ -177,8 +166,10 @@
 			isa = PBXGroup;
 			children = (
 				FB416B862460E3060062C387 /* AppDelegate */,
+				FBE2CB052468285100DF52C4 /* ProductCollectionViewCell */,
 				FB06C0FE24614DFE006F589A /* ShopViewController */,
 				FB13EAD6245FB6E600C9CC33 /* Main.storyboard */,
+				FBE2CB0B246828EB00DF52C4 /* Extensions And Helpers */,
 				FB416B872460E31B0062C387 /* Assets */,
 				FB13EADE245FB6E600C9CC33 /* Info.plist */,
 			);
@@ -210,6 +201,139 @@
 				FB13EADB245FB6E600C9CC33 /* LaunchScreen.storyboard */,
 			);
 			path = Assets;
+			sourceTree = "<group>";
+		};
+		FBE2CAF5246825CB00DF52C4 /* AdsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				FBE2CAF6246825ED00DF52C4 /* Views */,
+				FBE2CAF72468260600DF52C4 /* Nibs */,
+			);
+			path = AdsViewController;
+			sourceTree = "<group>";
+		};
+		FBE2CAF6246825ED00DF52C4 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FB06C0FF24615DE0006F589A /* AdsCollectionView.swift */,
+				FB06C10A24616E6C006F589A /* AdsCollectionViewCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		FBE2CAF72468260600DF52C4 /* Nibs */ = {
+			isa = PBXGroup;
+			children = (
+				FB06C10B24616E6C006F589A /* AdsCollectionViewCell.xib */,
+				FB06C10824616DA3006F589A /* AdsViewController.storyboard */,
+			);
+			path = Nibs;
+			sourceTree = "<group>";
+		};
+		FBE2CAF82468262200DF52C4 /* CategoriesViewController */ = {
+			isa = PBXGroup;
+			children = (
+				FBE2CAF92468263C00DF52C4 /* Nibs */,
+				FBE2CAFA2468264700DF52C4 /* Views */,
+			);
+			path = CategoriesViewController;
+			sourceTree = "<group>";
+		};
+		FBE2CAF92468263C00DF52C4 /* Nibs */ = {
+			isa = PBXGroup;
+			children = (
+				FBE8DCBA2464B61A009BA11E /* CategoriesViewController.storyboard */,
+				FBE8DCBD2464B683009BA11E /* CategoryCollectionViewCell.xib */,
+			);
+			path = Nibs;
+			sourceTree = "<group>";
+		};
+		FBE2CAFA2468264700DF52C4 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FBE8DCB82464B2EF009BA11E /* CategoriesViewController.swift */,
+				FBE8DCBC2464B683009BA11E /* CategoryCollectionViewCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		FBE2CAFB2468267300DF52C4 /* ProductsAdController */ = {
+			isa = PBXGroup;
+			children = (
+				FB2E029F24629051002CACDE /* RecommendationViewController.swift */,
+				FB2E029B24628F3A002CACDE /* RecommendationViewController.storyboard */,
+				FBE2CAFD246826AA00DF52C4 /* Views */,
+				FBE2CAFC2468269D00DF52C4 /* Nibs */,
+			);
+			path = ProductsAdController;
+			sourceTree = "<group>";
+		};
+		FBE2CAFC2468269D00DF52C4 /* Nibs */ = {
+			isa = PBXGroup;
+			children = (
+				FB06C111246172E7006F589A /* ProductsAdCollectionViewCell.xib */,
+				FB06C10E2461726D006F589A /* ProductsAdsController.storyboard */,
+			);
+			path = Nibs;
+			sourceTree = "<group>";
+		};
+		FBE2CAFD246826AA00DF52C4 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FB06C110246172E7006F589A /* ProductsAdCollectionViewCell.swift */,
+				FB06C114246177D9006F589A /* ProductsAdsController.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		FBE2CB042468281100DF52C4 /* RecommendationViewController */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = RecommendationViewController;
+			sourceTree = "<group>";
+		};
+		FBE2CB052468285100DF52C4 /* ProductCollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				FBE2CB072468288300DF52C4 /* Views */,
+			);
+			path = ProductCollectionViewCell;
+			sourceTree = "<group>";
+		};
+		FBE2CB072468288300DF52C4 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FB2E02A324629FE5002CACDE /* ProductCollectionViewCell.swift */,
+				FB2E02A424629FE5002CACDE /* ProductCollectionViewCell.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		FBE2CB082468289300DF52C4 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FB06C0FB24614DF3006F589A /* ShopViewController.storyboard */,
+				FB06C10124615EFD006F589A /* ShopViewController.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		FBE2CB0B246828EB00DF52C4 /* Extensions And Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				FB1C8023246212CE00BFE29F /* UIHelpers.swift */,
+			);
+			path = "Extensions And Helpers";
+			sourceTree = "<group>";
+		};
+		FBE2CB152468305F00DF52C4 /* RecommendationViewController */ = {
+			isa = PBXGroup;
+			children = (
+				FBE2CB1124682FB300DF52C4 /* RecommendationViewController.storyboard */,
+				FBE2CB1324682FE700DF52C4 /* RecommendationViewController.swift */,
+			);
+			path = RecommendationViewController;
 			sourceTree = "<group>";
 		};
 		FCE7614C7B50094D4CFB8263 /* Pods */ = {
@@ -313,11 +437,11 @@
 				FB06C10924616DA3006F589A /* AdsViewController.storyboard in Resources */,
 				FB06C10D24616E6C006F589A /* AdsCollectionViewCell.xib in Resources */,
 				FB2E02A624629FE5002CACDE /* ProductCollectionViewCell.xib in Resources */,
+				FBE2CB1224682FB300DF52C4 /* RecommendationViewController.storyboard in Resources */,
 				FB06C113246172E7006F589A /* ProductsAdCollectionViewCell.xib in Resources */,
 				FB06C10F2461726D006F589A /* ProductsAdsController.storyboard in Resources */,
 				FB13EADD245FB6E600C9CC33 /* LaunchScreen.storyboard in Resources */,
 				FB06C0FC24614DF3006F589A /* ShopViewController.storyboard in Resources */,
-				FB2E029C24628F3A002CACDE /* RecommendationViewController.storyboard in Resources */,
 				FB13EADA245FB6E600C9CC33 /* Assets.xcassets in Resources */,
 				FB13EAD8245FB6E600C9CC33 /* Main.storyboard in Resources */,
 			);
@@ -407,10 +531,10 @@
 				FB2E02A524629FE5002CACDE /* ProductCollectionViewCell.swift in Sources */,
 				FBE8DCBE2464B683009BA11E /* CategoryCollectionViewCell.swift in Sources */,
 				FB06C10C24616E6C006F589A /* AdsCollectionViewCell.swift in Sources */,
-				FB2E02A024629051002CACDE /* RecommendationViewController.swift in Sources */,
 				FB1C8024246212CE00BFE29F /* UIHelpers.swift in Sources */,
 				FB06C115246177D9006F589A /* ProductsAdsController.swift in Sources */,
 				FB13EAD3245FB6E600C9CC33 /* SceneDelegate.swift in Sources */,
+				FBE2CB1424682FE700DF52C4 /* RecommendationViewController.swift in Sources */,
 				FB06C10024615DE0006F589A /* AdsCollectionView.swift in Sources */,
 				FB06C112246172E7006F589A /* ProductsAdCollectionViewCell.swift in Sources */,
 			);

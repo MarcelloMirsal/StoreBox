@@ -11,15 +11,28 @@ import UIKit
 
 class AdsViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        collectionView.backgroundColor = .blue
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cellId")
+    
+    let cellId = "cellId"
+    
+    
+    func setupCollectionView() {
+        let nib = UINib(name: "AdsCollectionViewCell")
+        collectionView.register(nib, forCellWithReuseIdentifier: cellId)
+        collectionView.contentInset = .zero
     }
     
+    // MARK:- View Life Cycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupCollectionView()
+    }
+}
+
+//MARK:- CollectionView Delegate & DataSource Implementation
+extension AdsViewController {
+    
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath)
-        cell.backgroundColor = .random()
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! AdsCollectionViewCell
         return cell
     }
     

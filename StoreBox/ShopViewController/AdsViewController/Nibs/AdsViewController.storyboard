@@ -7,30 +7,30 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Recommendation View Controller-->
-        <scene sceneID="tyf-Fr-kws">
+        <!--Ads View Controller-->
+        <scene sceneID="TMY-5c-XVt">
             <objects>
-                <collectionViewController storyboardIdentifier="RecommendationViewController" id="hXC-bz-XQX" customClass="RecommendationViewController" customModule="StoreBox" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" id="mnd-oW-moH">
+                <collectionViewController storyboardIdentifier="AdsViewController" id="T1b-at-FfW" customClass="AdsViewController" customModule="StoreBox" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" id="cxc-xD-hyu">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Jyz-d2-7u6">
-                            <size key="itemSize" width="135" height="153"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="x00-21-fSV">
+                            <size key="itemSize" width="416" height="173"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells/>
                         <connections>
-                            <outlet property="dataSource" destination="hXC-bz-XQX" id="DxD-GD-71P"/>
-                            <outlet property="delegate" destination="hXC-bz-XQX" id="Cbr-hW-plI"/>
+                            <outlet property="dataSource" destination="T1b-at-FfW" id="rVu-mH-ZgZ"/>
+                            <outlet property="delegate" destination="T1b-at-FfW" id="PcM-b3-fj5"/>
                         </connections>
                     </collectionView>
                 </collectionViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Jv4-Yk-cGX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PNI-Ll-Q14" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="579.71014492753625" y="80.357142857142847"/>
+            <point key="canvasLocation" x="598.55072463768124" y="22.767857142857142"/>
         </scene>
     </scenes>
 </document>

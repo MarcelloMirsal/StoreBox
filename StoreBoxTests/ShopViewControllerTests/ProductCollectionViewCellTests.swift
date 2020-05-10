@@ -7,11 +7,13 @@
 //
 
 import XCTest
-
+@testable import StoreBox
 class ProductCollectionViewCellTests: XCTestCase {
-
+    
+    var sut: ProductCollectionViewCell!
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
+        sut = UINib(name: "ProductCollectionViewCell").initFirstView(ofType: ProductCollectionViewCell.self)
     }
 
     override func tearDown() {

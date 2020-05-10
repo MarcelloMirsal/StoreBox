@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="f3W-b0-B9W">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
@@ -11,16 +11,16 @@
         <!--Shop-->
         <scene sceneID="wrH-Cg-hhl">
             <objects>
-                <viewController id="Wkx-rt-E8b" customClass="ShopViewController" customModule="StoreBox" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Shop" id="Wkx-rt-E8b" customClass="ShopViewController" customModule="StoreBox" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Yyl-Ib-eZ1">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="2400"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wun-8K-jnN">
-                                <rect key="frame" x="0.0" y="140" width="414" height="2177"/>
+                                <rect key="frame" x="0.0" y="91" width="414" height="2260"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XUu-um-zJf">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1746.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1774"/>
                                         <subviews>
                                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xys-zf-nub" userLabel="PlatformAds">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="138"/>
@@ -29,15 +29,6 @@
                                                 </constraints>
                                                 <connections>
                                                     <segue destination="NIy-DV-2bO" kind="embed" id="eDb-XL-06u"/>
-                                                </connections>
-                                            </containerView>
-                                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JKM-CP-Y2d" userLabel="StoreAds">
-                                                <rect key="frame" x="0.0" y="138" width="414" height="138"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" secondItem="JKM-CP-Y2d" secondAttribute="height" multiplier="27:9" id="kW0-OC-LrS"/>
-                                                </constraints>
-                                                <connections>
-                                                    <segue destination="NIy-DV-2bO" kind="embed" id="p4k-Fp-PSm"/>
                                                 </connections>
                                             </containerView>
                                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kAk-rK-OTa" userLabel="ProductsAds">
@@ -59,16 +50,16 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hRD-9f-WaG" userLabel="NewProducts">
-                                                <rect key="frame" x="0.0" y="864" width="414" height="331"/>
+                                                <rect key="frame" x="0.0" y="864" width="414" height="345"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" secondItem="hRD-9f-WaG" secondAttribute="height" multiplier="5:4" id="dez-rp-66V"/>
+                                                    <constraint firstAttribute="width" secondItem="hRD-9f-WaG" secondAttribute="height" multiplier="1.2:1" id="dez-rp-66V"/>
                                                 </constraints>
                                                 <connections>
                                                     <segue destination="ELe-vj-cVo" kind="embed" id="nIn-q2-anf"/>
                                                 </connections>
                                             </containerView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Most Ordered" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9vb-P1-NU5">
-                                                <rect key="frame" x="16" y="1211" width="382" height="36"/>
+                                                <rect key="frame" x="16" y="1225" width="382" height="36"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="36" id="lcH-DD-aK1"/>
                                                 </constraints>
@@ -77,16 +68,16 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o6L-qZ-hbb" userLabel="NewProducts">
-                                                <rect key="frame" x="0.0" y="1247" width="414" height="331.5"/>
+                                                <rect key="frame" x="0.0" y="1261" width="414" height="345"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" secondItem="o6L-qZ-hbb" secondAttribute="height" multiplier="5:4" id="qTC-j2-4MC"/>
+                                                    <constraint firstAttribute="width" secondItem="o6L-qZ-hbb" secondAttribute="height" multiplier="1.2:1" id="qTC-j2-4MC"/>
                                                 </constraints>
                                                 <connections>
                                                     <segue destination="ELe-vj-cVo" kind="embed" id="VdS-J9-2Ry"/>
                                                 </connections>
                                             </containerView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Discover Categories" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IUw-7i-MPH">
-                                                <rect key="frame" x="16" y="1594.5" width="382" height="36"/>
+                                                <rect key="frame" x="16" y="1622" width="382" height="36"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="36" id="D2n-jX-mwo"/>
                                                 </constraints>
@@ -95,12 +86,21 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uUe-WO-sUJ">
-                                                <rect key="frame" x="0.0" y="1630" width="414" height="100"/>
+                                                <rect key="frame" x="0.0" y="1658" width="414" height="100"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="100" id="AIy-ZD-CpR"/>
                                                 </constraints>
                                                 <connections>
                                                     <segue destination="hdA-zc-yzP" kind="embed" identifier="CategoriesViewController" id="wbB-Tk-XKO"/>
+                                                </connections>
+                                            </containerView>
+                                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JKM-CP-Y2d" userLabel="StoreAds">
+                                                <rect key="frame" x="0.0" y="138" width="414" height="138"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="JKM-CP-Y2d" secondAttribute="height" multiplier="27:9" id="kW0-OC-LrS"/>
+                                                </constraints>
+                                                <connections>
+                                                    <segue destination="NIy-DV-2bO" kind="embed" id="p4k-Fp-PSm"/>
                                                 </connections>
                                             </containerView>
                                         </subviews>
@@ -155,7 +155,6 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="8FU-ct-p3R"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Shop" id="JiI-no-2fF"/>
                     <navigationItem key="navigationItem" title="Shop" largeTitleDisplayMode="always" id="488-kQ-cjN"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <size key="freeformSize" width="414" height="2400"/>
@@ -187,10 +186,10 @@
         <!--RecommendationViewController-->
         <scene sceneID="cHw-Yk-iFb">
             <objects>
-                <viewControllerPlaceholder storyboardName="RecommendationViewController" referencedIdentifier="RecommendationViewController" id="ELe-vj-cVo" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r4y-4v-fh9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <viewControllerPlaceholder storyboardName="RecommendationViewController" referencedIdentifier="RecommendationViewController" id="ELe-vj-cVo" sceneMemberID="viewController"/>
             </objects>
-            <point key="canvasLocation" x="2317" y="24"/>
+            <point key="canvasLocation" x="2540" y="-96"/>
         </scene>
         <!--CategoriesViewController-->
         <scene sceneID="zdu-ZO-nWC">
@@ -200,13 +199,15 @@
             </objects>
             <point key="canvasLocation" x="2287" y="463"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Shop-->
         <scene sceneID="luI-1A-ZEu">
             <objects>
                 <navigationController storyboardIdentifier="ShopNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="f3W-b0-B9W" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Shop" id="Q53-qB-AH7"/>
                     <toolbarItems/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="J4j-io-I8I">
-                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="91"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

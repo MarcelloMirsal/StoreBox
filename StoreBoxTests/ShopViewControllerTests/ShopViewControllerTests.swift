@@ -13,7 +13,7 @@ class ShopViewControllerTests: XCTestCase {
     var sut: ShopViewController!
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        sut = ShopViewController()
+        sut = (UIStoryboard(name: "ShopViewController").getInitialViewController(of: UINavigationController.self).topViewController as! ShopViewController)
         _ = sut.view
     }
 
@@ -23,6 +23,16 @@ class ShopViewControllerTests: XCTestCase {
     
     func testSearchControllerInNavigation_ShouldBeNotNil() {
         XCTAssertNotNil(sut.navigationItem.searchController)
+    }
+    
+    func testCategoriesViewHeightConstraint_ShouldBeEqualTo100() {
+        XCTAssertEqual(sut.categoriesViewHeightConstraint.constant, 100)
+    }
+    
+    func testCollectionViewDynamicSizeDelegate_categoriesHeightConstraintShouldBeUpdatedToEstimatedSize() {
+        let estimatedSize = CGSize(width: 50, height: 50)
+        sut.collectionView(setDynamicSize: estimatedSize)
+        XCTAssertEqual(sut.categoriesViewHeightConstraint.constant, estimatedSize.height)
     }
     
 }
