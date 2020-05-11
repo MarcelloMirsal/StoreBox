@@ -47,5 +47,10 @@ class ProductsAdsController: UICollectionViewController , UICollectionViewDelega
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 16
     }
+    
+//    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//        let productDetailsViewController = UIStoryboard(name: "ProductDetailsViewController").instantiateInitialViewController() as! ProductDetailsViewController
+//        navigationController?.pushViewController(productDetailsViewController, animated: true)
+//    }
 
 }

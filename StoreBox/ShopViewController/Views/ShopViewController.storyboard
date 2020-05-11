@@ -173,7 +173,7 @@
                 <viewControllerPlaceholder storyboardName="AdsViewController" referencedIdentifier="AdsViewController" id="NIy-DV-2bO" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VYT-sT-1MJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2240" y="-564"/>
+            <point key="canvasLocation" x="2437" y="-580"/>
         </scene>
         <!--ProductsAdsController-->
         <scene sceneID="AMi-VS-FxC">
@@ -181,15 +181,15 @@
                 <viewControllerPlaceholder storyboardName="ProductsAdsController" referencedIdentifier="ProductsAdsController" id="b89-Kb-yW1" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NFX-BR-wfE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2276" y="-290"/>
+            <point key="canvasLocation" x="3059" y="-112"/>
         </scene>
         <!--RecommendationViewController-->
         <scene sceneID="cHw-Yk-iFb">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="r4y-4v-fh9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewControllerPlaceholder storyboardName="RecommendationViewController" referencedIdentifier="RecommendationViewController" id="ELe-vj-cVo" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="r4y-4v-fh9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2540" y="-96"/>
+            <point key="canvasLocation" x="2915" y="96"/>
         </scene>
         <!--CategoriesViewController-->
         <scene sceneID="zdu-ZO-nWC">

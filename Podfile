@@ -6,8 +6,6 @@ target 'StoreBox' do
   use_frameworks!
 
   # Pods for StoreBox
-  pod 'Swinject'
-  pod 'SwinjectStoryboard'
 
   target 'StoreBoxTests' do
     inherit! :search_paths
