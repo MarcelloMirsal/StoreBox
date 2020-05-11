@@ -39,6 +39,7 @@
 		FBE8DCBB2464B61A009BA11E /* CategoriesViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FBE8DCBA2464B61A009BA11E /* CategoriesViewController.storyboard */; };
 		FBE8DCBE2464B683009BA11E /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE8DCBC2464B683009BA11E /* CategoryCollectionViewCell.swift */; };
 		FBE8DCBF2464B683009BA11E /* CategoryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBE8DCBD2464B683009BA11E /* CategoryCollectionViewCell.xib */; };
+		FBFD7C5F246A0CE700160D00 /* UIRoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBFD7C5E246A0CE700160D00 /* UIRoundButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,6 +94,7 @@
 		FBE8DCBA2464B61A009BA11E /* CategoriesViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CategoriesViewController.storyboard; sourceTree = "<group>"; };
 		FBE8DCBC2464B683009BA11E /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		FBE8DCBD2464B683009BA11E /* CategoryCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryCollectionViewCell.xib; sourceTree = "<group>"; };
+		FBFD7C5E246A0CE700160D00 /* UIRoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIRoundButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,6 +171,7 @@
 		FB13EACF245FB6E600C9CC33 /* StoreBox */ = {
 			isa = PBXGroup;
 			children = (
+				FBFD7C5E246A0CE700160D00 /* UIRoundButton.swift */,
 				FB416B862460E3060062C387 /* AppDelegate */,
 				FBE2CB052468285100DF52C4 /* ProductCollectionViewCell */,
 				FB06C0FE24614DFE006F589A /* ShopViewController */,
@@ -525,6 +528,7 @@
 			files = (
 				FB06C10224615EFD006F589A /* ShopViewController.swift in Sources */,
 				FBE8DCB92464B2EF009BA11E /* CategoriesViewController.swift in Sources */,
+				FBFD7C5F246A0CE700160D00 /* UIRoundButton.swift in Sources */,
 				FB13EAD1245FB6E600C9CC33 /* AppDelegate.swift in Sources */,
 				FB2E02A524629FE5002CACDE /* ProductCollectionViewCell.swift in Sources */,
 				FBE8DCBE2464B683009BA11E /* CategoryCollectionViewCell.swift in Sources */,

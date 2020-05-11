@@ -16,7 +16,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MyG-4n-lT7">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MyG-4n-lT7">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RpI-ay-A9R" userLabel="ContentsView">
@@ -29,7 +29,7 @@
                                                     <constraint firstAttribute="height" constant="0.5" id="tUr-ik-86N"/>
                                                 </constraints>
                                             </view>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cafeloisl" translatesAutoresizingMaskIntoConstraints="NO" id="Amc-65-MpA">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lap" translatesAutoresizingMaskIntoConstraints="NO" id="Amc-65-MpA">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="233"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="Amc-65-MpA" secondAttribute="height" multiplier="16:9" id="LI5-ho-tMx"/>
@@ -63,14 +63,6 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0hz-UN-2fg">
-                                                <rect key="frame" x="96" y="355" width="254" height="40"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="40" id="yxH-FK-DfV"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="18"/>
-                                                <state key="normal" title="Murad's Store For Electronics"/>
-                                            </button>
                                             <view alpha="0.69999998807907104" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9pa-ly-Akf" userLabel="Separator">
                                                 <rect key="frame" x="0.0" y="411" width="414" height="0.5"/>
                                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -93,19 +85,28 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="400" id="48E-PE-Hnr"/>
                                                 </constraints>
-                                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. https://stackoverflow.com</string>
+                                                <string key="text">Ultra-light and versatile. Get productive your way with the Surface Pro 6 — now faster than ever with an 8th Generation Intel® Core™ processor and the full Windows 10 Home experience.
+for more visit www.microsoft.com</string>
                                                 <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="20"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES"/>
                                             </textView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tM1-4v-lND">
-                                                <rect key="frame" x="29" y="798" width="356" height="40"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tM1-4v-lND" customClass="UIRoundButton" customModule="StoreBox" customModuleProvider="target">
+                                                <rect key="frame" x="29" y="754" width="356" height="40"/>
                                                 <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="20"/>
                                                 <state key="normal" title="Add to Cart">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0hz-UN-2fg">
+                                                <rect key="frame" x="96" y="353" width="254" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="yxH-FK-DfV"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="18"/>
+                                                <state key="normal" title="Murad's Store For Electronics"/>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -117,7 +118,7 @@
                                             <constraint firstItem="0Vt-nt-cEP" firstAttribute="leading" secondItem="RpI-ay-A9R" secondAttribute="leading" constant="16" id="3kv-lD-9wo"/>
                                             <constraint firstItem="Amc-65-MpA" firstAttribute="leading" secondItem="RpI-ay-A9R" secondAttribute="leading" id="7xn-75-O00"/>
                                             <constraint firstAttribute="trailing" secondItem="AlE-p1-iM9" secondAttribute="trailing" constant="16" id="9k0-U2-dAo"/>
-                                            <constraint firstItem="0hz-UN-2fg" firstAttribute="top" secondItem="fXE-Jk-ohW" secondAttribute="bottom" constant="22" id="9ll-Dl-dBX"/>
+                                            <constraint firstItem="0hz-UN-2fg" firstAttribute="top" secondItem="fXE-Jk-ohW" secondAttribute="bottom" constant="20" id="9ll-Dl-dBX"/>
                                             <constraint firstAttribute="trailing" secondItem="iTY-zJ-TJM" secondAttribute="trailing" id="BNS-w8-RZk"/>
                                             <constraint firstAttribute="trailing" secondItem="9pa-ly-Akf" secondAttribute="trailing" id="CwT-uM-3g9"/>
                                             <constraint firstItem="Amc-65-MpA" firstAttribute="top" secondItem="RpI-ay-A9R" secondAttribute="top" id="DmK-Zt-ifW"/>
@@ -125,7 +126,7 @@
                                             <constraint firstAttribute="trailing" secondItem="b8M-ap-1Nc" secondAttribute="trailing" constant="16" id="FPc-vf-iEn"/>
                                             <constraint firstAttribute="bottom" secondItem="AlE-p1-iM9" secondAttribute="bottom" constant="16" id="Lsg-6R-jEx"/>
                                             <constraint firstItem="b8M-ap-1Nc" firstAttribute="leading" secondItem="RpI-ay-A9R" secondAttribute="leading" constant="16" id="PPo-bP-JgM"/>
-                                            <constraint firstItem="9pa-ly-Akf" firstAttribute="top" secondItem="0hz-UN-2fg" secondAttribute="bottom" constant="16" id="TSC-uf-DwA"/>
+                                            <constraint firstItem="9pa-ly-Akf" firstAttribute="top" secondItem="0hz-UN-2fg" secondAttribute="bottom" constant="18" id="TSC-uf-DwA"/>
                                             <constraint firstItem="fXE-Jk-ohW" firstAttribute="leading" secondItem="RpI-ay-A9R" secondAttribute="leading" constant="16" id="TSf-Q7-TDq"/>
                                             <constraint firstItem="AlE-p1-iM9" firstAttribute="leading" secondItem="RpI-ay-A9R" secondAttribute="leading" constant="16" id="U7m-Yn-U9H"/>
                                             <constraint firstItem="0Vt-nt-cEP" firstAttribute="top" secondItem="iTY-zJ-TJM" secondAttribute="bottom" constant="8" id="YlR-XQ-sAE"/>
@@ -178,6 +179,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="cafeloisl" width="448" height="448"/>
+        <image name="lap" width="224" height="224"/>
     </resources>
 </document>

@@ -17,7 +17,7 @@ class ProductDetailsViewController: UIViewController {
     func updateDescriptionTextViewHeight() {
         let text = NSAttributedString(attributedString: descriptionTextView.attributedText)
         let size = text.boundingRect(with: view.frame.size, options: .usesLineFragmentOrigin, context: nil)
-        descriptionTextViewHeightConstraint.constant = size.height
+        descriptionTextViewHeightConstraint.constant = size.height + 32
         scrollView.layoutIfNeeded()
     }
     
