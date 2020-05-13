@@ -1,4 +1,4 @@
-framework module Pods_StoreBox {
+module Pods_StoreBox {
   umbrella header "Pods-StoreBox-umbrella.h"
 
   export *

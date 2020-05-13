@@ -10,6 +10,7 @@ import UIKit
 
 class ShopViewController: UIViewController {
     
+    @IBOutlet weak var scrollView: UIScrollView!
     
     @IBOutlet weak var contentsView: UIView!
     @IBOutlet weak var categoriesViewHeightConstraint: NSLayoutConstraint!
@@ -27,7 +28,7 @@ class ShopViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == categoriesViewId {
-        let vc = segue.destination as! CategoriesViewController
+            let vc = segue.destination as! CategoriesViewController
             vc.dynamicSizeDelegate = self
         }
     }

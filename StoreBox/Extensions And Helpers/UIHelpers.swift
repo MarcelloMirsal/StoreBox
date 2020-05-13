@@ -45,3 +45,9 @@ extension UIStoryboard {
         return instantiateInitialViewController() as! T
     }
 }
+
+
+extension NSAttributedString {
+    
+}
+

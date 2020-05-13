@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wun-8K-jnN">
-                                <rect key="frame" x="0.0" y="91" width="414" height="2260"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="2351"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XUu-um-zJf">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="1774"/>
@@ -151,16 +151,17 @@
                             <constraint firstItem="8FU-ct-p3R" firstAttribute="bottom" secondItem="Wun-8K-jnN" secondAttribute="bottom" id="0CD-nl-AMM"/>
                             <constraint firstItem="Wun-8K-jnN" firstAttribute="leading" secondItem="8FU-ct-p3R" secondAttribute="leading" id="0yg-72-3f1"/>
                             <constraint firstItem="8FU-ct-p3R" firstAttribute="trailing" secondItem="Wun-8K-jnN" secondAttribute="trailing" id="dOk-r9-Nsz"/>
-                            <constraint firstItem="Wun-8K-jnN" firstAttribute="top" secondItem="8FU-ct-p3R" secondAttribute="top" id="jSp-Cw-cak"/>
+                            <constraint firstItem="Wun-8K-jnN" firstAttribute="top" secondItem="Yyl-Ib-eZ1" secondAttribute="top" id="jSp-Cw-cak"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="8FU-ct-p3R"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Shop" largeTitleDisplayMode="always" id="488-kQ-cjN"/>
+                    <navigationItem key="navigationItem" title="Shop" id="hAh-1l-1yy"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <size key="freeformSize" width="414" height="2400"/>
                     <connections>
                         <outlet property="categoriesViewHeightConstraint" destination="AIy-ZD-CpR" id="6zu-7S-SVX"/>
                         <outlet property="contentsView" destination="XUu-um-zJf" id="vPz-UW-lR5"/>
+                        <outlet property="scrollView" destination="Wun-8K-jnN" id="a23-oS-H31"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="brG-WA-fV6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -202,6 +203,7 @@
         <!--Shop-->
         <scene sceneID="luI-1A-ZEu">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RVZ-eY-WDq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController storyboardIdentifier="ShopNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="f3W-b0-B9W" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Shop" id="Q53-qB-AH7"/>
                     <toolbarItems/>
@@ -212,10 +214,9 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="Wkx-rt-E8b" kind="relationship" relationship="rootViewController" id="Dsd-eB-996"/>
+                        <segue destination="Wkx-rt-E8b" kind="relationship" relationship="rootViewController" id="BKe-dd-phd"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="RVZ-eY-WDq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="776.81159420289862" y="54.910714285714285"/>
         </scene>

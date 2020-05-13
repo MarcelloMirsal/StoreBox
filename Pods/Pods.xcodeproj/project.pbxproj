@@ -3,20 +3,37 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1EFA4989CDC1666D49D747F464A2269C /* Pods-StoreBoxTests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E084BCFFC275AB3C803F3382B36927D /* Pods-StoreBoxTests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		45C54DE32966127FBB2BB3DB5D7E92DD /* Pods-StoreBox-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8111D9AA68932DCA98C4CFA87BF0AF69 /* Pods-StoreBox-dummy.m */; };
-		52B495F05463F83F86DEE1F9BF42EBCF /* Pods-StoreBoxTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4464ACB4E0ABB42923129A9468ABC664 /* Pods-StoreBoxTests-dummy.m */; };
-		6F9EF0C1BE13D3BA7191A9E3CBE385AD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
-		ABF2188202CDFC39B396458CE30AA3EE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
-		C8354B122154DABC2F1EF11573321289 /* Pods-StoreBox-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = D65BA172D5F0FEB036EE9EC07890F1FF /* Pods-StoreBox-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		07BCF6DE513760A2240F2A71F197CAC4 /* PageIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06F382F023133D391C96D35D58AE7952 /* PageIndicator.swift */; };
+		1805D07414F14C0A66C3684FA5A7D78D /* PageIndicatorPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 648804C32B56227A73B25A8EB6D5F1F7 /* PageIndicatorPosition.swift */; };
+		29E3F6C277F0A203F41D97C0FBAF2EB3 /* ImageSlideshowItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E2E23B239D013A4CAB9D53C0A8FD561 /* ImageSlideshowItem.swift */; };
+		2F343CB7EE11473CA7F45C45514D8C92 /* UIImageView+Tools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F511B2C5F552A57B736B66D58F6D5FC /* UIImageView+Tools.swift */; };
+		3CB7AF2133486AEE1ED52DD0FEC13E10 /* ImageSlideshow-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 871E8FD014F96175F7044C50CD103CB2 /* ImageSlideshow-umbrella.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		4BAE99AC13E416749F2C163BDD45876D /* Pods-StoreBox-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = F08325B43E6BC84A7311B1479E088EDC /* Pods-StoreBox-dummy.m */; };
+		4F6BA35C36D9F69D86ECC1DAF911DBEB /* ZoomAnimatedTransitioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AE7188E6F11EF08AAADB0FFDA7CB874 /* ZoomAnimatedTransitioning.swift */; };
+		888B1FC51E7D6FCBA373893D6FFEC5C2 /* ImageSlideshow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9231BC3A80AF340F71D75839B71E8B5 /* ImageSlideshow.swift */; };
+		89B8094BEDD851F9C5EE83C8386DC5A2 /* Pods-StoreBoxTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6C12F35C49D61D23BB259006C88F6B /* Pods-StoreBoxTests-dummy.m */; };
+		94A7DD99C31E987627574DF19D4E2765 /* UIImage+AspectFit.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45DA170B0E7B67AB0C469AA109FEBFF /* UIImage+AspectFit.swift */; };
+		99B3997F16BE6CFF07BF4EC68C0180F4 /* SwiftSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64B3B73AF1EE5A6F96EA380249073506 /* SwiftSupport.swift */; };
+		9C283E6CCF183DAA76191F2C57AAA5D9 /* ImageSlideshow-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 79C984929689BA03FE66B19DEC2F854C /* ImageSlideshow-dummy.m */; };
+		AA3F5699F398AE68117164B9BF2B8560 /* InputSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26ECC27C6CB2A2E43D2FABDD2DE0B3CA /* InputSource.swift */; };
+		EBE7118277550E93B3335EABC6348D0E /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943D612E790E95FB02AF1C160D932EA4 /* ActivityIndicator.swift */; };
+		EE6DF7DDE6414A270705EF43FC9AAEF2 /* FullScreenSlideshowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E30F0F16D308413910F6432C983C12 /* FullScreenSlideshowViewController.swift */; };
+		FD9532500CBFC3D24FAB24FA64ADE56E /* Pods-StoreBox-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 90FA754859A2C02F3C1C037F8654F7CC /* Pods-StoreBox-umbrella.h */; settings = {ATTRIBUTES = (Project, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		2D1FD9903E63221A054C505F140E6481 /* PBXContainerItemProxy */ = {
+		BF6EBF557E813BC3F13CDEB150A755FA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B2F46A67275CC5973EE13076CD708247;
+			remoteInfo = ImageSlideshow;
+		};
+		BFE69C62219A407293DA611BB0AFF6FC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
@@ -26,140 +43,216 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		032BAD08C524DC1A5DCB781176E909FA /* Pods-StoreBox-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-StoreBox-acknowledgements.plist"; sourceTree = "<group>"; };
-		139703AC95413971E6916080E89964F8 /* Pods-StoreBoxTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-StoreBoxTests-acknowledgements.markdown"; sourceTree = "<group>"; };
-		3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		4464ACB4E0ABB42923129A9468ABC664 /* Pods-StoreBoxTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-StoreBoxTests-dummy.m"; sourceTree = "<group>"; };
-		489892283530DEFF622124EC7B7394CE /* Pods-StoreBox-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-StoreBox-Info.plist"; sourceTree = "<group>"; };
-		4E084BCFFC275AB3C803F3382B36927D /* Pods-StoreBoxTests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-StoreBoxTests-umbrella.h"; sourceTree = "<group>"; };
-		5437B35756E3A6E7E8BD011B12FD2944 /* Pods-StoreBoxTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-StoreBoxTests.debug.xcconfig"; sourceTree = "<group>"; };
-		8111D9AA68932DCA98C4CFA87BF0AF69 /* Pods-StoreBox-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-StoreBox-dummy.m"; sourceTree = "<group>"; };
-		948CC30B1415AD0AB7BCDB9358BEBDA8 /* Pods-StoreBoxTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-StoreBoxTests.release.xcconfig"; sourceTree = "<group>"; };
-		998F85BDC6BB5960C94DE451A311764B /* Pods-StoreBox.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-StoreBox.debug.xcconfig"; sourceTree = "<group>"; };
+		06F382F023133D391C96D35D58AE7952 /* PageIndicator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PageIndicator.swift; path = ImageSlideshow/Classes/Core/PageIndicator.swift; sourceTree = "<group>"; };
+		0F3FD3E5AD84632050BFA34AD85A5C4C /* Pods-StoreBox-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-StoreBox-acknowledgements.markdown"; sourceTree = "<group>"; };
+		146AFEE4A301364D18343178D2EE64D3 /* Pods-StoreBox.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-StoreBox.release.xcconfig"; sourceTree = "<group>"; };
+		26ECC27C6CB2A2E43D2FABDD2DE0B3CA /* InputSource.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = InputSource.swift; path = ImageSlideshow/Classes/Core/InputSource.swift; sourceTree = "<group>"; };
+		2A0E5A9F987CF31B29C672795DEABEA8 /* ImageSlideshow-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "ImageSlideshow-prefix.pch"; sourceTree = "<group>"; };
+		3E2E23B239D013A4CAB9D53C0A8FD561 /* ImageSlideshowItem.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ImageSlideshowItem.swift; path = ImageSlideshow/Classes/Core/ImageSlideshowItem.swift; sourceTree = "<group>"; };
+		40AFFA9888BC82CBBA85682306DAEFDE /* ic_cross_white@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "ic_cross_white@3x.png"; path = "ImageSlideshow/Assets/ic_cross_white@3x.png"; sourceTree = "<group>"; };
+		5579FC2341AE1E2548076EB87AC1240D /* Pods-StoreBoxTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-StoreBoxTests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		5AE7188E6F11EF08AAADB0FFDA7CB874 /* ZoomAnimatedTransitioning.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ZoomAnimatedTransitioning.swift; path = ImageSlideshow/Classes/Core/ZoomAnimatedTransitioning.swift; sourceTree = "<group>"; };
+		61667BEF8DE6D26200A366F10AEDF47F /* Pods-StoreBoxTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-StoreBoxTests.release.xcconfig"; sourceTree = "<group>"; };
+		648804C32B56227A73B25A8EB6D5F1F7 /* PageIndicatorPosition.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PageIndicatorPosition.swift; path = ImageSlideshow/Classes/Core/PageIndicatorPosition.swift; sourceTree = "<group>"; };
+		64B3B73AF1EE5A6F96EA380249073506 /* SwiftSupport.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftSupport.swift; path = ImageSlideshow/Classes/Core/SwiftSupport.swift; sourceTree = "<group>"; };
+		66E07A86D70AA91C1D2F07A23DC3ADBA /* Pods-StoreBox-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-StoreBox-acknowledgements.plist"; sourceTree = "<group>"; };
+		6F511B2C5F552A57B736B66D58F6D5FC /* UIImageView+Tools.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UIImageView+Tools.swift"; path = "ImageSlideshow/Classes/Core/UIImageView+Tools.swift"; sourceTree = "<group>"; };
+		6F6C12F35C49D61D23BB259006C88F6B /* Pods-StoreBoxTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-StoreBoxTests-dummy.m"; sourceTree = "<group>"; };
+		70289005E618254E2F0D3D27A30C246D /* Pods-StoreBoxTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-StoreBoxTests.debug.xcconfig"; sourceTree = "<group>"; };
+		79C984929689BA03FE66B19DEC2F854C /* ImageSlideshow-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "ImageSlideshow-dummy.m"; sourceTree = "<group>"; };
+		7AA05FCDA0201E4E3E345B554ADC8400 /* Pods-StoreBox-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-StoreBox-resources.sh"; sourceTree = "<group>"; };
+		871E8FD014F96175F7044C50CD103CB2 /* ImageSlideshow-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "ImageSlideshow-umbrella.h"; sourceTree = "<group>"; };
+		90FA754859A2C02F3C1C037F8654F7CC /* Pods-StoreBox-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-StoreBox-umbrella.h"; sourceTree = "<group>"; };
+		943D612E790E95FB02AF1C160D932EA4 /* ActivityIndicator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ActivityIndicator.swift; path = ImageSlideshow/Classes/Core/ActivityIndicator.swift; sourceTree = "<group>"; };
+		959A7E148302B7A75A0285B2D62CFD67 /* Pods-StoreBox.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-StoreBox.debug.xcconfig"; sourceTree = "<group>"; };
+		9B00347D5898295B9C4DFABA01B03D6D /* ImageSlideshow.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = ImageSlideshow.modulemap; sourceTree = "<group>"; };
 		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		A27A6A57EAB1208808F15498FBFE76C1 /* Pods-StoreBox-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-StoreBox-acknowledgements.markdown"; sourceTree = "<group>"; };
-		A295195D904EA61D5D7265E65DA4A2E7 /* Pods_StoreBoxTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_StoreBoxTests.framework; path = "Pods-StoreBoxTests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		A66C130C0340E61180F2B740179C13B1 /* Pods-StoreBox.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-StoreBox.modulemap"; sourceTree = "<group>"; };
-		D6131A4ED995B1CEAB3851787D18B758 /* Pods-StoreBoxTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-StoreBoxTests-acknowledgements.plist"; sourceTree = "<group>"; };
-		D65BA172D5F0FEB036EE9EC07890F1FF /* Pods-StoreBox-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-StoreBox-umbrella.h"; sourceTree = "<group>"; };
-		DB501F5DCD1165EC977E57A7AA10F3C8 /* Pods-StoreBoxTests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-StoreBoxTests-Info.plist"; sourceTree = "<group>"; };
-		E405240AAD4CD69453885D9B7A04E3FD /* Pods-StoreBoxTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-StoreBoxTests.modulemap"; sourceTree = "<group>"; };
-		F048834A75FBEACEF6E3FACD790E46ED /* Pods-StoreBox.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-StoreBox.release.xcconfig"; sourceTree = "<group>"; };
-		F35281A50C9619895366D5634CB3C6A0 /* Pods_StoreBox.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_StoreBox.framework; path = "Pods-StoreBox.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A295195D904EA61D5D7265E65DA4A2E7 /* libPods-StoreBoxTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-StoreBoxTests.a"; path = "libPods-StoreBoxTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AC4D211B261AAF69279C2753678118C0 /* ic_cross_white@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "ic_cross_white@2x.png"; path = "ImageSlideshow/Assets/ic_cross_white@2x.png"; sourceTree = "<group>"; };
+		AEAD23161E1D50E3D63EB18FF5D13D19 /* Pods-StoreBoxTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-StoreBoxTests-acknowledgements.plist"; sourceTree = "<group>"; };
+		C1D78A7F43807F49FDB5B04DD9BD6AC7 /* libImageSlideshow.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libImageSlideshow.a; path = libImageSlideshow.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		C45DA170B0E7B67AB0C469AA109FEBFF /* UIImage+AspectFit.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UIImage+AspectFit.swift"; path = "ImageSlideshow/Classes/Core/UIImage+AspectFit.swift"; sourceTree = "<group>"; };
+		C4933517F544C5ADEF44D2424A70D051 /* ImageSlideshow.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = ImageSlideshow.xcconfig; sourceTree = "<group>"; };
+		C8E30F0F16D308413910F6432C983C12 /* FullScreenSlideshowViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FullScreenSlideshowViewController.swift; path = ImageSlideshow/Classes/Core/FullScreenSlideshowViewController.swift; sourceTree = "<group>"; };
+		DAF0FFA8DED03A78FBA90677B036A74A /* Pods-StoreBox.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-StoreBox.modulemap"; sourceTree = "<group>"; };
+		F08325B43E6BC84A7311B1479E088EDC /* Pods-StoreBox-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-StoreBox-dummy.m"; sourceTree = "<group>"; };
+		F35281A50C9619895366D5634CB3C6A0 /* libPods-StoreBox.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-StoreBox.a"; path = "libPods-StoreBox.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F9231BC3A80AF340F71D75839B71E8B5 /* ImageSlideshow.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ImageSlideshow.swift; path = ImageSlideshow/Classes/Core/ImageSlideshow.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		639593E1D119F8882417A674E873997E /* Frameworks */ = {
+		4DB8D07AD177DC1CDF0C7043B3F375DC /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6F9EF0C1BE13D3BA7191A9E3CBE385AD /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D6A9129849E67B8C2BB527F8649ADB15 /* Frameworks */ = {
+		577925618469FB5214760F441EF400AE /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ABF2188202CDFC39B396458CE30AA3EE /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F7B240A97275722703668E96DA9B339E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		15860B7465D6FA1CCFE0AF81F1DC9511 /* Pods-StoreBox */ = {
+		320F1E1A4D5A0DE314FD85DD28BFEAC9 /* Pods-StoreBoxTests */ = {
 			isa = PBXGroup;
 			children = (
-				A66C130C0340E61180F2B740179C13B1 /* Pods-StoreBox.modulemap */,
-				A27A6A57EAB1208808F15498FBFE76C1 /* Pods-StoreBox-acknowledgements.markdown */,
-				032BAD08C524DC1A5DCB781176E909FA /* Pods-StoreBox-acknowledgements.plist */,
-				8111D9AA68932DCA98C4CFA87BF0AF69 /* Pods-StoreBox-dummy.m */,
-				489892283530DEFF622124EC7B7394CE /* Pods-StoreBox-Info.plist */,
-				D65BA172D5F0FEB036EE9EC07890F1FF /* Pods-StoreBox-umbrella.h */,
-				998F85BDC6BB5960C94DE451A311764B /* Pods-StoreBox.debug.xcconfig */,
-				F048834A75FBEACEF6E3FACD790E46ED /* Pods-StoreBox.release.xcconfig */,
-			);
-			name = "Pods-StoreBox";
-			path = "Target Support Files/Pods-StoreBox";
-			sourceTree = "<group>";
-		};
-		56855894A2A3DBD09E4F6F9C49EFF882 /* Pods-StoreBoxTests */ = {
-			isa = PBXGroup;
-			children = (
-				E405240AAD4CD69453885D9B7A04E3FD /* Pods-StoreBoxTests.modulemap */,
-				139703AC95413971E6916080E89964F8 /* Pods-StoreBoxTests-acknowledgements.markdown */,
-				D6131A4ED995B1CEAB3851787D18B758 /* Pods-StoreBoxTests-acknowledgements.plist */,
-				4464ACB4E0ABB42923129A9468ABC664 /* Pods-StoreBoxTests-dummy.m */,
-				DB501F5DCD1165EC977E57A7AA10F3C8 /* Pods-StoreBoxTests-Info.plist */,
-				4E084BCFFC275AB3C803F3382B36927D /* Pods-StoreBoxTests-umbrella.h */,
-				5437B35756E3A6E7E8BD011B12FD2944 /* Pods-StoreBoxTests.debug.xcconfig */,
-				948CC30B1415AD0AB7BCDB9358BEBDA8 /* Pods-StoreBoxTests.release.xcconfig */,
+				5579FC2341AE1E2548076EB87AC1240D /* Pods-StoreBoxTests-acknowledgements.markdown */,
+				AEAD23161E1D50E3D63EB18FF5D13D19 /* Pods-StoreBoxTests-acknowledgements.plist */,
+				6F6C12F35C49D61D23BB259006C88F6B /* Pods-StoreBoxTests-dummy.m */,
+				70289005E618254E2F0D3D27A30C246D /* Pods-StoreBoxTests.debug.xcconfig */,
+				61667BEF8DE6D26200A366F10AEDF47F /* Pods-StoreBoxTests.release.xcconfig */,
 			);
 			name = "Pods-StoreBoxTests";
 			path = "Target Support Files/Pods-StoreBoxTests";
 			sourceTree = "<group>";
 		};
-		5D67AD179C40A67479CEDC8C125343D0 /* Products */ = {
+		4D7CC8691B0A326D0A1DC9762DD5E58A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				F35281A50C9619895366D5634CB3C6A0 /* Pods_StoreBox.framework */,
-				A295195D904EA61D5D7265E65DA4A2E7 /* Pods_StoreBoxTests.framework */,
+				C1D78A7F43807F49FDB5B04DD9BD6AC7 /* libImageSlideshow.a */,
+				F35281A50C9619895366D5634CB3C6A0 /* libPods-StoreBox.a */,
+				A295195D904EA61D5D7265E65DA4A2E7 /* libPods-StoreBoxTests.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		AC34B41268D078E3E42B79F2ADFB671A /* Targets Support Files */ = {
+		72EABFC5F541B3541AEA38A69B7A8ED2 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				15860B7465D6FA1CCFE0AF81F1DC9511 /* Pods-StoreBox */,
-				56855894A2A3DBD09E4F6F9C49EFF882 /* Pods-StoreBoxTests */,
+				943D612E790E95FB02AF1C160D932EA4 /* ActivityIndicator.swift */,
+				C8E30F0F16D308413910F6432C983C12 /* FullScreenSlideshowViewController.swift */,
+				F9231BC3A80AF340F71D75839B71E8B5 /* ImageSlideshow.swift */,
+				3E2E23B239D013A4CAB9D53C0A8FD561 /* ImageSlideshowItem.swift */,
+				26ECC27C6CB2A2E43D2FABDD2DE0B3CA /* InputSource.swift */,
+				06F382F023133D391C96D35D58AE7952 /* PageIndicator.swift */,
+				648804C32B56227A73B25A8EB6D5F1F7 /* PageIndicatorPosition.swift */,
+				64B3B73AF1EE5A6F96EA380249073506 /* SwiftSupport.swift */,
+				C45DA170B0E7B67AB0C469AA109FEBFF /* UIImage+AspectFit.swift */,
+				6F511B2C5F552A57B736B66D58F6D5FC /* UIImageView+Tools.swift */,
+				5AE7188E6F11EF08AAADB0FFDA7CB874 /* ZoomAnimatedTransitioning.swift */,
+				A067FED18D81204571E1D0DF5CB0C79C /* Resources */,
 			);
-			name = "Targets Support Files";
+			name = Core;
 			sourceTree = "<group>";
 		};
-		C0834CEBB1379A84116EF29F93051C60 /* iOS */ = {
+		8B014C23486AC6600BC4AB724EC8537A /* Pods-StoreBox */ = {
 			isa = PBXGroup;
 			children = (
-				3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */,
+				DAF0FFA8DED03A78FBA90677B036A74A /* Pods-StoreBox.modulemap */,
+				0F3FD3E5AD84632050BFA34AD85A5C4C /* Pods-StoreBox-acknowledgements.markdown */,
+				66E07A86D70AA91C1D2F07A23DC3ADBA /* Pods-StoreBox-acknowledgements.plist */,
+				F08325B43E6BC84A7311B1479E088EDC /* Pods-StoreBox-dummy.m */,
+				7AA05FCDA0201E4E3E345B554ADC8400 /* Pods-StoreBox-resources.sh */,
+				90FA754859A2C02F3C1C037F8654F7CC /* Pods-StoreBox-umbrella.h */,
+				959A7E148302B7A75A0285B2D62CFD67 /* Pods-StoreBox.debug.xcconfig */,
+				146AFEE4A301364D18343178D2EE64D3 /* Pods-StoreBox.release.xcconfig */,
 			);
-			name = iOS;
+			name = "Pods-StoreBox";
+			path = "Target Support Files/Pods-StoreBox";
+			sourceTree = "<group>";
+		};
+		A067FED18D81204571E1D0DF5CB0C79C /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				AC4D211B261AAF69279C2753678118C0 /* ic_cross_white@2x.png */,
+				40AFFA9888BC82CBBA85682306DAEFDE /* ic_cross_white@3x.png */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		A23E24BDA7E0D800250D2E07F84528F8 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E20D32DE2A565A61AB071CE1EB4A4C9B /* ImageSlideshow */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		BB829DF7BDFA426667DE280BD2839A9C /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				8B014C23486AC6600BC4AB724EC8537A /* Pods-StoreBox */,
+				320F1E1A4D5A0DE314FD85DD28BFEAC9 /* Pods-StoreBoxTests */,
+			);
+			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
 		CF1408CF629C7361332E53B88F7BD30C = {
 			isa = PBXGroup;
 			children = (
 				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
-				D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */,
-				5D67AD179C40A67479CEDC8C125343D0 /* Products */,
-				AC34B41268D078E3E42B79F2ADFB671A /* Targets Support Files */,
+				D89477F20FB1DE18A04690586D7808C4 /* Frameworks */,
+				A23E24BDA7E0D800250D2E07F84528F8 /* Pods */,
+				4D7CC8691B0A326D0A1DC9762DD5E58A /* Products */,
+				BB829DF7BDFA426667DE280BD2839A9C /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
-		D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */ = {
+		D89477F20FB1DE18A04690586D7808C4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				C0834CEBB1379A84116EF29F93051C60 /* iOS */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DA16476DC125BBC27E0E8593B61F8B25 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				9B00347D5898295B9C4DFABA01B03D6D /* ImageSlideshow.modulemap */,
+				C4933517F544C5ADEF44D2424A70D051 /* ImageSlideshow.xcconfig */,
+				79C984929689BA03FE66B19DEC2F854C /* ImageSlideshow-dummy.m */,
+				2A0E5A9F987CF31B29C672795DEABEA8 /* ImageSlideshow-prefix.pch */,
+				871E8FD014F96175F7044C50CD103CB2 /* ImageSlideshow-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/ImageSlideshow";
+			sourceTree = "<group>";
+		};
+		E20D32DE2A565A61AB071CE1EB4A4C9B /* ImageSlideshow */ = {
+			isa = PBXGroup;
+			children = (
+				72EABFC5F541B3541AEA38A69B7A8ED2 /* Core */,
+				DA16476DC125BBC27E0E8593B61F8B25 /* Support Files */,
+			);
+			name = ImageSlideshow;
+			path = ImageSlideshow;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		02A0017CC2AFCD7BEE72CDA7A4A218D5 /* Headers */ = {
+		395CF9DDB2E66A9BAAFE73E8F491C084 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1EFA4989CDC1666D49D747F464A2269C /* Pods-StoreBoxTests-umbrella.h in Headers */,
+				FD9532500CBFC3D24FAB24FA64ADE56E /* Pods-StoreBox-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		408A63F147579FB2116AC6173A9AFACC /* Headers */ = {
+		5978B13773D783B4AB0170AF61CC2A12 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C8354B122154DABC2F1EF11573321289 /* Pods-StoreBox-umbrella.h in Headers */,
+				3CB7AF2133486AEE1ED52DD0FEC13E10 /* ImageSlideshow-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D1FC10A3EA2C2E20FAA91FF242FE5F12 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -168,40 +261,57 @@
 /* Begin PBXNativeTarget section */
 		AA52203A7413AA5EE8FBBB32405FB5F3 /* Pods-StoreBox */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = FEE0D284F8C84B563C3D71B25AC857CC /* Build configuration list for PBXNativeTarget "Pods-StoreBox" */;
+			buildConfigurationList = 63BB11359F3E6DA2C14E2634BE6F9E1C /* Build configuration list for PBXNativeTarget "Pods-StoreBox" */;
 			buildPhases = (
-				408A63F147579FB2116AC6173A9AFACC /* Headers */,
-				2285A4B0BC09FB70DB77AFD3DA398F7E /* Sources */,
-				639593E1D119F8882417A674E873997E /* Frameworks */,
-				7B1735E19882EF6D34E012FF335ECEC7 /* Resources */,
+				395CF9DDB2E66A9BAAFE73E8F491C084 /* Headers */,
+				696564D1E6958FF0BDFB91D7888F946D /* Sources */,
+				4DB8D07AD177DC1CDF0C7043B3F375DC /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				4BB6000A6CED3D71C98EAD441116A17A /* PBXTargetDependency */,
 			);
 			name = "Pods-StoreBox";
 			productName = "Pods-StoreBox";
-			productReference = F35281A50C9619895366D5634CB3C6A0 /* Pods_StoreBox.framework */;
-			productType = "com.apple.product-type.framework";
+			productReference = F35281A50C9619895366D5634CB3C6A0 /* libPods-StoreBox.a */;
+			productType = "com.apple.product-type.library.static";
 		};
-		F33628CBF59C01A31E16E0073478732F /* Pods-StoreBoxTests */ = {
+		B2F46A67275CC5973EE13076CD708247 /* ImageSlideshow */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AC96DEBFCB8770F64E2F42EA1A298C6C /* Build configuration list for PBXNativeTarget "Pods-StoreBoxTests" */;
+			buildConfigurationList = 873482D4AA6E9AC7A342680A39B9345A /* Build configuration list for PBXNativeTarget "ImageSlideshow" */;
 			buildPhases = (
-				02A0017CC2AFCD7BEE72CDA7A4A218D5 /* Headers */,
-				F22D60AE524B05318FDF167D7FB46B14 /* Sources */,
-				D6A9129849E67B8C2BB527F8649ADB15 /* Frameworks */,
-				2C83F9723C4385067466AFBDC2E725B7 /* Resources */,
+				5978B13773D783B4AB0170AF61CC2A12 /* Headers */,
+				1D599215686ADD1D5D9014EA05B472F3 /* Sources */,
+				577925618469FB5214760F441EF400AE /* Frameworks */,
+				AD56663893BDCE751DC7925A68746F80 /* Copy generated compatibility header */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				19B96EBFE78ED96B57AF3E61FC4226ED /* PBXTargetDependency */,
+			);
+			name = ImageSlideshow;
+			productName = ImageSlideshow;
+			productReference = C1D78A7F43807F49FDB5B04DD9BD6AC7 /* libImageSlideshow.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		F33628CBF59C01A31E16E0073478732F /* Pods-StoreBoxTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4B1A2CBA39DD1734E4FE66BCAD8E3BE1 /* Build configuration list for PBXNativeTarget "Pods-StoreBoxTests" */;
+			buildPhases = (
+				D1FC10A3EA2C2E20FAA91FF242FE5F12 /* Headers */,
+				19CC93B45972FDB3BB59262F4DBBD61C /* Sources */,
+				F7B240A97275722703668E96DA9B339E /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5C300CA228A7D0E7AF98A1F595966CEF /* PBXTargetDependency */,
 			);
 			name = "Pods-StoreBoxTests";
 			productName = "Pods-StoreBoxTests";
-			productReference = A295195D904EA61D5D7265E65DA4A2E7 /* Pods_StoreBoxTests.framework */;
-			productType = "com.apple.product-type.framework";
+			productReference = A295195D904EA61D5D7265E65DA4A2E7 /* libPods-StoreBoxTests.a */;
+			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
 
@@ -213,7 +323,7 @@
 				LastUpgradeCheck = 1100;
 			};
 			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
-			compatibilityVersion = "Xcode 10.0";
+			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -221,98 +331,167 @@
 				Base,
 			);
 			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
-			productRefGroup = 5D67AD179C40A67479CEDC8C125343D0 /* Products */;
+			productRefGroup = 4D7CC8691B0A326D0A1DC9762DD5E58A /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
+				B2F46A67275CC5973EE13076CD708247 /* ImageSlideshow */,
 				AA52203A7413AA5EE8FBBB32405FB5F3 /* Pods-StoreBox */,
 				F33628CBF59C01A31E16E0073478732F /* Pods-StoreBoxTests */,
 			);
 		};
 /* End PBXProject section */
 
-/* Begin PBXResourcesBuildPhase section */
-		2C83F9723C4385067466AFBDC2E725B7 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
+/* Begin PBXShellScriptBuildPhase section */
+		AD56663893BDCE751DC7925A68746F80 /* Copy generated compatibility header */ = {
+			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7B1735E19882EF6D34E012FF335ECEC7 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${DERIVED_SOURCES_DIR}/${PRODUCT_MODULE_NAME}-Swift.h",
+				"${PODS_ROOT}/Headers/Public/ImageSlideshow/ImageSlideshow.modulemap",
+				"${PODS_ROOT}/Headers/Public/ImageSlideshow/ImageSlideshow-umbrella.h",
+			);
+			name = "Copy generated compatibility header";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${BUILT_PRODUCTS_DIR}/${PRODUCT_MODULE_NAME}.modulemap",
+				"${BUILT_PRODUCTS_DIR}/ImageSlideshow-umbrella.h",
+				"${BUILT_PRODUCTS_DIR}/Swift Compatibility Header/${PRODUCT_MODULE_NAME}-Swift.h",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "COMPATIBILITY_HEADER_PATH=\"${BUILT_PRODUCTS_DIR}/Swift Compatibility Header/${PRODUCT_MODULE_NAME}-Swift.h\"\nMODULE_MAP_PATH=\"${BUILT_PRODUCTS_DIR}/${PRODUCT_MODULE_NAME}.modulemap\"\n\nditto \"${DERIVED_SOURCES_DIR}/${PRODUCT_MODULE_NAME}-Swift.h\" \"${COMPATIBILITY_HEADER_PATH}\"\nditto \"${PODS_ROOT}/Headers/Public/ImageSlideshow/ImageSlideshow.modulemap\" \"${MODULE_MAP_PATH}\"\nditto \"${PODS_ROOT}/Headers/Public/ImageSlideshow/ImageSlideshow-umbrella.h\" \"${BUILT_PRODUCTS_DIR}\"\nprintf \"\\n\\nmodule ${PRODUCT_MODULE_NAME}.Swift {\\n  header \\\"${COMPATIBILITY_HEADER_PATH}\\\"\\n  requires objc\\n}\\n\" >> \"${MODULE_MAP_PATH}\"\n";
 		};
-/* End PBXResourcesBuildPhase section */
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		2285A4B0BC09FB70DB77AFD3DA398F7E /* Sources */ = {
+		19CC93B45972FDB3BB59262F4DBBD61C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				45C54DE32966127FBB2BB3DB5D7E92DD /* Pods-StoreBox-dummy.m in Sources */,
+				89B8094BEDD851F9C5EE83C8386DC5A2 /* Pods-StoreBoxTests-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F22D60AE524B05318FDF167D7FB46B14 /* Sources */ = {
+		1D599215686ADD1D5D9014EA05B472F3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52B495F05463F83F86DEE1F9BF42EBCF /* Pods-StoreBoxTests-dummy.m in Sources */,
+				EBE7118277550E93B3335EABC6348D0E /* ActivityIndicator.swift in Sources */,
+				EE6DF7DDE6414A270705EF43FC9AAEF2 /* FullScreenSlideshowViewController.swift in Sources */,
+				9C283E6CCF183DAA76191F2C57AAA5D9 /* ImageSlideshow-dummy.m in Sources */,
+				888B1FC51E7D6FCBA373893D6FFEC5C2 /* ImageSlideshow.swift in Sources */,
+				29E3F6C277F0A203F41D97C0FBAF2EB3 /* ImageSlideshowItem.swift in Sources */,
+				AA3F5699F398AE68117164B9BF2B8560 /* InputSource.swift in Sources */,
+				07BCF6DE513760A2240F2A71F197CAC4 /* PageIndicator.swift in Sources */,
+				1805D07414F14C0A66C3684FA5A7D78D /* PageIndicatorPosition.swift in Sources */,
+				99B3997F16BE6CFF07BF4EC68C0180F4 /* SwiftSupport.swift in Sources */,
+				94A7DD99C31E987627574DF19D4E2765 /* UIImage+AspectFit.swift in Sources */,
+				2F343CB7EE11473CA7F45C45514D8C92 /* UIImageView+Tools.swift in Sources */,
+				4F6BA35C36D9F69D86ECC1DAF911DBEB /* ZoomAnimatedTransitioning.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		696564D1E6958FF0BDFB91D7888F946D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4BAE99AC13E416749F2C163BDD45876D /* Pods-StoreBox-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		19B96EBFE78ED96B57AF3E61FC4226ED /* PBXTargetDependency */ = {
+		4BB6000A6CED3D71C98EAD441116A17A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = ImageSlideshow;
+			target = B2F46A67275CC5973EE13076CD708247 /* ImageSlideshow */;
+			targetProxy = BF6EBF557E813BC3F13CDEB150A755FA /* PBXContainerItemProxy */;
+		};
+		5C300CA228A7D0E7AF98A1F595966CEF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "Pods-StoreBox";
 			target = AA52203A7413AA5EE8FBBB32405FB5F3 /* Pods-StoreBox */;
-			targetProxy = 2D1FD9903E63221A054C505F140E6481 /* PBXContainerItemProxy */;
+			targetProxy = BFE69C62219A407293DA611BB0AFF6FC /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		464A234F8A0041C1A4D9CADCC220E804 /* Release */ = {
+		15DE914C6C9BDAD5F0BE004DAC4FEFD7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F048834A75FBEACEF6E3FACD790E46ED /* Pods-StoreBox.release.xcconfig */;
+			baseConfigurationReference = C4933517F544C5ADEF44D2424A70D051 /* ImageSlideshow.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-StoreBox/Pods-StoreBox-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				GCC_PREFIX_HEADER = "Target Support Files/ImageSlideshow/ImageSlideshow-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MODULEMAP_FILE = Headers/Public/ImageSlideshow/ImageSlideshow.modulemap;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_MODULE_NAME = ImageSlideshow;
+				PRODUCT_NAME = ImageSlideshow;
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.1;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		25CD8B58A490C79C1E2A43A0FCCCB19E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 70289005E618254E2F0D3D27A30C246D /* Pods-StoreBoxTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				MACH_O_TYPE = staticlib;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		5097AF2F47419A6281086C52CAF89B30 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 146AFEE4A301364D18343178D2EE64D3 /* Pods-StoreBox.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = "Target Support Files/Pods-StoreBox/Pods-StoreBox.modulemap";
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PODS_ROOT = "$(SRCROOT)";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
@@ -380,44 +559,30 @@
 			};
 			name = Debug;
 		};
-		9FFDD99A8233C5EA9D88A3CDAA8251B1 /* Release */ = {
+		7C2E1838BAC5CC12693A90F4BA8F41FA /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 948CC30B1415AD0AB7BCDB9358BEBDA8 /* Pods-StoreBoxTests.release.xcconfig */;
+			baseConfigurationReference = C4933517F544C5ADEF44D2424A70D051 /* ImageSlideshow.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-StoreBoxTests/Pods-StoreBoxTests-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-StoreBoxTests/Pods-StoreBoxTests.modulemap";
+				GCC_PREFIX_HEADER = "Target Support Files/ImageSlideshow/ImageSlideshow-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MODULEMAP_FILE = Headers/Public/ImageSlideshow/ImageSlideshow.modulemap;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_MODULE_NAME = ImageSlideshow;
+				PRODUCT_NAME = ImageSlideshow;
+				PUBLIC_HEADERS_FOLDER_PATH = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.1;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
 			};
-			name = Release;
+			name = Debug;
 		};
 		A27713CB74E99AF202AADC23200A32F4 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -479,81 +644,51 @@
 			};
 			name = Release;
 		};
-		AC68517F1639088237329D8F2A72102F /* Debug */ = {
+		EC48B0EF526334BA1DEA073AC20A772A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5437B35756E3A6E7E8BD011B12FD2944 /* Pods-StoreBoxTests.debug.xcconfig */;
+			baseConfigurationReference = 959A7E148302B7A75A0285B2D62CFD67 /* Pods-StoreBox.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-StoreBoxTests/Pods-StoreBoxTests-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-StoreBoxTests/Pods-StoreBoxTests.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		F8B5B35A6A4C2F90326C7D9377F582C2 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 998F85BDC6BB5960C94DE451A311764B /* Pods-StoreBox.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-StoreBox/Pods-StoreBox-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
 				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = "Target Support Files/Pods-StoreBox/Pods-StoreBox.modulemap";
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PODS_ROOT = "$(SRCROOT)";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
+		};
+		FD1BB3D4C4CAAC9D0D0277BEE5B308D8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 61667BEF8DE6D26200A366F10AEDF47F /* Pods-StoreBoxTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				MACH_O_TYPE = staticlib;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
@@ -567,20 +702,29 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		AC96DEBFCB8770F64E2F42EA1A298C6C /* Build configuration list for PBXNativeTarget "Pods-StoreBoxTests" */ = {
+		4B1A2CBA39DD1734E4FE66BCAD8E3BE1 /* Build configuration list for PBXNativeTarget "Pods-StoreBoxTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				AC68517F1639088237329D8F2A72102F /* Debug */,
-				9FFDD99A8233C5EA9D88A3CDAA8251B1 /* Release */,
+				25CD8B58A490C79C1E2A43A0FCCCB19E /* Debug */,
+				FD1BB3D4C4CAAC9D0D0277BEE5B308D8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		FEE0D284F8C84B563C3D71B25AC857CC /* Build configuration list for PBXNativeTarget "Pods-StoreBox" */ = {
+		63BB11359F3E6DA2C14E2634BE6F9E1C /* Build configuration list for PBXNativeTarget "Pods-StoreBox" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				F8B5B35A6A4C2F90326C7D9377F582C2 /* Debug */,
-				464A234F8A0041C1A4D9CADCC220E804 /* Release */,
+				EC48B0EF526334BA1DEA073AC20A772A /* Debug */,
+				5097AF2F47419A6281086C52CAF89B30 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		873482D4AA6E9AC7A342680A39B9345A /* Build configuration list for PBXNativeTarget "ImageSlideshow" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7C2E1838BAC5CC12693A90F4BA8F41FA /* Debug */,
+				15DE914C6C9BDAD5F0BE004DAC4FEFD7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

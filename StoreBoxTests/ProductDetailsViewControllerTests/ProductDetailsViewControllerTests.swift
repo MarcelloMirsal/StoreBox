@@ -31,9 +31,13 @@ class ProductDetailsViewControllerTests: XCTestCase {
     }
     
     func testDescriptionTextViewHeightConstraint_ShouldBeNotNil() {
-        XCTAssertNotNil(sut.descriptionTextViewHeightConstraint)
+        XCTAssertNotNil(sut.descriptionHeightConstraint)
     }
     
+    func testHandleImageSliderViewPresentation_PresentationControllerShouldBeNotNil() {
+        sut.handleImageSliderViewPresentation()
+        XCTAssertNotNil(sut.presentationController)
+    }
     
     
     

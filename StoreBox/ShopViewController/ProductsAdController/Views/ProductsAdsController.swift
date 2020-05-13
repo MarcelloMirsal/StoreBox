@@ -48,9 +48,9 @@ class ProductsAdsController: UICollectionViewController , UICollectionViewDelega
         return 16
     }
     
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let productDetailsViewController = UIStoryboard(name: "ProductDetailsViewController").instantiateInitialViewController() as! ProductDetailsViewController
-        navigationController?.pushViewController(productDetailsViewController, animated: true)
-    }
+//    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//        let productDetailsViewController = UIStoryboard(name: "ProductDetailsViewController").instantiateInitialViewController() as! ProductDetailsViewController
+//        navigationController?.pushViewController(productDetailsViewController, animated: true)
+//    }
 
 }
