@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="cF1-8n-jAZ">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Cart-->
+        <scene sceneID="TO4-LA-ocF">
+            <objects>
+                <viewController storyboardIdentifier="CartViewController" title="Cart" id="46A-Rm-eb6" customClass="CartViewController" customModule="StoreBox" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="1m6-Rg-lwK">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="JED-x9-FUu">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellId" rowHeight="125" id="U8v-0h-8mm" customClass="ProductTableViewCell" customModule="StoreBox" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="125"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="U8v-0h-8mm" id="6L1-vt-l4r">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="125"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c1F-g2-qI3" customClass="UIRoundButton" customModule="StoreBox" customModuleProvider="target">
+                                <rect key="frame" x="32" y="755" width="350" height="42"/>
+                                <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="42" id="YsE-aP-Udp"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="20"/>
+                                <state key="normal" title="Checkout 6 products">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="ziC-d0-TNf" firstAttribute="trailing" secondItem="c1F-g2-qI3" secondAttribute="trailing" constant="32" id="DQI-wD-Vjs"/>
+                            <constraint firstAttribute="bottom" secondItem="JED-x9-FUu" secondAttribute="bottom" id="Kjk-cS-h5i"/>
+                            <constraint firstItem="JED-x9-FUu" firstAttribute="leading" secondItem="ziC-d0-TNf" secondAttribute="leading" id="R5U-Zd-Blb"/>
+                            <constraint firstItem="JED-x9-FUu" firstAttribute="top" secondItem="1m6-Rg-lwK" secondAttribute="top" id="XnV-gp-TLB"/>
+                            <constraint firstItem="c1F-g2-qI3" firstAttribute="leading" secondItem="ziC-d0-TNf" secondAttribute="leading" constant="32" id="bX8-VJ-x0g"/>
+                            <constraint firstItem="ziC-d0-TNf" firstAttribute="bottom" secondItem="c1F-g2-qI3" secondAttribute="bottom" constant="16" id="mxY-Fl-HmN"/>
+                            <constraint firstItem="ziC-d0-TNf" firstAttribute="trailing" secondItem="JED-x9-FUu" secondAttribute="trailing" id="tIp-ii-eH6"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="ziC-d0-TNf"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Cart" id="xI1-Nx-0Sp">
+                        <barButtonItem key="rightBarButtonItem" systemItem="trash" id="KWb-Ay-Vc7"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="checkoutButton" destination="c1F-g2-qI3" id="fEW-e9-Go8"/>
+                        <outlet property="tableView" destination="JED-x9-FUu" id="iuC-oV-zbq"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FBX-ue-G7u" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1064" y="132"/>
+        </scene>
+        <!--Cart-->
+        <scene sceneID="46q-f7-Aeu">
+            <objects>
+                <navigationController storyboardIdentifier="CartNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="cF1-8n-jAZ" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Cart" id="cMS-WV-65b"/>
+                    <toolbarItems/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="XZh-F7-m0T">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="46A-Rm-eb6" kind="relationship" relationship="rootViewController" id="mQO-yd-HCz"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="s16-9K-RLQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="260.86956521739131" y="131.91964285714286"/>
+        </scene>
+    </scenes>
+</document>

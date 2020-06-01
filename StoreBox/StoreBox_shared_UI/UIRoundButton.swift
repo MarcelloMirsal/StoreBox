@@ -10,6 +10,12 @@ import UIKit
 
 class UIRoundButton: UIButton {
     
+    
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
+    
     override func didMoveToSuperview() {
         super.didMoveToSuperview()
         layer.cornerRadius = 8
