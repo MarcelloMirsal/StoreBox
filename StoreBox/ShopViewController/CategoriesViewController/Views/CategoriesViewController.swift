@@ -14,7 +14,9 @@ protocol UICollectionViewDynamicSizeDelegate: class {
 
 class CategoriesViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     let cellId = "cellId"
+    var items = 0
     
     weak var dynamicSizeDelegate: UICollectionViewDynamicSizeDelegate?
     
@@ -30,22 +32,31 @@ class CategoriesViewController: UICollectionViewController, UICollectionViewDele
         collectionView.register(nib, forCellWithReuseIdentifier: cellId)
     }
     
+    func calculateHeight() -> CGFloat {
+        let x = cellSize.height * CGFloat((floor( Double(items / 2) ) ))
+        let y = x + ( 16 * CGFloat((floor( Double(items / 2) ) )))
+        return y
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCollectionView()
     }
     
     
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        let numberOfItems = 4
-        let numberOfRowsPerColumn = ceil(Float(numberOfItems) / 2.0)
-        let height = numberOfRowsPerColumn * Float(cellSize.height) + (numberOfRowsPerColumn-1) * 16
-        DispatchQueue.global().asyncAfter(deadline: .now()) {
-            DispatchQueue.main.async {
-                self.dynamicSizeDelegate!.collectionView(setDynamicSize: CGSize(width: self.collectionView.frame.width, height: CGFloat(height)))
-            }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) { [weak self] in
+            self?.items = 10
+            self?.dynamicSizeDelegate?.collectionView(setDynamicSize: CGSize(width: 300, height: self!.calculateHeight()) )
+            self?.dynamicSizeDelegate = nil
+            self?.activityIndicator.stopAnimating()
+            self?.collectionView.reloadData()
         }
-        return numberOfItems
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return items
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

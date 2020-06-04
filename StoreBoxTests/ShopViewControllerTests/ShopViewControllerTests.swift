@@ -30,16 +30,6 @@ class ShopViewControllerTests: XCTestCase {
     }
 
     
-    func testCategoriesViewHeightConstraint_ShouldBeEqualTo100() {
-        XCTAssertEqual(sut.categoriesViewHeightConstraint.constant, 100)
-    }
-    
-    func testCollectionViewDynamicSizeDelegate_categoriesHeightConstraintShouldBeUpdatedToEstimatedSize() {
-        let estimatedSize = CGSize(width: 50, height: 50)
-        sut.collectionView(setDynamicSize: estimatedSize)
-        XCTAssertEqual(sut.categoriesViewHeightConstraint.constant, estimatedSize.height)
-    }
-    
     func testSearchControllerDelegateDidPresent_ShouldChangeTitleAndSizeOfNavigationBarForSearching() {
         sut.didPresentSearchController(sut.searchController)
         XCTAssertEqual(sut.navigationItem.title, "Search")

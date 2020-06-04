@@ -21,12 +21,19 @@
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
+                        <activityIndicatorView key="backgroundView" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" id="A3S-Iv-bb8">
+                            <rect key="frame" x="0.0" y="-44" width="414" height="896"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </activityIndicatorView>
                         <cells/>
                         <connections>
                             <outlet property="dataSource" destination="ims-AO-d4C" id="JDO-ee-jZ0"/>
                             <outlet property="delegate" destination="ims-AO-d4C" id="ZNX-Gq-KEr"/>
                         </connections>
                     </collectionView>
+                    <connections>
+                        <outlet property="activityIndicator" destination="A3S-Iv-bb8" id="C6A-kT-H6y"/>
+                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wbO-bb-0es" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
