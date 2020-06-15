@@ -16,7 +16,6 @@ class ShopViewControllerTests: XCTestCase {
         let rootSut = (UIStoryboard(name: "ShopViewController").getInitialViewController(of: UINavigationController.self).topViewController as! ShopViewController)
         let nv = UINavigationController(rootViewController: rootSut)
         sut = nv.topViewController as? ShopViewController
-        sut.setupSearchController()
         _ = sut.view
         
     }
@@ -25,21 +24,5 @@ class ShopViewControllerTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
     
-    func testSearchControllerInNavigation_ShouldBeNotNil() {
-        XCTAssertNotNil(sut.navigationItem.searchController)
-    }
-
-    
-    func testSearchControllerDelegateDidPresent_ShouldChangeTitleAndSizeOfNavigationBarForSearching() {
-        sut.didPresentSearchController(sut.searchController)
-        XCTAssertEqual(sut.navigationItem.title, "Search")
-        XCTAssertEqual(sut.navigationController?.navigationBar.prefersLargeTitles , false)
-    }
-    
-    func testSearchControllerDelegateWiiDismiss_ShouldChangeTitleAndSizeOfNavigationBarForShopDefaults() {
-        sut.willDismissSearchController(sut.searchController)
-        XCTAssertEqual(sut.navigationItem.title, "Shop")
-        XCTAssertEqual(sut.navigationController?.navigationBar.prefersLargeTitles , true)
-    }
     
 }
