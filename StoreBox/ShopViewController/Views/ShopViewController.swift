@@ -23,6 +23,7 @@ class ShopViewController: UITableViewController {
         let searchController = UISearchController()
         searchController.searchBar.searchTextField.placeholder = "Search for Products"
         searchController.searchBar.delegate = self
+        navigationItem.hidesSearchBarWhenScrolling = false
         navigationItem.searchController = searchController
     }
     

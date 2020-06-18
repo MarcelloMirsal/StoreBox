@@ -63,9 +63,9 @@ extension SearchCompletionResults {
         delegate?.searchCompletionResults(didSelectResult: "Playstation 5 1TB Euro")
         tableView.deselectRow(at: indexPath, animated: true)
         navigationItem.searchController?.searchBar.endEditing(true)
-        navigationItem.searchController?.dismiss(animated: true, completion: {
-            self.dismiss(animated: true)
-        })
+        dismiss(animated: true) // for searchContrller
+        dismiss(animated: true) // for self
+        //navigationItem.searchController?.dismiss(animated: true)
     }
 }
 
