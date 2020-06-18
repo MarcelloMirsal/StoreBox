@@ -7,7 +7,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Title-->
+        <!--Product-->
         <scene sceneID="Gsc-Rj-cIZ">
             <objects>
                 <collectionViewController storyboardIdentifier="SearchDetailsViewController" id="4Zo-wx-ngS" customClass="SearchDetailsViewController" customModule="StoreBox" customModuleProvider="target" sceneMemberID="viewController">
@@ -27,7 +27,13 @@
                             <outlet property="delegate" destination="4Zo-wx-ngS" id="XSo-6x-vb6"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" title="Title" largeTitleDisplayMode="never" id="0QU-XC-jQI"/>
+                    <navigationItem key="navigationItem" title="Product" largeTitleDisplayMode="never" id="0QU-XC-jQI">
+                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="smN-Mx-Mx0">
+                            <connections>
+                                <action selector="handleSearch:" destination="4Zo-wx-ngS" id="e7P-j3-rJO"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b9j-7g-U0O" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

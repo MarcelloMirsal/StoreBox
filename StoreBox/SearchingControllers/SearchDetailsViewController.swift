@@ -8,9 +8,7 @@
 
 import UIKit
 
-class SearchDetailsViewController: UICollectionViewController {
-    
-    
+final class SearchDetailsViewController: UICollectionViewController {
     let cellId = "cellId"
     let headerId = "headerId"
     let items = 5
@@ -21,11 +19,23 @@ class SearchDetailsViewController: UICollectionViewController {
         return calculator.get(aspectWidth: 1, aspectHeight: 2)
     }()
     
-    
     // MARK:- View life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCollectionView()
+    }
+    
+    @IBAction func handleSearch(_ sender: UIBarButtonItem) {
+        let searchCompletionResults = getSearchCompletionResults()
+        let nv = UINavigationController(rootViewController: searchCompletionResults)
+        nv.modalPresentationStyle = .fullScreen
+        present(nv, animated: true)
+    }
+    
+    func getSearchCompletionResults() -> SearchCompletionResults {
+        let searchCompletionResults = SearchCompletionResults()
+        searchCompletionResults.delegate = self
+        return searchCompletionResults
     }
     
     func setupCollectionView() {
@@ -41,10 +51,15 @@ class SearchDetailsViewController: UICollectionViewController {
         present(searchFilteringNavigationController, animated: true)
     }
     
-    deinit {
-        print("from details")
+}
+
+// MARK:- SearchCompletionResultsDelegate Implementation
+extension SearchDetailsViewController: SearchCompletionResultsDelegate {
+    func searchCompletionResults(didSelectResult result: String) {
+        let newSearchDetailsViewController = UIStoryboard(name: "SearchDetailsViewController").getInitialViewController(of: SearchDetailsViewController.self)
+        newSearchDetailsViewController.title = result
+        navigationController?.pushViewController(newSearchDetailsViewController, animated: false)
     }
-    
 }
 
 
@@ -81,7 +96,4 @@ extension SearchDetailsViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: collectionView.frame.width, height: 64)
     }
-    
-    
-
 }

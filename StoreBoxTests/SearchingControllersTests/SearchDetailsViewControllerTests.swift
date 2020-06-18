@@ -21,7 +21,6 @@ class SearchDetailsViewControllerTests: XCTestCase {
         appDelegate.window = UIWindow(frame: UIScreen.main.bounds)
         appDelegate.window?.rootViewController = sut
         appDelegate.window?.makeKeyAndVisible()
-        
     }
 
     override func tearDown() {
@@ -50,6 +49,21 @@ class SearchDetailsViewControllerTests: XCTestCase {
     func testFilterButtonHandler_PresentedViewControllerShouldBeNotNil(){
         sut.handleFilterButton()
         XCTAssertNotNil(sut.presentedViewController)
+    }
+    
+    func testGetSearchCompletionResults_ShouldReturnWithDelegateEqualToSUT() {
+        XCTAssertTrue(sut.getSearchCompletionResults().delegate === sut)
+    }
+    
+    func testSearchCompletionResultsDidSelectResults_NavigationControllerShouldPushNewSearchDetailsViewController() {
+        sut.searchCompletionResults(didSelectResult: "New Search")
+//        sut.navigationController
+    }
+    
+    func testHandleSearch_ShouldPresentSearchCompletionResulst() {
+        sut.handleSearch(.init())
+        let nv = sut.presentedViewController as! UINavigationController
+        XCTAssertTrue(nv.topViewController is SearchCompletionResults)
     }
 
     

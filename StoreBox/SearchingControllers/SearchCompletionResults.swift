@@ -60,7 +60,7 @@ extension SearchCompletionResults {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        delegate?.searchCompletionResults(didSelectResult: "Playstation 5 1TB Euro")
+        delegate?.searchCompletionResults(didSelectResult: "\(indexPath)")
         tableView.deselectRow(at: indexPath, animated: true)
         navigationItem.searchController?.searchBar.endEditing(true)
         dismiss(animated: true) // for searchContrller

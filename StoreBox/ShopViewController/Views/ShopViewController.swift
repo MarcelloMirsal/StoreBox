@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ShopViewController: UITableViewController {
+final class ShopViewController: UITableViewController {
     var categorySectionIndexPath = IndexPath(row: 0, section: 4)
     var categorySectionHeight: CGFloat = 200
     let headerId = "headerId"
@@ -55,21 +55,21 @@ class ShopViewController: UITableViewController {
     }
     
     
-    //    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-    //        let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: headerId) as? ShopTableViewHeaderSection
-    //        headerView?.contentView.backgroundColor = .white
-    //        switch section {
-    //            case 2:
-    //                headerView?.sectionLabel.text = "New Products"
-    //            case 3:
-    //                headerView?.sectionLabel.text = "Most Ordered"
-    //            case 4:
-    //                headerView?.sectionLabel.text = "Categories"
-    //            default:
-    //                break
-    //        }
-    //        return headerView
-    //    }
+//    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+//        let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: headerId) as? ShopTableViewHeaderSection
+//        headerView?.contentView.backgroundColor = .white
+//        switch section {
+//            case 2:
+//                headerView?.sectionLabel.text = "New Products"
+//            case 3:
+//                headerView?.sectionLabel.text = "Most Ordered"
+//            case 4:
+//                headerView?.sectionLabel.text = "Categories"
+//            default:
+//                break
+//        }
+//        return headerView
+//    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "CategoriesViewController" {
@@ -90,8 +90,9 @@ extension ShopViewController: UICollectionViewDynamicSizeDelegate {
 
 extension ShopViewController: SearchCompletionResultsDelegate {
     func searchCompletionResults(didSelectResult result: String) {
-        let searchDetailsViewController = UIStoryboard(name: "SearchDetailsViewController").getInitialViewController(of: SearchDetailsViewController.self)
-        navigationController?.pushViewController(searchDetailsViewController, animated: false)
+        let newSearchDetailsViewController = UIStoryboard(name: "SearchDetailsViewController").getInitialViewController(of: SearchDetailsViewController.self)
+        newSearchDetailsViewController.title = result
+        navigationController?.pushViewController(newSearchDetailsViewController, animated: false)
     }
 }
 
