@@ -8,8 +8,7 @@
 
 import UIKit
 
-class ShopViewController: UITableViewController, UISearchBarDelegate {
-    
+class ShopViewController: UITableViewController {
     var categorySectionIndexPath = IndexPath(row: 0, section: 4)
     var categorySectionHeight: CGFloat = 200
     let headerId = "headerId"
@@ -20,20 +19,27 @@ class ShopViewController: UITableViewController, UISearchBarDelegate {
         tableView.contentInset.bottom = 40
     }
     
+    func setupFakeSearchController() {
+        let searchController = UISearchController()
+        searchController.searchBar.searchTextField.placeholder = "Search for Products"
+        searchController.searchBar.delegate = self
+        navigationItem.searchController = searchController
+    }
+    
+    
+    func handleProductsSearchPresentation() {
+        let searchCompletionResults = SearchCompletionResults()
+        searchCompletionResults.delegate = self
+        let nv = UINavigationController(rootViewController: searchCompletionResults)
+        nv.modalPresentationStyle = .fullScreen
+        present(nv, animated: false)
+    }
+    
     // MARK:- View LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         tableViewSetup()
-    }
-    
-    var nv: UINavigationController? = UINavigationController(rootViewController: ProductsSearchViewController())
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        if let _ = nv {
-            nv!.modalPresentationStyle = .fullScreen
-            present(nv!, animated: true)
-            nv = nil
-        }
+        setupFakeSearchController()
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -53,13 +59,13 @@ class ShopViewController: UITableViewController, UISearchBarDelegate {
     //        headerView?.contentView.backgroundColor = .white
     //        switch section {
     //            case 2:
-    //            headerView?.sectionLabel.text = "New Products"
+    //                headerView?.sectionLabel.text = "New Products"
     //            case 3:
-    //            headerView?.sectionLabel.text = "Most Ordered"
+    //                headerView?.sectionLabel.text = "Most Ordered"
     //            case 4:
-    //            headerView?.sectionLabel.text = "Categories"
+    //                headerView?.sectionLabel.text = "Categories"
     //            default:
-    //            break
+    //                break
     //        }
     //        return headerView
     //    }
@@ -76,9 +82,21 @@ class ShopViewController: UITableViewController, UISearchBarDelegate {
 extension ShopViewController: UICollectionViewDynamicSizeDelegate {
     func collectionView(setDynamicSize dynamicSize: CGSize) {
         // TODO:- Stop Reloading Rows while presenting Products Search Controller
-//        categorySectionHeight = dynamicSize.height
-//        tableView.reloadRows(at: [categorySectionIndexPath], with: .top)
+        //        categorySectionHeight = dynamicSize.height
+        //        tableView.reloadRows(at: [categorySectionIndexPath], with: .top)
     }
-    
-    
+}
+
+extension ShopViewController: SearchCompletionResultsDelegate {
+    func searchCompletionResults(didSelectResult result: String) {
+        let searchDetailsViewController = UIStoryboard(name: "SearchDetailsViewController").getInitialViewController(of: SearchDetailsViewController.self)
+        navigationController?.pushViewController(searchDetailsViewController, animated: false)
+    }
+}
+
+extension ShopViewController: UISearchBarDelegate {
+    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
+        handleProductsSearchPresentation()
+        return false
+    }
 }

@@ -24,5 +24,18 @@ class ShopViewControllerTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
     
+    func testSearchCompletionResultsDidSelectResult_SearchDetailsViewControllerShouldBeRgeNavigationControllerTopViewController() {
+        sut.searchCompletionResults(didSelectResult: "result")
+        XCTAssertTrue(sut.navigationController?.topViewController is SearchDetailsViewController)
+    }
+    
+    func testSearchBarShouldBeginEditing_ShouldReturnFalse() {
+        let shouldBeginEditing = sut.searchBarShouldBeginEditing(.init())
+        XCTAssertFalse(shouldBeginEditing)
+    }
+    
+    
+    
     
 }
+

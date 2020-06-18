@@ -47,6 +47,23 @@ final class SearchCompletionResultsTests: XCTestCase {
         XCTAssertNil(sut.delegate)
     }
     
+    func testSearchBarSearchText_ShouldUpdateResults() {
+        let searchText = "Product"
+        let itemsCountBeforeUpdate = sut.items
+        sut.searchBar(.init(), textDidChange: searchText)
+        let itemsCountAfterUpdate = sut.items
+        XCTAssertNotEqual(itemsCountBeforeUpdate, itemsCountAfterUpdate)
+    }
+    
+    func testViewDidAppear_() { // UI Test nothing to test
+        sut.viewDidAppear(false)
+    }
+    
+    func testSearchBarCancelButtonDidClick_() { // UI Test nothing to test
+        let searchBar = sut.navigationItem.searchController!.searchBar
+        sut.searchBarCancelButtonClicked(searchBar)
+    }
+    
     
     
     

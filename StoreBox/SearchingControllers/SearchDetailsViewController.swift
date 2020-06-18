@@ -37,10 +37,12 @@ class SearchDetailsViewController: UICollectionViewController {
     
     @objc
     func handleFilterButton() {
-        let xViewController = UIViewController()
-        xViewController.title = "Filters"
-        xViewController.view.backgroundColor = .white
-        present(xViewController, animated: true)
+        let searchFilteringNavigationController = UIStoryboard(name: "SearchFilteringViewController").getInitialViewController(of: UINavigationController.self)
+        present(searchFilteringNavigationController, animated: true)
+    }
+    
+    deinit {
+        print("from details")
     }
     
 }
