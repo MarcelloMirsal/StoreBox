@@ -15,13 +15,58 @@
                     <view key="view" contentMode="scaleToFill" id="x3g-0Y-Bq9">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="3ff-xH-5vc">
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="Q0e-hE-7Kf" id="b61-78-wWo"/>
+                                    <outlet property="delegate" destination="Q0e-hE-7Kf" id="FDz-AV-VyW"/>
+                                </connections>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t5z-TI-RRV" customClass="UIRoundButton" customModule="StoreBox" customModuleProvider="target">
+                                <rect key="frame" x="24" y="788" width="366" height="42"/>
+                                <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="42" id="wa0-dV-qok"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="18"/>
+                                <state key="normal" title="Done">
+                                    <color key="titleColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="handleDone:" destination="Q0e-hE-7Kf" eventType="touchUpInside" id="b62-Dv-lGF"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="3ff-xH-5vc" firstAttribute="top" secondItem="2FR-6r-vGa" secondAttribute="top" id="Ir4-1x-rbR"/>
+                            <constraint firstItem="t5z-TI-RRV" firstAttribute="leading" secondItem="2FR-6r-vGa" secondAttribute="leading" constant="24" id="MJO-Ra-Zy2"/>
+                            <constraint firstItem="3ff-xH-5vc" firstAttribute="leading" secondItem="2FR-6r-vGa" secondAttribute="leading" id="Z9W-hL-l7C"/>
+                            <constraint firstItem="2FR-6r-vGa" firstAttribute="trailing" secondItem="3ff-xH-5vc" secondAttribute="trailing" id="hTW-Gf-zsv"/>
+                            <constraint firstItem="2FR-6r-vGa" firstAttribute="bottom" secondItem="3ff-xH-5vc" secondAttribute="bottom" id="iLa-Gu-bj6"/>
+                            <constraint firstItem="2FR-6r-vGa" firstAttribute="trailing" secondItem="t5z-TI-RRV" secondAttribute="trailing" constant="24" id="xyc-i7-7ab"/>
+                            <constraint firstItem="2FR-6r-vGa" firstAttribute="bottom" secondItem="t5z-TI-RRV" secondAttribute="bottom" constant="32" id="yIp-Ty-SlP"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="2FR-6r-vGa"/>
                     </view>
                     <navigationItem key="navigationItem" title="Select Filters" largeTitleDisplayMode="never" id="o51-e2-5bG">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="XuO-0G-p06"/>
-                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="bfb-9f-3vM"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="XuO-0G-p06">
+                            <connections>
+                                <action selector="handleCancel:" destination="Q0e-hE-7Kf" id="s95-Fm-7Ne"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="bfb-9f-3vM">
+                            <connections>
+                                <action selector="handleDone:" destination="Q0e-hE-7Kf" id="BDn-CG-EtP"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="doneButton" destination="t5z-TI-RRV" id="Dww-gO-xhE"/>
+                        <outlet property="tableView" destination="3ff-xH-5vc" id="8uk-g1-LUa"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kws-Eq-XbA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
