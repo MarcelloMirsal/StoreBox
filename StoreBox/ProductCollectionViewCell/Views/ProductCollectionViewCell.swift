@@ -21,7 +21,7 @@ class ProductCollectionViewCell: UICollectionViewCell {
         layer.cornerRadius = 8
         layer.masksToBounds = true
         layer.borderWidth = 0.5
-        layer.borderColor = UIColor.lightGray.cgColor
+        layer.borderColor = UIColor.systemGray.cgColor
     }
     
 }

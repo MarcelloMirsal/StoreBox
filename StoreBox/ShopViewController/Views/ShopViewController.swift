@@ -55,21 +55,21 @@ final class ShopViewController: UITableViewController {
     }
     
     
-//    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: headerId) as? ShopTableViewHeaderSection
-//        headerView?.contentView.backgroundColor = .white
-//        switch section {
-//            case 2:
-//                headerView?.sectionLabel.text = "New Products"
-//            case 3:
-//                headerView?.sectionLabel.text = "Most Ordered"
-//            case 4:
-//                headerView?.sectionLabel.text = "Categories"
-//            default:
-//                break
-//        }
-//        return headerView
-//    }
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: headerId) as? ShopTableViewHeaderSection
+        headerView?.contentView.backgroundColor = view.backgroundColor
+        switch section {
+            case 2:
+                headerView?.sectionLabel.text = "New Products"
+            case 3:
+                headerView?.sectionLabel.text = "Most Ordered"
+            case 4:
+                headerView?.sectionLabel.text = "Categories"
+            default:
+                break
+        }
+        return headerView
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "CategoriesViewController" {

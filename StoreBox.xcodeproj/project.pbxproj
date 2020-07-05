@@ -213,7 +213,6 @@
 		FB13EACF245FB6E600C9CC33 /* StoreBox */ = {
 			isa = PBXGroup;
 			children = (
-				FB5125512496B05300BEA4C1 /* DetailsCollectionViewHeader.swift */,
 				FBA0E67F2486CD1E008C1F9C /* MoreViewController */,
 				FBA0E66B24845C91008C1F9C /* CartViewController */,
 				FB416B862460E3060062C387 /* AppDelegate */,
@@ -233,7 +232,7 @@
 		FB13EAE6245FB6E700C9CC33 /* StoreBoxTests */ = {
 			isa = PBXGroup;
 			children = (
-				FB51254F2496AE3C00BEA4C1 /* DetailsCollectionViewHeaderTests.swift */,
+				FBB105EC24B1A30B00D3DF77 /* StoreBox_shared_UI Tests */,
 				FB51254824968C0900BEA4C1 /* SearchingControllersTests */,
 				FBA0E67E2486CCF9008C1F9C /* MoreViewControllerTests */,
 				FBA0E65F24845A4A008C1F9C /* CartViewControllerTests */,
@@ -285,6 +284,7 @@
 			children = (
 				FBA0E6422484508E008C1F9C /* UIRoundButton.swift */,
 				FBA0E6432484508E008C1F9C /* ImageSliderView.swift */,
+				FB5125512496B05300BEA4C1 /* DetailsCollectionViewHeader.swift */,
 			);
 			path = StoreBox_shared_UI;
 			sourceTree = "<group>";
@@ -375,6 +375,14 @@
 				FBA0E67A2486CCC1008C1F9C /* MoreViewController.storyboard */,
 			);
 			path = Storyboard;
+			sourceTree = "<group>";
+		};
+		FBB105EC24B1A30B00D3DF77 /* StoreBox_shared_UI Tests */ = {
+			isa = PBXGroup;
+			children = (
+				FB51254F2496AE3C00BEA4C1 /* DetailsCollectionViewHeaderTests.swift */,
+			);
+			path = "StoreBox_shared_UI Tests";
 			sourceTree = "<group>";
 		};
 		FBE2CAF5246825CB00DF52C4 /* AdsViewController */ = {

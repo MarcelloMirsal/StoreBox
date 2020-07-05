@@ -56,6 +56,7 @@ extension SearchCompletionResults {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
         cell.textLabel?.text = "indexPath \(indexPath)"
+        cell.imageView?.image = #imageLiteral(resourceName: "Search")
         return cell
     }
     
