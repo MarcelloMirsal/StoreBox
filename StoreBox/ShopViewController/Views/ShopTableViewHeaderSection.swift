@@ -19,7 +19,7 @@ class ShopTableViewHeaderSection: UITableViewHeaderFooterView {
     
     override func didMoveToWindow() {
         super.didMoveToWindow()
-        addSubview(sectionLabel)
+        contentView.addSubview(sectionLabel)
         NSLayoutConstraint.activate( [
             sectionLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
             sectionLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),

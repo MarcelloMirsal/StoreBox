@@ -18,8 +18,9 @@
                     </tabBar>
                     <connections>
                         <segue destination="yth-t6-D8X" kind="relationship" relationship="viewControllers" id="vfA-Pf-mBG"/>
-                        <segue destination="IN2-UT-Zh7" kind="relationship" relationship="viewControllers" id="ub1-Me-4Ae"/>
-                        <segue destination="ZxO-QP-3jx" kind="relationship" relationship="viewControllers" id="9Cu-cT-Pwo"/>
+                        <segue destination="SSw-sW-CvF" kind="relationship" relationship="viewControllers" id="dSP-BN-s9B"/>
+                        <segue destination="IN2-UT-Zh7" kind="relationship" relationship="viewControllers" id="rr0-dQ-KJp"/>
+                        <segue destination="ZxO-QP-3jx" kind="relationship" relationship="viewControllers" id="Fwc-Gj-ZKy"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EmK-ng-suB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -55,6 +56,16 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CVt-AW-ZHd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-12" y="27"/>
+        </scene>
+        <!--StoresNavigationController-->
+        <scene sceneID="63p-S6-6dM">
+            <objects>
+                <viewControllerPlaceholder storyboardName="StoresViewController" referencedIdentifier="StoresNavigationController" id="SSw-sW-CvF" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="bzG-FS-RTJ"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vB1-Pf-O4k" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-6" y="-380"/>
         </scene>
     </scenes>
 </document>

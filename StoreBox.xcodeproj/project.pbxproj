@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		999436112FC3351C124410E6 /* libPods-StoreBox.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AE0826BEB1281928033974 /* libPods-StoreBox.a */; };
 		E9142AF0885279D6B4C55F17 /* libPods-StoreBoxTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 75DB793C9E7012795B483926 /* libPods-StoreBoxTests.a */; };
+		FB0167B024B1AE1D00A62670 /* DetailsTableViewHeaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0167AF24B1AE1D00A62670 /* DetailsTableViewHeaderTests.swift */; };
+		FB0167B224B1AE4400A62670 /* DetailsTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0167B124B1AE4400A62670 /* DetailsTableViewHeader.swift */; };
+		FB0167B424B1B78200A62670 /* StoreTableViewCellTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0167B324B1B78200A62670 /* StoreTableViewCellTests.swift */; };
+		FB0167B724B1B7C700A62670 /* StoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0167B524B1B7C700A62670 /* StoreTableViewCell.swift */; };
+		FB0167B824B1B7C700A62670 /* StoreTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB0167B624B1B7C700A62670 /* StoreTableViewCell.xib */; };
 		FB06C0FC24614DF3006F589A /* ShopViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB06C0FB24614DF3006F589A /* ShopViewController.storyboard */; };
 		FB06C10024615DE0006F589A /* AdsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB06C0FF24615DE0006F589A /* AdsCollectionView.swift */; };
 		FB06C10224615EFD006F589A /* ShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB06C10124615EFD006F589A /* ShopViewController.swift */; };
@@ -54,6 +59,9 @@
 		FBA0E67B2486CCC1008C1F9C /* MoreViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FBA0E67A2486CCC1008C1F9C /* MoreViewController.storyboard */; };
 		FBA0E67D2486CCE5008C1F9C /* MoreViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA0E67C2486CCE5008C1F9C /* MoreViewControllerTests.swift */; };
 		FBA0E6822486CD5A008C1F9C /* MoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA0E6812486CD5A008C1F9C /* MoreViewController.swift */; };
+		FBB105EE24B1A43D00D3DF77 /* StoresViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB105ED24B1A43D00D3DF77 /* StoresViewControllerTests.swift */; };
+		FBB105F224B1A4C100D3DF77 /* StoresViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB105F024B1A4C100D3DF77 /* StoresViewController.swift */; };
+		FBB105F624B1A57200D3DF77 /* StoresViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FBB105F524B1A57200D3DF77 /* StoresViewController.storyboard */; };
 		FBD0DDFD2487F96300B38D5E /* ShopTableViewHeaderSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD0DDFC2487F96300B38D5E /* ShopTableViewHeaderSection.swift */; };
 		FBE2CB1224682FB300DF52C4 /* RecommendationViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FBE2CB1124682FB300DF52C4 /* RecommendationViewController.storyboard */; };
 		FBE2CB1424682FE700DF52C4 /* RecommendationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE2CB1324682FE700DF52C4 /* RecommendationViewController.swift */; };
@@ -80,6 +88,11 @@
 		68535002665691472CD36D52 /* Pods-StoreBoxTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StoreBoxTests.debug.xcconfig"; path = "Target Support Files/Pods-StoreBoxTests/Pods-StoreBoxTests.debug.xcconfig"; sourceTree = "<group>"; };
 		75DB793C9E7012795B483926 /* libPods-StoreBoxTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-StoreBoxTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8542FE08C24B8691FC7C69B /* Pods-StoreBoxTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StoreBoxTests.release.xcconfig"; path = "Target Support Files/Pods-StoreBoxTests/Pods-StoreBoxTests.release.xcconfig"; sourceTree = "<group>"; };
+		FB0167AF24B1AE1D00A62670 /* DetailsTableViewHeaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsTableViewHeaderTests.swift; sourceTree = "<group>"; };
+		FB0167B124B1AE4400A62670 /* DetailsTableViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsTableViewHeader.swift; sourceTree = "<group>"; };
+		FB0167B324B1B78200A62670 /* StoreTableViewCellTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreTableViewCellTests.swift; sourceTree = "<group>"; };
+		FB0167B524B1B7C700A62670 /* StoreTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreTableViewCell.swift; sourceTree = "<group>"; };
+		FB0167B624B1B7C700A62670 /* StoreTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StoreTableViewCell.xib; sourceTree = "<group>"; };
 		FB06C0FB24614DF3006F589A /* ShopViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ShopViewController.storyboard; sourceTree = "<group>"; };
 		FB06C0FF24615DE0006F589A /* AdsCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsCollectionView.swift; sourceTree = "<group>"; };
 		FB06C10124615EFD006F589A /* ShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopViewController.swift; sourceTree = "<group>"; };
@@ -129,6 +142,9 @@
 		FBA0E67A2486CCC1008C1F9C /* MoreViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MoreViewController.storyboard; sourceTree = "<group>"; };
 		FBA0E67C2486CCE5008C1F9C /* MoreViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MoreViewControllerTests.swift; path = StoreBoxTests/MoreViewControllerTests/MoreViewControllerTests.swift; sourceTree = SOURCE_ROOT; };
 		FBA0E6812486CD5A008C1F9C /* MoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreViewController.swift; sourceTree = "<group>"; };
+		FBB105ED24B1A43D00D3DF77 /* StoresViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoresViewControllerTests.swift; sourceTree = "<group>"; };
+		FBB105F024B1A4C100D3DF77 /* StoresViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoresViewController.swift; sourceTree = "<group>"; };
+		FBB105F524B1A57200D3DF77 /* StoresViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = StoresViewController.storyboard; sourceTree = "<group>"; };
 		FBD0DDFC2487F96300B38D5E /* ShopTableViewHeaderSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ShopTableViewHeaderSection.swift; path = StoreBox/ShopViewController/Views/ShopTableViewHeaderSection.swift; sourceTree = SOURCE_ROOT; };
 		FBE2CB1124682FB300DF52C4 /* RecommendationViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = RecommendationViewController.storyboard; sourceTree = "<group>"; };
 		FBE2CB1324682FE700DF52C4 /* RecommendationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationViewController.swift; sourceTree = "<group>"; };
@@ -213,6 +229,7 @@
 		FB13EACF245FB6E600C9CC33 /* StoreBox */ = {
 			isa = PBXGroup;
 			children = (
+				FBB105F424B1A4FF00D3DF77 /* StoresViewController */,
 				FBA0E67F2486CD1E008C1F9C /* MoreViewController */,
 				FBA0E66B24845C91008C1F9C /* CartViewController */,
 				FB416B862460E3060062C387 /* AppDelegate */,
@@ -232,6 +249,7 @@
 		FB13EAE6245FB6E700C9CC33 /* StoreBoxTests */ = {
 			isa = PBXGroup;
 			children = (
+				FBB105EF24B1A44200D3DF77 /* StoresViewControllerTests */,
 				FBB105EC24B1A30B00D3DF77 /* StoreBox_shared_UI Tests */,
 				FB51254824968C0900BEA4C1 /* SearchingControllersTests */,
 				FBA0E67E2486CCF9008C1F9C /* MoreViewControllerTests */,
@@ -282,6 +300,7 @@
 		FBA0E6412484508E008C1F9C /* StoreBox_shared_UI */ = {
 			isa = PBXGroup;
 			children = (
+				FB0167B124B1AE4400A62670 /* DetailsTableViewHeader.swift */,
 				FBA0E6422484508E008C1F9C /* UIRoundButton.swift */,
 				FBA0E6432484508E008C1F9C /* ImageSliderView.swift */,
 				FB5125512496B05300BEA4C1 /* DetailsCollectionViewHeader.swift */,
@@ -380,9 +399,30 @@
 		FBB105EC24B1A30B00D3DF77 /* StoreBox_shared_UI Tests */ = {
 			isa = PBXGroup;
 			children = (
+				FB0167AF24B1AE1D00A62670 /* DetailsTableViewHeaderTests.swift */,
 				FB51254F2496AE3C00BEA4C1 /* DetailsCollectionViewHeaderTests.swift */,
 			);
 			path = "StoreBox_shared_UI Tests";
+			sourceTree = "<group>";
+		};
+		FBB105EF24B1A44200D3DF77 /* StoresViewControllerTests */ = {
+			isa = PBXGroup;
+			children = (
+				FB0167B324B1B78200A62670 /* StoreTableViewCellTests.swift */,
+				FBB105ED24B1A43D00D3DF77 /* StoresViewControllerTests.swift */,
+			);
+			path = StoresViewControllerTests;
+			sourceTree = "<group>";
+		};
+		FBB105F424B1A4FF00D3DF77 /* StoresViewController */ = {
+			isa = PBXGroup;
+			children = (
+				FB0167B524B1B7C700A62670 /* StoreTableViewCell.swift */,
+				FB0167B624B1B7C700A62670 /* StoreTableViewCell.xib */,
+				FBB105F024B1A4C100D3DF77 /* StoresViewController.swift */,
+				FBB105F524B1A57200D3DF77 /* StoresViewController.storyboard */,
+			);
+			path = StoresViewController;
 			sourceTree = "<group>";
 		};
 		FBE2CAF5246825CB00DF52C4 /* AdsViewController */ = {
@@ -625,6 +665,8 @@
 				FBE2CB1224682FB300DF52C4 /* RecommendationViewController.storyboard in Resources */,
 				FB51254E2496902300BEA4C1 /* SearchDetailsViewController.storyboard in Resources */,
 				FBA0E67724845C91008C1F9C /* ProductTableViewCell.xib in Resources */,
+				FBB105F624B1A57200D3DF77 /* StoresViewController.storyboard in Resources */,
+				FB0167B824B1B7C700A62670 /* StoreTableViewCell.xib in Resources */,
 				FB5866DE2468AFB10048EF18 /* ProductDetailsViewController.storyboard in Resources */,
 				FB06C113246172E7006F589A /* ProductsAdCollectionViewCell.xib in Resources */,
 				FB06C10F2461726D006F589A /* ProductsAdsController.storyboard in Resources */,
@@ -717,6 +759,7 @@
 				FBA0E6822486CD5A008C1F9C /* MoreViewController.swift in Sources */,
 				FB06C10224615EFD006F589A /* ShopViewController.swift in Sources */,
 				FBE8DCB92464B2EF009BA11E /* CategoriesViewController.swift in Sources */,
+				FB0167B224B1AE4400A62670 /* DetailsTableViewHeader.swift in Sources */,
 				FBA0E64F2484508E008C1F9C /* UIRoundButton.swift in Sources */,
 				FB13EAD1245FB6E600C9CC33 /* AppDelegate.swift in Sources */,
 				FB2E02A524629FE5002CACDE /* ProductCollectionViewCell.swift in Sources */,
@@ -726,6 +769,7 @@
 				FB06C10C24616E6C006F589A /* AdsCollectionViewCell.swift in Sources */,
 				FB1C8024246212CE00BFE29F /* UIHelpers.swift in Sources */,
 				FB06C115246177D9006F589A /* ProductsAdsController.swift in Sources */,
+				FB0167B724B1B7C700A62670 /* StoreTableViewCell.swift in Sources */,
 				FBD0DDFD2487F96300B38D5E /* ShopTableViewHeaderSection.swift in Sources */,
 				FB5125532496B05300BEA4C1 /* DetailsCollectionViewHeader.swift in Sources */,
 				FBA0E6502484508E008C1F9C /* ImageSliderView.swift in Sources */,
@@ -734,6 +778,7 @@
 				FB5866DC2468AC5F0048EF18 /* ProductDetailsViewController.swift in Sources */,
 				FBE2CB1424682FE700DF52C4 /* RecommendationViewController.swift in Sources */,
 				FBA0E67624845C91008C1F9C /* ProductTableViewCell.swift in Sources */,
+				FBB105F224B1A4C100D3DF77 /* StoresViewController.swift in Sources */,
 				FB51254C24968F2100BEA4C1 /* SearchDetailsViewController.swift in Sources */,
 				FB06C10024615DE0006F589A /* AdsCollectionView.swift in Sources */,
 				FB06C112246172E7006F589A /* ProductsAdCollectionViewCell.swift in Sources */,
@@ -747,8 +792,11 @@
 				FB5125502496AE3C00BEA4C1 /* DetailsCollectionViewHeaderTests.swift in Sources */,
 				FB419342246C902800005577 /* ProductsAdsControllerTests.swift in Sources */,
 				FB5125452493EF3D00BEA4C1 /* SearchCompletionResultsTests.swift in Sources */,
+				FB0167B024B1AE1D00A62670 /* DetailsTableViewHeaderTests.swift in Sources */,
 				FB119B142497D9A400E0B097 /* SearchFilteringViewControllerTests.swift in Sources */,
+				FBB105EE24B1A43D00D3DF77 /* StoresViewControllerTests.swift in Sources */,
 				FB06C1072461696F006F589A /* ShopViewControllerTests.swift in Sources */,
+				FB0167B424B1B78200A62670 /* StoreTableViewCellTests.swift in Sources */,
 				FBA0E66124845A4A008C1F9C /* CartViewControllerTests.swift in Sources */,
 				FB2E029E24628F73002CACDE /* RecommendationViewControllerTests.swift in Sources */,
 				FB51254A24968DCA00BEA4C1 /* SearchDetailsViewControllerTests.swift in Sources */,
