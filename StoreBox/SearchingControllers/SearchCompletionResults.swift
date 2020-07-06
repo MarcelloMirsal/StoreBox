@@ -45,6 +45,7 @@ final class SearchCompletionResults: UITableViewController {
         navigationItem.searchController = searchController
         
     }
+    
 }
 
 // MARK:- TableView Delegate & DataSource Implementation
@@ -64,9 +65,11 @@ extension SearchCompletionResults {
         delegate?.searchCompletionResults(didSelectResult: "\(indexPath)")
         tableView.deselectRow(at: indexPath, animated: true)
         navigationItem.searchController?.searchBar.endEditing(true)
-        dismiss(animated: true) // for searchContrller
-        dismiss(animated: true) // for self
-        //navigationItem.searchController?.dismiss(animated: true)
+        if let searchController = navigationItem.searchController {
+            searchController.dismiss(animated: true, completion: { [weak self] in
+                self?.dismiss(animated: true)
+            })
+        }
     }
 }
 

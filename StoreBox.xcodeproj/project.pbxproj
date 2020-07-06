@@ -14,6 +14,9 @@
 		FB0167B424B1B78200A62670 /* StoreTableViewCellTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0167B324B1B78200A62670 /* StoreTableViewCellTests.swift */; };
 		FB0167B724B1B7C700A62670 /* StoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0167B524B1B7C700A62670 /* StoreTableViewCell.swift */; };
 		FB0167B824B1B7C700A62670 /* StoreTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB0167B624B1B7C700A62670 /* StoreTableViewCell.xib */; };
+		FB0167BA24B1F29000A62670 /* StoreSearchDetailsViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0167B924B1F29000A62670 /* StoreSearchDetailsViewControllerTests.swift */; };
+		FB0167BC24B1F2E500A62670 /* StoreSearchDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0167BB24B1F2E500A62670 /* StoreSearchDetailsViewController.swift */; };
+		FB0167BE24B1F6E500A62670 /* StoreSearchDetailsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB0167BD24B1F6E500A62670 /* StoreSearchDetailsViewController.storyboard */; };
 		FB06C0FC24614DF3006F589A /* ShopViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB06C0FB24614DF3006F589A /* ShopViewController.storyboard */; };
 		FB06C10024615DE0006F589A /* AdsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB06C0FF24615DE0006F589A /* AdsCollectionView.swift */; };
 		FB06C10224615EFD006F589A /* ShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB06C10124615EFD006F589A /* ShopViewController.swift */; };
@@ -93,6 +96,9 @@
 		FB0167B324B1B78200A62670 /* StoreTableViewCellTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreTableViewCellTests.swift; sourceTree = "<group>"; };
 		FB0167B524B1B7C700A62670 /* StoreTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreTableViewCell.swift; sourceTree = "<group>"; };
 		FB0167B624B1B7C700A62670 /* StoreTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StoreTableViewCell.xib; sourceTree = "<group>"; };
+		FB0167B924B1F29000A62670 /* StoreSearchDetailsViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreSearchDetailsViewControllerTests.swift; sourceTree = "<group>"; };
+		FB0167BB24B1F2E500A62670 /* StoreSearchDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreSearchDetailsViewController.swift; sourceTree = "<group>"; };
+		FB0167BD24B1F6E500A62670 /* StoreSearchDetailsViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = StoreSearchDetailsViewController.storyboard; sourceTree = "<group>"; };
 		FB06C0FB24614DF3006F589A /* ShopViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ShopViewController.storyboard; sourceTree = "<group>"; };
 		FB06C0FF24615DE0006F589A /* AdsCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsCollectionView.swift; sourceTree = "<group>"; };
 		FB06C10124615EFD006F589A /* ShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopViewController.swift; sourceTree = "<group>"; };
@@ -282,6 +288,7 @@
 		FB51254824968C0900BEA4C1 /* SearchingControllersTests */ = {
 			isa = PBXGroup;
 			children = (
+				FB0167B924B1F29000A62670 /* StoreSearchDetailsViewControllerTests.swift */,
 				FB119B132497D9A400E0B097 /* SearchFilteringViewControllerTests.swift */,
 				FB51254924968DCA00BEA4C1 /* SearchDetailsViewControllerTests.swift */,
 				FB5125442493EF3D00BEA4C1 /* SearchCompletionResultsTests.swift */,
@@ -311,6 +318,8 @@
 		FBA0E6442484508E008C1F9C /* SearchingControllers */ = {
 			isa = PBXGroup;
 			children = (
+				FB0167BB24B1F2E500A62670 /* StoreSearchDetailsViewController.swift */,
+				FB0167BD24B1F6E500A62670 /* StoreSearchDetailsViewController.storyboard */,
 				FB119B152497D9DD00E0B097 /* SearchFilteringViewController.storyboard */,
 				FB119B172497DA0A00E0B097 /* SearchFilteringViewController.swift */,
 				FB51254D2496902300BEA4C1 /* SearchDetailsViewController.storyboard */,
@@ -675,6 +684,7 @@
 				FB06C0FC24614DF3006F589A /* ShopViewController.storyboard in Resources */,
 				FB13EADA245FB6E600C9CC33 /* Assets.xcassets in Resources */,
 				FB13EAD8245FB6E600C9CC33 /* Main.storyboard in Resources */,
+				FB0167BE24B1F6E500A62670 /* StoreSearchDetailsViewController.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -763,6 +773,7 @@
 				FBA0E64F2484508E008C1F9C /* UIRoundButton.swift in Sources */,
 				FB13EAD1245FB6E600C9CC33 /* AppDelegate.swift in Sources */,
 				FB2E02A524629FE5002CACDE /* ProductCollectionViewCell.swift in Sources */,
+				FB0167BC24B1F2E500A62670 /* StoreSearchDetailsViewController.swift in Sources */,
 				FB119B182497DA0A00E0B097 /* SearchFilteringViewController.swift in Sources */,
 				FBE8DCBE2464B683009BA11E /* CategoryCollectionViewCell.swift in Sources */,
 				FBA0E67524845C91008C1F9C /* CartViewController.swift in Sources */,
@@ -797,6 +808,7 @@
 				FBB105EE24B1A43D00D3DF77 /* StoresViewControllerTests.swift in Sources */,
 				FB06C1072461696F006F589A /* ShopViewControllerTests.swift in Sources */,
 				FB0167B424B1B78200A62670 /* StoreTableViewCellTests.swift in Sources */,
+				FB0167BA24B1F29000A62670 /* StoreSearchDetailsViewControllerTests.swift in Sources */,
 				FBA0E66124845A4A008C1F9C /* CartViewControllerTests.swift in Sources */,
 				FB2E029E24628F73002CACDE /* RecommendationViewControllerTests.swift in Sources */,
 				FB51254A24968DCA00BEA4C1 /* SearchDetailsViewControllerTests.swift in Sources */,

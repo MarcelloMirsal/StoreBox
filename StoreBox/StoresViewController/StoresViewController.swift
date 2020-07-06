@@ -22,11 +22,28 @@ class StoresViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupFakeSearchController()
         setupTableView()
     }
     
+    func setupFakeSearchController() {
+        let searchController = UISearchController()
+        searchController.searchBar.delegate = self
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
+    }
+    
     func setupTableView() {
+        tableView.contentInset.bottom = 24
         tableView.register(DetailsTableViewHeader.self, forHeaderFooterViewReuseIdentifier: headerId)
+    }
+    
+    func handleStoresSearchPresentation() {
+        let searchCompletionResults = SearchCompletionResults()
+        searchCompletionResults.delegate = self
+        let nv = UINavigationController(rootViewController: searchCompletionResults)
+        nv.modalPresentationStyle = .fullScreen
+        present(nv, animated: false)
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -61,5 +78,19 @@ class StoresViewController: UITableViewController {
     
 }
 
+extension StoresViewController: SearchCompletionResultsDelegate {
+    func searchCompletionResults(didSelectResult result: String) {
+        let newSearchDetailsViewController = UIStoryboard(name: "StoreSearchDetailsViewController").getInitialViewController(of: StoreSearchDetailsViewController.self)
+        newSearchDetailsViewController.title = result
+        navigationController?.pushViewController(newSearchDetailsViewController, animated: false)
+    }
+}
 
-
+extension StoresViewController: UISearchBarDelegate {
+    
+    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
+        handleStoresSearchPresentation()
+        return false
+    }
+    
+}

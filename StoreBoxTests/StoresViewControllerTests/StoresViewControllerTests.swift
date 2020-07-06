@@ -23,6 +23,32 @@ class StoresViewControllerTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
     
+    // MARK:- SearchController tests
+    
+    func testSearchController_ShouldBeNotNil() {
+        XCTAssertNotNil(sut.navigationItem.searchController)
+    }
+    
+    func testSearchBarDelegate_ShouldBeEqualToSUT() {
+        let searchBar = sut.navigationItem.searchController!.searchBar
+        XCTAssertTrue(searchBar.delegate === sut)
+    }
+    
+    func testSearchBarDidBeginEditing_ShouldReturnFalse(){
+        XCTAssertFalse(sut.searchBarShouldBeginEditing(.init()))
+    }
+    
+    func testSearchResultsCompletion_NavigationTopViewControllerShouldBeStoreSearchDetailsViewController() {
+        sut.searchCompletionResults(didSelectResult: "Store Name")
+        XCTAssertTrue(sut.navigationController!.topViewController is StoreSearchDetailsViewController)
+    }
+    
+    func testHandleStoresSearchPresentation() { // UI details
+        sut.handleStoresSearchPresentation()
+    }
+    
+    
+    // MARK:- TableView delegate and DataSource Tests
     func testRegisteredCell_ShouldBeNotNil() {
         let indexPath = IndexPath(row: 0, section: 0)
         let cell = sut.tableView.dequeueReusableCell(withIdentifier: sut.cellId, for: indexPath) as? StoreTableViewCell
