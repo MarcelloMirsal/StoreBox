@@ -23,6 +23,11 @@ class StoresViewControllerTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
     
+    func testPushStoreDetailsViewController_NavigationTopViewShouldStoreDetails() {
+        sut.pushStoreDetailsViewController(isAnimated: false)
+        XCTAssertTrue(sut.navigationController?.topViewController is StoreDetailsViewController)
+    }
+    
     // MARK:- SearchController tests
     
     func testSearchController_ShouldBeNotNil() {
@@ -73,7 +78,6 @@ class StoresViewControllerTests: XCTestCase {
         sut.tableView(sut.tableView, didSelectRowAt: indexPath)
         XCTAssertNil(sut.tableView.indexPathForSelectedRow)
     }
-    
     
 }
 

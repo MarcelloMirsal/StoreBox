@@ -38,6 +38,13 @@ class StoresViewController: UITableViewController {
         tableView.register(DetailsTableViewHeader.self, forHeaderFooterViewReuseIdentifier: headerId)
     }
     
+    func pushStoreDetailsViewController(isAnimated: Bool = true) {
+        let storeDetailsVC = UIStoryboard(name: "StoreDetailsViewController").getInitialViewController(of: StoreDetailsViewController.self)
+//        storeDetailsVC.modalPresentationStyle = .fullScreen
+//        present(storeDetailsVC, animated: true, completion: nil)
+        navigationController?.pushViewController(storeDetailsVC, animated: isAnimated)
+    }
+    
     func handleStoresSearchPresentation() {
         let searchCompletionResults = SearchCompletionResults()
         searchCompletionResults.delegate = self
@@ -60,16 +67,17 @@ class StoresViewController: UITableViewController {
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-    }
-    
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier:
             headerId) as! DetailsTableViewHeader
         headerView.contentView.backgroundColor = tableView.backgroundColor
         headerView.sectionLabel.text = items[section].0
         return headerView
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        pushStoreDetailsViewController()
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
