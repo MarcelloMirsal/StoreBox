@@ -13,16 +13,12 @@ class ImageSliderView: ImageSlideshow {
     
     let tapGesture = UITapGestureRecognizer()
     
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         setupImageSlideShow()
     }
     
-    func setFullPresentation(target: Any, action: Selector) {
+    func setupTapGesture(target: Any, action: Selector) {
         tapGesture.addTarget(target, action: action)
         addGestureRecognizer(tapGesture)
     }
@@ -45,4 +41,25 @@ class ImageSliderView: ImageSlideshow {
         ])
         
     }
+}
+
+@IBDesignable
+class PresentableImageView: ImageSlideshow {
+    
+    @IBInspectable var image: UIImage?
+    var imageContentMode: UIViewContentMode = .scaleAspectFill
+    
+    let tapGesture = UITapGestureRecognizer()
+    
+    override func draw(_ rect: CGRect) {
+        contentScaleMode = imageContentMode
+        guard let presentableImage = image else { return }
+        setImageInputs([ ImageSource(image: presentableImage) ])
+    }
+    
+    func setupTapGesture(target: Any, action: Selector) {
+        tapGesture.addTarget(target, action: action)
+        addGestureRecognizer(tapGesture)
+    }
+    
 }

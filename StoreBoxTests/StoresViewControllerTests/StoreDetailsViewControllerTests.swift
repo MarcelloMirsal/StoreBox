@@ -53,4 +53,8 @@ class StoreDetailsViewControllerTests: XCTestCase {
         sut.tableView(sut.tableView, didSelectRowAt: indexPath)
         XCTAssertNil(sut.tableView.indexPathForSelectedRow)
     }
+    
+    func testHandleStoreImagePresentation() { // UI Details
+        sut.handleStoreImagePresentation()
+    }
 }

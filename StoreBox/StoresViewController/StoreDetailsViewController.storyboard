@@ -20,19 +20,19 @@
                             <rect key="frame" x="0.0" y="0.0" width="414" height="458"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bourkestreetbakery" translatesAutoresizingMaskIntoConstraints="NO" id="JZe-DX-r9P" customClass="StoreHeaderImageView" customModule="StoreBox" customModuleProvider="target">
+                                <view contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="wMt-HI-Pyk" userLabel="store header image" customClass="StoreImageView" customModule="StoreBox" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="276"/>
-                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                     <gestureRecognizers/>
                                     <constraints>
-                                        <constraint firstAttribute="width" secondItem="JZe-DX-r9P" secondAttribute="height" multiplier="3:2" id="krC-yC-3Jb"/>
+                                        <constraint firstAttribute="width" secondItem="wMt-HI-Pyk" secondAttribute="height" multiplier="3:2" id="aag-5g-8bh"/>
                                     </constraints>
                                     <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="image" keyPath="image" value="bourkestreetbakery"/>
                                         <userDefinedRuntimeAttribute type="color" keyPath="gradientColor">
                                             <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
-                                </imageView>
+                                </view>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Marcello Store For Electronics &amp; Accessories" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SGt-dG-5FM">
                                     <rect key="frame" x="16" y="205" width="382" height="55"/>
                                     <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="20"/>
@@ -58,18 +58,18 @@
                             </subviews>
                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             <constraints>
-                                <constraint firstItem="6Yq-2B-BZR" firstAttribute="top" secondItem="JZe-DX-r9P" secondAttribute="bottom" id="3Zj-Lk-VmJ"/>
                                 <constraint firstItem="qch-EA-vad" firstAttribute="trailing" secondItem="SGt-dG-5FM" secondAttribute="trailing" constant="16" id="5cc-Hu-tgq"/>
                                 <constraint firstItem="qch-EA-vad" firstAttribute="trailing" secondItem="9D3-Az-CYK" secondAttribute="trailing" id="6tz-bL-mbt"/>
-                                <constraint firstItem="JZe-DX-r9P" firstAttribute="trailing" secondItem="qch-EA-vad" secondAttribute="trailing" id="Cpj-im-IK7"/>
-                                <constraint firstItem="JZe-DX-r9P" firstAttribute="leading" secondItem="qch-EA-vad" secondAttribute="leading" id="OAj-jr-slx"/>
-                                <constraint firstItem="SGt-dG-5FM" firstAttribute="bottom" secondItem="JZe-DX-r9P" secondAttribute="baseline" constant="-16" id="VKt-4g-1Sb"/>
+                                <constraint firstItem="6Yq-2B-BZR" firstAttribute="top" secondItem="wMt-HI-Pyk" secondAttribute="bottom" id="INF-4X-AY1"/>
+                                <constraint firstItem="wMt-HI-Pyk" firstAttribute="leading" secondItem="qch-EA-vad" secondAttribute="leading" id="YJx-dC-cXg"/>
+                                <constraint firstItem="wMt-HI-Pyk" firstAttribute="top" secondItem="qch-EA-vad" secondAttribute="top" id="b7o-ff-eca"/>
                                 <constraint firstItem="qch-EA-vad" firstAttribute="trailing" secondItem="6Yq-2B-BZR" secondAttribute="trailing" constant="16" id="bLd-ET-b8E"/>
                                 <constraint firstAttribute="bottom" secondItem="9D3-Az-CYK" secondAttribute="bottom" id="f2W-yb-pVv"/>
+                                <constraint firstItem="SGt-dG-5FM" firstAttribute="bottom" secondItem="wMt-HI-Pyk" secondAttribute="baseline" constant="-16" id="gu5-1e-Ocl"/>
                                 <constraint firstItem="9D3-Az-CYK" firstAttribute="leading" secondItem="qch-EA-vad" secondAttribute="leading" id="mkV-Tu-bjJ"/>
                                 <constraint firstItem="SGt-dG-5FM" firstAttribute="leading" secondItem="qch-EA-vad" secondAttribute="leading" constant="16" id="mpW-aH-Qi2"/>
+                                <constraint firstItem="qch-EA-vad" firstAttribute="trailing" secondItem="wMt-HI-Pyk" secondAttribute="trailing" id="tEV-AB-7eh"/>
                                 <constraint firstItem="6Yq-2B-BZR" firstAttribute="leading" secondItem="qch-EA-vad" secondAttribute="leading" constant="16" id="vGn-d0-Qde"/>
-                                <constraint firstItem="JZe-DX-r9P" firstAttribute="top" secondItem="qch-EA-vad" secondAttribute="top" id="xWg-CU-lYB"/>
                             </constraints>
                             <viewLayoutGuide key="safeArea" id="qch-EA-vad"/>
                         </view>
@@ -82,7 +82,7 @@
                     <connections>
                         <outlet property="descriptionTextView" destination="6Yq-2B-BZR" id="LxG-83-OMe"/>
                         <outlet property="headerView" destination="L80-9p-HaN" id="uni-JY-PK7"/>
-                        <outlet property="storeImageView" destination="JZe-DX-r9P" id="bpD-lD-x82"/>
+                        <outlet property="storeImageView" destination="wMt-HI-Pyk" id="3bo-bg-s8C"/>
                         <outlet property="storeNameLabel" destination="SGt-dG-5FM" id="xWJ-aY-dnm"/>
                     </connections>
                 </tableViewController>

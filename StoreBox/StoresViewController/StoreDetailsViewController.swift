@@ -8,13 +8,13 @@
 
 import UIKit
 
-class StoreDetailsViewController: UITableViewController {
+final class StoreDetailsViewController: UITableViewController {
     
     let cellId = "cellId"
     let headerId = "headerId"
     
     @IBOutlet weak var headerView: UIView!
-    @IBOutlet weak var storeImageView: StoreHeaderImageView!
+    @IBOutlet weak var storeImageView: StoreImageView!
     @IBOutlet weak var descriptionTextView: UITextView!
     @IBOutlet weak var storeNameLabel: UILabel!
     
@@ -25,6 +25,12 @@ class StoreDetailsViewController: UITableViewController {
         setupTableView()
         setupHeaderView()
         setupStoreImageViewGradientLayer()
+        storeImageView.setupTapGesture(target: self, action: #selector( handleStoreImagePresentation))
+    }
+    
+    @objc
+    func handleStoreImagePresentation(){
+        storeImageView.presentFullScreenController(from: self)
     }
     
     func setupHeaderView() {
@@ -47,6 +53,8 @@ class StoreDetailsViewController: UITableViewController {
         let labelsCoverPercent = (storeNameLabelHeight + shiftBetweenLabels) / imageViewSize.height
         storeImageView.gradientCoverPercent = labelsCoverPercent
     }
+    
+    
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 10
@@ -75,32 +83,5 @@ class StoreDetailsViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 56
-    }
-}
-
-
-class StoreHeaderImageView: UIImageView {
-    
-    var gradientCoverPercent: CGFloat = 0.0
-    var gradientLayer: CAGradientLayer!
-    @IBInspectable var gradientColor: UIColor = .white
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        setupLayers()
-    }
-    
-    func setupLayers() {
-        guard let currentGradientLayer = gradientLayer else {
-            gradientLayer = CAGradientLayer()
-            gradientLayer.colors = [ gradientColor.cgColor , UIColor.clear.cgColor ]
-            gradientLayer.startPoint = CGPoint(x: 0.5, y: 1)
-            gradientLayer.endPoint = CGPoint(x: 0.5, y: 0)
-            gradientLayer.locations = [ 0.0 , gradientCoverPercent as NSNumber, 1.0 ]
-            layer.addSublayer(gradientLayer)
-            gradientLayer.frame = bounds
-            return
-        }
-        currentGradientLayer.frame = bounds
     }
 }

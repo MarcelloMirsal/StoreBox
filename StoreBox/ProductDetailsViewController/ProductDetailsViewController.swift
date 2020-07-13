@@ -33,7 +33,7 @@ class ProductDetailsViewController: UIViewController {
     }
     
     func setupImageSliderView() {
-        imageSliderView.setFullPresentation(target: self, action: #selector( handleImageSliderViewPresentation))
+        imageSliderView.setupTapGesture(target: self, action: #selector( handleImageSliderViewPresentation))
     }
     
     @objc
