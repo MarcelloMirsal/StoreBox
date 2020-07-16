@@ -26,6 +26,7 @@ final class StoreDetailsViewController: UITableViewController {
         setupHeaderView()
         setupStoreImageViewGradientLayer()
         storeImageView.setupTapGesture(target: self, action: #selector( handleStoreImagePresentation))
+        
     }
     
     @objc
@@ -62,6 +63,7 @@ final class StoreDetailsViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! ProductTableViewCell
+        cell.sellerNameLabel.text = ""
         return cell
     }
     

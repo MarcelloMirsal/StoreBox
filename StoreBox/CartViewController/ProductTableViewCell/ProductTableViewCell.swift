@@ -9,5 +9,16 @@
 import UIKit
 
 class ProductTableViewCell: UITableViewCell {
+    @IBOutlet weak var productImageView: UIImageView!
+    
+    @IBOutlet weak var nameLabel: UILabel!
+    
+    @IBOutlet weak var priceLabel: UILabel!
+    
+    
+    @IBOutlet weak var sellerNameLabel: UILabel!
+    
+    
+    
     
 }
