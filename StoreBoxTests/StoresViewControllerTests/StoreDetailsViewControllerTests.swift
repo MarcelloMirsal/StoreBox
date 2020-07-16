@@ -56,5 +56,6 @@ class StoreDetailsViewControllerTests: XCTestCase {
     
     func testHandleStoreImagePresentation() { // UI Details
         sut.handleStoreImagePresentation()
+        sut.handleContactInfo()
     }
 }

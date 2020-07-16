@@ -21,13 +21,28 @@ final class StoreDetailsViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "@DemoStore"
-        navigationItem.rightBarButtonItem = .init(title: "Contact", style: .done, target: nil, action: nil)
+        let contactButton = UIBarButtonItem(title: "Contact", style: .done, target: self, action: #selector(handleContactInfo))
+        navigationItem.rightBarButtonItem = contactButton
         setupTableView()
         setupHeaderView()
         setupStoreImageViewGradientLayer()
         storeImageView.setupTapGesture(target: self, action: #selector( handleStoreImagePresentation))
         
     }
+    
+    @objc
+    func handleContactInfo() {
+        let alertController = UIAlertController(title: "Contact Options", message: "Please Choose an Option", preferredStyle: .actionSheet)
+        let whatsAppAction = UIAlertAction(title: "WhatsApp", style: .default)
+        let emailAction = UIAlertAction(title: "Email \(navigationItem.title! )", style: .default)
+        let cancelAction = UIAlertAction(title: "cancel", style: .cancel)
+        alertController.addAction(whatsAppAction)
+        alertController.addAction(emailAction)
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true)
+    }
+    
     
     @objc
     func handleStoreImagePresentation(){
