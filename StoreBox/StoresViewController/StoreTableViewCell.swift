@@ -9,6 +9,4 @@
 import UIKit
 
 final class StoreTableViewCell: UITableViewCell {
-    
-    
 }

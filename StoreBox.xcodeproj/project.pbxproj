@@ -287,6 +287,17 @@
 			path = StoreBoxTests;
 			sourceTree = "<group>";
 		};
+		FB208C3924C4658C005FAC99 /* nibs */ = {
+			isa = PBXGroup;
+			children = (
+				FBF1626724B45C6D002CDC13 /* CategoriesSectionCollectionViewCell.xib */,
+				FBE7795724B32F8B00034414 /* StoreDetailsViewController.storyboard */,
+				FB0167B624B1B7C700A62670 /* StoreTableViewCell.xib */,
+				FBB105F524B1A57200D3DF77 /* StoresViewController.storyboard */,
+			);
+			path = nibs;
+			sourceTree = "<group>";
+		};
 		FB416B862460E3060062C387 /* AppDelegate */ = {
 			isa = PBXGroup;
 			children = (
@@ -452,14 +463,11 @@
 			isa = PBXGroup;
 			children = (
 				FB6790E124BC65580073141B /* StoreImageView.swift */,
-				FBF1626724B45C6D002CDC13 /* CategoriesSectionCollectionViewCell.xib */,
 				FBE7795B24B36E8400034414 /* CategoriesTableSectionHeader.swift */,
 				FBE7795524B32F3800034414 /* StoreDetailsViewController.swift */,
-				FBE7795724B32F8B00034414 /* StoreDetailsViewController.storyboard */,
 				FB0167B524B1B7C700A62670 /* StoreTableViewCell.swift */,
-				FB0167B624B1B7C700A62670 /* StoreTableViewCell.xib */,
 				FBB105F024B1A4C100D3DF77 /* StoresViewController.swift */,
-				FBB105F524B1A57200D3DF77 /* StoresViewController.storyboard */,
+				FB208C3924C4658C005FAC99 /* nibs */,
 			);
 			path = StoresViewController;
 			sourceTree = "<group>";

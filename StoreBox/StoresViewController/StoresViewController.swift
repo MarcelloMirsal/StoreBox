@@ -20,12 +20,14 @@ class StoresViewController: UITableViewController {
         ("Shoes" , ["1 Store"])
     ]
     
+    // MARK:- View's Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupFakeSearchController()
         setupTableView()
     }
     
+    // MARK:- Setup UI
     func setupFakeSearchController() {
         let searchController = UISearchController()
         searchController.searchBar.delegate = self
@@ -40,8 +42,6 @@ class StoresViewController: UITableViewController {
     
     func pushStoreDetailsViewController(isAnimated: Bool = true) {
         let storeDetailsVC = UIStoryboard(name: "StoreDetailsViewController").getInitialViewController(of: StoreDetailsViewController.self)
-//        storeDetailsVC.modalPresentationStyle = .fullScreen
-//        present(storeDetailsVC, animated: true, completion: nil)
         navigationController?.pushViewController(storeDetailsVC, animated: isAnimated)
     }
     
@@ -52,7 +52,10 @@ class StoresViewController: UITableViewController {
         nv.modalPresentationStyle = .fullScreen
         present(nv, animated: false)
     }
-    
+}
+
+// MARK:- UITableView Delegate & DataSource
+extension StoresViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
         return items.count
     }
@@ -83,9 +86,9 @@ class StoresViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 42
     }
-    
 }
 
+// MARK:- SearchCompletionResultsDelegate
 extension StoresViewController: SearchCompletionResultsDelegate {
     func searchCompletionResults(didSelectResult result: String) {
         let newSearchDetailsViewController = UIStoryboard(name: "StoreSearchDetailsViewController").getInitialViewController(of: StoreSearchDetailsViewController.self)
@@ -94,11 +97,10 @@ extension StoresViewController: SearchCompletionResultsDelegate {
     }
 }
 
+// MARK:- UISearchBarDelegate
 extension StoresViewController: UISearchBarDelegate {
-    
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
         handleStoresSearchPresentation()
         return false
     }
-    
 }

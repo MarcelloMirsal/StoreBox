@@ -77,7 +77,6 @@ extension CategoriesTableSectionHeader: UICollectionViewDataSource, UICollection
 final class CategoriesSectionCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var sectionLabel: UILabel!
-    
     @IBOutlet weak var sectionIndicatorView: UIView!
     
     override var isSelected: Bool {
@@ -85,8 +84,5 @@ final class CategoriesSectionCollectionViewCell: UICollectionViewCell {
             sectionLabel.isHighlighted = isSelected
             sectionIndicatorView.backgroundColor = isSelected ? UIColor.systemBlue : sectionLabel.backgroundColor
         }
-        
     }
-    
-    
 }

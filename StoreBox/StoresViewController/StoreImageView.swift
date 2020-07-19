@@ -10,8 +10,10 @@ import UIKit
 
 @IBDesignable
 final class StoreImageView: PresentableImageView {
+    
     var gradientCoverPercent: CGFloat = 0.5
     var gradientLayer: CAGradientLayer!
+    
     @IBInspectable var gradientColor: UIColor = .white
     
     override func draw(_ rect: CGRect) {
