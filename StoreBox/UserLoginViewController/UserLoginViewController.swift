@@ -8,8 +8,8 @@
 
 import UIKit
 
+
 class UserLoginViewController: UIViewController {
-    
     
     @IBAction func presentMainStoryboard() {
         present(getMainTabBarController() , animated: true)
@@ -20,6 +20,5 @@ class UserLoginViewController: UIViewController {
         mainTabBarController.modalPresentationStyle = .fullScreen
         return mainTabBarController
     }
-    
     
 }

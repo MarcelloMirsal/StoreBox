@@ -8,6 +8,7 @@ target 'StoreBox' do
 
   # Pods for StoreBox
   pod 'ImageSlideshow'
+  pod 'Alamofire'
 
   target 'StoreBoxTests' do
     inherit! :search_paths
