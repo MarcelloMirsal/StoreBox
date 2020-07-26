@@ -55,6 +55,9 @@
 		FB6790E024BC634B0073141B /* PresentableImageViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB6790DF24BC634B0073141B /* PresentableImageViewTests.swift */; };
 		FB6790E224BC65580073141B /* StoreImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB6790E124BC65580073141B /* StoreImageView.swift */; };
 		FB6790E424BC65830073141B /* StoreImageViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB6790E324BC65830073141B /* StoreImageViewTests.swift */; };
+		FB744FE224CDBD3600D72FA6 /* UserLoginViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB744FE124CDBD3600D72FA6 /* UserLoginViewControllerTests.swift */; };
+		FB744FE424CDBDA400D72FA6 /* UserLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB744FE324CDBDA400D72FA6 /* UserLoginViewController.swift */; };
+		FB744FE624CDBE2C00D72FA6 /* UserLoginViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB744FE524CDBE2C00D72FA6 /* UserLoginViewController.storyboard */; };
 		FBA0E64F2484508E008C1F9C /* UIRoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA0E6422484508E008C1F9C /* UIRoundButton.swift */; };
 		FBA0E6502484508E008C1F9C /* ImageSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA0E6432484508E008C1F9C /* ImageSliderView.swift */; };
 		FBA0E66124845A4A008C1F9C /* CartViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA0E66024845A4A008C1F9C /* CartViewControllerTests.swift */; };
@@ -151,6 +154,9 @@
 		FB6790DF24BC634B0073141B /* PresentableImageViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentableImageViewTests.swift; sourceTree = "<group>"; };
 		FB6790E124BC65580073141B /* StoreImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreImageView.swift; sourceTree = "<group>"; };
 		FB6790E324BC65830073141B /* StoreImageViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreImageViewTests.swift; sourceTree = "<group>"; };
+		FB744FE124CDBD3600D72FA6 /* UserLoginViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLoginViewControllerTests.swift; sourceTree = "<group>"; };
+		FB744FE324CDBDA400D72FA6 /* UserLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLoginViewController.swift; sourceTree = "<group>"; };
+		FB744FE524CDBE2C00D72FA6 /* UserLoginViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = UserLoginViewController.storyboard; sourceTree = "<group>"; };
 		FBA0E6422484508E008C1F9C /* UIRoundButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIRoundButton.swift; sourceTree = "<group>"; };
 		FBA0E6432484508E008C1F9C /* ImageSliderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageSliderView.swift; sourceTree = "<group>"; };
 		FBA0E66024845A4A008C1F9C /* CartViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartViewControllerTests.swift; sourceTree = "<group>"; };
@@ -255,6 +261,7 @@
 		FB13EACF245FB6E600C9CC33 /* StoreBox */ = {
 			isa = PBXGroup;
 			children = (
+				FB744FE724CDBE5600D72FA6 /* UserLoginViewController */,
 				FBB105F424B1A4FF00D3DF77 /* StoresViewController */,
 				FBA0E67F2486CD1E008C1F9C /* MoreViewController */,
 				FBA0E66B24845C91008C1F9C /* CartViewController */,
@@ -275,6 +282,7 @@
 		FB13EAE6245FB6E700C9CC33 /* StoreBoxTests */ = {
 			isa = PBXGroup;
 			children = (
+				FB744FE824CDC20900D72FA6 /* UserLoginViewControllerTests */,
 				FBB105EF24B1A44200D3DF77 /* StoresViewControllerTests */,
 				FBB105EC24B1A30B00D3DF77 /* StoreBox_shared_UI Tests */,
 				FB51254824968C0900BEA4C1 /* SearchingControllersTests */,
@@ -325,6 +333,23 @@
 				FB5125442493EF3D00BEA4C1 /* SearchCompletionResultsTests.swift */,
 			);
 			path = SearchingControllersTests;
+			sourceTree = "<group>";
+		};
+		FB744FE724CDBE5600D72FA6 /* UserLoginViewController */ = {
+			isa = PBXGroup;
+			children = (
+				FB744FE324CDBDA400D72FA6 /* UserLoginViewController.swift */,
+				FB744FE524CDBE2C00D72FA6 /* UserLoginViewController.storyboard */,
+			);
+			path = UserLoginViewController;
+			sourceTree = "<group>";
+		};
+		FB744FE824CDC20900D72FA6 /* UserLoginViewControllerTests */ = {
+			isa = PBXGroup;
+			children = (
+				FB744FE124CDBD3600D72FA6 /* UserLoginViewControllerTests.swift */,
+			);
+			path = UserLoginViewControllerTests;
 			sourceTree = "<group>";
 		};
 		FB9992722469BCD80047FC72 /* ProductDetailsViewControllerTests */ = {
@@ -710,6 +735,7 @@
 				FB06C10924616DA3006F589A /* AdsViewController.storyboard in Resources */,
 				FB06C10D24616E6C006F589A /* AdsCollectionViewCell.xib in Resources */,
 				FB2E02A624629FE5002CACDE /* ProductCollectionViewCell.xib in Resources */,
+				FB744FE624CDBE2C00D72FA6 /* UserLoginViewController.storyboard in Resources */,
 				FBF1626824B45C6D002CDC13 /* CategoriesSectionCollectionViewCell.xib in Resources */,
 				FBE2CB1224682FB300DF52C4 /* RecommendationViewController.storyboard in Resources */,
 				FB51254E2496902300BEA4C1 /* SearchDetailsViewController.storyboard in Resources */,
@@ -817,6 +843,7 @@
 				FB119B182497DA0A00E0B097 /* SearchFilteringViewController.swift in Sources */,
 				FBE8DCBE2464B683009BA11E /* CategoryCollectionViewCell.swift in Sources */,
 				FBA0E67524845C91008C1F9C /* CartViewController.swift in Sources */,
+				FB744FE424CDBDA400D72FA6 /* UserLoginViewController.swift in Sources */,
 				FB06C10C24616E6C006F589A /* AdsCollectionViewCell.swift in Sources */,
 				FB6790E224BC65580073141B /* StoreImageView.swift in Sources */,
 				FB1C8024246212CE00BFE29F /* UIHelpers.swift in Sources */,
@@ -861,6 +888,7 @@
 				FB2E029E24628F73002CACDE /* RecommendationViewControllerTests.swift in Sources */,
 				FB51254A24968DCA00BEA4C1 /* SearchDetailsViewControllerTests.swift in Sources */,
 				FB2E02A224629FBA002CACDE /* ProductCollectionViewCellTests.swift in Sources */,
+				FB744FE224CDBD3600D72FA6 /* UserLoginViewControllerTests.swift in Sources */,
 				FBA0E67D2486CCE5008C1F9C /* MoreViewControllerTests.swift in Sources */,
 				FB5866D82468AB810048EF18 /* ProductDetailsViewControllerTests.swift in Sources */,
 			);
