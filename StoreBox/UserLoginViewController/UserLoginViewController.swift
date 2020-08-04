@@ -8,17 +8,15 @@
 
 import UIKit
 
-
 class UserLoginViewController: UIViewController {
     
-    @IBAction func presentMainStoryboard() {
-        present(getMainTabBarController() , animated: true)
+    let viewModel = UserLoginViewModel()
+    
+    @IBAction func handleGuestLoginAction() {
+        viewModel.handleGuestLogin(completion: handleGuestLoginResponse(dict:error:))
     }
     
-    func getMainTabBarController() -> UITabBarController {
-        let mainTabBarController = UIStoryboard(name: "Main").getInitialViewController(of: UITabBarController.self)
-        mainTabBarController.modalPresentationStyle = .fullScreen
-        return mainTabBarController
+    func handleGuestLoginResponse(dict: [String:Any]? , error: Error? ) {
+        if let _ = dict { dismiss(animated: true) }
     }
-    
 }

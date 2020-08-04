@@ -36,12 +36,18 @@
 		FB13EAD8245FB6E600C9CC33 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB13EAD6245FB6E600C9CC33 /* Main.storyboard */; };
 		FB13EADA245FB6E600C9CC33 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FB13EAD9245FB6E600C9CC33 /* Assets.xcassets */; };
 		FB13EADD245FB6E600C9CC33 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB13EADB245FB6E600C9CC33 /* LaunchScreen.storyboard */; };
+		FB17608824D88F0000BDBC66 /* UserAuthServiceResponses.json in Resources */ = {isa = PBXBuildFile; fileRef = FB17608724D88F0000BDBC66 /* UserAuthServiceResponses.json */; };
+		FB17608A24D8C27000BDBC66 /* TestDoubles.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB17608924D8C27000BDBC66 /* TestDoubles.swift */; };
 		FB1C8024246212CE00BFE29F /* UIHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1C8023246212CE00BFE29F /* UIHelpers.swift */; };
 		FB2E029E24628F73002CACDE /* RecommendationViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2E029D24628F73002CACDE /* RecommendationViewControllerTests.swift */; };
 		FB2E02A224629FBA002CACDE /* ProductCollectionViewCellTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2E02A124629FBA002CACDE /* ProductCollectionViewCellTests.swift */; };
 		FB2E02A524629FE5002CACDE /* ProductCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2E02A324629FE5002CACDE /* ProductCollectionViewCell.swift */; };
 		FB2E02A624629FE5002CACDE /* ProductCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB2E02A424629FE5002CACDE /* ProductCollectionViewCell.xib */; };
 		FB419342246C902800005577 /* ProductsAdsControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB419341246C902800005577 /* ProductsAdsControllerTests.swift */; };
+		FB4B251024D9D628004A327B /* UserLoginViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB4B250F24D9D628004A327B /* UserLoginViewModelTests.swift */; };
+		FB4B251224D9D643004A327B /* UserLoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB4B251124D9D643004A327B /* UserLoginViewModel.swift */; };
+		FB4BBACE24CED17800E82E8A /* NetworkConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB4BBACD24CED17800E82E8A /* NetworkConstants.swift */; };
+		FB4BBAD124CED1F200E82E8A /* NetworkConstantsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB4BBAD024CED1F200E82E8A /* NetworkConstantsTests.swift */; };
 		FB5125452493EF3D00BEA4C1 /* SearchCompletionResultsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5125442493EF3D00BEA4C1 /* SearchCompletionResultsTests.swift */; };
 		FB5125472493EF7100BEA4C1 /* SearchCompletionResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5125462493EF7000BEA4C1 /* SearchCompletionResults.swift */; };
 		FB51254A24968DCA00BEA4C1 /* SearchDetailsViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB51254924968DCA00BEA4C1 /* SearchDetailsViewControllerTests.swift */; };
@@ -83,8 +89,11 @@
 		FBE8DCBB2464B61A009BA11E /* CategoriesViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FBE8DCBA2464B61A009BA11E /* CategoriesViewController.storyboard */; };
 		FBE8DCBE2464B683009BA11E /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE8DCBC2464B683009BA11E /* CategoryCollectionViewCell.swift */; };
 		FBE8DCBF2464B683009BA11E /* CategoryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBE8DCBD2464B683009BA11E /* CategoryCollectionViewCell.xib */; };
+		FBEF201E24D9BAD200F1AAED /* UserAuthServiceTestDoubles.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBEF201D24D9BAD200F1AAED /* UserAuthServiceTestDoubles.swift */; };
 		FBF1626624B455B3002CDC13 /* CategoriesSectionCollectionViewCellTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBF1626524B455B3002CDC13 /* CategoriesSectionCollectionViewCellTests.swift */; };
 		FBF1626824B45C6D002CDC13 /* CategoriesSectionCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBF1626724B45C6D002CDC13 /* CategoriesSectionCollectionViewCell.xib */; };
+		FBF76F9F24CED9ED00E03773 /* UserAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBF76F9E24CED9ED00E03773 /* UserAuthService.swift */; };
+		FBF76FA124CEDA0E00E03773 /* UserAuthServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBF76FA024CEDA0E00E03773 /* UserAuthServiceTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -135,12 +144,18 @@
 		FB13EADE245FB6E600C9CC33 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FB13EAE3245FB6E700C9CC33 /* StoreBoxTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StoreBoxTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB13EAE9245FB6E700C9CC33 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FB17608724D88F0000BDBC66 /* UserAuthServiceResponses.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = UserAuthServiceResponses.json; sourceTree = "<group>"; };
+		FB17608924D8C27000BDBC66 /* TestDoubles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDoubles.swift; sourceTree = "<group>"; };
 		FB1C8023246212CE00BFE29F /* UIHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UIHelpers.swift; path = "StoreBox/Extensions And Helpers/UIHelpers.swift"; sourceTree = SOURCE_ROOT; };
 		FB2E029D24628F73002CACDE /* RecommendationViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationViewControllerTests.swift; sourceTree = "<group>"; };
 		FB2E02A124629FBA002CACDE /* ProductCollectionViewCellTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCollectionViewCellTests.swift; sourceTree = "<group>"; };
 		FB2E02A324629FE5002CACDE /* ProductCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCollectionViewCell.swift; sourceTree = "<group>"; };
 		FB2E02A424629FE5002CACDE /* ProductCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductCollectionViewCell.xib; sourceTree = "<group>"; };
 		FB419341246C902800005577 /* ProductsAdsControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsAdsControllerTests.swift; sourceTree = "<group>"; };
+		FB4B250F24D9D628004A327B /* UserLoginViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLoginViewModelTests.swift; sourceTree = "<group>"; };
+		FB4B251124D9D643004A327B /* UserLoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLoginViewModel.swift; sourceTree = "<group>"; };
+		FB4BBACD24CED17800E82E8A /* NetworkConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConstants.swift; sourceTree = "<group>"; };
+		FB4BBAD024CED1F200E82E8A /* NetworkConstantsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConstantsTests.swift; sourceTree = "<group>"; };
 		FB5125442493EF3D00BEA4C1 /* SearchCompletionResultsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCompletionResultsTests.swift; sourceTree = "<group>"; };
 		FB5125462493EF7000BEA4C1 /* SearchCompletionResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCompletionResults.swift; sourceTree = "<group>"; };
 		FB51254924968DCA00BEA4C1 /* SearchDetailsViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDetailsViewControllerTests.swift; sourceTree = "<group>"; };
@@ -182,8 +197,11 @@
 		FBE8DCBA2464B61A009BA11E /* CategoriesViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CategoriesViewController.storyboard; sourceTree = "<group>"; };
 		FBE8DCBC2464B683009BA11E /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		FBE8DCBD2464B683009BA11E /* CategoryCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryCollectionViewCell.xib; sourceTree = "<group>"; };
+		FBEF201D24D9BAD200F1AAED /* UserAuthServiceTestDoubles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthServiceTestDoubles.swift; sourceTree = "<group>"; };
 		FBF1626524B455B3002CDC13 /* CategoriesSectionCollectionViewCellTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesSectionCollectionViewCellTests.swift; sourceTree = "<group>"; };
 		FBF1626724B45C6D002CDC13 /* CategoriesSectionCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoriesSectionCollectionViewCell.xib; sourceTree = "<group>"; };
+		FBF76F9E24CED9ED00E03773 /* UserAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthService.swift; sourceTree = "<group>"; };
+		FBF76FA024CEDA0E00E03773 /* UserAuthServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthServiceTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -261,18 +279,19 @@
 		FB13EACF245FB6E600C9CC33 /* StoreBox */ = {
 			isa = PBXGroup;
 			children = (
+				FB416B862460E3060062C387 /* AppDelegate */,
+				FB13EAD6245FB6E600C9CC33 /* Main.storyboard */,
 				FB744FE724CDBE5600D72FA6 /* UserLoginViewController */,
 				FBB105F424B1A4FF00D3DF77 /* StoresViewController */,
 				FBA0E67F2486CD1E008C1F9C /* MoreViewController */,
 				FBA0E66B24845C91008C1F9C /* CartViewController */,
-				FB416B862460E3060062C387 /* AppDelegate */,
-				FB13EAD6245FB6E600C9CC33 /* Main.storyboard */,
 				FB06C0FE24614DFE006F589A /* ShopViewController */,
 				FBA0E6442484508E008C1F9C /* SearchingControllers */,
 				FBE2CB052468285100DF52C4 /* ProductCollectionViewCell */,
 				FBF0BF2B2469B99200368ED3 /* ProductDetailsViewController */,
 				FBA0E6412484508E008C1F9C /* StoreBox_shared_UI */,
 				FBE2CB0B246828EB00DF52C4 /* Extensions And Helpers */,
+				FB4BBACF24CED18200E82E8A /* Networking */,
 				FB416B872460E31B0062C387 /* Assets */,
 				FB13EADE245FB6E600C9CC33 /* Info.plist */,
 			);
@@ -282,6 +301,7 @@
 		FB13EAE6245FB6E700C9CC33 /* StoreBoxTests */ = {
 			isa = PBXGroup;
 			children = (
+				FB4BBAD224CED1F900E82E8A /* Networking Tests */,
 				FB744FE824CDC20900D72FA6 /* UserLoginViewControllerTests */,
 				FBB105EF24B1A44200D3DF77 /* StoresViewControllerTests */,
 				FBB105EC24B1A30B00D3DF77 /* StoreBox_shared_UI Tests */,
@@ -324,6 +344,25 @@
 			path = Assets;
 			sourceTree = "<group>";
 		};
+		FB4BBACF24CED18200E82E8A /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				FB4BBACD24CED17800E82E8A /* NetworkConstants.swift */,
+				FBF76FA324CEDA7500E03773 /* Services */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		FB4BBAD224CED1F900E82E8A /* Networking Tests */ = {
+			isa = PBXGroup;
+			children = (
+				FB4BBAD024CED1F200E82E8A /* NetworkConstantsTests.swift */,
+				FB17608924D8C27000BDBC66 /* TestDoubles.swift */,
+				FBF76FA224CEDA6D00E03773 /* Services Tests */,
+			);
+			path = "Networking Tests";
+			sourceTree = "<group>";
+		};
 		FB51254824968C0900BEA4C1 /* SearchingControllersTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -339,6 +378,7 @@
 			isa = PBXGroup;
 			children = (
 				FB744FE324CDBDA400D72FA6 /* UserLoginViewController.swift */,
+				FB4B251124D9D643004A327B /* UserLoginViewModel.swift */,
 				FB744FE524CDBE2C00D72FA6 /* UserLoginViewController.storyboard */,
 			);
 			path = UserLoginViewController;
@@ -347,6 +387,7 @@
 		FB744FE824CDC20900D72FA6 /* UserLoginViewControllerTests */ = {
 			isa = PBXGroup;
 			children = (
+				FB4B250F24D9D628004A327B /* UserLoginViewModelTests.swift */,
 				FB744FE124CDBD3600D72FA6 /* UserLoginViewControllerTests.swift */,
 			);
 			path = UserLoginViewControllerTests;
@@ -631,6 +672,24 @@
 			path = ProductDetailsViewController;
 			sourceTree = "<group>";
 		};
+		FBF76FA224CEDA6D00E03773 /* Services Tests */ = {
+			isa = PBXGroup;
+			children = (
+				FBF76FA024CEDA0E00E03773 /* UserAuthServiceTests.swift */,
+				FBEF201D24D9BAD200F1AAED /* UserAuthServiceTestDoubles.swift */,
+				FB17608724D88F0000BDBC66 /* UserAuthServiceResponses.json */,
+			);
+			path = "Services Tests";
+			sourceTree = "<group>";
+		};
+		FBF76FA324CEDA7500E03773 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				FBF76F9E24CED9ED00E03773 /* UserAuthService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		FCE7614C7B50094D4CFB8263 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -660,6 +719,8 @@
 			dependencies = (
 			);
 			name = StoreBox;
+			packageProductDependencies = (
+			);
 			productName = StoreBox;
 			productReference = FB13EACD245FB6E600C9CC33 /* StoreBox.app */;
 			productType = "com.apple.product-type.application";
@@ -758,6 +819,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FB17608824D88F0000BDBC66 /* UserAuthServiceResponses.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -836,9 +898,11 @@
 				FB06C10224615EFD006F589A /* ShopViewController.swift in Sources */,
 				FBE8DCB92464B2EF009BA11E /* CategoriesViewController.swift in Sources */,
 				FB0167B224B1AE4400A62670 /* DetailsTableViewHeader.swift in Sources */,
+				FB4B251224D9D643004A327B /* UserLoginViewModel.swift in Sources */,
 				FBA0E64F2484508E008C1F9C /* UIRoundButton.swift in Sources */,
 				FB13EAD1245FB6E600C9CC33 /* AppDelegate.swift in Sources */,
 				FB2E02A524629FE5002CACDE /* ProductCollectionViewCell.swift in Sources */,
+				FB4BBACE24CED17800E82E8A /* NetworkConstants.swift in Sources */,
 				FB0167BC24B1F2E500A62670 /* StoreSearchDetailsViewController.swift in Sources */,
 				FB119B182497DA0A00E0B097 /* SearchFilteringViewController.swift in Sources */,
 				FBE8DCBE2464B683009BA11E /* CategoryCollectionViewCell.swift in Sources */,
@@ -846,6 +910,7 @@
 				FB744FE424CDBDA400D72FA6 /* UserLoginViewController.swift in Sources */,
 				FB06C10C24616E6C006F589A /* AdsCollectionViewCell.swift in Sources */,
 				FB6790E224BC65580073141B /* StoreImageView.swift in Sources */,
+				FBF76F9F24CED9ED00E03773 /* UserAuthService.swift in Sources */,
 				FB1C8024246212CE00BFE29F /* UIHelpers.swift in Sources */,
 				FB06C115246177D9006F589A /* ProductsAdsController.swift in Sources */,
 				FB0167B724B1B7C700A62670 /* StoreTableViewCell.swift in Sources */,
@@ -878,14 +943,19 @@
 				FB6790E024BC634B0073141B /* PresentableImageViewTests.swift in Sources */,
 				FB6790E424BC65830073141B /* StoreImageViewTests.swift in Sources */,
 				FB119B142497D9A400E0B097 /* SearchFilteringViewControllerTests.swift in Sources */,
+				FB4B251024D9D628004A327B /* UserLoginViewModelTests.swift in Sources */,
 				FBB105EE24B1A43D00D3DF77 /* StoresViewControllerTests.swift in Sources */,
+				FB4BBAD124CED1F200E82E8A /* NetworkConstantsTests.swift in Sources */,
 				FB06C1072461696F006F589A /* ShopViewControllerTests.swift in Sources */,
 				FB0167B424B1B78200A62670 /* StoreTableViewCellTests.swift in Sources */,
 				FB0167BA24B1F29000A62670 /* StoreSearchDetailsViewControllerTests.swift in Sources */,
 				FBF1626624B455B3002CDC13 /* CategoriesSectionCollectionViewCellTests.swift in Sources */,
 				FBA0E66124845A4A008C1F9C /* CartViewControllerTests.swift in Sources */,
+				FBEF201E24D9BAD200F1AAED /* UserAuthServiceTestDoubles.swift in Sources */,
 				FBE7795424B32EBF00034414 /* StoreDetailsViewControllerTests.swift in Sources */,
 				FB2E029E24628F73002CACDE /* RecommendationViewControllerTests.swift in Sources */,
+				FBF76FA124CEDA0E00E03773 /* UserAuthServiceTests.swift in Sources */,
+				FB17608A24D8C27000BDBC66 /* TestDoubles.swift in Sources */,
 				FB51254A24968DCA00BEA4C1 /* SearchDetailsViewControllerTests.swift in Sources */,
 				FB2E02A224629FBA002CACDE /* ProductCollectionViewCellTests.swift in Sources */,
 				FB744FE224CDBD3600D72FA6 /* UserLoginViewControllerTests.swift in Sources */,

@@ -20,7 +20,7 @@
                                 <rect key="frame" x="160" y="433" width="94" height="30"/>
                                 <state key="normal" title="Guest Access"/>
                                 <connections>
-                                    <action selector="presentMainStoryboard" destination="bcD-hW-GSY" eventType="touchUpInside" id="dJW-u9-Q8s"/>
+                                    <action selector="handleGuestLoginAction" destination="bcD-hW-GSY" eventType="touchUpInside" id="Y4q-wr-d0g"/>
                                 </connections>
                             </button>
                         </subviews>

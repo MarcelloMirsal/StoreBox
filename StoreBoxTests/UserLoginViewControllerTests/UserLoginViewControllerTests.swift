@@ -12,7 +12,7 @@ import XCTest
 class UserLoginViewControllerTests: XCTestCase {
     
     var sut: UserLoginViewController!
-
+    
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         sut = UIStoryboard(name: "UserLoginViewController").getInitialViewController(of: UserLoginViewController.self)
@@ -22,8 +22,13 @@ class UserLoginViewControllerTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
     
-    func testPresentMainStoryboard() { // UI Details
-        sut.presentMainStoryboard()
+    
+    func testHandleGuestLoginResponse() {
+        sut.handleGuestLoginResponse(dict: nil, error: nil)
+    }
+    
+    func testHandleGuestLoginAction() {
+        sut.handleGuestLoginAction()
     }
     
 }
