@@ -11,7 +11,15 @@ class UserAuthService {
     
     typealias UserAuthResponse = ([ String : Any ]?, Error?) -> ()
     
-    static var token: String?
+    static var token: String? {
+        get {
+            guard let tokenKey = UserDefaults().value(forKey: "token") as? String else { return nil }
+            return tokenKey
+        }
+        set {
+            UserDefaults().set(newValue, forKey: "token")
+        }
+    }
     
     let router: UserAuthServiceRoutes
     

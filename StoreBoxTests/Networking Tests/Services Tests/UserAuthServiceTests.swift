@@ -20,6 +20,7 @@ class UserAuthServiceTests: XCTestCase {
     
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
+        UserAuthService.token = nil
     }
     
     func testStartGuestLogin_DictShouldBeNotNil() {
@@ -58,6 +59,16 @@ class UserAuthServiceTests: XCTestCase {
         router.guestLogin = NetworkRequestFake(path: path)
         
         sut = UserAuthService(router: router)
+    }
+    
+    func testTokenIsSavedAfterUserAuthAction_TokenShouldBeNotNil() {
+        let exp = expectation(description: "testTokenIsSavedAfterUserAuthAction")
+        
+        sut.startGuestLogin { (dict, error) in
+            XCTAssertNotNil(UserAuthService.token)
+            exp.fulfill()
+        }
+        wait(for: [exp], timeout: 1)
     }
 }
 
