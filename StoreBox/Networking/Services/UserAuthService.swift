@@ -7,9 +7,23 @@
 //
 
 import Alamofire
+
+protocol UserAuthServiceProtocol: class {
+    func startGuestLogin(completion: @escaping UserAuthService.UserAuthResponse)
+    func parseUserAuth(from jsonData: Data?) -> UserAuth?
+}
+
 class UserAuthService {
     
-    typealias UserAuthResponse = ([ String : Any ]?, Error?) -> ()
+    typealias UserAuthResponse = (UserAuth?, Error?) -> ()
+    
+    private(set) var router: UserAuthServiceRoutes
+    
+    init(router: UserAuthServiceRoutes = UserAuthRouter() ) {
+        self.router = router
+    }
+    
+//    static var token: String? = nil
     
     static var token: String? {
         get {
@@ -20,38 +34,39 @@ class UserAuthService {
             UserDefaults().set(newValue, forKey: "token")
         }
     }
-    
-    let router: UserAuthServiceRoutes
-    
-    init(router: UserAuthServiceRoutes = UserAuthRouter() ) {
-        self.router = router
-    }
-    
-    
-    func startGuestLogin(completion: @escaping UserAuthResponse)  {
-        AF.request(router.guestLogin).responseJSON { [weak self] (jsonDataResponse) in
-            let dict = self?.parseDict(from: jsonDataResponse.data)
-            completion(dict, jsonDataResponse.error)
-        }
-    }
-    
-    func parseDict(from jsonData: Data?) -> [String: Any]? {
-        guard let data = jsonData else { return nil}
-        guard let jsonObject = try? JSONSerialization.jsonObject(with: data) else { return nil }
-        let jsonDict = jsonObject as? [String : Any]
-        UserAuthService.token = jsonDict?["token"] as? String
-        return jsonDict
-    }
-    
 }
 
-class UserAuthRouter: UserAuthServiceRoutes {
-    var guestLogin: NetworkRequestProtocol = NetworkRequest(method: .post , path: "/sessions/guest")
+extension UserAuthServiceProtocol {
+    func parseUserAuth(from jsonData: Data?) -> UserAuth? {
+        guard let data = jsonData else { return nil}
+        return try? JSONDecoder().decode(UserAuth.self, from: data)
+    }
+}
+
+extension UserAuthService: UserAuthServiceProtocol  {
+    func startGuestLogin(completion: @escaping UserAuthService.UserAuthResponse)  {
+        AF.request(router.guestLogin).validate().responseJSON { [weak self] (jsonDataResponse) in
+            let userAuth = self?.parseUserAuth(from: jsonDataResponse.data) ?? nil
+            UserAuthService.token = userAuth?.token
+            completion(userAuth, jsonDataResponse.error)
+        }
+    }
 }
 
 
 protocol UserAuthServiceRoutes {
-    var guestLogin: NetworkRequestProtocol { get set }
+    var guestLogin: NetworkRequestProtocol { get }
 }
 
+struct UserAuthRouter: UserAuthServiceRoutes {
+    private(set) var guestLogin: NetworkRequestProtocol = NetworkRequest(method: .post , path: "/sessions/guest")
+}
 
+struct UserAuth: Codable {
+    let message: String
+    let token: String
+    
+    enum CodingKeys: String, CodingKey {
+        case message, token
+    }
+}

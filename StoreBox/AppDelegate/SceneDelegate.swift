@@ -35,13 +35,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     func sceneDidBecomeActive(_ scene: UIScene) {
-        guard let _ = UserAuthService.token else {
+        if let _ = UserAuthService.token {
+            
+        } else {
             guard let windowScene = (scene as? UIWindowScene) else { return }
             let window = windowScene.windows.first!
             let loginVC = UIStoryboard(name: "UserLoginViewController").getInitialViewController(of: UserLoginViewController.self)
             loginVC.modalPresentationStyle = .fullScreen
             window.rootViewController?.present(loginVC, animated: true)
-            return
         }
     }
     

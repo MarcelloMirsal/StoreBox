@@ -10,13 +10,25 @@ import UIKit
 
 class UserLoginViewController: UIViewController {
     
-    let viewModel = UserLoginViewModel()
+    var viewModel = UserLoginViewModel()
     
-    @IBAction func handleGuestLoginAction() {
-        viewModel.handleGuestLogin(completion: handleGuestLoginResponse(dict:error:))
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        viewModel.delegate = self
     }
     
-    func handleGuestLoginResponse(dict: [String:Any]? , error: Error? ) {
-        if let _ = dict { dismiss(animated: true) }
+    @IBAction func handleGuestLoginAction() {
+        viewModel.handleGuestLogin()
+    }
+}
+
+extension UserLoginViewController: UserLoginViewModelDelegate {
+    func userLoginViewModel(isUserAuthenticated: Bool, message: String) {
+        guard isUserAuthenticated else {
+            let title = "Error?"
+            present(UIAlertController.makeAlert(message, with: title), animated: true)
+            return
+        }
+        dismiss(animated: true)
     }
 }

@@ -58,6 +58,7 @@ struct NetworkRequest: NetworkRequestProtocol {
     
     func setupURLRequest(from url: URL) -> URLRequest {
         var urlRequest = URLRequest(url: url)
+        urlRequest.timeoutInterval = 10
         urlRequest.method = method
         if let _ = headers { urlRequest.headers = .init(headers!) }
         if let _ = body { urlRequest.httpBody = try? JSONEncoder().encode(body!) }

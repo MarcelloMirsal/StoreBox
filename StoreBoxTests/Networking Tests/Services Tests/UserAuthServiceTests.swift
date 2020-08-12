@@ -15,61 +15,58 @@ class UserAuthServiceTests: XCTestCase {
     
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        arrangeSutWithCorrectPath()
+        arrangeSutWithCorrectRouter()
     }
     
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
-        UserAuthService.token = nil
     }
     
-    func testStartGuestLogin_DictShouldBeNotNil() {
+    func testStartGuestLogin_UserAuthShouldBeNotNil() {
         let exp = expectation(description: "testStartGuestLogin_ErrorShouldBeNotNil")
         
-        sut.startGuestLogin { (dict, error) in
-            XCTAssertNotNil(dict)
+        sut.startGuestLogin { (userAuth, error) in
+            XCTAssertNotNil(userAuth)
             exp.fulfill()
         }
-        wait(for: [exp], timeout: 1)
+        wait(for: [exp], timeout: 2)
     }
     
     func testStartGuestLoginWithBadPath_ErrorShouldBeNotNil() {
-        arrangeSutWithFailablePath()
+        arrangeSutWithBadRouter()
         
         let exp = expectation(description: "testStartGuestLoginWithBadPath")
         
-        sut.startGuestLogin { (dict, error) in
+        sut.startGuestLogin { (userAuth, error) in
             XCTAssertNotNil(error)
             exp.fulfill()
         }
-        wait(for: [exp], timeout: 1)
-    }
-    
-    func arrangeSutWithFailablePath() {
-        let router =  UserAuthRouter()
-        router.guestLogin = NetworkRequestFake(path: "BAD PATH")
-        sut = UserAuthService(router: router)
-    }
-    
-    func arrangeSutWithCorrectPath() {
-        let path = Bundle(for: UserAuthServiceTests.self).path(forResource: "UserAuthServiceResponses", ofType: "json")!
-        
-        
-        let router = UserAuthRouter()
-        router.guestLogin = NetworkRequestFake(path: path)
-        
-        sut = UserAuthService(router: router)
+        wait(for: [exp], timeout: 2)
     }
     
     func testTokenIsSavedAfterUserAuthAction_TokenShouldBeNotNil() {
         let exp = expectation(description: "testTokenIsSavedAfterUserAuthAction")
         
-        sut.startGuestLogin { (dict, error) in
+        sut.startGuestLogin { (userAuth, error) in
             XCTAssertNotNil(UserAuthService.token)
+            UserAuthService.token = nil
             exp.fulfill()
         }
-        wait(for: [exp], timeout: 1)
+        wait(for: [exp], timeout: 2)
     }
+    
+    func arrangeSutWithBadRouter() {
+        let router =  UserAuthRouter(guestLogin: NetworkRequestFake(path: "BAD PATH"))
+        sut = UserAuthService(router: router)
+    }
+    
+    func arrangeSutWithCorrectRouter() {
+        let jsonResponsesFilePath = Bundle(for: UserAuthServiceTests.self).path(forResource: "UserAuthServiceResponses", ofType: "json")!
+        
+        let router = UserAuthRouter(guestLogin: NetworkRequestFake(path: jsonResponsesFilePath))
+        sut = UserAuthService(router: router)
+    }
+    
 }
 
 

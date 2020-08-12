@@ -74,6 +74,7 @@
 		FBA0E67B2486CCC1008C1F9C /* MoreViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FBA0E67A2486CCC1008C1F9C /* MoreViewController.storyboard */; };
 		FBA0E67D2486CCE5008C1F9C /* MoreViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA0E67C2486CCE5008C1F9C /* MoreViewControllerTests.swift */; };
 		FBA0E6822486CD5A008C1F9C /* MoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA0E6812486CD5A008C1F9C /* MoreViewController.swift */; };
+		FBAD586424E4A5F000E7A770 /* AppDelegateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAD586324E4A5F000E7A770 /* AppDelegateTests.swift */; };
 		FBB105EE24B1A43D00D3DF77 /* StoresViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB105ED24B1A43D00D3DF77 /* StoresViewControllerTests.swift */; };
 		FBB105F224B1A4C100D3DF77 /* StoresViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB105F024B1A4C100D3DF77 /* StoresViewController.swift */; };
 		FBB105F624B1A57200D3DF77 /* StoresViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FBB105F524B1A57200D3DF77 /* StoresViewController.storyboard */; };
@@ -182,6 +183,7 @@
 		FBA0E67A2486CCC1008C1F9C /* MoreViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MoreViewController.storyboard; sourceTree = "<group>"; };
 		FBA0E67C2486CCE5008C1F9C /* MoreViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MoreViewControllerTests.swift; path = StoreBoxTests/MoreViewControllerTests/MoreViewControllerTests.swift; sourceTree = SOURCE_ROOT; };
 		FBA0E6812486CD5A008C1F9C /* MoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreViewController.swift; sourceTree = "<group>"; };
+		FBAD586324E4A5F000E7A770 /* AppDelegateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegateTests.swift; sourceTree = "<group>"; };
 		FBB105ED24B1A43D00D3DF77 /* StoresViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoresViewControllerTests.swift; sourceTree = "<group>"; };
 		FBB105F024B1A4C100D3DF77 /* StoresViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoresViewController.swift; sourceTree = "<group>"; };
 		FBB105F524B1A57200D3DF77 /* StoresViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = StoresViewController.storyboard; sourceTree = "<group>"; };
@@ -301,6 +303,7 @@
 		FB13EAE6245FB6E700C9CC33 /* StoreBoxTests */ = {
 			isa = PBXGroup;
 			children = (
+				FBAD586324E4A5F000E7A770 /* AppDelegateTests.swift */,
 				FB4BBAD224CED1F900E82E8A /* Networking Tests */,
 				FB744FE824CDC20900D72FA6 /* UserLoginViewControllerTests */,
 				FBB105EF24B1A44200D3DF77 /* StoresViewControllerTests */,
@@ -945,6 +948,7 @@
 				FB119B142497D9A400E0B097 /* SearchFilteringViewControllerTests.swift in Sources */,
 				FB4B251024D9D628004A327B /* UserLoginViewModelTests.swift in Sources */,
 				FBB105EE24B1A43D00D3DF77 /* StoresViewControllerTests.swift in Sources */,
+				FBAD586424E4A5F000E7A770 /* AppDelegateTests.swift in Sources */,
 				FB4BBAD124CED1F200E82E8A /* NetworkConstantsTests.swift in Sources */,
 				FB06C1072461696F006F589A /* ShopViewControllerTests.swift in Sources */,
 				FB0167B424B1B78200A62670 /* StoreTableViewCellTests.swift in Sources */,

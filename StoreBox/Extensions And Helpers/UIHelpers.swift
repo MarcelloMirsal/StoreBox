@@ -9,6 +9,16 @@
 import Foundation
 import UIKit
 
+
+extension UIAlertController {
+    static func makeAlert( _ message: String, with title: String) -> UIAlertController {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+        alertController.addAction(okAction)
+        return alertController
+    }
+}
+
 extension UIColor {
     //    static func random() -> UIColor {
     //        return UIColor(displayP3Red: CGFloat.random(in: 0...1) , green: CGFloat.random(in: 0...1), blue: CGFloat.random(in: 0...1), alpha: 1)

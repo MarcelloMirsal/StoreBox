@@ -16,19 +16,29 @@ class UserLoginViewControllerTests: XCTestCase {
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         sut = UIStoryboard(name: "UserLoginViewController").getInitialViewController(of: UserLoginViewController.self)
+        sut.viewModel = .init(userAuthService: UserAuthServiceFake(responseType: .success) )
+        _ = sut.view
     }
 
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
     
-    
-    func testHandleGuestLoginResponse() {
-        sut.handleGuestLoginResponse(dict: nil, error: nil)
+    func testSutViewModelDelegate_ShouldbEqualToSut() {
+        XCTAssertTrue(sut.viewModel.delegate === sut)
     }
     
-    func testHandleGuestLoginAction() {
+    func testHandleGuestLogin() { // Nothing To Test UI Details
         sut.handleGuestLoginAction()
+    }
+    
+    
+    // MARK:- UserLoginViewModelDelegate Implementation
+    func testUserLoginViewModelIsAuthenticated_() {
+        sut.userLoginViewModel(isUserAuthenticated: true, message: "isUserAuthenticated")
+    }
+    func testUserLoginViewModelIsNotAuthenticated_() {
+        sut.userLoginViewModel(isUserAuthenticated: false, message: "isNotUserAuthenticated")
     }
     
 }

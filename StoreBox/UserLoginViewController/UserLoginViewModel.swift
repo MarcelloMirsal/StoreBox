@@ -8,18 +8,33 @@
 
 import UIKit
 
+protocol UserLoginViewModelDelegate: class {
+    func userLoginViewModel(isUserAuthenticated: Bool, message: String)
+}
 
 class UserLoginViewModel {
+    let userAuthService: UserAuthServiceProtocol
+    weak var delegate: UserLoginViewModelDelegate?
     
-    let userAuthService: UserAuthService
-    
-    init(userAuthService: UserAuthService = UserAuthService() ) {
+    init(userAuthService: UserAuthServiceProtocol = UserAuthService() ) {
         self.userAuthService = userAuthService
     }
     
-    func handleGuestLogin(completion: @escaping UserAuthService.UserAuthResponse) {
-        userAuthService.startGuestLogin { (dict, error) in
-            completion(dict, error)
+    func handleGuestLogin() {
+        userAuthService.startGuestLogin { [weak self] (userAuth, error) in
+            if let _ = error {
+                self?.delegate?.userLoginViewModel(isUserAuthenticated: false, message: "Please try again")
+                return
+            }
+            guard let _ = userAuth else {
+                self?.delegate?.userLoginViewModel(isUserAuthenticated: false, message: "cant parse UserAuth")
+                return
+            }
+            self?.delegate?.userLoginViewModel(isUserAuthenticated: true, message: "Welcome Guest")
         }
     }
+    
+    
+    
 }
+
