@@ -70,10 +70,7 @@ class UserLoginViewModelTests: XCTestCase {
     
 }
 
-
 private class UserLoginViewModelDelegateSpy: UserLoginViewModelDelegate {
-
-    
     weak var asyncExpectation: XCTestExpectation?
     var isUserAuthenticated: Bool?
     
@@ -83,5 +80,3 @@ private class UserLoginViewModelDelegateSpy: UserLoginViewModelDelegate {
         exp.fulfill()
     }
 }
-
-

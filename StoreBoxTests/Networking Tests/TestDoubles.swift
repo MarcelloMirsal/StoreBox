@@ -11,13 +11,14 @@ import Alamofire
 @testable import StoreBox
 
 struct NetworkRequestFake: NetworkRequestProtocol {
+    
     var method: HTTPMethod
     var path: String
     var body: [String : String]?
-    var params: [String : Any]?
+    var params: [String: String]?
     var headers: [String: String]?
     
-    init(method: HTTPMethod = .get, path: String, body: [String : String]? = nil, params: [String : Any]? = nil , headers: [String: String]? = nil) {
+    init(method: HTTPMethod = .get, path: String, body: [String : String]? = nil, params: [String: String]? = nil , headers: [String: String]? = nil) {
         self.method = method
         self.path = path
         self.body = body

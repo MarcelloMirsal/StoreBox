@@ -1,0 +1,12 @@
+{
+    "products": [
+        {
+            "name": "تي شيرت أزرق",
+            "sub_category_name": "boy's shirts",
+        },
+        {
+            "name": "شنطة سوداء",
+            "sub_category_name": "bags",
+        }
+    ]
+}

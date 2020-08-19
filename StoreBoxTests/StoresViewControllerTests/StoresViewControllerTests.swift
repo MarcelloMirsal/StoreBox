@@ -43,11 +43,6 @@ class StoresViewControllerTests: XCTestCase {
         XCTAssertFalse(sut.searchBarShouldBeginEditing(.init()))
     }
     
-    func testSearchResultsCompletion_NavigationTopViewControllerShouldBeStoreSearchDetailsViewController() {
-        sut.searchCompletionResults(didSelectResult: "Store Name")
-        XCTAssertTrue(sut.navigationController!.topViewController is StoreSearchDetailsViewController)
-    }
-    
     func testHandleStoresSearchPresentation() { // UI details
         sut.handleStoresSearchPresentation()
     }

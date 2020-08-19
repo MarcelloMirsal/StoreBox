@@ -23,16 +23,17 @@ class SceneDelegateTests: XCTestCase {
         UserAuthService.token = nil
         
         sut.sceneDidBecomeActive(UIApplication.shared.connectedScenes.first!)
-        XCTAssertTrue(sut.window?.rootViewController?.presentedViewController is UserLoginViewController)
         UserAuthService.token = savedToken
+        
+        XCTAssertTrue(sut.window?.rootViewController?.presentedViewController is UserLoginViewController)
     }
     
     func testSutWindowRootViewController_ShouldBeEqualToMainTabBarControllerWhenTokenIsNotNil() {
         let savedToken = UserAuthService.token
         UserAuthService.token = "TokenId"
         sut.sceneDidBecomeActive(UIApplication.shared.connectedScenes.first!)
-        XCTAssertTrue(sut.window?.rootViewController is UITabBarController)
         UserAuthService.token = savedToken
+        XCTAssertTrue(sut.window?.rootViewController is UITabBarController)
     }
     
     

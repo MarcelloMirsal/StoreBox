@@ -46,11 +46,11 @@ class StoresViewController: UITableViewController {
     }
     
     func handleStoresSearchPresentation() {
-        let searchCompletionResults = SearchCompletionResults()
-        searchCompletionResults.delegate = self
-        let nv = UINavigationController(rootViewController: searchCompletionResults)
-        nv.modalPresentationStyle = .fullScreen
-        present(nv, animated: false)
+//        let searchCompletionResults = SearchCompletionResults()
+////        searchCompletionResults.delegate = self
+//        let nv = UINavigationController(rootViewController: searchCompletionResults)
+//        nv.modalPresentationStyle = .fullScreen
+//        present(nv, animated: false)
     }
 }
 
@@ -85,15 +85,6 @@ extension StoresViewController {
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 42
-    }
-}
-
-// MARK:- SearchCompletionResultsDelegate
-extension StoresViewController: SearchCompletionResultsDelegate {
-    func searchCompletionResults(didSelectResult result: String) {
-        let newSearchDetailsViewController = UIStoryboard(name: "StoreSearchDetailsViewController").getInitialViewController(of: StoreSearchDetailsViewController.self)
-        newSearchDetailsViewController.title = result
-        navigationController?.pushViewController(newSearchDetailsViewController, animated: false)
     }
 }
 

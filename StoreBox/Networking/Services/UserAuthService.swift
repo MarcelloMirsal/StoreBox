@@ -23,8 +23,6 @@ class UserAuthService {
         self.router = router
     }
     
-//    static var token: String? = nil
-    
     static var token: String? {
         get {
             guard let tokenKey = UserDefaults().value(forKey: "token") as? String else { return nil }

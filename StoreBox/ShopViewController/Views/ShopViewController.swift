@@ -29,8 +29,7 @@ final class ShopViewController: UITableViewController {
     
     
     func handleProductsSearchPresentation() {
-        let searchCompletionResults = SearchCompletionResults()
-        searchCompletionResults.delegate = self
+        let searchCompletionResults = ProductsSearchViewController()
         let nv = UINavigationController(rootViewController: searchCompletionResults)
         nv.modalPresentationStyle = .fullScreen
         present(nv, animated: false)
@@ -85,14 +84,6 @@ extension ShopViewController: UICollectionViewDynamicSizeDelegate {
         // TODO:- Stop Reloading Rows while presenting Products Search Controller
         //        categorySectionHeight = dynamicSize.height
         //        tableView.reloadRows(at: [categorySectionIndexPath], with: .top)
-    }
-}
-
-extension ShopViewController: SearchCompletionResultsDelegate {
-    func searchCompletionResults(didSelectResult result: String) {
-        let newSearchDetailsViewController = UIStoryboard(name: "SearchDetailsViewController").getInitialViewController(of: SearchDetailsViewController.self)
-        newSearchDetailsViewController.title = result
-        navigationController?.pushViewController(newSearchDetailsViewController, animated: false)
     }
 }
 

@@ -9,9 +9,16 @@
 import Foundation
 import UIKit
 
+extension Array {
+    subscript(at index: Index) -> Element? {
+        if index >= count { return nil }
+        return self[index]
+    }
+}
+
 
 extension UIAlertController {
-    static func makeAlert( _ message: String, with title: String) -> UIAlertController {
+    static func makeAlert( _ message: String, title: String) -> UIAlertController {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
         alertController.addAction(okAction)

@@ -12,6 +12,7 @@ class UserLoginViewController: UIViewController {
     
     var viewModel = UserLoginViewModel()
     
+    // MARK: View Life's Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.delegate = self
@@ -22,11 +23,12 @@ class UserLoginViewController: UIViewController {
     }
 }
 
+// MARK:- UserLoginViewModelDelegate Implementation
 extension UserLoginViewController: UserLoginViewModelDelegate {
     func userLoginViewModel(isUserAuthenticated: Bool, message: String) {
         guard isUserAuthenticated else {
             let title = "Error?"
-            present(UIAlertController.makeAlert(message, with: title), animated: true)
+            present(UIAlertController.makeAlert(message, title: title), animated: true)
             return
         }
         dismiss(animated: true)

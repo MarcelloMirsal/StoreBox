@@ -29,22 +29,35 @@ enum NetworkConstants: String {
 protocol NetworkRequestProtocol: URLRequestConvertible {
     var method: HTTPMethod { get }
     var path: String { get }
-    var body: [String: String]? { get }
-    var params: [String: Any]? { get }
-    var headers: [String: String]? { get }
+    var body: [String: String]? { get set }
+    var params: [String: String]? { get set }
+    var headers: [String: String]? { get set }
     
-    init(method: HTTPMethod, path: String, body: [ String : String ]?, params: [String : Any]?, headers: [String: String]? )
+    init(method: HTTPMethod, path: String, body: [ String : String ]?, params: [String: String]?, headers: [String: String]? )
+    
+    mutating func set(params: [String: String]?)
+    mutating func set(headers: [String: String]?)
+}
+
+extension NetworkRequestProtocol {
+    mutating func set(params: [String: String]?) {
+        self.params = params
+    }
+    mutating func set(headers: [String: String]?) {
+        self.headers = headers
+    }
 }
 
 
 struct NetworkRequest: NetworkRequestProtocol {
+    
     var method: HTTPMethod
     var path: String
     var body: [String : String]?
-    var params: [String : Any]?
+    var params: [String: String]?
     var headers: [String: String]?
     
-    init(method: HTTPMethod = .get, path: String, body: [String : String]? = nil, params: [String : Any]? = nil , headers: [String: String]? = nil) {
+    init(method: HTTPMethod = .get, path: String, body: [String : String]? = nil, params: [String: String]? = nil , headers: [String: String]? = nil) {
         self.method = method
         self.path = path
         self.body = body
@@ -58,7 +71,7 @@ struct NetworkRequest: NetworkRequestProtocol {
     
     func setupURLRequest(from url: URL) -> URLRequest {
         var urlRequest = URLRequest(url: url)
-        urlRequest.timeoutInterval = 10
+//        urlRequest.timeoutInterval = 10
         urlRequest.method = method
         if let _ = headers { urlRequest.headers = .init(headers!) }
         if let _ = body { urlRequest.httpBody = try? JSONEncoder().encode(body!) }
@@ -70,11 +83,11 @@ struct NetworkRequest: NetworkRequestProtocol {
         var urlComponents = URLComponents(url: baseURL, resolvingAgainstBaseURL: true)!
         
         urlComponents.path += path
-        
         urlComponents.queryItems = params?.reduce([URLQueryItem](), { (result, queryItem) -> [URLQueryItem] in
-            return result + [ URLQueryItem(name: queryItem.key, value: queryItem.value as? String) ]
+            return result + [ URLQueryItem(name: queryItem.key, value: queryItem.value) ]
         })
         return urlComponents.url!
     }
+
     
 }
