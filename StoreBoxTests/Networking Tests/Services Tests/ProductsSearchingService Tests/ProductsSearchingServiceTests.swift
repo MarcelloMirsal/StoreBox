@@ -12,141 +12,145 @@ import XCTest
 class ProductsSearchingServiceTests: XCTestCase {
     
     var sut: ProductsSearchingService!
+    let tokenId = "TokenId"
     
     override func setUp() {
-        sut = ProductsSearchingService(authToken: "TokenId")
+        sut = ProductsSearchingService(authToken: tokenId)
     }
     
-    func testProductsSearchURLRequest_ShouldBeEqualToProductsSearchPath() {
-        let searchPath = "https://store-box-api.herokuapp.com/v1/products"
-        XCTAssertEqual(searchPath, sut.productsSearchURLRequest.urlRequest!.url!.absoluteString)
+    func testSutInit_urlRequestPathShouldBeEqualToPath() {
+        let path = "/products"
+        XCTAssertEqual(sut.urlRequest.path, path)
     }
     
-    func testSutInit_AuthTokenShouldBeEqualToPassedValue() {
-        let authToken = "TokenId"
-        sut = ProductsSearchingService(authToken: authToken)
-        XCTAssertEqual(sut.authToken, authToken)
-    }
-    
-    
-    func testInitSearchRequestAuthorizationHeaderValue_ShouldBeEqualPassedToken() {
-        XCTAssertEqual(sut.productsSearchURLRequest.headers?.first?.value , sut.authToken)
-    }
-    
-    func testSearchRequestMethod_ShouldBeEqualGET() {
-        let searchRequestMethod = "GET"
-        XCTAssertEqual(sut.productsSearchURLRequest.method.rawValue , searchRequestMethod)
-    }
-    
-    func testSetSearchFilter_SearchFiltersShouldBeEqualToPassed() {
-        let searchFilters = ["key" : "value" , "key2" : "value2"]
-        sut.set(searchFilters: searchFilters)
-        XCTAssertEqual(sut.searchFilters, searchFilters)
-    }
-    
-    func testSetupSearchParametersWithoutSearchFilters_ProductsSearchURLRequestShouldBeEqualToSearchURLString() {
-        let searchQuery = "product"
-        let searchURLString = "https://store-box-api.herokuapp.com/v1/products?search=product"
-        
-        sut.setupSearchParameters(with: searchQuery)
-        XCTAssertEqual(sut.productsSearchURLRequest.urlRequest!.url!.absoluteString, searchURLString)
+    func testSutInit_urlRequestAuthorizationHeaderShouldBeEqual() {
+        XCTAssertEqual(sut.urlRequest.headers!.first!.value, tokenId)
     }
     
     
-    // using this approach because search parameters are placed randomly
-    func testSetupSearchParametersWithSearchFilters_ProductsSearchURLRequestContainAllSearchFilters() {
-        let searchQuery = "product"
-        let searchFilters = ["Key" : "Value"]
-        
-        sut.set(searchFilters: searchFilters)
-        sut.setupSearchParameters(with: searchQuery)
-        
-        let isContainingFilter = sut.productsSearchURLRequest.params!.contains { (pair) -> Bool in
-            (pair.key == searchFilters.keys.first!) && (pair.value == searchFilters.values.first!)
-        }
-        XCTAssertTrue(isContainingFilter)
+    func testGetAutocompleteSearchRequest_RequestSearchParamShouldBeEqualToPassedQuery() {
+        let searchQuery = "Product"
+        let searchRequest = sut.getAutocompleteSearchRequest(searchQuery: searchQuery)
+        XCTAssertEqual(searchRequest.params?["search"], searchQuery)
     }
     
-    func testParseProductSearchResultsFromJSONData_ShouldReturnNotNilProductSearchResult() {
-        let jsonDict = ["products" :
-            [ ProductSearchResult(name: "productA", subCategoryName: "A"),
-              ProductSearchResult(name: "productB", subCategoryName: "B"),
-              ProductSearchResult(name: "productC", subCategoryName: "C")] ]
-        let jsonData = try! JSONEncoder().encode(jsonDict)
-        
-        let searchProductResults = try? sut.parseProductSearchResults(from: jsonData)
-        
-        XCTAssertNotNil(searchProductResults)
-    }
     
-    func testParseProductSearchResultsFromBadFormattedJSONData_ShouldThrowBadFormattedError() {
-        // jsonDict value is the bad formatted data
-        let jsonDict = ["products" : [ "A" , "B" , "C" ] ]
-        let jsonData = try! JSONEncoder().encode(jsonDict)
-        
-        do {
-            let _ = try sut.parseProductSearchResults(from: jsonData)
-            XCTFail()
-        } catch ProductSearchingErrors.badFormattedJSON {
-            XCTAssertTrue(true)
-        } catch {}
-    }
-    
-    func testSearchWithNetworkError_ProductSearchingErrorShouldBeNotNil() {
-        let searchQuery = "product"
-        let exp = expectation(description: "testSearchWithNetworkError")
+    func testAutocompleteSearchWithBadNetwork_ErrorShouldBeBadNetworkRequest() {
         arrangeSutWithBadNetworkRequest()
+        let exp = expectation(description: "testAutocompleteSearchWithBadNetwork")
+        let searchQuery = "Product"
         
-        sut.search(query: searchQuery) { (products, error) in
-            XCTAssertNil(products)
-            XCTAssertNotNil(error)
-            XCTAssertTrue(error! == .badNetwork)
+        sut.autocompleteSearch(query: searchQuery) { (error, searchResults) in
+            XCTAssertEqual(error, NetworkServiceError.badNetworkRequest(.unSpecified) )
             exp.fulfill()
         }
+        
         wait(for: [exp], timeout: 1)
     }
     
-    func testSearchWithBadFormattedJSON_BadFormattedJSONErrorShouldBeNotNil() {
+    func testAutocompleteSearchWithBadJSON_ErrorShouldBeJSONDecodingFailure() {
         arrangeSutWithBadJSONResponse()
-        let exp = expectation(description: "testSearchWithBadFormattedJSON")
-        sut.search(query: "product") { (products, error) in
-            XCTAssertNil(products)
-            XCTAssertNotNil(error)
-            XCTAssertTrue(error! == .badFormattedJSON)
+        let exp = expectation(description: "testAutocompleteSearchWithBadJSON")
+        let searchQuery = "Product"
+        
+        sut.autocompleteSearch(query: searchQuery) { (error, searchResults) in
+            XCTAssertEqual(error, NetworkServiceError.jsonDecodingFailure )
             exp.fulfill()
         }
         
         wait(for: [exp], timeout: 1)
     }
     
-    func testSearchWithSuccessfultResponse_ProductSearchResultsShouldBeNotNil() {
-        let searchQuery = "product"
-        let exp = expectation(description: "testSearchWithSuccessfultResponse")
+    func testAutocompleteSearchWithSuccessfulResponse_SearchResultsShouldBeNotNil() {
         arrangeSutWithLocalSuccessfulResponse()
+        let exp = expectation(description: "testAutocompleteSearchWithSuccessfulResponse")
+        let searchQuery = "Product"
         
-        sut.search(query: searchQuery) { (products, error) in
+        sut.autocompleteSearch(query: searchQuery) { (error, searchResults) in
             XCTAssertNil(error)
-            XCTAssertNotNil(products)
+            XCTAssertNotNil(searchResults)
             exp.fulfill()
         }
+        
         wait(for: [exp], timeout: 1)
     }
-    
     
     func arrangeSutWithLocalSuccessfulResponse() {
         let jsonResponsesFilePath = Bundle(for: ProductsSearchingServiceTests.self).path(forResource: "ProductsSearchingServiceResponses", ofType: "json")!
-        sut = ProductsSearchingService(authToken: "TokenId", productsSearchURLRequest: NetworkRequestFake(path: jsonResponsesFilePath))
+        
+        sut = ProductsSearchingService(authToken: tokenId, urlRequest: NetworkRequestFake(path: jsonResponsesFilePath))
     }
     
     func arrangeSutWithBadJSONResponse() {
         let jsonResponsesFilePath = Bundle(for: ProductsSearchingServiceTests.self).path(forResource: "ProductsSearchingServiceBadJSON", ofType: "json")!
-        sut = ProductsSearchingService(authToken: "TokenId", productsSearchURLRequest: NetworkRequestFake(path: jsonResponsesFilePath))
+        
+        sut = ProductsSearchingService(authToken: "TokenId", urlRequest: NetworkRequestFake(path: jsonResponsesFilePath))
     }
     
     func arrangeSutWithBadNetworkRequest() {
         let jsonResponsesFilePath = Bundle(for: ProductsSearchingServiceTests.self).path(forResource: "ProductsSearchingServiceResponses", ofType: "json")!
-        sut = ProductsSearchingService(authToken: "TokenId", productsSearchURLRequest: NetworkRequestFake(path: jsonResponsesFilePath + "BAD")) // BAD is the extra value in url which is cause a network error
+        
+        sut = ProductsSearchingService(authToken: tokenId, urlRequest: NetworkRequestFake(path: jsonResponsesFilePath + "BAD" ))
+        // BAD is the extra value in url which is cause a network error
     }
     
 }
 
+class SearchingServiceParserTests: XCTestCase {
+    
+    var sut: SearchingServiceParser!
+    override func setUp() {
+        sut = SearchingServiceParser()
+    }
+    
+    func testDecoderDecodingStrategy_ShouldBeEqualToSnakeCase() {
+        let decodingStrategy = sut.decoder.keyDecodingStrategy
+        switch decodingStrategy {
+            case .convertFromSnakeCase: break
+            default: XCTFail()
+        }
+    }
+    
+    func testParseAutocompleteFromNilData_ShouldThrowNoDataFound() {
+        let exp = expectation(description: "testParseAutocompleteFromNilData")
+        do { _ = try sut.parseAutocompleteResults(from: nil) }
+        catch NetworkServiceError.noDataFound { exp.fulfill() }
+        catch { XCTFail() }
+        wait(for: [exp], timeout: 1)
+    }
+    
+    func testParseAutocompleteFromEmptyData_ShouldThrowJSONDecodingFailure() {
+        let exp = expectation(description: "testParseAutocompleteFromEmptyData")
+        let data = Data()
+        
+        do { _ = try sut.parseAutocompleteResults(from: data) }
+        catch NetworkServiceError.jsonDecodingFailure { exp.fulfill() }
+        catch { XCTFail() }
+        wait(for: [exp], timeout: 1)
+    }
+    
+    func testParseAutocompleteFromDictDataWithWrongProductsKey_ShouldThrowJSONDecodingFailure() {
+        let exp = expectation(description: "testParseAutocompleteFromEmptyData")
+        let dict = ["WRONG Key" : 10]
+        let dictData = try! JSONSerialization.data(withJSONObject: dict)
+        
+        do { _ = try sut.parseAutocompleteResults(from: dictData) }
+        catch NetworkServiceError.jsonDecodingFailure { exp.fulfill() }
+        catch { XCTFail() }
+        wait(for: [exp], timeout: 1)
+    }
+    
+    func testParseAutocompleteFromSuccessfulDataResponse_SearchResultsShouldBeNotNil() {
+        let searchResult1 = ProductsSearchingService.AutocompleteSearchResult(name: "name1", subCategoryName: "sub1")
+        let searchResult2 = ProductsSearchingService.AutocompleteSearchResult(name: "name2", subCategoryName: "sub2")
+        
+        let responseDict = [ "products" : [ searchResult1, searchResult2 ] ]
+        
+        let dictData = try! JSONEncoder().encode(responseDict)
+        
+        let searchResults = try? sut.parseAutocompleteResults(from: dictData)
+        
+        XCTAssertNotNil(searchResults)
+    }
+    
+}

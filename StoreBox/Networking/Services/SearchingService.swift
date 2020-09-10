@@ -8,105 +8,86 @@
 
 import Alamofire
 
+
+// tomorrow:
+//request router
+//response parser
+
+protocol ProductsSearchingServiceProtocol {
+    func autocompleteSearch(query: String, completion: @escaping ProductsSearchingService.AutocompleteResponse)
+}
+
 class ProductsSearchingService: ProductsSearchingServiceProtocol {
-    typealias ProductsSearchResponse = ([ProductSearchResult]?, ProductSearchingErrors?) -> ()
+    typealias AutocompleteResponse = (NetworkServiceError?,[AutocompleteSearchResult]?) -> ()
     
-    let authToken: String
-    var productsSearchURLRequest: NetworkRequestProtocol
-    var searchFilters: [String : String]?
+    let urlRequest: NetworkRequestProtocol
+    let networkManager = NetworkManagerFacade()
     
-    init?(authToken: String?, productsSearchURLRequest: NetworkRequestProtocol = NetworkRequest(path: "/products") ) {
-        guard let authToken = authToken else { return nil  }
-        self.authToken = authToken
-        self.productsSearchURLRequest = productsSearchURLRequest
-        
-        let authHeader = ["Authorization" : authToken]
-        self.productsSearchURLRequest.set(headers: authHeader)
+    init(authToken: String, urlRequest: NetworkRequestProtocol = NetworkRequest(path: "/products") ) {
+        var authedURLRequest = urlRequest
+        authedURLRequest.set(headers: [ "Authorization" : authToken ] )
+        self.urlRequest = authedURLRequest
     }
     
-    func search(query: String, completion: @escaping ProductsSearchResponse) {
-        setupSearchParameters(with: query)
-        AF.request(productsSearchURLRequest).validate().responseJSON { [weak self](jsonDataResponse) in
-            
-            if let _ = jsonDataResponse.error { // Network request Error here only
-                completion(nil, ProductSearchingErrors.badNetwork)
+    func autocompleteSearch(query: String, completion: @escaping AutocompleteResponse) {
+        let searchRequest = getAutocompleteSearchRequest(searchQuery: query).urlRequest!
+        
+        networkManager.json(searchRequest) { (requestError, data) in
+            if let error = requestError {
+                completion(.badNetworkRequest(error), nil)
                 return
             }
             
-            guard let data = jsonDataResponse.data else { return }
-            
             do {
-                let productSearchResults = try self?.parseProductSearchResults(from: data)
-                completion(productSearchResults, nil)
-            } catch {
-                completion(nil , .badFormattedJSON)
+                let parser = SearchingServiceParser()
+                let searchResults = try parser.parseAutocompleteResults(from: data)
+                completion(nil, searchResults)
             }
+            catch { completion(.jsonDecodingFailure, nil) }
+            
         }
     }
     
+    func getAutocompleteSearchRequest(searchQuery: String) -> NetworkRequestProtocol {
+        var searchRequest = urlRequest
+        searchRequest.set(params: [ "search" : searchQuery ])
+        return searchRequest
+    }
     
-    func parseProductSearchResults(from data: Data) throws -> [ProductSearchResult] {
+    struct AutocompleteSearchResult: Codable {
+        let name: String
+        let subCategoryName: String
+        enum CodingKeyes: String , CodingKey {
+            case name , subCategoryName = "sub_category_name"
+        }
+    }
+}
+
+
+class SearchingServiceParser {
+    typealias AutocompleteSearchResults = [ProductsSearchingService.AutocompleteSearchResult]
+    
+    let decoder: JSONDecoder = {
+        let jsonDecoder = JSONDecoder()
+        jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
+        return jsonDecoder
+    }()
+    
+    func parseAutocompleteResults(from jsonData: Data?) throws -> AutocompleteSearchResults {
         
-        let jsonDict = try! JSONSerialization.jsonObject(with: data) as! [String : Any]
-        let productsJsonObject = jsonDict["products"]!
-        let productsData = try! JSONSerialization.data(withJSONObject: productsJsonObject)
-        let productSearchResults: [ProductSearchResult]
-        do {
-            let results = try JSONDecoder().decode([ProductSearchResult].self, from: productsData)
-            productSearchResults = results
-        } catch { throw ProductSearchingErrors.badFormattedJSON }
-        return productSearchResults
+        guard let data = jsonData else { throw NetworkServiceError.noDataFound }
+        
+        guard let searchResponse = try? decoder.decode(AutocompleteSearchResponse.self, from: data) else { throw NetworkServiceError.jsonDecodingFailure }
+        
+        return searchResponse.products
     }
     
-    func setupSearchParameters(with searchQuery: String) {
-        let searchQueryParam = ["search" : searchQuery]
-        guard let filterParams = searchFilters else {
-            productsSearchURLRequest.set(params: searchQueryParam)
-            return
-        }
-        let searchingParams = searchQueryParam.merging(filterParams, uniquingKeysWith: {$1} )
-        productsSearchURLRequest.set(params: searchingParams)
-    }
-    
-    func set(searchFilters: [String : String]?) {
-        self.searchFilters = searchFilters
-        // call new search
+    private struct AutocompleteSearchResponse: Codable {
+        let products: AutocompleteSearchResults
+        enum CodingKeyes: String, CodingKey { case products }
     }
     
 }
 
 
-protocol ProductsSearchingServiceProtocol {
-    var productsSearchURLRequest: NetworkRequestProtocol { get }
-    var authToken: String { get }
-    var searchFilters: [String : String]? { get }
-    func search(query: String, completion: @escaping ProductsSearchingService.ProductsSearchResponse )
-}
 
-
-enum ProductSearchingErrors: Error {
-    case badFormattedJSON
-    case badNetwork
-}
-
-extension ProductSearchingErrors: LocalizedError {
-    var localizedDescription: String {
-        switch self {
-            case .badFormattedJSON:
-                return "Cant decode ProductSearchResult, Model is no matching the API"
-            case .badNetwork:
-                return "Bad network, try again"
-        }
-    }
-}
-
-
-struct ProductSearchResult: Codable {
-    let name: String
-    let subCategoryName: String
-    
-    enum CodingKeys: String, CodingKey {
-        case name
-        case subCategoryName = "sub_category_name"
-    }
-}

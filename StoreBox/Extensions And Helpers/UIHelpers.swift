@@ -9,12 +9,12 @@
 import Foundation
 import UIKit
 
-extension Array {
-    subscript(at index: Index) -> Element? {
-        if index >= count { return nil }
-        return self[index]
-    }
-}
+//extension Array {
+//    subscript(at index: Index) -> Element? {
+//        if index >= count { return nil }
+//        return self[index]
+//    }
+//}
 
 
 extension UIAlertController {

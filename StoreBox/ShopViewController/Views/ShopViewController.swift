@@ -29,10 +29,10 @@ final class ShopViewController: UITableViewController {
     
     
     func handleProductsSearchPresentation() {
-        let searchCompletionResults = ProductsSearchViewController()
-        let nv = UINavigationController(rootViewController: searchCompletionResults)
-        nv.modalPresentationStyle = .fullScreen
-        present(nv, animated: false)
+//        let searchCompletionResults = ProductsSearchViewController()
+//        let nv = UINavigationController(rootViewController: searchCompletionResults)
+//        nv.modalPresentationStyle = .fullScreen
+//        present(nv, animated: false)
     }
     
     // MARK:- View LifeCycle

@@ -17,17 +17,12 @@ class ShopViewControllerTests: XCTestCase {
         let nv = UINavigationController(rootViewController: rootSut)
         sut = nv.topViewController as? ShopViewController
         _ = sut.view
-        
     }
 
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
     
-    func testFakeSearchControllerBarShouldBeginEditing_ShouldReturnFalse() {
-        let shouldBeginEditing = sut.searchBarShouldBeginEditing(.init())
-        XCTAssertFalse(shouldBeginEditing)
-    }
     
     
     

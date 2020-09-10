@@ -29,7 +29,7 @@ enum NetworkConstants: String {
 protocol NetworkRequestProtocol: URLRequestConvertible {
     var method: HTTPMethod { get }
     var path: String { get }
-    var body: [String: String]? { get set }
+    var body: [String: String]? { get }
     var params: [String: String]? { get set }
     var headers: [String: String]? { get set }
     
@@ -71,7 +71,7 @@ struct NetworkRequest: NetworkRequestProtocol {
     
     func setupURLRequest(from url: URL) -> URLRequest {
         var urlRequest = URLRequest(url: url)
-//        urlRequest.timeoutInterval = 10
+        urlRequest.timeoutInterval = 15
         urlRequest.method = method
         if let _ = headers { urlRequest.headers = .init(headers!) }
         if let _ = body { urlRequest.httpBody = try? JSONEncoder().encode(body!) }
@@ -88,6 +88,21 @@ struct NetworkRequest: NetworkRequestProtocol {
         })
         return urlComponents.url!
     }
+}
 
-    
+
+enum NetworkServiceError: Error, Equatable {
+    case badNetworkRequest(NetworkRequestError)
+    case jsonDecodingFailure
+    case noDataFound
+}
+
+
+enum NetworkRequestError: Error {
+    case badRequest
+    case unauthorizedAccess
+    case pathNotFound
+    case timeout
+    case noInternetConnection
+    case unSpecified
 }

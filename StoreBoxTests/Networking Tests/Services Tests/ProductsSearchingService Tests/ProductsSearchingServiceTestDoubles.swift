@@ -15,30 +15,21 @@ class ProductsSearchingServiceFake: ProductsSearchingServiceProtocol {
         case failed
         case success
     }
+    
     let responseType: FakeResponseType
     
     init(responseType: FakeResponseType) {
         self.responseType = responseType
     }
     
-    var productsSearchURLRequest: NetworkRequestProtocol = NetworkRequest(path: "")
+    var urlRequest: NetworkRequestProtocol = NetworkRequest(path: "")
     
     var authToken: String = "TokenId"
     
     var searchFilters: [String : String]?
     
-    func search(query: String, completion: @escaping ProductsSearchingService.ProductsSearchResponse) {
-        switch responseType {
-            case .failed:
-                completion([ProductSearchResult]() , .badNetwork)
-            case .success:
-                let products = [
-                    ProductSearchResult(name: "A", subCategoryName: "Z"),
-                    ProductSearchResult(name: "B", subCategoryName: "X"),
-                ]
-            completion(products, nil)
-        }
+    func autocompleteSearch(query: String, completion: ProductsSearchingService.AutocompleteResponse) {
+        
     }
-    
     
 }
