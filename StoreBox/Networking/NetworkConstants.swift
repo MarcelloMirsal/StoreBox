@@ -10,6 +10,7 @@ import Foundation
 import Alamofire
 
 enum NetworkConstants: String {
+    case authorizationKey = "Authorization"
     case version = "/v1"
     case scheme = "https"
     case host = "store-box-api.herokuapp.com"
@@ -95,6 +96,17 @@ enum NetworkServiceError: Error, Equatable {
     case badNetworkRequest(NetworkRequestError)
     case jsonDecodingFailure
     case noDataFound
+    var localizedDescription: String {
+        switch self {
+            case .badNetworkRequest(let requestError):
+                return requestError.localizedDescription
+            case .jsonDecodingFailure:
+                return "No data found"
+            case .noDataFound:
+            return "No data found"
+        }
+    }
+    
 }
 
 
@@ -105,4 +117,21 @@ enum NetworkRequestError: Error {
     case timeout
     case noInternetConnection
     case unSpecified
+    
+    var localizedDescription: String {
+        switch self {
+            case .badRequest:
+                return "No data found"
+            case .unauthorizedAccess:
+                return "Unauthorized Access, please re-sign in again."
+            case .pathNotFound:
+                return "No data found"
+            case .timeout:
+                return "Request timeout, please try again"
+            case .noInternetConnection:
+                return "No internet connection"
+            case .unSpecified:
+                return "No data fount"
+        }
+    }
 }

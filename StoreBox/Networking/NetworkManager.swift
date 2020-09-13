@@ -16,11 +16,8 @@ class NetworkManagerFacade {
         
         AF.request(urlRequest).validate().responseJSON { jsonDataResponse in
             let networkRequestError = AFErrorAdapter(aferror: jsonDataResponse.error)?.getNetworkRequestError()
-            
             let data = jsonDataResponse.data
-            
             completion(networkRequestError , data)
-            
         }
         
     }

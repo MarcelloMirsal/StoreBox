@@ -25,7 +25,8 @@ class ProductsSearchingService: ProductsSearchingServiceProtocol {
     
     init(authToken: String, urlRequest: NetworkRequestProtocol = NetworkRequest(path: "/products") ) {
         var authedURLRequest = urlRequest
-        authedURLRequest.set(headers: [ "Authorization" : authToken ] )
+        let authKey = NetworkConstants.authorizationKey.rawValue
+        authedURLRequest.set(headers: [ authKey : authToken ] )
         self.urlRequest = authedURLRequest
     }
     
@@ -33,6 +34,7 @@ class ProductsSearchingService: ProductsSearchingServiceProtocol {
         let searchRequest = getAutocompleteSearchRequest(searchQuery: query).urlRequest!
         
         networkManager.json(searchRequest) { (requestError, data) in
+            
             if let error = requestError {
                 completion(.badNetworkRequest(error), nil)
                 return

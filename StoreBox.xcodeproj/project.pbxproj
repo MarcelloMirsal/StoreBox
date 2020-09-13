@@ -54,6 +54,12 @@
 		FB6790E024BC634B0073141B /* PresentableImageViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB6790DF24BC634B0073141B /* PresentableImageViewTests.swift */; };
 		FB6790E224BC65580073141B /* StoreImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB6790E124BC65580073141B /* StoreImageView.swift */; };
 		FB6790E424BC65830073141B /* StoreImageViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB6790E324BC65830073141B /* StoreImageViewTests.swift */; };
+		FB6F7C45250A79E300E1A653 /* AutocompleteSearchViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB6F7C44250A79E300E1A653 /* AutocompleteSearchViewControllerTests.swift */; };
+		FB6F7C49250A7B4200E1A653 /* AutocompleteSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB6F7C48250A7B4200E1A653 /* AutocompleteSearchViewController.swift */; };
+		FB6F7C4B250A7C6200E1A653 /* AutocompleteSearchViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB6F7C4A250A7C6200E1A653 /* AutocompleteSearchViewModelTests.swift */; };
+		FB6F7C4D250A7CA200E1A653 /* AutocompleteSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB6F7C4C250A7CA200E1A653 /* AutocompleteSearchViewModel.swift */; };
+		FB6F7C4F250A88B100E1A653 /* AutocompleteSearchTestDoubles.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB6F7C4E250A88B100E1A653 /* AutocompleteSearchTestDoubles.swift */; };
+		FB6F7C51250AF60D00E1A653 /* AutocompleteSearchViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB6F7C50250AF60D00E1A653 /* AutocompleteSearchViewController.storyboard */; };
 		FB744FE224CDBD3600D72FA6 /* UserLoginViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB744FE124CDBD3600D72FA6 /* UserLoginViewControllerTests.swift */; };
 		FB744FE424CDBDA400D72FA6 /* UserLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB744FE324CDBDA400D72FA6 /* UserLoginViewController.swift */; };
 		FB744FE624CDBE2C00D72FA6 /* UserLoginViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB744FE524CDBE2C00D72FA6 /* UserLoginViewController.storyboard */; };
@@ -159,6 +165,12 @@
 		FB6790DF24BC634B0073141B /* PresentableImageViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentableImageViewTests.swift; sourceTree = "<group>"; };
 		FB6790E124BC65580073141B /* StoreImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreImageView.swift; sourceTree = "<group>"; };
 		FB6790E324BC65830073141B /* StoreImageViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreImageViewTests.swift; sourceTree = "<group>"; };
+		FB6F7C44250A79E300E1A653 /* AutocompleteSearchViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutocompleteSearchViewControllerTests.swift; sourceTree = "<group>"; };
+		FB6F7C48250A7B4200E1A653 /* AutocompleteSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutocompleteSearchViewController.swift; sourceTree = "<group>"; };
+		FB6F7C4A250A7C6200E1A653 /* AutocompleteSearchViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutocompleteSearchViewModelTests.swift; sourceTree = "<group>"; };
+		FB6F7C4C250A7CA200E1A653 /* AutocompleteSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutocompleteSearchViewModel.swift; sourceTree = "<group>"; };
+		FB6F7C4E250A88B100E1A653 /* AutocompleteSearchTestDoubles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutocompleteSearchTestDoubles.swift; sourceTree = "<group>"; };
+		FB6F7C50250AF60D00E1A653 /* AutocompleteSearchViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AutocompleteSearchViewController.storyboard; sourceTree = "<group>"; };
 		FB744FE124CDBD3600D72FA6 /* UserLoginViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLoginViewControllerTests.swift; sourceTree = "<group>"; };
 		FB744FE324CDBDA400D72FA6 /* UserLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLoginViewController.swift; sourceTree = "<group>"; };
 		FB744FE524CDBE2C00D72FA6 /* UserLoginViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = UserLoginViewController.storyboard; sourceTree = "<group>"; };
@@ -393,6 +405,9 @@
 		FB82471824E5A99D0047FC59 /* Searching Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				FB6F7C50250AF60D00E1A653 /* AutocompleteSearchViewController.storyboard */,
+				FB6F7C48250A7B4200E1A653 /* AutocompleteSearchViewController.swift */,
+				FB6F7C4C250A7CA200E1A653 /* AutocompleteSearchViewModel.swift */,
 			);
 			path = "Searching Controllers";
 			sourceTree = "<group>";
@@ -400,6 +415,9 @@
 		FB82471924E5A9E80047FC59 /* Searching Controllers Tests */ = {
 			isa = PBXGroup;
 			children = (
+				FB6F7C4A250A7C6200E1A653 /* AutocompleteSearchViewModelTests.swift */,
+				FB6F7C4E250A88B100E1A653 /* AutocompleteSearchTestDoubles.swift */,
+				FB6F7C44250A79E300E1A653 /* AutocompleteSearchViewControllerTests.swift */,
 			);
 			path = "Searching Controllers Tests";
 			sourceTree = "<group>";
@@ -800,6 +818,7 @@
 				FBE8DCBF2464B683009BA11E /* CategoryCollectionViewCell.xib in Resources */,
 				FBE8DCBB2464B61A009BA11E /* CategoriesViewController.storyboard in Resources */,
 				FB06C10924616DA3006F589A /* AdsViewController.storyboard in Resources */,
+				FB6F7C51250AF60D00E1A653 /* AutocompleteSearchViewController.storyboard in Resources */,
 				FB06C10D24616E6C006F589A /* AdsCollectionViewCell.xib in Resources */,
 				FB2E02A624629FE5002CACDE /* ProductCollectionViewCell.xib in Resources */,
 				FB744FE624CDBE2C00D72FA6 /* UserLoginViewController.storyboard in Resources */,
@@ -918,6 +937,7 @@
 				FB6790E224BC65580073141B /* StoreImageView.swift in Sources */,
 				FBF76F9F24CED9ED00E03773 /* UserAuthService.swift in Sources */,
 				FB1C8024246212CE00BFE29F /* UIHelpers.swift in Sources */,
+				FB6F7C4D250A7CA200E1A653 /* AutocompleteSearchViewModel.swift in Sources */,
 				FB06C115246177D9006F589A /* ProductsAdsController.swift in Sources */,
 				FB0167B724B1B7C700A62670 /* StoreTableViewCell.swift in Sources */,
 				FBD0DDFD2487F96300B38D5E /* ShopTableViewHeaderSection.swift in Sources */,
@@ -926,6 +946,7 @@
 				FBA0E6502484508E008C1F9C /* ImageSliderView.swift in Sources */,
 				FB13EAD3245FB6E600C9CC33 /* SceneDelegate.swift in Sources */,
 				FB5866DC2468AC5F0048EF18 /* ProductDetailsViewController.swift in Sources */,
+				FB6F7C49250A7B4200E1A653 /* AutocompleteSearchViewController.swift in Sources */,
 				FBE2CB1424682FE700DF52C4 /* RecommendationViewController.swift in Sources */,
 				FBE7795624B32F3800034414 /* StoreDetailsViewController.swift in Sources */,
 				FBA0E67624845C91008C1F9C /* ProductTableViewCell.swift in Sources */,
@@ -943,8 +964,11 @@
 				FB419342246C902800005577 /* ProductsAdsControllerTests.swift in Sources */,
 				FBE7795A24B36E5B00034414 /* CategoriesTableSectionHeaderTests.swift in Sources */,
 				FB0167B024B1AE1D00A62670 /* DetailsTableViewHeaderTests.swift in Sources */,
+				FB6F7C4B250A7C6200E1A653 /* AutocompleteSearchViewModelTests.swift in Sources */,
 				FB1842AE250822270006256C /* NetworkManagerTests.swift in Sources */,
+				FB6F7C4F250A88B100E1A653 /* AutocompleteSearchTestDoubles.swift in Sources */,
 				FB6790E024BC634B0073141B /* PresentableImageViewTests.swift in Sources */,
+				FB6F7C45250A79E300E1A653 /* AutocompleteSearchViewControllerTests.swift in Sources */,
 				FB6790E424BC65830073141B /* StoreImageViewTests.swift in Sources */,
 				FB4B251024D9D628004A327B /* UserLoginViewModelTests.swift in Sources */,
 				FBB105EE24B1A43D00D3DF77 /* StoresViewControllerTests.swift in Sources */,

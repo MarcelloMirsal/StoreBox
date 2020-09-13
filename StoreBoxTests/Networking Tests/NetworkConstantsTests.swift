@@ -35,6 +35,12 @@ class NetworkConstantsTests: XCTestCase {
         XCTAssertEqual(NetworkConstants.getBaseURL(), optimalBaseURL)
     }
     
+    func testAuthorizationKey_ShouldBeEqualToAuthKey() {
+        let authKey = "Authorization"
+        sut = .authorizationKey
+        XCTAssertEqual(sut.rawValue, authKey)
+    }
+    
 }
 
 // MARK:- NetworkRequest Tests

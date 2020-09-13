@@ -30,6 +30,14 @@ class ProductsSearchingServiceFake: ProductsSearchingServiceProtocol {
     
     func autocompleteSearch(query: String, completion: ProductsSearchingService.AutocompleteResponse) {
         
+        switch responseType {
+            case .failed:
+                completion(.noDataFound, nil)
+            case .success:
+                let searchResult: ProductsSearchingService.AutocompleteSearchResult = .init(name: "name", subCategoryName: "category")
+                completion(nil , [searchResult] )
+        }
+        
     }
     
 }
