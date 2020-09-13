@@ -57,6 +57,6 @@ class AutocompleteSearchViewControllerTests: XCTestCase {
         sut.searchBar(.init(), textDidChange: "Search Query")
         sut.autocompleteSearchSuccess()
         sut.autocompleteSearchFailed(message: "message")
-        
+        sut.tableView(sut.tableView, didSelectRowAt: IndexPath(row: 0, section: 0))
     }
 }
