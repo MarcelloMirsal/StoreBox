@@ -40,6 +40,7 @@
 		FB2E02A224629FBA002CACDE /* ProductCollectionViewCellTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2E02A124629FBA002CACDE /* ProductCollectionViewCellTests.swift */; };
 		FB2E02A524629FE5002CACDE /* ProductCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2E02A324629FE5002CACDE /* ProductCollectionViewCell.swift */; };
 		FB2E02A624629FE5002CACDE /* ProductCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB2E02A424629FE5002CACDE /* ProductCollectionViewCell.xib */; };
+		FB2FC557250E9330000F80D9 /* UserAuthServiceWrongFormattedResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = FB2FC556250E9330000F80D9 /* UserAuthServiceWrongFormattedResponse.json */; };
 		FB2FF35E24EB281A001C30E6 /* ProductsSearchingServiceBadJSON.json in Resources */ = {isa = PBXBuildFile; fileRef = FB2FF35D24EB281A001C30E6 /* ProductsSearchingServiceBadJSON.json */; };
 		FB419342246C902800005577 /* ProductsAdsControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB419341246C902800005577 /* ProductsAdsControllerTests.swift */; };
 		FB4B251024D9D628004A327B /* UserLoginViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB4B250F24D9D628004A327B /* UserLoginViewModelTests.swift */; };
@@ -151,6 +152,7 @@
 		FB2E02A124629FBA002CACDE /* ProductCollectionViewCellTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCollectionViewCellTests.swift; sourceTree = "<group>"; };
 		FB2E02A324629FE5002CACDE /* ProductCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCollectionViewCell.swift; sourceTree = "<group>"; };
 		FB2E02A424629FE5002CACDE /* ProductCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductCollectionViewCell.xib; sourceTree = "<group>"; };
+		FB2FC556250E9330000F80D9 /* UserAuthServiceWrongFormattedResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = UserAuthServiceWrongFormattedResponse.json; sourceTree = "<group>"; };
 		FB2FF35D24EB281A001C30E6 /* ProductsSearchingServiceBadJSON.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ProductsSearchingServiceBadJSON.json; sourceTree = "<group>"; };
 		FB419341246C902800005577 /* ProductsAdsControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsAdsControllerTests.swift; sourceTree = "<group>"; };
 		FB4B250F24D9D628004A327B /* UserLoginViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLoginViewModelTests.swift; sourceTree = "<group>"; };
@@ -428,6 +430,7 @@
 				FBF76FA024CEDA0E00E03773 /* UserAuthServiceTests.swift */,
 				FBEF201D24D9BAD200F1AAED /* UserAuthServiceTestDoubles.swift */,
 				FB17608724D88F0000BDBC66 /* UserAuthServiceResponses.json */,
+				FB2FC556250E9330000F80D9 /* UserAuthServiceWrongFormattedResponse.json */,
 			);
 			path = "UserAuthService Tests";
 			sourceTree = "<group>";
@@ -844,6 +847,7 @@
 			files = (
 				FB17608824D88F0000BDBC66 /* UserAuthServiceResponses.json in Resources */,
 				FBF8200824E9AE2C0050EA71 /* ProductsSearchingServiceResponses.json in Resources */,
+				FB2FC557250E9330000F80D9 /* UserAuthServiceWrongFormattedResponse.json in Resources */,
 				FB2FF35E24EB281A001C30E6 /* ProductsSearchingServiceBadJSON.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

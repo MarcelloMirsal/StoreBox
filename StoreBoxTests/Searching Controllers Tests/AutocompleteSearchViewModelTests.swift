@@ -44,6 +44,7 @@ class AutocompleteSearchViewModelTests: XCTestCase {
         let searchQuery = "Red Bag"
         XCTAssertTrue(sut.isValid(searchQuery: searchQuery) )
     }
+    
 
     func testAutocompleteSearchWithFailedResponse_ServiceDelegateShouldCall() {
         arrangeSutWithFailedSearchingService()
@@ -73,6 +74,11 @@ class AutocompleteSearchViewModelTests: XCTestCase {
         
         wait(for: [exp], timeout: 1)
         
+    }
+    
+    func testAutocompleteSearchWithInvalidSearchQuery_() {
+        let invalidSearchQuery = "BA"
+        sut.autocompleteSearch(query: invalidSearchQuery)
     }
     
     func arrangeSutWithFailedSearchingService() {

@@ -29,12 +29,12 @@ class UserAuthServiceFake: UserAuthServiceProtocol {
     func startGuestLogin(completion: @escaping UserAuthService.UserAuthResponse) {
         switch responseType {
             case .success:
-                let userAuth = UserAuth(message: "Welcome", token: "TokenID")
-                completion(userAuth, nil)
+                let userAuth = UserAuthService.UserAuth(message: "Welcome", token: "TokenID")
+                completion(nil , userAuth)
             case .networkFailure:
-                completion(nil, NSError())
+                completion(.badNetworkRequest(.badRequest), nil)
             case .badJSONDecoding:
-                completion(nil , nil)
+                completion(.jsonDecodingFailure, nil)
         }
     }
 }

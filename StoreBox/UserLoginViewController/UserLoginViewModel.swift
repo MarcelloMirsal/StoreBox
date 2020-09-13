@@ -21,16 +21,13 @@ class UserLoginViewModel {
     }
     
     func handleGuestLogin() {
-        userAuthService.startGuestLogin { [weak self] (userAuth, error) in
-            if let _ = error {
-                self?.delegate?.userLoginViewModel(isUserAuthenticated: false, message: "Please try again")
+        userAuthService.startGuestLogin { [weak self] (serviceError, userAuth) in
+            if let error = serviceError {
+                self?.delegate?.userLoginViewModel(isUserAuthenticated: false, message: error.localizedDescription)
                 return
             }
-            guard let _ = userAuth else {
-                self?.delegate?.userLoginViewModel(isUserAuthenticated: false, message: "cant parse UserAuth")
-                return
-            }
-            self?.delegate?.userLoginViewModel(isUserAuthenticated: true, message: "Welcome Guest")
+            self?.delegate?.userLoginViewModel(isUserAuthenticated: true, message: "")
+            
         }
     }
     

@@ -92,5 +92,14 @@ class NetworkRequestTests: XCTestCase {
         }
     }
     
+    func testNetworkRequestErrors() {
+        _ = NetworkRequestError.badRequest.localizedDescription
+        _ = NetworkRequestError.noInternetConnection.localizedDescription
+        _ = NetworkRequestError.pathNotFound.localizedDescription
+        _ = NetworkRequestError.timeout.localizedDescription
+        _ = NetworkRequestError.unSpecified.localizedDescription
+        _ = NetworkRequestError.unauthorizedAccess.localizedDescription
+    }
+    
 }
 

@@ -27,13 +27,10 @@ class UserLoginViewModelTests: XCTestCase {
         let spyDelegate = UserLoginViewModelDelegateSpy()
         spyDelegate.asyncExpectation = exp
         sut.delegate = spyDelegate
+        
         sut.handleGuestLogin()
         
-        waitForExpectations(timeout: 1) { (error) in
-            if let _ = error { XCTFail("timeout")}
-            guard let result = spyDelegate.isUserAuthenticated else { XCTFail("SpyDelegate did not set the isUserAuthenticated value") ; return}
-            XCTAssertTrue(result)
-        }
+        wait(for: [exp], timeout: 1)
     }
     
     func testHandleGuestLoginWithNetworkFailure_SutDelegateSpyResultShouldBeTrue() {
@@ -43,13 +40,10 @@ class UserLoginViewModelTests: XCTestCase {
         let spyDelegate = UserLoginViewModelDelegateSpy()
         spyDelegate.asyncExpectation = exp
         sut.delegate = spyDelegate
+        
         sut.handleGuestLogin()
         
-        waitForExpectations(timeout: 1) { (error) in
-            if let _ = error { XCTFail("timeout")}
-            guard let result = spyDelegate.isUserAuthenticated else { XCTFail("SpyDelegate did not set the isUserAuthenticated value") ; return}
-            XCTAssertFalse(result)
-        }
+        wait(for: [exp], timeout: 1)
     }
     
     func testHandleGuestLoginWithBadJsonDataDecoding_SutDelegateSpyResultShouldBeTrue() {
@@ -59,13 +53,10 @@ class UserLoginViewModelTests: XCTestCase {
         let spyDelegate = UserLoginViewModelDelegateSpy()
         spyDelegate.asyncExpectation = exp
         sut.delegate = spyDelegate
+        
         sut.handleGuestLogin()
         
-        waitForExpectations(timeout: 1) { (error) in
-            if let _ = error { XCTFail("timeout")}
-            guard let result = spyDelegate.isUserAuthenticated else { XCTFail("SpyDelegate did not set the isUserAuthenticated value") ; return}
-            XCTAssertFalse(result)
-        }
+        wait(for: [exp], timeout: 1)
     }
     
 }

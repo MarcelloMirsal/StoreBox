@@ -22,11 +22,22 @@ class UserAuthServiceTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
     
-    func testStartGuestLogin_UserAuthShouldBeNotNil() {
-        let exp = expectation(description: "testStartGuestLogin_ErrorShouldBeNotNil")
+    func testStartGuestLoginWithSuccessfulResponse_UserAuthShouldBeNotNil() {
+        let exp = expectation(description: "testStartGuestLoginWithSuccessfulResponse")
         
-        sut.startGuestLogin { (userAuth, error) in
+        sut.startGuestLogin { (error, userAuth) in
             XCTAssertNotNil(userAuth)
+            exp.fulfill()
+        }
+        wait(for: [exp], timeout: 2)
+    }
+    
+    func testStartGuestLoginWithBadFormattedJSON_UserAuthShouldBeNil() {
+        let exp = expectation(description: "testStartGuestLoginWithBadFormattedJSON")
+        arrangeSutWithInvalidResponseRouter()
+        
+        sut.startGuestLogin { (error, userAuth) in
+            XCTAssertNil(userAuth)
             exp.fulfill()
         }
         wait(for: [exp], timeout: 2)
@@ -37,7 +48,7 @@ class UserAuthServiceTests: XCTestCase {
         
         let exp = expectation(description: "testStartGuestLoginWithBadPath")
         
-        sut.startGuestLogin { (userAuth, error) in
+        sut.startGuestLogin { (error, userAuth) in
             XCTAssertNotNil(error)
             exp.fulfill()
         }
@@ -47,7 +58,7 @@ class UserAuthServiceTests: XCTestCase {
     func testTokenIsSavedAfterUserAuthAction_TokenShouldBeNotNil() {
         let exp = expectation(description: "testTokenIsSavedAfterUserAuthAction")
         
-        sut.startGuestLogin { (userAuth, error) in
+        sut.startGuestLogin { (error, userAuth) in
             XCTAssertNotNil(UserAuthService.token)
             UserAuthService.token = nil
             exp.fulfill()
@@ -67,6 +78,13 @@ class UserAuthServiceTests: XCTestCase {
         sut = UserAuthService(router: router)
     }
     
+    func arrangeSutWithInvalidResponseRouter() {
+        let jsonResponsesFilePath = Bundle(for: UserAuthServiceTests.self).path(forResource: "UserAuthServiceWrongFormattedResponse", ofType: "json")!
+        
+        let router = UserAuthRouter(guestLogin: NetworkRequestFake(path: jsonResponsesFilePath))
+        sut = UserAuthService(router: router)
+    }
+    
 }
 
 
@@ -74,7 +92,7 @@ class UserAuthServiceTests: XCTestCase {
 import Alamofire
 class UserAuthRouterTests: XCTestCase {
     
-    var sut: UserAuthServiceRoutes!
+    var sut: UserAuthServiceRoutesProtocol!
     
     let guestPath = "/sessions/guest"
     
