@@ -92,7 +92,6 @@ extension StoreDetailsViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! ProductTableViewCell
-        cell.sellerNameLabel.text = ""
         return cell
     }
     

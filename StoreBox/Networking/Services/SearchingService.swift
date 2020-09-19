@@ -8,18 +8,18 @@
 
 import Alamofire
 
-
-// tomorrow:
-//request router
-//response parser
-
 protocol ProductsSearchingServiceProtocol {
-    func autocompleteSearch(query: String, completion: @escaping ProductsSearchingService.AutocompleteResponse)
+    typealias AutocompleteSearchResponse = (NetworkServiceError?,[ProductAutocompleteSearchResult]?) -> ()
+    
+    typealias ProductSearchResponse = (NetworkServiceError?,ProductsList?) -> ()
+    
+    func autocompleteSearch(query: String, completion: @escaping AutocompleteSearchResponse)
+    
+    func productSearch(query: String, completion: @escaping ProductSearchResponse)
+    
 }
 
 class ProductsSearchingService: ProductsSearchingServiceProtocol {
-    typealias AutocompleteResponse = (NetworkServiceError?,[AutocompleteSearchResult]?) -> ()
-    
     let urlRequest: NetworkRequestProtocol
     let networkManager = NetworkManagerFacade()
     
@@ -30,7 +30,7 @@ class ProductsSearchingService: ProductsSearchingServiceProtocol {
         self.urlRequest = authedURLRequest
     }
     
-    func autocompleteSearch(query: String, completion: @escaping AutocompleteResponse) {
+    func autocompleteSearch(query: String, completion: @escaping AutocompleteSearchResponse) {
         let searchRequest = getAutocompleteSearchRequest(searchQuery: query).urlRequest!
         
         networkManager.json(searchRequest) { (requestError, data) in
@@ -41,12 +41,31 @@ class ProductsSearchingService: ProductsSearchingServiceProtocol {
             }
             
             do {
-                let parser = SearchingServiceParser()
-                let searchResults = try parser.parseAutocompleteResults(from: data)
+                let parser = Parser()
+                let searchResponse: ProductAutocompleteSearchResponse = try parser.parse(from: data)
+                let searchResults = searchResponse.products
                 completion(nil, searchResults)
             }
             catch { completion(.jsonDecodingFailure, nil) }
             
+        }
+    }
+    
+    func productSearch(query: String, completion: @escaping ProductsSearchingService.ProductSearchResponse) {
+        let searchRequest = getProductSearchRequest(searchQuery: query).urlRequest!
+        networkManager.json(searchRequest) { (requestError, data) in
+
+            if let error = requestError {
+                completion(.badNetworkRequest(error), nil)
+                return
+            }
+
+            do {
+                let parser = Parser()
+                let productsList: ProductsList = try parser.parse(from: data)
+                completion(nil, productsList)
+            }
+            catch { completion(.jsonDecodingFailure, nil) }
         }
     }
     
@@ -56,40 +75,29 @@ class ProductsSearchingService: ProductsSearchingServiceProtocol {
         return searchRequest
     }
     
-    struct AutocompleteSearchResult: Codable {
-        let name: String
-        let subCategoryName: String
-        enum CodingKeyes: String , CodingKey {
-            case name , subCategoryName = "sub_category_name"
-        }
+    func getProductSearchRequest(searchQuery: String) -> NetworkRequestProtocol {
+        var searchRequest = urlRequest
+        searchRequest.set(params: [ "search" : searchQuery ])
+        return searchRequest
+    }
+    
+}
+
+// MARK:- Service Parser
+extension ProductsSearchingService {
+    class Parser: NetworkServiceParser {
+        var decoder: JSONDecoder = {
+            let jsonDecoder = JSONDecoder()
+            jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
+            return jsonDecoder
+        }()
     }
 }
 
-
-class SearchingServiceParser {
-    typealias AutocompleteSearchResults = [ProductsSearchingService.AutocompleteSearchResult]
-    
-    let decoder: JSONDecoder = {
-        let jsonDecoder = JSONDecoder()
-        jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
-        return jsonDecoder
-    }()
-    
-    func parseAutocompleteResults(from jsonData: Data?) throws -> AutocompleteSearchResults {
-        
-        guard let data = jsonData else { throw NetworkServiceError.noDataFound }
-        
-        guard let searchResponse = try? decoder.decode(AutocompleteSearchResponse.self, from: data) else { throw NetworkServiceError.jsonDecodingFailure }
-        
-        return searchResponse.products
-    }
-    
-    private struct AutocompleteSearchResponse: Codable {
-        let products: AutocompleteSearchResults
+// MARK:- Helpers Types
+extension ProductsSearchingService {
+    private struct ProductAutocompleteSearchResponse: Codable {
+        let products: [ProductAutocompleteSearchResult]
         enum CodingKeyes: String, CodingKey { case products }
     }
-    
 }
-
-
-

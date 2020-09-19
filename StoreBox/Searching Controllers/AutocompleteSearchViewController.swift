@@ -23,15 +23,22 @@ class AutocompleteSearchViewController: UITableViewController {
     
     let viewModel = AutocompleteSearchViewModel()
     
+    weak var mainNavigationController: UINavigationController?
+    
     func setupSearchController() {
         searchController.searchBar.delegate = self
         navigationItem.searchController = searchController
     }
     
+    func getProductSearchViewController(for productSearchQuery: String) -> UIViewController {
+        let viewController = ProductSearchViewController.initiate(for: productSearchQuery)
+        viewController.navigationItem.largeTitleDisplayMode = .never
+        return viewController
+    }
+    
     // MARK:- View's Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationBar.prefersLargeTitles = false
         setupSearchController()
         viewModel.delegate = self
     }
@@ -58,14 +65,21 @@ extension AutocompleteSearchViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let  index = indexPath.row
+        let productSearchQuery = viewModel.searchResults[at: index]?.name ?? ""
+        let productSearchViewController = getProductSearchViewController(for: productSearchQuery)
         tableView.deselectRow(at: indexPath, animated: true)
+        mainNavigationController?.pushViewController(productSearchViewController, animated: false)
+        searchController.dismiss(animated: false) {
+            self.dismiss(animated: true)
+        }
     }
 }
 
 
 extension AutocompleteSearchViewController: UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        dismiss(animated: false)
+        dismiss(animated: true)
     }
     
     

@@ -28,10 +28,16 @@ class ProductsSearchingServiceTests: XCTestCase {
     }
     
     
-    func testGetAutocompleteSearchRequest_RequestSearchParamShouldBeEqualToPassedQuery() {
+    func testGetAutocompleteSearchRequest_SearchParamShouldBeEqualToPassedSearchQuery() {
         let searchQuery = "Product"
         let searchRequest = sut.getAutocompleteSearchRequest(searchQuery: searchQuery)
         XCTAssertEqual(searchRequest.params?["search"], searchQuery)
+    }
+    
+    func testGetProductSearchRequest_SearchParamValueShouldBeEqualToPassedSearchQuery() {
+        let searchQuery = "Product"
+        let searchRequest = sut.getProductSearchRequest(searchQuery: searchQuery)
+        XCTAssertEqual(searchRequest.params?.first!.value, searchQuery)
     }
     
     
@@ -75,6 +81,46 @@ class ProductsSearchingServiceTests: XCTestCase {
         wait(for: [exp], timeout: 1)
     }
     
+    func testProductSearchWithBadNetwork_ErrorShouldBeBadNetworkRequest() {
+        arrangeSutWithBadNetworkRequest()
+        let exp = expectation(description: "testProductSearchWithBadNetwork")
+        let searchQuery = "Product"
+
+        sut.productSearch(query: searchQuery) { (error, searchResults) in
+            XCTAssertEqual(error, NetworkServiceError.badNetworkRequest(.unSpecified) )
+            exp.fulfill()
+        }
+
+        wait(for: [exp], timeout: 1)
+    }
+
+    func testProductSearchWithBadJSON_ErrorShouldBeJSONDecodingFailure() {
+        arrangeSutWithBadJSONResponse()
+        let exp = expectation(description: "testProductSearchWithBadJSON")
+        let searchQuery = "Product"
+
+        sut.productSearch(query: searchQuery) { (error, searchResults) in
+            XCTAssertEqual(error, NetworkServiceError.jsonDecodingFailure )
+            exp.fulfill()
+        }
+
+        wait(for: [exp], timeout: 1)
+    }
+
+    func testProductSearchWithSuccessfulResponse_SearchResultsShouldBeNotNil() {
+        arrangeSutWithLocalSuccessfulResponse()
+        let exp = expectation(description: "testProductSearchWithSuccessfulResponse")
+        let searchQuery = "Product"
+
+        sut.productSearch(query: searchQuery) { (error, productsList) in
+            XCTAssertNil(error)
+            XCTAssertNotNil(productsList)
+            exp.fulfill()
+        }
+
+        wait(for: [exp], timeout: 1)
+    }
+    
     func arrangeSutWithLocalSuccessfulResponse() {
         let jsonResponsesFilePath = Bundle(for: ProductsSearchingServiceTests.self).path(forResource: "ProductsSearchingServiceResponses", ofType: "json")!
         
@@ -92,65 +138,6 @@ class ProductsSearchingServiceTests: XCTestCase {
         
         sut = ProductsSearchingService(authToken: tokenId, urlRequest: NetworkRequestFake(path: jsonResponsesFilePath + "BAD" ))
         // BAD is the extra value in url which is cause a network error
-    }
-    
-}
-
-class SearchingServiceParserTests: XCTestCase {
-    
-    var sut: SearchingServiceParser!
-    override func setUp() {
-        sut = SearchingServiceParser()
-    }
-    
-    func testDecoderDecodingStrategy_ShouldBeEqualToSnakeCase() {
-        let decodingStrategy = sut.decoder.keyDecodingStrategy
-        switch decodingStrategy {
-            case .convertFromSnakeCase: break
-            default: XCTFail()
-        }
-    }
-    
-    func testParseAutocompleteFromNilData_ShouldThrowNoDataFound() {
-        let exp = expectation(description: "testParseAutocompleteFromNilData")
-        do { _ = try sut.parseAutocompleteResults(from: nil) }
-        catch NetworkServiceError.noDataFound { exp.fulfill() }
-        catch { XCTFail() }
-        wait(for: [exp], timeout: 1)
-    }
-    
-    func testParseAutocompleteFromEmptyData_ShouldThrowJSONDecodingFailure() {
-        let exp = expectation(description: "testParseAutocompleteFromEmptyData")
-        let data = Data()
-        
-        do { _ = try sut.parseAutocompleteResults(from: data) }
-        catch NetworkServiceError.jsonDecodingFailure { exp.fulfill() }
-        catch { XCTFail() }
-        wait(for: [exp], timeout: 1)
-    }
-    
-    func testParseAutocompleteFromDictDataWithWrongProductsKey_ShouldThrowJSONDecodingFailure() {
-        let exp = expectation(description: "testParseAutocompleteFromEmptyData")
-        let dict = ["WRONG Key" : 10]
-        let dictData = try! JSONSerialization.data(withJSONObject: dict)
-        
-        do { _ = try sut.parseAutocompleteResults(from: dictData) }
-        catch NetworkServiceError.jsonDecodingFailure { exp.fulfill() }
-        catch { XCTFail() }
-        wait(for: [exp], timeout: 1)
-    }
-    
-    func testParseAutocompleteFromSuccessfulDataResponse_SearchResultsShouldBeNotNil() {
-        let searchResult1 = ProductsSearchingService.AutocompleteSearchResult(name: "name1", subCategoryName: "sub1")
-        let searchResult2 = ProductsSearchingService.AutocompleteSearchResult(name: "name2", subCategoryName: "sub2")
-        
-        let responseDict = [ "products" : [ searchResult1, searchResult2 ] ]
-        
-        let dictData = try! JSONEncoder().encode(responseDict)
-        
-        let searchResults = try? sut.parseAutocompleteResults(from: dictData)
-        
-        XCTAssertNotNil(searchResults)
     }
     
 }

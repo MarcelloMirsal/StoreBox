@@ -21,7 +21,7 @@ class AutocompleteSearchViewModelTests: XCTestCase {
     }
     
     func testSetSearchResults_SearchResultsShouldBeUpdated() {
-        let searchResults: AutocompleteSearchViewModel.SearchResults = [ .init(name: "name", subCategoryName: "sub") ]
+        let searchResults: [ProductAutocompleteSearchResult] = [ .init(name: "name", subCategoryName: "sub") ]
         
         sut.set(searchResults: searchResults )
         

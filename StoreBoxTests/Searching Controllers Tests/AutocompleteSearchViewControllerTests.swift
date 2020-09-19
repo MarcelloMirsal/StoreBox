@@ -36,6 +36,13 @@ class AutocompleteSearchViewControllerTests: XCTestCase {
         XCTAssertTrue(sut.searchController.searchBar.delegate === sut)
     }
     
+    func testGetProductSearchViewControllerWithSearchQuery_SearchQueryShouldBePassedToSearchViewController() {
+        let productSearchQuery = "Bag"
+        let searchViewController = sut.getProductSearchViewController(for: productSearchQuery)
+        
+        XCTAssertEqual(searchViewController.title, productSearchQuery)
+    }
+    
     
     // MARK:- TableView delegate and DataSource Tests
     func testRegisteredCell_ShouldBeNotNil() {

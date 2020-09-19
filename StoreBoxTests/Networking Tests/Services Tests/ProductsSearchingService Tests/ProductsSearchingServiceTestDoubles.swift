@@ -11,6 +11,11 @@ import Foundation
 
 class ProductsSearchingServiceFake: ProductsSearchingServiceProtocol {
     
+    
+    func productSearch(query: String, completion: @escaping ProductsSearchingService.ProductSearchResponse) {
+    }
+    
+    
     enum FakeResponseType {
         case failed
         case success
@@ -28,13 +33,13 @@ class ProductsSearchingServiceFake: ProductsSearchingServiceProtocol {
     
     var searchFilters: [String : String]?
     
-    func autocompleteSearch(query: String, completion: ProductsSearchingService.AutocompleteResponse) {
+    func autocompleteSearch(query: String, completion: ProductsSearchingServiceFake.AutocompleteSearchResponse) {
         
         switch responseType {
             case .failed:
                 completion(.noDataFound, nil)
             case .success:
-                let searchResult: ProductsSearchingService.AutocompleteSearchResult = .init(name: "name", subCategoryName: "category")
+                let searchResult: ProductAutocompleteSearchResult = .init(name: "name", subCategoryName: "category")
                 completion(nil , [searchResult] )
         }
         

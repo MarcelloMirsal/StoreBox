@@ -15,16 +15,15 @@ protocol AutocompleteSearchViewModelDelegate: class {
 }
 
 class AutocompleteSearchViewModel {
-    typealias SearchResults = [ProductsSearchingService.AutocompleteSearchResult]
     private let searchingService: ProductsSearchingServiceProtocol
     weak var delegate: AutocompleteSearchViewModelDelegate?
-    private(set) var searchResults: SearchResults = []
+    private(set) var searchResults: [ProductAutocompleteSearchResult] = []
     
-    init(searchingService: ProductsSearchingServiceProtocol = ProductsSearchingService(authToken: UserAuthService.token ?? "" )) {
+    init(searchingService: ProductsSearchingServiceProtocol = ProductsSearchingService(authToken: UserAuthService.token ?? "")) {
         self.searchingService = searchingService
     }
     
-    func set(searchResults: SearchResults) {
+    func set(searchResults: [ProductAutocompleteSearchResult] ) {
         self.searchResults = searchResults
     }
     
