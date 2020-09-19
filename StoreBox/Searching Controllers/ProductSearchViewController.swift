@@ -22,8 +22,7 @@ class ProductSearchViewController: UITableViewController {
     }
     
     func setupTableView() {
-        let cellNib = UINib(name: "ProductTableViewCell")
-        tableView.register(cellNib, forCellReuseIdentifier: cellId)
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
         tableView.rowHeight = 200
         tableView.estimatedRowHeight = 200
     }
@@ -53,7 +52,9 @@ extension ProductSearchViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! ProductTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
+        let index = indexPath.row
+        cell.textLabel?.text = productsList?.products[at: index]?.name
         return cell
     }
     
