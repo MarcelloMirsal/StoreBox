@@ -31,14 +31,22 @@ class ProductSearchViewControllerTests: XCTestCase {
         XCTAssertTrue(sut.viewModel.delegate === sut )
     }
     
-    func testDataSourceCellProvider_ShouldRetunNotNilRegisteredCell() {
-        let product = Product(id: 100, name: "NAME", price: 1.0, discount: 0.0, priceAfterDiscount: 1.0, storeName: "STORE", subCategoryName: "CATEGORY")
+    func testDataSource_ShouldRetunNotNilRegisteredCell() {
+        arrangeSutCollectionViewFakeProducts()
         let indexPath = IndexPath(item: 0, section: 0)
         
-        let cell = sut.dataSourceCellProvider(collectionView: sut.collectionView, indexPath: indexPath, product: product)
+        let cell = sut.dataSource.collectionView(sut.collectionView, cellForItemAt: indexPath) as? ProductCollectionViewCell
         
         XCTAssertNotNil(cell)
+    }
+    
+    func testDataSource_ShouldReturnNotNilRegisteredFooter() {
+        arrangeSutCollectionViewFakeProducts()
+        let indexPath = IndexPath(item: 0, section: 0)
         
+        let footerView = sut.dataSource.collectionView(sut.collectionView, viewForSupplementaryElementOfKind: UICollectionView.elementKindSectionFooter, at: indexPath) as? CollectionViewLoadingFooter
+        
+        XCTAssertNotNil(footerView)
     }
     
     func testCollectionViewDataSource_ShouldBeEqualToDataSource() {
@@ -50,6 +58,15 @@ class ProductSearchViewControllerTests: XCTestCase {
         sut.handleFilterAction()
         sut.searchRequestFailed(message: "")
         sut.searchRequestSuccess()
+    }
+    
+    func arrangeSutCollectionViewFakeProducts() {
+        let product = Product(id: 100, name: "NAME", price: 1.0, discount: 0.0, priceAfterDiscount: 1.0, storeName: "STORE", subCategoryName: "CATEGORY")
+        
+        var snapshot = NSDiffableDataSourceSnapshot<ProductSearchViewController.Section, Product>()
+        snapshot.appendSections([.main])
+        snapshot.appendItems( [product] )
+        sut.dataSource.apply(snapshot)
     }
 }
 
@@ -70,7 +87,7 @@ class ProductSearchViewModelTests: XCTestCase {
         let delegateSpy = ProductSearchViewModelDelegateSpy(exp: exp)
         sut.delegate = delegateSpy
         
-        sut.productsSearch(productName: productName)
+        sut.productSearch(productName: productName)
         XCTAssertTrue(delegateSpy.isSearchFailed ?? false)
         
         wait(for: [exp], timeout: 1)
@@ -84,7 +101,7 @@ class ProductSearchViewModelTests: XCTestCase {
         let delegateSpy = ProductSearchViewModelDelegateSpy(exp: exp)
         sut.delegate = delegateSpy
         
-        sut.productsSearch(productName: productName)
+        sut.productSearch(productName: productName)
         XCTAssertTrue(delegateSpy.isSearchSuccess ?? false)
         
         wait(for: [exp], timeout: 1)

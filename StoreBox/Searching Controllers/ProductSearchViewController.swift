@@ -11,8 +11,24 @@ import UIKit
 class ProductSearchViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     let cellId = "cellId"
-    lazy var dataSource = UICollectionViewDiffableDataSource<Section, Product>(collectionView: collectionView, cellProvider: dataSourceCellProvider(collectionView:indexPath:product:))
-    let viewModel = ProductSearchViewModel()
+    let sectionFooterId = "sectionFooterId"
+    
+    let loadingActivityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView(style: .medium)
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator.startAnimating()
+        activityIndicator.hidesWhenStopped = true
+        return activityIndicator
+    }()
+    
+    private(set) var dataSource: UICollectionViewDiffableDataSource<Section, Product>!
+    
+    private(set) lazy var viewModel: ProductSearchViewModel = {
+        let viewModel = ProductSearchViewModel()
+        viewModel.delegate = self
+        return viewModel
+    }()
+    
     
     // MARK: Factory
     static func initiate(for searchQuery: String) -> ProductSearchViewController {
@@ -24,33 +40,45 @@ class ProductSearchViewController: UICollectionViewController, UICollectionViewD
     // MARK:- View's Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupCollectionView()
-        setupSearchFilterBatButton()
         navigationItem.largeTitleDisplayMode = .never
-        
-        viewModel.delegate = self
-        guard let productName = title else { return }
-        viewModel.productsSearch(productName: productName)
+        setupSubViews()
+        setupCollectionView()
+        setupSearchFilterBarButton()
+        requestProductSearch()
     }
     
-    // MARK:- UI Actions
+    // MARK:- Actions
     @objc
     func handleFilterAction() {
         
     }
     
-    // MARK:- UI setup methods
-    func setupCollectionView() {
-        collectionView.backgroundColor = .systemGray6
-        
-        collectionView.dataSource = dataSource
+    func requestProductSearch() {
+        guard let productName = title else { return }
+        viewModel.productSearch(productName: productName)
+    }
+    
+    // MARK:- UI setup
+    private func setupCollectionViewRegistration() {
         let productCellNib = UINib(name: "ProductCollectionViewCell")
         collectionView.register(productCellNib, forCellWithReuseIdentifier: cellId)
-        
+        collectionView.register(CollectionViewLoadingFooter.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: sectionFooterId)
+    }
+    
+    private func setupCollectionViewDataSource() {
+        dataSource = .init(collectionView: collectionView, cellProvider: dataSourceCellProvider(collectionView:indexPath:product:))
+        dataSource.supplementaryViewProvider = dataSourceSupplementaryViewProvider(collectionView:kind:indexPath:)
+        collectionView.dataSource = dataSource
+    }
+    
+    private func setupCollectionView() {
+        collectionView.backgroundColor = .systemGray6
+        setupCollectionViewRegistration()
+        setupCollectionViewDataSource()
         collectionView.setCollectionViewLayout(getCollectionViewLayout(), animated: false)
     }
     
-    func getCollectionViewLayout() -> UICollectionViewCompositionalLayout {
+    private func getCollectionViewLayout() -> UICollectionViewCompositionalLayout {
         let estimatedSize = collectionView.frame.size
         let layoutSpace: CGFloat = 16.0
         let productItem = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(0.5), heightDimension: .fractionalWidth(1.0)) )
@@ -63,14 +91,30 @@ class ProductSearchViewController: UICollectionViewController, UICollectionViewD
         let section = NSCollectionLayoutSection(group: productGroup)
         section.contentInsets = .init(top: layoutSpace, leading: 0, bottom: layoutSpace, trailing: 0)
         section.interGroupSpacing = layoutSpace
+        
+        let sectionFooter = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .absolute(45.0)), elementKind: UICollectionView.elementKindSectionFooter, alignment: .bottom)
+        section.boundarySupplementaryItems = [sectionFooter]
+        
         return UICollectionViewCompositionalLayout(section: section)
     }
     
-    func setupSearchFilterBatButton() {
+    private func setupSearchFilterBarButton() {
         navigationItem.rightBarButtonItem = .init(title: "Filter", style: .plain, target: self, action: #selector(handleFilterAction) )
     }
     
-    func dataSourceCellProvider(collectionView: UICollectionView, indexPath: IndexPath, product: Product) -> UICollectionViewCell? {
+    private func setupSubViews() {
+        collectionView.addSubview(loadingActivityIndicator)
+        NSLayoutConstraint.activate([
+            loadingActivityIndicator.topAnchor.constraint(equalTo: collectionView.topAnchor,constant: 16),
+            loadingActivityIndicator.centerXAnchor.constraint(equalTo: collectionView.centerXAnchor)
+        ])
+    }
+}
+
+// MARK:- CollectionView dataSource configuration
+extension ProductSearchViewController {
+    
+    private func dataSourceCellProvider(collectionView: UICollectionView, indexPath: IndexPath, product: Product) -> UICollectionViewCell? {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as? ProductCollectionViewCell
         cell?.nameLabel.text = product.name
         cell?.priceLabel.text = "\(product.priceAfterDiscount)"
@@ -78,11 +122,24 @@ class ProductSearchViewController: UICollectionViewController, UICollectionViewD
         return cell
     }
     
-    func updateDataSource() {
+    private func dataSourceSupplementaryViewProvider(collectionView: UICollectionView, kind: String, indexPath: IndexPath) -> UICollectionReusableView? {
+        let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: self.sectionFooterId, for: indexPath) as? CollectionViewLoadingFooter
+        return footerView
+    }
+    
+    private func updateDataSource() {
         var snapshot = NSDiffableDataSourceSnapshot<Section, Product>()
         snapshot.appendSections([.main])
         snapshot.appendItems(viewModel.productsList?.products ?? [], toSection: .main)
         dataSource.apply(snapshot)
+    }
+    
+}
+
+// MARK:- CollectionView Delegate Implementation
+extension ProductSearchViewController {
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
     }
 }
 
@@ -91,20 +148,12 @@ extension ProductSearchViewController: ProductSearchViewModelDelegate {
     func searchRequestFailed(message: String) {
         let alertController = UIAlertController.makeAlert(message, title: "Error")
         present(alertController, animated: true)
+        loadingActivityIndicator.stopAnimating()
     }
     
     func searchRequestSuccess() {
         updateDataSource()
-    }
-    
-    
-}
-
-
-// MARK:- CollectionView Delegate Implementation
-extension ProductSearchViewController {
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        collectionView.deselectItem(at: indexPath, animated: true)
+        loadingActivityIndicator.stopAnimating()
     }
 }
 
@@ -131,7 +180,7 @@ class ProductSearchViewModel {
         self.searchingService = searchingService
     }
     
-    func productsSearch(productName: String) {
+    func productSearch(productName: String) {
         searchingService.productSearch(query: productName) { (serviceError, productsList) in
             if let error = serviceError {
                 self.delegate?.searchRequestFailed(message: error.localizedDescription)
@@ -143,4 +192,29 @@ class ProductSearchViewModel {
         }
     }
     
+}
+
+
+class CollectionViewLoadingFooter: UICollectionReusableView {
+    
+    let loadingActivityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView(style: .medium)
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator.startAnimating()
+        activityIndicator.hidesWhenStopped = true
+        return activityIndicator
+    }()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        addSubview(loadingActivityIndicator)
+        NSLayoutConstraint.activate( [
+            loadingActivityIndicator.centerYAnchor.constraint(equalTo: centerYAnchor),
+            loadingActivityIndicator.centerXAnchor.constraint(equalTo: centerXAnchor)
+        ] )
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }
