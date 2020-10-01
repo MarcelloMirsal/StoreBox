@@ -11,11 +11,6 @@ import Foundation
 
 class ProductsSearchingServiceFake: ProductsSearchingServiceProtocol {
     
-    
-    func productSearch(query: String, completion: @escaping ProductsSearchingService.ProductSearchResponse) {
-    }
-    
-    
     enum FakeResponseType {
         case failed
         case success
@@ -43,6 +38,17 @@ class ProductsSearchingServiceFake: ProductsSearchingServiceProtocol {
                 completion(nil , [searchResult] )
         }
         
+    }
+    
+    func productSearch(query: String, completion: @escaping ProductsSearchingService.ProductSearchResponse) {
+        switch responseType {
+            case .failed:
+                completion(.noDataFound, nil)
+            case .success:
+                let productsList = ProductsList(products: [], pagination: .init(currentPage: 1, nextPage: nil, previousPage: nil, totalPages: 1, totalEntries: 10))
+                completion(nil ,  productsList)
+            break
+        }
     }
     
 }

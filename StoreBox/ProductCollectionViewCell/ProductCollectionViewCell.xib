@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProductCollectionViewCell" customModule="StoreBox" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="ProductCollectionViewCell" customModule="StoreBox" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="200" height="400"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="200" height="400"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bourkestreetbakery" translatesAutoresizingMaskIntoConstraints="NO" id="1eJ-Rk-fyG">
+                        <rect key="frame" x="0.0" y="0.0" width="200" height="250"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="1eJ-Rk-fyG" secondAttribute="height" multiplier="4:5" id="HA0-3G-iXI"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You can use Postman to design, debug, test, document, mock, and monitor your API" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vM5-uF-T9G">
+                        <rect key="frame" x="4" y="254" width="192" height="42.5"/>
+                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="Rju-dw-J4p">
+                        <rect key="frame" x="6" y="302.5" width="188" height="40"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="9YS-fK-RBT">
+                                <rect key="frame" x="0.0" y="0.0" width="148" height="40"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12000$" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rKm-Zv-PbM">
+                                        <rect key="frame" x="0.0" y="0.0" width="148" height="19"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="90000$" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fxc-Bz-ATR">
+                                        <rect key="frame" x="0.0" y="23" width="148" height="17"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="97C-hF-ogs">
+                                <rect key="frame" x="148" y="0.0" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="cbG-FH-P6D"/>
+                                    <constraint firstAttribute="height" constant="40" id="yje-hl-pLc"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" image="cart.fill.badge.plus" catalog="system">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
+                                </state>
+                                <state key="selected" image="cart.fill" catalog="system">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
+                                </state>
+                            </button>
+                        </subviews>
+                    </stackView>
+                </subviews>
+            </view>
+            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="1eJ-Rk-fyG" secondAttribute="trailing" id="8jz-le-vUc"/>
+                <constraint firstItem="1eJ-Rk-fyG" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="B56-86-qVR"/>
+                <constraint firstItem="1eJ-Rk-fyG" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="CV3-h3-cJB"/>
+                <constraint firstItem="vM5-uF-T9G" firstAttribute="top" secondItem="1eJ-Rk-fyG" secondAttribute="bottom" constant="4" id="Fa0-2z-atG"/>
+                <constraint firstAttribute="trailing" secondItem="Rju-dw-J4p" secondAttribute="trailing" constant="6" id="KhS-8m-SR9"/>
+                <constraint firstItem="Rju-dw-J4p" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="6" id="W1O-uy-HuG"/>
+                <constraint firstItem="Rju-dw-J4p" firstAttribute="top" secondItem="vM5-uF-T9G" secondAttribute="bottom" constant="6" id="fP5-MT-oUt"/>
+                <constraint firstItem="vM5-uF-T9G" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="4" id="tUe-cY-9Xm"/>
+                <constraint firstAttribute="trailing" secondItem="vM5-uF-T9G" secondAttribute="trailing" constant="4" id="xjc-PH-tfq"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <size key="customSize" width="139.5" height="503.5"/>
+            <connections>
+                <outlet property="cartButton" destination="97C-hF-ogs" id="8KV-dN-cyt"/>
+                <outlet property="discountLabel" destination="Fxc-Bz-ATR" id="2KK-66-0d4"/>
+                <outlet property="nameLabel" destination="vM5-uF-T9G" id="fKy-vD-nN6"/>
+                <outlet property="priceLabel" destination="rKm-Zv-PbM" id="hAV-QU-CB7"/>
+            </connections>
+            <point key="canvasLocation" x="197.10144927536234" y="203.57142857142856"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="bourkestreetbakery" width="640" height="640"/>
+        <image name="cart.fill" catalog="system" width="64" height="50"/>
+        <image name="cart.fill.badge.plus" catalog="system" width="64" height="48"/>
+    </resources>
+</document>

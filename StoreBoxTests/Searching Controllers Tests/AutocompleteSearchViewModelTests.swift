@@ -46,7 +46,7 @@ class AutocompleteSearchViewModelTests: XCTestCase {
     }
     
 
-    func testAutocompleteSearchWithFailedResponse_ServiceDelegateShouldCall() {
+    func testAutocompleteSearchWithFailedResponse_ServiceDelegateShouldCallSearchFailed() {
         arrangeSutWithFailedSearchingService()
         let exp = expectation(description: "testAutocompleteSearchWithFailedResponse")
         let spyDelegate = AutocompleteSearchViewModelDelegateSpy(testExpectation: exp)
@@ -61,7 +61,7 @@ class AutocompleteSearchViewModelTests: XCTestCase {
         
     }
     
-    func testAutocompleteSearchWithSuccessResponse_ServiceDelegateShouldCall() {
+    func testAutocompleteSearchWithSuccessResponse_ServiceDelegateShouldCallSearchSuccess() {
         arrangeSutWithSuccessSearchingService()
         let exp = expectation(description: "testAutocompleteSearchWithSuccessResponse")
         let spyDelegate = AutocompleteSearchViewModelDelegateSpy(testExpectation: exp)

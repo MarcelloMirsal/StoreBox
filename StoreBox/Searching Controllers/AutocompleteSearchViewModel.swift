@@ -41,8 +41,7 @@ class AutocompleteSearchViewModel {
                 self?.delegate?.autocompleteSearchFailed(message: error.localizedDescription)
                 return
             }
-            guard let results = searchResults else { return }
-            self?.set(searchResults: results)
+            self?.set(searchResults: searchResults ?? [])
             self?.delegate?.autocompleteSearchSuccess()
         }
     }

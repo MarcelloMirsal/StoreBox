@@ -26,6 +26,13 @@ struct Product: Codable {
     }
 }
 
+extension Product: Hashable {
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+}
+
+
 struct ProductAutocompleteSearchResult: Codable {
     let name: String
     let subCategoryName: String
@@ -49,11 +56,14 @@ struct ListPagination: Codable {
         case totalEntries = "total_entries"
     }
     
+    static func emptyListPagination() -> ListPagination {
+        return ListPagination(currentPage: 1, nextPage: nil, previousPage: nil, totalPages: 1, totalEntries: 0)
+    }
 }
 
 struct ProductsList: Codable {
-    let products: [Product]
-    let pagination: ListPagination
+    var products: [Product]
+    var pagination: ListPagination
     enum CodingKeyes: String , CodingKey {
         case products
         case pagination

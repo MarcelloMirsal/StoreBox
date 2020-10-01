@@ -665,18 +665,10 @@
 		FBE2CB052468285100DF52C4 /* ProductCollectionViewCell */ = {
 			isa = PBXGroup;
 			children = (
-				FBE2CB072468288300DF52C4 /* Views */,
-			);
-			path = ProductCollectionViewCell;
-			sourceTree = "<group>";
-		};
-		FBE2CB072468288300DF52C4 /* Views */ = {
-			isa = PBXGroup;
-			children = (
 				FB2E02A324629FE5002CACDE /* ProductCollectionViewCell.swift */,
 				FB2E02A424629FE5002CACDE /* ProductCollectionViewCell.xib */,
 			);
-			path = Views;
+			path = ProductCollectionViewCell;
 			sourceTree = "<group>";
 		};
 		FBE2CB082468289300DF52C4 /* Views */ = {
