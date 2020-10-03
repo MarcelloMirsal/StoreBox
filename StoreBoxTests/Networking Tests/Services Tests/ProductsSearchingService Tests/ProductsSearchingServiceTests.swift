@@ -40,6 +40,17 @@ class ProductsSearchingServiceTests: XCTestCase {
         XCTAssertEqual(searchRequest.params?.first!.value, searchQuery)
     }
     
+    func testGetProductSearchRequestWithParams_SearchRequestParamsShouldContainAllSearchParams() {
+        let searchQuery = "Product"
+        let searchParams = ["page" : "1"]
+        let searchRequest = sut.getProductSearchRequest(searchQuery: searchQuery,params: searchParams)
+        let isContainSearchParams = searchRequest.params?.contains(where: { (pair) -> Bool in
+            pair.key == searchParams.first?.key && pair.value == searchParams.first?.value
+        })
+        
+        XCTAssertTrue(isContainSearchParams ?? false)
+    }
+    
     
     func testAutocompleteSearchWithBadNetwork_ErrorShouldBeBadNetworkRequest() {
         arrangeSutWithBadNetworkRequest()

@@ -35,7 +35,7 @@ final class ShopViewController: UITableViewController {
 //        autocompleteSearchViewController.mainNavigationController = navigationController
 //        present(nv, animated: false)
         
-        let x = ProductSearchViewController.initiate(for: "BAG")
+        let x = ProductSearchViewController.initiate(for: " ")
         navigationController?.pushViewController(x, animated: true)
         
     }

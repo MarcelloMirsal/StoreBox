@@ -62,8 +62,25 @@ struct ListPagination: Codable {
 }
 
 struct ProductsList: Codable {
-    var products: [Product]
-    var pagination: ListPagination
+    private(set) var products: [Product]
+    private(set) var pagination: ListPagination
+    
+    mutating func append(products: [Product]) {
+        self.products += products
+    }
+    
+    mutating func set(products: [Product]) {
+        self.products = products
+    }
+    
+    mutating func set(pagination: ListPagination) {
+        self.pagination = pagination
+    }
+    
+    static func emptyList() -> ProductsList {
+        return .init(products: [], pagination: .emptyListPagination())
+    }
+    
     enum CodingKeyes: String , CodingKey {
         case products
         case pagination

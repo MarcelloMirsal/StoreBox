@@ -31,6 +31,10 @@ class ProductSearchViewControllerTests: XCTestCase {
         XCTAssertTrue(sut.viewModel.delegate === sut )
     }
     
+    func testCollectionViewDataSource_ShouldBeEqualToDataSource() {
+        XCTAssertTrue(sut.collectionView.dataSource === sut.dataSource)
+    }
+    
     func testDataSource_ShouldRetunNotNilRegisteredCell() {
         arrangeSutCollectionViewFakeProducts()
         let indexPath = IndexPath(item: 0, section: 0)
@@ -44,13 +48,14 @@ class ProductSearchViewControllerTests: XCTestCase {
         arrangeSutCollectionViewFakeProducts()
         let indexPath = IndexPath(item: 0, section: 0)
         
-        let footerView = sut.dataSource.collectionView(sut.collectionView, viewForSupplementaryElementOfKind: UICollectionView.elementKindSectionFooter, at: indexPath) as? CollectionViewLoadingFooter
+        let footerView = sut.dataSource.collectionView(sut.collectionView, viewForSupplementaryElementOfKind: UICollectionView.elementKindSectionFooter, at: indexPath) as? UICollectionViewLoadingFooter
         
         XCTAssertNotNil(footerView)
     }
     
-    func testCollectionViewDataSource_ShouldBeEqualToDataSource() {
-        XCTAssertTrue(sut.collectionView.dataSource === sut.dataSource)
+    func testUpdateDataSourceSnapshot_ShouldReturnSnapshotForMainSection() {
+        let snapshot = sut.updateDataSourceSnapshot()
+        XCTAssertTrue(snapshot.sectionIdentifiers.contains(.main))
     }
     
     func testUI_Details() {
@@ -68,77 +73,4 @@ class ProductSearchViewControllerTests: XCTestCase {
         snapshot.appendItems( [product] )
         sut.dataSource.apply(snapshot)
     }
-}
-
-
-class ProductSearchViewModelTests: XCTestCase {
-    var sut: ProductSearchViewModel!
-    
-    
-    override func setUp() {
-        sut = ProductSearchViewModel()
-    }
-    
-    
-    func testProductSearchWithFailedResponse_ServiceSpyDelegateShouldCallSearchFailed() {
-        arrangeSutWithFailedSearchingService()
-        let exp = expectation(description: "testProductSearchWithFailedResponse")
-        let productName = "Shirt"
-        let delegateSpy = ProductSearchViewModelDelegateSpy(exp: exp)
-        sut.delegate = delegateSpy
-        
-        sut.productSearch(productName: productName)
-        XCTAssertTrue(delegateSpy.isSearchFailed ?? false)
-        
-        wait(for: [exp], timeout: 1)
-        
-    }
-    
-    func testProductSearchWithSuccessResponse_ServiceSpyDelegateShouldCallSearchSuccess() {
-        arrangeSutWithSuccessSearchingService()
-        let exp = expectation(description: "testProductSearchWithSuccessResponse")
-        let productName = "Shirt"
-        let delegateSpy = ProductSearchViewModelDelegateSpy(exp: exp)
-        sut.delegate = delegateSpy
-        
-        sut.productSearch(productName: productName)
-        XCTAssertTrue(delegateSpy.isSearchSuccess ?? false)
-        
-        wait(for: [exp], timeout: 1)
-        
-    }
-    
-    func arrangeSutWithFailedSearchingService() {
-        let fakeSearchingService = ProductsSearchingServiceFake(responseType: .failed)
-        sut = .init(searchingService: fakeSearchingService)
-    }
-    
-    func arrangeSutWithSuccessSearchingService() {
-        let fakeSearchingService = ProductsSearchingServiceFake(responseType: .success)
-        sut = .init(searchingService: fakeSearchingService)
-    }
-}
-
-
-class ProductSearchViewModelDelegateSpy: ProductSearchViewModelDelegate {
-    
-    let exp: XCTestExpectation
-    
-    init(exp: XCTestExpectation) {
-        self.exp = exp
-    }
-    var isSearchFailed: Bool?
-    var isSearchSuccess: Bool?
-    
-    func searchRequestFailed(message: String) {
-        isSearchFailed = true
-        exp.fulfill()
-    }
-    
-    func searchRequestSuccess() {
-        isSearchSuccess = true
-        exp.fulfill()
-    }
-    
-    
 }

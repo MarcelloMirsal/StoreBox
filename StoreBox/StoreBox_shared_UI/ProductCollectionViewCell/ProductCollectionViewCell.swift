@@ -10,14 +10,13 @@ import UIKit
 
 class ProductCollectionViewCell: UICollectionViewCell {
     
-    @IBOutlet weak var cartButton: UIButton!
-    
+
     @IBOutlet weak var nameLabel: UILabel!
     
-    @IBOutlet weak var priceLabel: UILabel!
     
+    @IBOutlet weak var purchasePriceLabel: UILabel!
     
-    @IBOutlet weak var discountLabel: UILabel!
+    @IBOutlet weak var basePriceLabel: UILabel!
     
     
     override func awakeFromNib() {

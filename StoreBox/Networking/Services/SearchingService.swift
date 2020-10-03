@@ -15,7 +15,7 @@ protocol ProductsSearchingServiceProtocol {
     
     func autocompleteSearch(query: String, completion: @escaping AutocompleteSearchResponse)
     
-    func productSearch(query: String, completion: @escaping ProductSearchResponse)
+    func productSearch(query: String, params: [String : String]  , completion: @escaping ProductSearchResponse)
     
 }
 
@@ -51,8 +51,8 @@ class ProductsSearchingService: ProductsSearchingServiceProtocol {
         }
     }
     
-    func productSearch(query: String, completion: @escaping ProductsSearchingService.ProductSearchResponse) {
-        let searchRequest = getProductSearchRequest(searchQuery: query).urlRequest!
+    func productSearch(query: String, params: [String : String] = [:] , completion: @escaping ProductsSearchingService.ProductSearchResponse) {
+        let searchRequest = getProductSearchRequest(searchQuery: query, params: params).urlRequest!
         networkManager.json(searchRequest) { (requestError, data) in
 
             if let error = requestError {
@@ -75,9 +75,11 @@ class ProductsSearchingService: ProductsSearchingServiceProtocol {
         return searchRequest
     }
     
-    func getProductSearchRequest(searchQuery: String) -> NetworkRequestProtocol {
+    func getProductSearchRequest(searchQuery: String, params: [String : String] = [:] ) -> NetworkRequestProtocol {
         var searchRequest = urlRequest
-        searchRequest.set(params: [ "search" : searchQuery ])
+        var searchParams = params
+        searchParams["search"] = searchQuery
+        searchRequest.set(params: searchParams)
         return searchRequest
     }
     

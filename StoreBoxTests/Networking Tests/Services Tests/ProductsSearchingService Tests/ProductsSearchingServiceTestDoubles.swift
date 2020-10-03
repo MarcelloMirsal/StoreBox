@@ -40,12 +40,13 @@ class ProductsSearchingServiceFake: ProductsSearchingServiceProtocol {
         
     }
     
-    func productSearch(query: String, completion: @escaping ProductsSearchingService.ProductSearchResponse) {
+    func productSearch(query: String, params: [String : String] = [:], completion: @escaping ProductsSearchingService.ProductSearchResponse) {
         switch responseType {
             case .failed:
                 completion(.noDataFound, nil)
             case .success:
-                let productsList = ProductsList(products: [], pagination: .init(currentPage: 1, nextPage: nil, previousPage: nil, totalPages: 1, totalEntries: 10))
+                let product = Product(id: 20, name: "name", price: 10, discount: 1, priceAfterDiscount: 9, storeName: "store", subCategoryName: "Category")
+                let productsList = ProductsList(products: [product], pagination: .emptyListPagination() )
                 completion(nil ,  productsList)
             break
         }

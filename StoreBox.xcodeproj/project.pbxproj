@@ -42,6 +42,10 @@
 		FB2E02A624629FE5002CACDE /* ProductCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB2E02A424629FE5002CACDE /* ProductCollectionViewCell.xib */; };
 		FB2FC557250E9330000F80D9 /* UserAuthServiceWrongFormattedResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = FB2FC556250E9330000F80D9 /* UserAuthServiceWrongFormattedResponse.json */; };
 		FB2FF35E24EB281A001C30E6 /* ProductsSearchingServiceBadJSON.json in Resources */ = {isa = PBXBuildFile; fileRef = FB2FF35D24EB281A001C30E6 /* ProductsSearchingServiceBadJSON.json */; };
+		FB353885252647A800FA4C63 /* UICollectionViewLoadingFooterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB353884252647A800FA4C63 /* UICollectionViewLoadingFooterTests.swift */; };
+		FB3538872526490000FA4C63 /* UICollectionViewLoadingFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3538862526490000FA4C63 /* UICollectionViewLoadingFooter.swift */; };
+		FB35388925264A0D00FA4C63 /* ProductSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB35388825264A0D00FA4C63 /* ProductSearchViewModel.swift */; };
+		FB35388B25264B2500FA4C63 /* ProductSearchViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB35388A25264B2500FA4C63 /* ProductSearchViewModelTests.swift */; };
 		FB419342246C902800005577 /* ProductsAdsControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB419341246C902800005577 /* ProductsAdsControllerTests.swift */; };
 		FB4379482513B722001C8863 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB4379472513B722001C8863 /* Product.swift */; };
 		FB43794A25157EB6001C8863 /* NetworkServiceParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB43794925157EB6001C8863 /* NetworkServiceParser.swift */; };
@@ -62,7 +66,7 @@
 		FB6F7C49250A7B4200E1A653 /* AutocompleteSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB6F7C48250A7B4200E1A653 /* AutocompleteSearchViewController.swift */; };
 		FB6F7C4B250A7C6200E1A653 /* AutocompleteSearchViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB6F7C4A250A7C6200E1A653 /* AutocompleteSearchViewModelTests.swift */; };
 		FB6F7C4D250A7CA200E1A653 /* AutocompleteSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB6F7C4C250A7CA200E1A653 /* AutocompleteSearchViewModel.swift */; };
-		FB6F7C4F250A88B100E1A653 /* AutocompleteSearchTestDoubles.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB6F7C4E250A88B100E1A653 /* AutocompleteSearchTestDoubles.swift */; };
+		FB6F7C4F250A88B100E1A653 /* SearchingTestDoubles.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB6F7C4E250A88B100E1A653 /* SearchingTestDoubles.swift */; };
 		FB6F7C51250AF60D00E1A653 /* AutocompleteSearchViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB6F7C50250AF60D00E1A653 /* AutocompleteSearchViewController.storyboard */; };
 		FB744FE224CDBD3600D72FA6 /* UserLoginViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB744FE124CDBD3600D72FA6 /* UserLoginViewControllerTests.swift */; };
 		FB744FE424CDBDA400D72FA6 /* UserLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB744FE324CDBDA400D72FA6 /* UserLoginViewController.swift */; };
@@ -159,6 +163,10 @@
 		FB2E02A424629FE5002CACDE /* ProductCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductCollectionViewCell.xib; sourceTree = "<group>"; };
 		FB2FC556250E9330000F80D9 /* UserAuthServiceWrongFormattedResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = UserAuthServiceWrongFormattedResponse.json; sourceTree = "<group>"; };
 		FB2FF35D24EB281A001C30E6 /* ProductsSearchingServiceBadJSON.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ProductsSearchingServiceBadJSON.json; sourceTree = "<group>"; };
+		FB353884252647A800FA4C63 /* UICollectionViewLoadingFooterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionViewLoadingFooterTests.swift; sourceTree = "<group>"; };
+		FB3538862526490000FA4C63 /* UICollectionViewLoadingFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionViewLoadingFooter.swift; sourceTree = "<group>"; };
+		FB35388825264A0D00FA4C63 /* ProductSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductSearchViewModel.swift; sourceTree = "<group>"; };
+		FB35388A25264B2500FA4C63 /* ProductSearchViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductSearchViewModelTests.swift; sourceTree = "<group>"; };
 		FB419341246C902800005577 /* ProductsAdsControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsAdsControllerTests.swift; sourceTree = "<group>"; };
 		FB4379472513B722001C8863 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		FB43794925157EB6001C8863 /* NetworkServiceParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceParser.swift; sourceTree = "<group>"; };
@@ -179,7 +187,7 @@
 		FB6F7C48250A7B4200E1A653 /* AutocompleteSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutocompleteSearchViewController.swift; sourceTree = "<group>"; };
 		FB6F7C4A250A7C6200E1A653 /* AutocompleteSearchViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutocompleteSearchViewModelTests.swift; sourceTree = "<group>"; };
 		FB6F7C4C250A7CA200E1A653 /* AutocompleteSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutocompleteSearchViewModel.swift; sourceTree = "<group>"; };
-		FB6F7C4E250A88B100E1A653 /* AutocompleteSearchTestDoubles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutocompleteSearchTestDoubles.swift; sourceTree = "<group>"; };
+		FB6F7C4E250A88B100E1A653 /* SearchingTestDoubles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchingTestDoubles.swift; sourceTree = "<group>"; };
 		FB6F7C50250AF60D00E1A653 /* AutocompleteSearchViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AutocompleteSearchViewController.storyboard; sourceTree = "<group>"; };
 		FB744FE124CDBD3600D72FA6 /* UserLoginViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLoginViewControllerTests.swift; sourceTree = "<group>"; };
 		FB744FE324CDBDA400D72FA6 /* UserLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLoginViewController.swift; sourceTree = "<group>"; };
@@ -305,7 +313,6 @@
 				FBA0E67F2486CD1E008C1F9C /* MoreViewController */,
 				FBA0E66B24845C91008C1F9C /* CartViewController */,
 				FB06C0FE24614DFE006F589A /* ShopViewController */,
-				FBE2CB052468285100DF52C4 /* ProductCollectionViewCell */,
 				FBF0BF2B2469B99200368ED3 /* ProductDetailsViewController */,
 				FBA0E6412484508E008C1F9C /* StoreBox_shared_UI */,
 				FBE2CB0B246828EB00DF52C4 /* Extensions And Helpers */,
@@ -424,6 +431,7 @@
 				FB6F7C50250AF60D00E1A653 /* AutocompleteSearchViewController.storyboard */,
 				FB6F7C48250A7B4200E1A653 /* AutocompleteSearchViewController.swift */,
 				FB6F7C4C250A7CA200E1A653 /* AutocompleteSearchViewModel.swift */,
+				FB35388825264A0D00FA4C63 /* ProductSearchViewModel.swift */,
 			);
 			path = "Searching Controllers";
 			sourceTree = "<group>";
@@ -431,10 +439,11 @@
 		FB82471924E5A9E80047FC59 /* Searching Controllers Tests */ = {
 			isa = PBXGroup;
 			children = (
-				FB6F7C4A250A7C6200E1A653 /* AutocompleteSearchViewModelTests.swift */,
-				FB6F7C4E250A88B100E1A653 /* AutocompleteSearchTestDoubles.swift */,
 				FB6F7C44250A79E300E1A653 /* AutocompleteSearchViewControllerTests.swift */,
+				FB6F7C4A250A7C6200E1A653 /* AutocompleteSearchViewModelTests.swift */,
 				FBE25AB2251131B200B7B69C /* ProductSearchViewControllerTests.swift */,
+				FB35388A25264B2500FA4C63 /* ProductSearchViewModelTests.swift */,
+				FB6F7C4E250A88B100E1A653 /* SearchingTestDoubles.swift */,
 			);
 			path = "Searching Controllers Tests";
 			sourceTree = "<group>";
@@ -461,10 +470,12 @@
 		FBA0E6412484508E008C1F9C /* StoreBox_shared_UI */ = {
 			isa = PBXGroup;
 			children = (
+				FBE2CB052468285100DF52C4 /* ProductCollectionViewCell */,
 				FB0167B124B1AE4400A62670 /* DetailsTableViewHeader.swift */,
 				FBA0E6422484508E008C1F9C /* UIRoundButton.swift */,
 				FBA0E6432484508E008C1F9C /* ImageSliderView.swift */,
 				FB5125512496B05300BEA4C1 /* DetailsCollectionViewHeader.swift */,
+				FB3538862526490000FA4C63 /* UICollectionViewLoadingFooter.swift */,
 			);
 			path = StoreBox_shared_UI;
 			sourceTree = "<group>";
@@ -551,6 +562,7 @@
 				FB0167AF24B1AE1D00A62670 /* DetailsTableViewHeaderTests.swift */,
 				FB51254F2496AE3C00BEA4C1 /* DetailsCollectionViewHeaderTests.swift */,
 				FB6790DF24BC634B0073141B /* PresentableImageViewTests.swift */,
+				FB353884252647A800FA4C63 /* UICollectionViewLoadingFooterTests.swift */,
 			);
 			path = "StoreBox_shared_UI Tests";
 			sourceTree = "<group>";
@@ -942,9 +954,11 @@
 				FB1842AC250821910006256C /* NetworkManager.swift in Sources */,
 				FBE8DCBE2464B683009BA11E /* CategoryCollectionViewCell.swift in Sources */,
 				FB82471E24E5AC290047FC59 /* SearchingService.swift in Sources */,
+				FB3538872526490000FA4C63 /* UICollectionViewLoadingFooter.swift in Sources */,
 				FBA0E67524845C91008C1F9C /* CartViewController.swift in Sources */,
 				FB744FE424CDBDA400D72FA6 /* UserLoginViewController.swift in Sources */,
 				FB06C10C24616E6C006F589A /* AdsCollectionViewCell.swift in Sources */,
+				FB35388925264A0D00FA4C63 /* ProductSearchViewModel.swift in Sources */,
 				FB6790E224BC65580073141B /* StoreImageView.swift in Sources */,
 				FBF76F9F24CED9ED00E03773 /* UserAuthService.swift in Sources */,
 				FB1C8024246212CE00BFE29F /* UIHelpers.swift in Sources */,
@@ -980,8 +994,9 @@
 				FB0167B024B1AE1D00A62670 /* DetailsTableViewHeaderTests.swift in Sources */,
 				FB6F7C4B250A7C6200E1A653 /* AutocompleteSearchViewModelTests.swift in Sources */,
 				FB1842AE250822270006256C /* NetworkManagerTests.swift in Sources */,
-				FB6F7C4F250A88B100E1A653 /* AutocompleteSearchTestDoubles.swift in Sources */,
+				FB6F7C4F250A88B100E1A653 /* SearchingTestDoubles.swift in Sources */,
 				FB6790E024BC634B0073141B /* PresentableImageViewTests.swift in Sources */,
+				FB353885252647A800FA4C63 /* UICollectionViewLoadingFooterTests.swift in Sources */,
 				FB6F7C45250A79E300E1A653 /* AutocompleteSearchViewControllerTests.swift in Sources */,
 				FB6790E424BC65830073141B /* StoreImageViewTests.swift in Sources */,
 				FB4B251024D9D628004A327B /* UserLoginViewModelTests.swift in Sources */,
@@ -1001,6 +1016,7 @@
 				FB2E029E24628F73002CACDE /* RecommendationViewControllerTests.swift in Sources */,
 				FBF76FA124CEDA0E00E03773 /* UserAuthServiceTests.swift in Sources */,
 				FB17608A24D8C27000BDBC66 /* TestDoubles.swift in Sources */,
+				FB35388B25264B2500FA4C63 /* ProductSearchViewModelTests.swift in Sources */,
 				FB2E02A224629FBA002CACDE /* ProductCollectionViewCellTests.swift in Sources */,
 				FB744FE224CDBD3600D72FA6 /* UserLoginViewControllerTests.swift in Sources */,
 				FBA0E67D2486CCE5008C1F9C /* MoreViewControllerTests.swift in Sources */,

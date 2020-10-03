@@ -1,5 +1,5 @@
 //
-//  AutocompleteSearchTestDoubles.swift
+//  SearchingTestDoubles.swift
 //  StoreBoxTests
 //
 //  Created by Marcello Mirsal on 10/09/2020.
@@ -9,8 +9,6 @@
 import XCTest
 @testable import StoreBox
 class AutocompleteSearchViewModelDelegateSpy: AutocompleteSearchViewModelDelegate {
-    
-    
     let testExpectation: XCTestExpectation
     
     init(testExpectation: XCTestExpectation) {
@@ -28,4 +26,27 @@ class AutocompleteSearchViewModelDelegateSpy: AutocompleteSearchViewModelDelegat
         isAutocompleteSearchFailed = true
         testExpectation.fulfill()
     }
+}
+
+
+class ProductSearchViewModelDelegateSpy: ProductSearchViewModelDelegate {
+    let exp: XCTestExpectation
+    
+    init(exp: XCTestExpectation) {
+        self.exp = exp
+    }
+    var isSearchFailed: Bool?
+    var isSearchSuccess: Bool?
+    
+    func searchRequestFailed(message: String) {
+        isSearchFailed = true
+        exp.fulfill()
+    }
+    
+    func searchRequestSuccess() {
+        isSearchSuccess = true
+        exp.fulfill()
+    }
+    
+    
 }

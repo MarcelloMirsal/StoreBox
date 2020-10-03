@@ -81,10 +81,9 @@
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="139.5" height="503.5"/>
             <connections>
-                <outlet property="cartButton" destination="97C-hF-ogs" id="8KV-dN-cyt"/>
-                <outlet property="discountLabel" destination="Fxc-Bz-ATR" id="2KK-66-0d4"/>
-                <outlet property="nameLabel" destination="vM5-uF-T9G" id="fKy-vD-nN6"/>
-                <outlet property="priceLabel" destination="rKm-Zv-PbM" id="hAV-QU-CB7"/>
+                <outlet property="basePriceLabel" destination="Fxc-Bz-ATR" id="Ajn-zx-hcN"/>
+                <outlet property="nameLabel" destination="vM5-uF-T9G" id="VDK-C0-dks"/>
+                <outlet property="purchasePriceLabel" destination="rKm-Zv-PbM" id="7JF-bm-ERb"/>
             </connections>
             <point key="canvasLocation" x="197.10144927536234" y="203.57142857142856"/>
         </collectionViewCell>

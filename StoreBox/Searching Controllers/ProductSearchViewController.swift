@@ -62,7 +62,7 @@ class ProductSearchViewController: UICollectionViewController, UICollectionViewD
     private func setupCollectionViewRegistration() {
         let productCellNib = UINib(name: "ProductCollectionViewCell")
         collectionView.register(productCellNib, forCellWithReuseIdentifier: cellId)
-        collectionView.register(CollectionViewLoadingFooter.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: sectionFooterId)
+        collectionView.register(UICollectionViewLoadingFooter.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: sectionFooterId)
     }
     
     private func setupCollectionViewDataSource() {
@@ -109,6 +109,10 @@ class ProductSearchViewController: UICollectionViewController, UICollectionViewD
             loadingActivityIndicator.centerXAnchor.constraint(equalTo: collectionView.centerXAnchor)
         ])
     }
+    
+    
+    
+    
 }
 
 // MARK:- CollectionView dataSource configuration
@@ -117,30 +121,41 @@ extension ProductSearchViewController {
     private func dataSourceCellProvider(collectionView: UICollectionView, indexPath: IndexPath, product: Product) -> UICollectionViewCell? {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as? ProductCollectionViewCell
         cell?.nameLabel.text = product.name
-        cell?.priceLabel.text = "\(product.priceAfterDiscount)"
-        cell?.discountLabel.text = "\(product.price)"
+        cell?.purchasePriceLabel.text = "\(product.priceAfterDiscount)"
+        cell?.basePriceLabel.text = "\(product.price)"
         return cell
     }
     
     private func dataSourceSupplementaryViewProvider(collectionView: UICollectionView, kind: String, indexPath: IndexPath) -> UICollectionReusableView? {
-        let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: self.sectionFooterId, for: indexPath) as? CollectionViewLoadingFooter
+        let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: self.sectionFooterId, for: indexPath) as? UICollectionViewLoadingFooter
         return footerView
     }
     
-    private func updateDataSource() {
+    @discardableResult
+     func updateDataSourceSnapshot() -> NSDiffableDataSourceSnapshot<Section, Product>  {
         var snapshot = NSDiffableDataSourceSnapshot<Section, Product>()
         snapshot.appendSections([.main])
-        snapshot.appendItems(viewModel.productsList?.products ?? [], toSection: .main)
+        snapshot.appendItems(viewModel.productsList.products, toSection: .main)
         dataSource.apply(snapshot)
+        return snapshot
     }
     
 }
 
-// MARK:- CollectionView Delegate Implementation
+// MARK:- CollectionView delegate implementation
 extension ProductSearchViewController {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
     }
+    
+    
+    override func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
+        let loadingFooterView = view as? UICollectionViewLoadingFooter
+        loadingFooterView?.loadingActivityIndicator.isHidden = !viewModel.canLoadMoreData
+        viewModel.loadMoreData(productName: title! )
+        print("load More")
+    }
+    
 }
 
 // MARK:- ViewModel Delegate Implementation
@@ -152,7 +167,7 @@ extension ProductSearchViewController: ProductSearchViewModelDelegate {
     }
     
     func searchRequestSuccess() {
-        updateDataSource()
+        updateDataSourceSnapshot()
         loadingActivityIndicator.stopAnimating()
     }
 }
@@ -161,60 +176,5 @@ extension ProductSearchViewController: ProductSearchViewModelDelegate {
 extension ProductSearchViewController {
     enum Section {
         case main
-    }
-}
-
-
-protocol ProductSearchViewModelDelegate: class {
-    func searchRequestFailed(message: String)
-    func searchRequestSuccess()
-}
-
-class ProductSearchViewModel {
-    
-    let searchingService: ProductsSearchingServiceProtocol
-    weak var delegate: ProductSearchViewModelDelegate?
-    private(set) var productsList : ProductsList? = ProductsList(products: [], pagination: ListPagination.emptyListPagination())
-    
-    init(searchingService: ProductsSearchingServiceProtocol = ProductsSearchingService(authToken: UserAuthService.token ?? "")) {
-        self.searchingService = searchingService
-    }
-    
-    func productSearch(productName: String) {
-        searchingService.productSearch(query: productName) { (serviceError, productsList) in
-            if let error = serviceError {
-                self.delegate?.searchRequestFailed(message: error.localizedDescription)
-                return
-            }
-            // set product list here
-            self.productsList = productsList
-            self.delegate?.searchRequestSuccess()
-        }
-    }
-    
-}
-
-
-class CollectionViewLoadingFooter: UICollectionReusableView {
-    
-    let loadingActivityIndicator: UIActivityIndicatorView = {
-        let activityIndicator = UIActivityIndicatorView(style: .medium)
-        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
-        activityIndicator.startAnimating()
-        activityIndicator.hidesWhenStopped = true
-        return activityIndicator
-    }()
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        addSubview(loadingActivityIndicator)
-        NSLayoutConstraint.activate( [
-            loadingActivityIndicator.centerYAnchor.constraint(equalTo: centerYAnchor),
-            loadingActivityIndicator.centerXAnchor.constraint(equalTo: centerXAnchor)
-        ] )
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }
