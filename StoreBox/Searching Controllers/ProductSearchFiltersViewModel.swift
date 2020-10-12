@@ -36,5 +36,4 @@ class ProductSearchFiltersViewModel {
     func isFilterSelected(filter: SearchFilter, in section: Section) -> Bool {
         return filterSectionsManager.isFilterSelected(filter: filter, in: section)
     }
-    
 }

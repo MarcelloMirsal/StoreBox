@@ -29,30 +29,8 @@ class ProductSearchFiltersViewController: UITableViewController {
         viewModel.filterSectionsManager.delegate = self
         setupTableView()
         setupTableViewDataSource()
-        DispatchQueue.main.async {
-            self.loadFilterSections()
-        }
+        loadFilterSections()
     }
-    
-    // MARK:- Methods
-    func loadFilterSections() {
-        var snapshot = dataSource.snapshot()
-        snapshot.appendSections(viewModel.sections) // to presented in this order
-        viewModel.sections.forEach { (section) in
-            let filters = viewModel.getSearchFilters(for: section)
-            snapshot.appendItems(filters, toSection: section)
-        }
-        dataSource.apply(snapshot , animatingDifferences: true)
-    }
-    
-    func handleFilterSelection(at indexPath: IndexPath) {
-        if let section = section(at: indexPath.section) {
-            let snapshot = dataSource.snapshot()
-            let filter = snapshot.itemIdentifiers(inSection: section)[indexPath.row]
-            viewModel.filterSectionsManager.select(filter: filter, at: section)
-        }
-    }
-    
     
     // MARK:- UI setup
     func setupTableView() {
@@ -60,6 +38,33 @@ class ProductSearchFiltersViewController: UITableViewController {
         tableView.sectionHeaderHeight = 48
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
         tableView.register(TitledTableViewHeaderFooterView.self, forHeaderFooterViewReuseIdentifier: headerId)
+    }
+    
+    // MARK:- Methods
+    func loadFilterSections() {
+        var snapshot = dataSource.snapshot()
+        snapshot.appendSections([.sortBy , .city, .subCategory])
+        viewModel.sections.forEach { (section) in
+            let filters = viewModel.getSearchFilters(for: section)
+            snapshot.appendItems(filters, toSection: section)
+        }
+        dataSource.apply(snapshot , animatingDifferences: false)
+    }
+    
+    func handleFilterSelection(at indexPath: IndexPath) {
+        guard let section = section(at: indexPath.section) else { return }
+        let snapshot = dataSource.snapshot()
+        let sectionFilters = snapshot.itemIdentifiers(inSection: section)
+        if let filter = sectionFilters[at: indexPath.row] {
+            viewModel.filterSectionsManager.select(filter: filter, at: section)
+        }
+    }
+    
+    func reload(filter: SearchFilter) {
+        guard let _ = dataSource.snapshot().indexOfItem(filter) else { return }
+        var snapshot = dataSource.snapshot()
+        snapshot.reloadItems([filter])
+        dataSource.apply(snapshot, animatingDifferences: false)
     }
     
     // MARK:- TableView dataSource setup
@@ -75,13 +80,9 @@ class ProductSearchFiltersViewController: UITableViewController {
         if let section = section(at: indexPath.section) {
             isFilterSelected = viewModel.isFilterSelected(filter: filter, in: section)
         }
-        
-        
         cell.selectionStyle = .none
         cell.textLabel?.text = filter.name
         cell.accessoryType = isFilterSelected ? .checkmark : .none
-        
-        
         return cell
     }
     
@@ -109,17 +110,11 @@ extension ProductSearchFiltersViewController {
 // MARK:- FilterSectionsManagerDelegate implementaion
 extension ProductSearchFiltersViewController: FilterSectionsManagerDelegate {
     func filterSectionsManager(didDeselectFilter filter: FilterSectionsManager.SearchFilter) {
-        guard let _ = dataSource.snapshot().indexOfItem(filter) else { return }
-        var snapshot = dataSource.snapshot()
-        snapshot.reloadItems([filter])
-        dataSource.apply(snapshot)
+        reload(filter: filter)
     }
     
     func filterSectionsManager(didSelectFilter filter: FilterSectionsManager.SearchFilter) {
-        guard let _ = dataSource.snapshot().indexOfItem(filter) else { return }
-        var snapshot = dataSource.snapshot()
-        snapshot.reloadItems([filter])
-        dataSource.apply(snapshot)
+        reload(filter: filter)
     }
     
     

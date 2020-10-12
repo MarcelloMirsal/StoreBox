@@ -47,16 +47,49 @@ class ProductSearchFiltersViewControllerTests: XCTestCase {
         XCTAssertNotNil(cell)
     }
     
+    func testDataSourceCellProviderWithSelectedFilter_ShouldReturnSelectedCell() {
+        
+        print(sut.dataSource.snapshot().itemIdentifiers)
+        print(sut.dataSource.snapshot().sectionIdentifiers)
+        guard let filter = sut.dataSource.snapshot().itemIdentifiers(inSection: .sortBy).first else {
+            XCTFail()
+            return
+        }
+        guard let indexPath = sut.dataSource.indexPath(for: filter) else {
+            XCTFail()
+            return
+        }
+        sut.handleFilterSelection(at: indexPath)
+        let cell = sut.dataSourceCellProvider(tableView: sut.tableView, indexPath: indexPath, filter: filter)
+        XCTAssertTrue(cell?.accessoryType == .checkmark )
+    }
+    
     func testTableViewHeaderView_ShouldReturnNotNilHeaderView() {
         let section = 0
         let headerView = sut.tableView(sut.tableView, viewForHeaderInSection: section) as? TitledTableViewHeaderFooterView
         XCTAssertNotNil(headerView)
     }
     
+    func testHandleFilterSelectionAtNoneExistFilter_ShouldReturn() {
+        let indexPath = IndexPath(row: 0, section: 2)
+        sut.handleFilterSelection(at: indexPath)
+    }
+    
+    func testHandleFilterSelectionAtExistFilter_ShouldReturn() {
+        guard let filter = sut.dataSource.snapshot().itemIdentifiers.first else {
+            XCTFail() ; return
+        }
+        guard let indexPath = sut.dataSource.indexPath(for: filter) else {
+            XCTFail() ; return
+        }
+        sut.handleFilterSelection(at: indexPath)
+    }
+    
     func testUIDetails() {  //NothingToTest
         sut.tableView(sut.tableView, didSelectRowAt: IndexPath(row: 0, section: 0) )
         sut.filterSectionsManager(didSelectFilter: .init(name: ""))
         sut.filterSectionsManager(didDeselectFilter: .init(name: ""))
+        sut.reload(filter: .init(name: ""))
     }
     
 }
