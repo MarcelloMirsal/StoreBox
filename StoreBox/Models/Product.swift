@@ -69,10 +69,6 @@ struct ProductsList: Codable {
         self.products += products
     }
     
-    mutating func set(products: [Product]) {
-        self.products = products
-    }
-    
     mutating func set(pagination: ListPagination) {
         self.pagination = pagination
     }

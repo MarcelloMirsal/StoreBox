@@ -46,16 +46,17 @@ class ProductSearchViewController: UICollectionViewController, UICollectionViewD
         setupSearchFilterBarButton()
         requestProductSearch()
     }
-    
     // MARK:- Actions
     @objc
     func handleFilterAction() {
-        
+        let productSearchFilterViewController = ProductSearchFiltersViewController.initiate()
+        let nvController = UINavigationController(rootViewController: productSearchFilterViewController)
+        present(nvController, animated: true)
     }
     
     func requestProductSearch() {
-        guard let productName = title else { return }
-        viewModel.productSearch(productName: productName)
+//        guard let productName = title else { return }
+//        viewModel.productSearch(productName: productName)
     }
     
     // MARK:- UI setup

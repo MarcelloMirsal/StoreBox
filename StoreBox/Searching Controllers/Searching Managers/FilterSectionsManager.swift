@@ -1,0 +1,113 @@
+//
+//  FilterSectionsManager.swift
+//  StoreBox
+//
+//  Created by Marcello Mirsal on 12/10/2020.
+//  Copyright © 2020 Mohammed Ahmed. All rights reserved.
+//
+
+import Foundation
+
+protocol FilterSectionsManagerDelegate: class {
+    func filterSectionsManager(didDeselectFilter filter: FilterSectionsManager.SearchFilter)
+    func filterSectionsManager(didSelectFilter filter: FilterSectionsManager.SearchFilter)
+}
+
+
+/// Managing search filters sections CRUD & selection, allowing a section to select a single or multiple filters and keep track of them
+class FilterSectionsManager {
+    typealias Section = ProductSearchFiltersViewController.Section
+    typealias SearchFilter = ProductSearchFiltersViewController.SearchFilter
+    
+    typealias SearchFilterSection =  [ Section : SectionFilters ]
+    typealias SelectedSearchFilters = [Section : Set<SearchFilter> ]
+    
+    private(set) var filterSections: SearchFilterSection = [:]
+    private var selectedFilters: SelectedSearchFilters = [:]
+    weak var delegate: FilterSectionsManagerDelegate?
+    
+    var sections: [Section] {
+        return filterSections.map({ $0.key})
+    }
+    
+    init(delegate: FilterSectionsManagerDelegate? = nil) {
+        self.filterSections = self.getDefaultFilterSection()
+        self.delegate = delegate
+    }
+    
+    private func getDefaultFilterSection() -> SearchFilterSection  {
+        return [
+            .sortBy : .init(filters: [
+                .init(name: "Price: low to hight") ,
+                .init(name: "price: hight to low"),
+                .init(name: "Newest")
+            ], selectionType: .signle)
+        ]
+    }
+    
+    func set(sectionFilters: SectionFilters, to section: Section) {
+        filterSections[section] = sectionFilters
+    }
+    
+    func sectionFilters(for section: Section) -> SectionFilters? {
+        return filterSections[section]
+    }
+    
+    func isFilterSelected(filter: SearchFilter, in section: Section) -> Bool {
+        guard selectedFilters[section]?.contains(filter) == true else {
+            return false
+        }
+        return true
+    }
+    
+    fileprivate func handleSingleSelection(selectedFilter: SearchFilter, at section: Section) {
+        if let previousSelectedFilter = selectedFilters[section]?.first {
+            selectedFilters[section] = []
+            delegate?.filterSectionsManager(didDeselectFilter: previousSelectedFilter)
+        }
+        selectedFilters[section] = [selectedFilter]
+        delegate?.filterSectionsManager(didDeselectFilter: selectedFilter)
+    }
+    
+    fileprivate func handleMultipleSelection(selectedFilter: SearchFilter, at section: Section) {
+        if selectedFilters[section]?.contains(selectedFilter) ?? false {
+            selectedFilters[section]?.remove(selectedFilter)
+            delegate?.filterSectionsManager(didDeselectFilter: selectedFilter)
+            return
+        }
+        var updateSelectedFiltersSet = Set(selectedFilters[section] ?? [])
+        updateSelectedFiltersSet.insert(selectedFilter)
+        selectedFilters[section] = updateSelectedFiltersSet
+        delegate?.filterSectionsManager(didSelectFilter: selectedFilter)
+    }
+    
+    func select(filter: SearchFilter , at section: Section) {
+        guard let sectionSelectionType = filterSections[section]?.selectionType else {
+            return
+        }
+        switch sectionSelectionType {
+            case .signle:
+                handleSingleSelection(selectedFilter: filter, at: section)
+            case .multiple:
+                handleMultipleSelection(selectedFilter: filter, at: section)
+        }
+    }
+}
+
+// MARK:- Helpers models
+extension FilterSectionsManager {
+    struct SectionFilters: Equatable {
+        var filters: [SearchFilter]
+        let selectionType: SelectionType
+        
+        enum SelectionType {
+            case signle
+            case multiple
+        }
+    }
+    
+    
+    
+}
+
+

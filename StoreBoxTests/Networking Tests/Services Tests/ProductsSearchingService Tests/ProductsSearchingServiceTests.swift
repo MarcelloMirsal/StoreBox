@@ -69,13 +69,13 @@ class ProductsSearchingServiceTests: XCTestCase {
         arrangeSutWithBadJSONResponse()
         let exp = expectation(description: "testAutocompleteSearchWithBadJSON")
         let searchQuery = "Product"
-        
+
         sut.autocompleteSearch(query: searchQuery) { (error, searchResults) in
             XCTAssertEqual(error, NetworkServiceError.jsonDecodingFailure )
             exp.fulfill()
         }
-        
-        wait(for: [exp], timeout: 1)
+
+        wait(for: [exp], timeout: 5)
     }
     
     func testAutocompleteSearchWithSuccessfulResponse_SearchResultsShouldBeNotNil() {
