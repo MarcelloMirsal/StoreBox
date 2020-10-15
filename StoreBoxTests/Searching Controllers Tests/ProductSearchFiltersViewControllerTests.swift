@@ -40,10 +40,7 @@ class ProductSearchFiltersViewControllerTests: XCTestCase {
     
     func testDataSourceCellProvider_ShouldReturnNotNilCell() {
         let indexPath = IndexPath(row: 0, section: 0)
-        let filter = SearchFilter(name: "Name")
-        
-        let cell = sut.dataSourceCellProvider(tableView: sut.tableView, indexPath: indexPath, filter: filter)
-        
+        let cell = sut.dataSource.tableView(sut.tableView, cellForRowAt: indexPath)
         XCTAssertNotNil(cell)
     }
     
@@ -60,8 +57,8 @@ class ProductSearchFiltersViewControllerTests: XCTestCase {
             return
         }
         sut.handleFilterSelection(at: indexPath)
-        let cell = sut.dataSourceCellProvider(tableView: sut.tableView, indexPath: indexPath, filter: filter)
-        XCTAssertTrue(cell?.accessoryType == .checkmark )
+        let cell = sut.dataSource.tableView(sut.tableView, cellForRowAt: indexPath)
+        XCTAssertTrue(cell.accessoryType == .checkmark )
     }
     
     func testTableViewHeaderView_ShouldReturnNotNilHeaderView() {
@@ -89,6 +86,7 @@ class ProductSearchFiltersViewControllerTests: XCTestCase {
         sut.tableView(sut.tableView, didSelectRowAt: IndexPath(row: 0, section: 0) )
         sut.filterSectionsManager(didSelectFilter: .init(name: ""))
         sut.filterSectionsManager(didDeselectFilter: .init(name: ""))
+        sut.filterSectionsManager(didUpdateSection: .cities)
         sut.reload(filter: .init(name: ""))
     }
     

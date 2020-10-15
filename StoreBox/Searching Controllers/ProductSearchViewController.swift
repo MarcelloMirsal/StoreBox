@@ -37,6 +37,7 @@ class ProductSearchViewController: UICollectionViewController, UICollectionViewD
         return viewController
     }
     
+    
     // MARK:- View's Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()

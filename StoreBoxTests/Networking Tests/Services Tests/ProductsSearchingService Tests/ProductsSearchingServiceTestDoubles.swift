@@ -11,6 +11,8 @@ import Foundation
 
 class ProductsSearchingServiceFake: ProductsSearchingServiceProtocol {
     
+    
+    
     enum FakeResponseType {
         case failed
         case success
@@ -48,8 +50,7 @@ class ProductsSearchingServiceFake: ProductsSearchingServiceProtocol {
                 let product = Product(id: 20, name: "name", price: 10, discount: 1, priceAfterDiscount: 9, storeName: "store", subCategoryName: "Category")
                 let productsList = ProductsList(products: [product], pagination: .emptyListPagination() )
                 completion(nil ,  productsList)
-            break
+                break
         }
     }
-    
 }

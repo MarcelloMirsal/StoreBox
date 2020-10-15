@@ -12,14 +12,15 @@ protocol ProductsSearchingServiceProtocol {
     typealias AutocompleteSearchResponse = (NetworkServiceError?,[ProductAutocompleteSearchResult]?) -> ()
     
     typealias ProductSearchResponse = (NetworkServiceError?,ProductsList?) -> ()
+    typealias SearchFilterListResponse<T> = (NetworkServiceError?,T?) -> ()
     
     func autocompleteSearch(query: String, completion: @escaping AutocompleteSearchResponse)
     
     func productSearch(query: String, params: [String : String]  , completion: @escaping ProductSearchResponse)
-    
 }
 
 class ProductsSearchingService: ProductsSearchingServiceProtocol {
+    
     let urlRequest: NetworkRequestProtocol
     let networkManager = NetworkManagerFacade()
     
@@ -54,12 +55,12 @@ class ProductsSearchingService: ProductsSearchingServiceProtocol {
     func productSearch(query: String, params: [String : String] = [:] , completion: @escaping ProductsSearchingService.ProductSearchResponse) {
         let searchRequest = getProductSearchRequest(searchQuery: query, params: params).urlRequest!
         networkManager.json(searchRequest) { (requestError, data) in
-
+            
             if let error = requestError {
                 completion(.badNetworkRequest(error), nil)
                 return
             }
-
+            
             do {
                 let parser = Parser()
                 let productsList: ProductsList = try parser.parse(from: data)
@@ -68,6 +69,7 @@ class ProductsSearchingService: ProductsSearchingServiceProtocol {
             catch { completion(.jsonDecodingFailure, nil) }
         }
     }
+    
     
     func getAutocompleteSearchRequest(searchQuery: String) -> NetworkRequestProtocol {
         var searchRequest = urlRequest
@@ -102,4 +104,6 @@ extension ProductsSearchingService {
         let products: [ProductAutocompleteSearchResult]
         enum CodingKeyes: String, CodingKey { case products }
     }
+    
+    
 }

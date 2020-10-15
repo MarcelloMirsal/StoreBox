@@ -10,7 +10,6 @@ import UIKit
 
 
 class ProductSearchFiltersViewController: UITableViewController {
-    
     let cellId = "cellId"
     let headerId = "headerId"
     var dataSource: UITableViewDiffableDataSource<Section, SearchFilter>!
@@ -27,6 +26,7 @@ class ProductSearchFiltersViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.filterSectionsManager.delegate = self
+        viewModel.fetchDynamicFilterSections()
         setupTableView()
         setupTableViewDataSource()
         loadFilterSections()
@@ -43,7 +43,7 @@ class ProductSearchFiltersViewController: UITableViewController {
     // MARK:- Methods
     func loadFilterSections() {
         var snapshot = dataSource.snapshot()
-        snapshot.appendSections([.sortBy , .city, .subCategory])
+        snapshot.appendSections([.sortBy , .cities, .subCategory])
         viewModel.sections.forEach { (section) in
             let filters = viewModel.getSearchFilters(for: section)
             snapshot.appendItems(filters, toSection: section)
@@ -69,21 +69,21 @@ class ProductSearchFiltersViewController: UITableViewController {
     
     // MARK:- TableView dataSource setup
     func setupTableViewDataSource() {
-        dataSource = .init(tableView: tableView, cellProvider: dataSourceCellProvider(tableView:indexPath:filter:))
+        dataSource = .init(tableView: tableView, cellProvider: { [unowned self]
+            (tableView, indexPath, filter) -> UITableViewCell? in
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: self.cellId, for: indexPath)
+            
+            var isFilterSelected = false
+            if let section = self.section(at: indexPath.section) {
+                isFilterSelected = self.viewModel.isFilterSelected(filter: filter, in: section)
+            }
+            cell.selectionStyle = .none
+            cell.textLabel?.text = filter.name
+            cell.accessoryType = isFilterSelected ? .checkmark : .none
+            return cell
+        })
         tableView.dataSource = dataSource
-    }
-    
-    func dataSourceCellProvider(tableView: UITableView, indexPath: IndexPath, filter: SearchFilter) -> UITableViewCell? {
-        let cell = tableView.dequeueReusableCell(withIdentifier: self.cellId, for: indexPath)
-        
-        var isFilterSelected = false
-        if let section = section(at: indexPath.section) {
-            isFilterSelected = viewModel.isFilterSelected(filter: filter, in: section)
-        }
-        cell.selectionStyle = .none
-        cell.textLabel?.text = filter.name
-        cell.accessoryType = isFilterSelected ? .checkmark : .none
-        return cell
     }
     
     func section(at index: Int) -> Section? {
@@ -97,7 +97,8 @@ class ProductSearchFiltersViewController: UITableViewController {
 extension ProductSearchFiltersViewController {
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: headerId) as? TitledTableViewHeaderFooterView
-        headerView?.sectionLabel.text = "\(section)"
+        let sectionIndex = section
+        headerView?.sectionLabel.text = self.section(at: sectionIndex)?.rawValue
         return headerView
     }
     
@@ -109,6 +110,13 @@ extension ProductSearchFiltersViewController {
 
 // MARK:- FilterSectionsManagerDelegate implementaion
 extension ProductSearchFiltersViewController: FilterSectionsManagerDelegate {
+    func filterSectionsManager(didUpdateSection section: FilterSectionsManager.Section) {
+        var snapshot = dataSource.snapshot()
+        let searchFilters = viewModel.getSearchFilters(for: section)
+        snapshot.appendItems(searchFilters, toSection: section)
+        dataSource.apply(snapshot)
+    }
+    
     func filterSectionsManager(didDeselectFilter filter: FilterSectionsManager.SearchFilter) {
         reload(filter: filter)
     }
@@ -122,16 +130,20 @@ extension ProductSearchFiltersViewController: FilterSectionsManagerDelegate {
 
 // MARK:- Helper Models
 extension ProductSearchFiltersViewController {
-    enum Section: Int {
-        case sortBy = 0
-        case city
-        case subCategory
+    enum Section: String {
+        case sortBy = "Sort by"
+        case cities = "City"
+        case subCategory = "Category"
     }
     
-    struct SearchFilter: Hashable, NetworkRequestParameterValue {
+    struct SearchFilter: Hashable {
         let uuid = UUID()
         let name: String
-        var requestParamValue: String = ""
+        var filterValue: String
+        
+        init(name: String, filterValue: String = "") {
+            self.name = name
+            self.filterValue = filterValue
+        }
     }
-    
 }

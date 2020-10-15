@@ -11,11 +11,13 @@ import Foundation
 protocol FilterSectionsManagerDelegate: class {
     func filterSectionsManager(didDeselectFilter filter: FilterSectionsManager.SearchFilter)
     func filterSectionsManager(didSelectFilter filter: FilterSectionsManager.SearchFilter)
+    func filterSectionsManager(didUpdateSection section: FilterSectionsManager.Section)
 }
 
 
 /// Managing search filters sections CRUD & selection, allowing a section to select a single or multiple filters and keep track of them
 class FilterSectionsManager {
+    
     typealias Section = ProductSearchFiltersViewController.Section
     typealias SearchFilter = ProductSearchFiltersViewController.SearchFilter
     
@@ -47,6 +49,7 @@ class FilterSectionsManager {
     
     func set(sectionFilters: SectionFilters, to section: Section) {
         filterSections[section] = sectionFilters
+        delegate?.filterSectionsManager(didUpdateSection: section)
     }
     
     func sectionFilters(for section: Section) -> SectionFilters? {

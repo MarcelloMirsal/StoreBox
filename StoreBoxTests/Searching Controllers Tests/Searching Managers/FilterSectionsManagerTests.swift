@@ -33,7 +33,7 @@ class FilterSectionsManagerTests: XCTestCase {
             .init(name: "KSA"),
             .init(name: "NY")
         ], selectionType: .signle)
-        let section = ProductSearchFiltersViewController.Section.city
+        let section = ProductSearchFiltersViewController.Section.cities
         
         sut.set(sectionFilters: sectionFilters, to: section)
         
@@ -133,7 +133,7 @@ class FilterSectionsManagerTests: XCTestCase {
     }
     
     func testSelectFilterAtNoneExistSection_FilterShouldBeNotSelected() {
-        let section = ProductSearchFiltersViewController.Section.city
+        let section = ProductSearchFiltersViewController.Section.cities
         let firstFilter = ProductSearchFiltersViewController.SearchFilter(name: "1")
         
         sut.select(filter: firstFilter, at: section)

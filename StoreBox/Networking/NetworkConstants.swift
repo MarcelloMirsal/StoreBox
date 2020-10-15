@@ -27,10 +27,6 @@ enum NetworkConstants: String {
     }
 }
 
-protocol NetworkRequestParameterValue {
-    var requestParamValue: String { get set }
-}
-
 protocol NetworkRequestProtocol: URLRequestConvertible {
     var method: HTTPMethod { get }
     var path: String { get }
