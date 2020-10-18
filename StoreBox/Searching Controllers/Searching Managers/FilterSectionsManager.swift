@@ -14,13 +14,16 @@ protocol FilterSectionsManagerDelegate: class {
     func filterSectionsManager(didUpdateSection section: FilterSectionsManager.Section)
 }
 
+protocol FilterSectionsManagerDataSource: class {
+    func filterSectionsManager()
+}
+
 
 /// Managing search filters sections CRUD & selection, allowing a section to select a single or multiple filters and keep track of them
 class FilterSectionsManager {
     
     typealias Section = ProductSearchFiltersViewController.Section
     typealias SearchFilter = ProductSearchFiltersViewController.SearchFilter
-    
     typealias SearchFilterSection =  [ Section : SectionFilters ]
     typealias SelectedSearchFilters = [Section : Set<SearchFilter> ]
     
@@ -41,7 +44,7 @@ class FilterSectionsManager {
         return [
             .sortBy : .init(filters: [
                 .init(name: "Price: low to hight") ,
-                .init(name: "price: hight to low"),
+                .init(name: "Price: hight to low"),
                 .init(name: "Newest")
             ], selectionType: .signle)
         ]
@@ -63,27 +66,6 @@ class FilterSectionsManager {
         return true
     }
     
-    fileprivate func handleSingleSelection(selectedFilter: SearchFilter, at section: Section) {
-        if let previousSelectedFilter = selectedFilters[section]?.first {
-            selectedFilters[section] = []
-            delegate?.filterSectionsManager(didDeselectFilter: previousSelectedFilter)
-        }
-        selectedFilters[section] = [selectedFilter]
-        delegate?.filterSectionsManager(didDeselectFilter: selectedFilter)
-    }
-    
-    fileprivate func handleMultipleSelection(selectedFilter: SearchFilter, at section: Section) {
-        if selectedFilters[section]?.contains(selectedFilter) ?? false {
-            selectedFilters[section]?.remove(selectedFilter)
-            delegate?.filterSectionsManager(didDeselectFilter: selectedFilter)
-            return
-        }
-        var updateSelectedFiltersSet = Set(selectedFilters[section] ?? [])
-        updateSelectedFiltersSet.insert(selectedFilter)
-        selectedFilters[section] = updateSelectedFiltersSet
-        delegate?.filterSectionsManager(didSelectFilter: selectedFilter)
-    }
-    
     func select(filter: SearchFilter , at section: Section) {
         guard let sectionSelectionType = filterSections[section]?.selectionType else {
             return
@@ -94,6 +76,27 @@ class FilterSectionsManager {
             case .multiple:
                 handleMultipleSelection(selectedFilter: filter, at: section)
         }
+    }
+    
+    private func handleSingleSelection(selectedFilter: SearchFilter, at section: Section) {
+        if let previousSelectedFilter = selectedFilters[section]?.first {
+            selectedFilters[section] = []
+            delegate?.filterSectionsManager(didDeselectFilter: previousSelectedFilter)
+        }
+        selectedFilters[section] = [selectedFilter]
+        delegate?.filterSectionsManager(didDeselectFilter: selectedFilter)
+    }
+    
+    private func handleMultipleSelection(selectedFilter: SearchFilter, at section: Section) {
+        if selectedFilters[section]?.contains(selectedFilter) ?? false {
+            selectedFilters[section]?.remove(selectedFilter)
+            delegate?.filterSectionsManager(didDeselectFilter: selectedFilter)
+            return
+        }
+        var updateSelectedFiltersSet = Set(selectedFilters[section] ?? [])
+        updateSelectedFiltersSet.insert(selectedFilter)
+        selectedFilters[section] = updateSelectedFiltersSet
+        delegate?.filterSectionsManager(didSelectFilter: selectedFilter)
     }
 }
 
@@ -108,9 +111,6 @@ extension FilterSectionsManager {
             case multiple
         }
     }
-    
-    
-    
 }
 
 

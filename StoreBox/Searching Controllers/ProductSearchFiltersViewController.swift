@@ -10,10 +10,21 @@ import UIKit
 
 
 class ProductSearchFiltersViewController: UITableViewController {
+    
     let cellId = "cellId"
     let headerId = "headerId"
+    let activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView()
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.startAnimating()
+        return activityIndicator
+    }()
+    
     var dataSource: UITableViewDiffableDataSource<Section, SearchFilter>!
-    let viewModel = ProductSearchFiltersViewModel()
+    private(set) lazy var viewModel: ProductSearchFiltersViewModel = {
+       let viewModel = ProductSearchFiltersViewModel(filterSectionsManagerDelegate: self)
+        return viewModel
+    }()
     
     // MARK:- Factory
     static func initiate() -> ProductSearchFiltersViewController {
@@ -25,15 +36,15 @@ class ProductSearchFiltersViewController: UITableViewController {
     // MARK:- View's life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel.filterSectionsManager.delegate = self
-        viewModel.fetchDynamicFilterSections()
         setupTableView()
         setupTableViewDataSource()
+        viewModel.fetchDynamicFilterSections()
         loadFilterSections()
     }
     
     // MARK:- UI setup
     func setupTableView() {
+        tableView.tableHeaderView = activityIndicator
         tableView.backgroundColor = .systemGroupedBackground
         tableView.sectionHeaderHeight = 48
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
@@ -43,7 +54,7 @@ class ProductSearchFiltersViewController: UITableViewController {
     // MARK:- Methods
     func loadFilterSections() {
         var snapshot = dataSource.snapshot()
-        snapshot.appendSections([.sortBy , .cities, .subCategory])
+        snapshot.appendSections(viewModel.sortedSections)
         viewModel.sections.forEach { (section) in
             let filters = viewModel.getSearchFilters(for: section)
             snapshot.appendItems(filters, toSection: section)
@@ -53,15 +64,13 @@ class ProductSearchFiltersViewController: UITableViewController {
     
     func handleFilterSelection(at indexPath: IndexPath) {
         guard let section = section(at: indexPath.section) else { return }
-        let snapshot = dataSource.snapshot()
-        let sectionFilters = snapshot.itemIdentifiers(inSection: section)
-        if let filter = sectionFilters[at: indexPath.row] {
+        if let filter = dataSource.itemIdentifier(for: indexPath) {
             viewModel.filterSectionsManager.select(filter: filter, at: section)
         }
     }
     
     func reload(filter: SearchFilter) {
-        guard let _ = dataSource.snapshot().indexOfItem(filter) else { return }
+        guard let _ = dataSource.indexPath(for: filter) else { return }
         var snapshot = dataSource.snapshot()
         snapshot.reloadItems([filter])
         dataSource.apply(snapshot, animatingDifferences: false)
@@ -72,9 +81,9 @@ class ProductSearchFiltersViewController: UITableViewController {
         dataSource = .init(tableView: tableView, cellProvider: { [unowned self]
             (tableView, indexPath, filter) -> UITableViewCell? in
             
+            var isFilterSelected = false
             let cell = tableView.dequeueReusableCell(withIdentifier: self.cellId, for: indexPath)
             
-            var isFilterSelected = false
             if let section = self.section(at: indexPath.section) {
                 isFilterSelected = self.viewModel.isFilterSelected(filter: filter, in: section)
             }
@@ -115,6 +124,7 @@ extension ProductSearchFiltersViewController: FilterSectionsManagerDelegate {
         let searchFilters = viewModel.getSearchFilters(for: section)
         snapshot.appendItems(searchFilters, toSection: section)
         dataSource.apply(snapshot)
+        activityIndicator.stopAnimating()
     }
     
     func filterSectionsManager(didDeselectFilter filter: FilterSectionsManager.SearchFilter) {

@@ -13,15 +13,14 @@ class ProductSearchFiltersViewModel {
     typealias Section = ProductSearchFiltersViewController.Section
     typealias SearchFilter = ProductSearchFiltersViewController.SearchFilter
     
-    let filterSectionsManager = FilterSectionsManager()
-    let searchingService: ProductsSearchingServiceProtocol
+    let filterSectionsManager: FilterSectionsManager
+    let listingService = ListingService()
+    var sections: [Section] { return filterSectionsManager.sections }
+    let sortedSections: [Section] = [.sortBy , .cities , .subCategory]
     
-    var sections: [Section] {
-        return filterSectionsManager.sections
-    }
     
-    init( searchingService: ProductsSearchingServiceProtocol = ProductsSearchingService(authToken: UserAuthService.token ?? "" ) ) {
-        self.searchingService = searchingService
+    init(filterSectionsManagerDelegate: FilterSectionsManagerDelegate? = nil) {
+        self.filterSectionsManager = .init(delegate: filterSectionsManagerDelegate)
     }
     
     func getSearchFilters(for section: Section) -> [SearchFilter] {
@@ -43,11 +42,8 @@ extension ProductSearchFiltersViewModel {
     }
     
     func fetchFilterSection<T: Decodable>(type: T.Type, section: Section) {
-        let listingService = ListingService()
         let urlRequest = ListingService.Router().urlRequest(for: section)
-        
         listingService.getList(listType: type, urlRequest, completion: handleFetchingFilterSection(serviceError:list:))
-        
     }
     
     func handleFetchingFilterSection<T: Decodable>(serviceError: NetworkServiceError?, list: T?) {

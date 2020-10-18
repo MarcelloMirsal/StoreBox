@@ -83,11 +83,4 @@ class ProductSearchFiltersViewModelTests: XCTestCase {
     func testListingServiceRouterURLRequestForNoneDynamicSearchFilters_ShouldReturnEmptyURLRequestEmptyPath() {
         _ = ListingService.Router().urlRequest(for: .sortBy)
     }
-    
-    func arrangeSutWithFailedSearchingService() {
-        sut = .init(searchingService: ProductsSearchingServiceFake(responseType: .failed))
-    }
-    func arrangeSutWithSuccessfulResponseSearchingService() {
-        sut = .init(searchingService: ProductsSearchingServiceFake(responseType: .success))
-    }
 }
