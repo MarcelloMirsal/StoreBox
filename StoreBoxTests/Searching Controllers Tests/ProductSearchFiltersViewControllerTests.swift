@@ -15,7 +15,7 @@ class ProductSearchFiltersViewControllerTests: XCTestCase {
     
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        sut = ProductSearchFiltersViewController.initiate()
+        sut = UINavigationController(rootViewController: ProductSearchFiltersViewController.initiate()).topViewController as? ProductSearchFiltersViewController
         _ = sut.view
     }
     
@@ -61,6 +61,13 @@ class ProductSearchFiltersViewControllerTests: XCTestCase {
         XCTAssertTrue(cell.accessoryType == .checkmark )
     }
     
+    
+    func testSectionAtOutofRangeIndex_ShouldReturnNil() {
+        let indexPath = IndexPath(row: 20, section: 20)
+        
+        XCTAssertNil(sut.section(at: indexPath.section))
+    }
+    
     func testTableViewHeaderView_ShouldReturnNotNilHeaderView() {
         let section = 0
         let headerView = sut.tableView(sut.tableView, viewForHeaderInSection: section) as? TitledTableViewHeaderFooterView
@@ -87,6 +94,8 @@ class ProductSearchFiltersViewControllerTests: XCTestCase {
         sut.filterSectionsManager(didSelectFilter: .init(name: ""))
         sut.filterSectionsManager(didDeselectFilter: .init(name: ""))
         sut.filterSectionsManager(didUpdateSection: .cities)
+        sut.handleSubmitAction()
+        sut.handleFiltersResetAction()
         sut.reload(filter: .init(name: ""))
     }
     

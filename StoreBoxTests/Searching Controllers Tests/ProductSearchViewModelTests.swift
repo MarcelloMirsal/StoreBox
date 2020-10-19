@@ -76,6 +76,7 @@ class ProductSearchViewModelTests: XCTestCase {
         XCTAssertTrue(sut.canLoadMoreData)
     }
     
+    
     func arrangeSutWithFailedSearchingService() {
         let fakeSearchingService = ProductsSearchingServiceFake(responseType: .failed)
         sut = .init(searchingService: fakeSearchingService)

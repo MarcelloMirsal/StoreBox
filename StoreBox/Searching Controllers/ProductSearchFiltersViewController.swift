@@ -20,9 +20,24 @@ class ProductSearchFiltersViewController: UITableViewController {
         return activityIndicator
     }()
     
+    private(set) lazy var submitButton: UIRoundButton = {
+        let button = UIRoundButton(type: .system)
+        button.setTitle("Submit", for: .normal)
+        button.backgroundColor = .systemBlue
+        button.setTitleColor(.white, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(handleSubmitAction), for: .touchUpInside)
+        return button
+    }()
+    
+    private(set) lazy var resetFilterBarButton: UIBarButtonItem = {
+        let button = UIBarButtonItem(title: "Reset", style: .plain, target: self, action: #selector(handleFiltersResetAction))
+        return button
+    }()
+    
     var dataSource: UITableViewDiffableDataSource<Section, SearchFilter>!
     private(set) lazy var viewModel: ProductSearchFiltersViewModel = {
-       let viewModel = ProductSearchFiltersViewModel(filterSectionsManagerDelegate: self)
+        let viewModel = ProductSearchFiltersViewModel(filterSectionsManagerDelegate: self)
         return viewModel
     }()
     
@@ -34,12 +49,26 @@ class ProductSearchFiltersViewController: UITableViewController {
     }
     
     // MARK:- View's life cycle
+    fileprivate func setupSubViews() {
+        if let navigationView = navigationController?.view {
+            navigationView.addSubview(submitButton)
+            NSLayoutConstraint.activate([
+                submitButton.bottomAnchor.constraint(equalTo: navigationView.bottomAnchor, constant: -24),
+                submitButton.leadingAnchor.constraint(equalTo: navigationView.leadingAnchor, constant: 16),
+                submitButton.trailingAnchor.constraint(equalTo: navigationView.trailingAnchor, constant: -16),
+                submitButton.heightAnchor.constraint(equalToConstant: 48)
+            ])
+            navigationItem.rightBarButtonItem = resetFilterBarButton
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
         setupTableViewDataSource()
         viewModel.fetchDynamicFilterSections()
         loadFilterSections()
+        setupSubViews()
     }
     
     // MARK:- UI setup
@@ -47,8 +76,21 @@ class ProductSearchFiltersViewController: UITableViewController {
         tableView.tableHeaderView = activityIndicator
         tableView.backgroundColor = .systemGroupedBackground
         tableView.sectionHeaderHeight = 48
+        tableView.contentInset.bottom = 64
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
         tableView.register(TitledTableViewHeaderFooterView.self, forHeaderFooterViewReuseIdentifier: headerId)
+    }
+    
+    // MARK:- Action Handlers
+    @objc
+    func handleSubmitAction() {
+        print(viewModel.getSearchFiltersParams())
+        dismiss(animated: true)
+    }
+    
+    @objc
+    func handleFiltersResetAction() {
+        viewModel.removeAllSelectedFilters()
     }
     
     // MARK:- Methods
@@ -63,8 +105,7 @@ class ProductSearchFiltersViewController: UITableViewController {
     }
     
     func handleFilterSelection(at indexPath: IndexPath) {
-        guard let section = section(at: indexPath.section) else { return }
-        if let filter = dataSource.itemIdentifier(for: indexPath) {
+        if let section = section(at: indexPath.section), let filter = dataSource.itemIdentifier(for: indexPath) {
             viewModel.filterSectionsManager.select(filter: filter, at: section)
         }
     }
@@ -121,10 +162,15 @@ extension ProductSearchFiltersViewController {
 extension ProductSearchFiltersViewController: FilterSectionsManagerDelegate {
     func filterSectionsManager(didUpdateSection section: FilterSectionsManager.Section) {
         var snapshot = dataSource.snapshot()
-        let searchFilters = viewModel.getSearchFilters(for: section)
-        snapshot.appendItems(searchFilters, toSection: section)
+        
+        if snapshot.itemIdentifiers(inSection: section).isEmpty {
+            let searchFilters = viewModel.getSearchFilters(for: section)
+            snapshot.appendItems(searchFilters, toSection: section)
+            activityIndicator.stopAnimating()
+        } else {
+            snapshot.reloadSections([section])
+        }
         dataSource.apply(snapshot)
-        activityIndicator.stopAnimating()
     }
     
     func filterSectionsManager(didDeselectFilter filter: FilterSectionsManager.SearchFilter) {

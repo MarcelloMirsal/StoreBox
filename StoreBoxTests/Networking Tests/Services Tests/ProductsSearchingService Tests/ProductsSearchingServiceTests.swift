@@ -152,3 +152,14 @@ class ProductsSearchingServiceTests: XCTestCase {
     }
     
 }
+
+// MARK:- ProductSearchFiltersParams Tests
+
+extension ProductsSearchingServiceTests {
+    func testSearchFiltersParamsRawValues_ShouldBeEqual() {
+        let searchFiltersParams = ProductsSearchingService.SearchFiltersParams.self
+        XCTAssertEqual(searchFiltersParams.sort.rawValue, "sort")
+        XCTAssertEqual(searchFiltersParams.subcategories.rawValue, "sub_category_id")
+        XCTAssertEqual(searchFiltersParams.city.rawValue, "city_id")
+    }
+}

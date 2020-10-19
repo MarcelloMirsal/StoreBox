@@ -96,6 +96,12 @@ extension ProductsSearchingService {
             return jsonDecoder
         }()
     }
+    
+    enum SearchFiltersParams: String {
+        case city = "city_id"
+        case subcategories = "sub_category_id"
+        case sort = "sort"
+    }
 }
 
 // MARK:- Helpers Types
@@ -104,6 +110,4 @@ extension ProductsSearchingService {
         let products: [ProductAutocompleteSearchResult]
         enum CodingKeyes: String, CodingKey { case products }
     }
-    
-    
 }

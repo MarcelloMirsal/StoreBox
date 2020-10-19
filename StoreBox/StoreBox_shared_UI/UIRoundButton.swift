@@ -10,15 +10,21 @@ import UIKit
 
 class UIRoundButton: UIButton {
     
-    
-    
     override func awakeFromNib() {
         super.awakeFromNib()
     }
     
-    override func didMoveToSuperview() {
-        super.didMoveToSuperview()
+    
+    fileprivate func setupLayer() {
         layer.cornerRadius = 8
         layer.masksToBounds = true
+    }
+    
+    override func didMoveToSuperview() {
+        super.didMoveToSuperview()
+        titleLabel?.font = UIFont(name: "AvenirNext-Bold", size: UIFont.buttonFontSize)
+        setupLayer()
+        backgroundColor = .systemBlue
+        setTitleColor(.white, for: .normal)
     }
 }

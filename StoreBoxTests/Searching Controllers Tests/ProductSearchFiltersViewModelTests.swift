@@ -11,6 +11,8 @@ import XCTest
 
 class ProductSearchFiltersViewModelTests: XCTestCase {
     
+    typealias SearchFilter = ProductSearchFiltersViewModel.SearchFilter
+
     var sut: ProductSearchFiltersViewModel!
     
     override func setUp() {
@@ -75,12 +77,63 @@ class ProductSearchFiltersViewModelTests: XCTestCase {
         sut.handleFetchingFilterSection(serviceError: nil, list: subcategoriesList)
     }
     
+    func testRemoveAllSelectedFilters_SelectedFiltersShouldBeEmpty() {
+        _ = arrangeSutWithSelectedSearchFilterSections()
+        sut.removeAllSelectedFilters()
+        XCTAssertTrue(sut.filterSectionsManager.selectedFilters.isEmpty)
+    }
+    
     func testFetchDynamicFilterSections() {
         sut.fetchDynamicFilterSections()
     }
     
-    // for ListingService Extension in SUT
-    func testListingServiceRouterURLRequestForNoneDynamicSearchFilters_ShouldReturnEmptyURLRequestEmptyPath() {
+    
+    func testGetSearchFiltersParamsFromEmptySelectedFilters_ShouldReturnEmptyParams() {
+        XCTAssertTrue(sut.getSearchFiltersParams().isEmpty)
+    }
+    
+    func testGetSearchFiltersParamsFromSelectedFilters_SearchParamsFiltersShouldBeEqualToSelectedFilters() {
+        let selectedFilters = arrangeSutWithSelectedSearchFilterSections()
+        
+        let searchParams = sut.getSearchFiltersParams()
+        let searchParamsFilters = searchParams.reduce([], { $0 + $1.value })
+        
+        XCTAssertEqual(Set(searchParamsFilters), Set(selectedFilters))
+    }
+    
+    
+    func testURLRequestRouter_() {
         _ = ListingService.Router().urlRequest(for: .sortBy)
     }
+    
+    
+    func arrangeSutWithSelectedSearchFilterSections() -> [ProductSearchFiltersViewModel.SearchFilter] {
+        var selectedFilters = [SearchFilter]()
+        let sortFilter = SearchFilter(name: "sortFilter", filterValue: "sortFilter")
+        let sortFilters: [SearchFilter] = [ sortFilter ]
+        let sortSection = ProductSearchFiltersViewModel.Section.sortBy
+        
+        let cityFilter1 = SearchFilter(name: "city1", filterValue: "city1")
+        let cityFilter2 = SearchFilter(name: "city1", filterValue: "city1")
+        let cityFilters: [SearchFilter] = [ cityFilter1 , cityFilter2 ]
+        let citySection = ProductSearchFiltersViewModel.Section.cities
+        
+        let subcategoryFilter1 = SearchFilter(name: "sub1", filterValue: "sub1")
+        
+        sut.filterSectionsManager.set(sectionFilters: .init(filters: sortFilters, selectionType: .signle), to: sortSection)
+        sut.filterSectionsManager.set(sectionFilters: .init(filters: cityFilters, selectionType: .multiple), to: citySection)
+        sut.filterSectionsManager.set(sectionFilters: .init(filters: [subcategoryFilter1], selectionType: .multiple), to: .subCategory)
+        
+        
+        // selection
+        sut.filterSectionsManager.select(filter: sortFilter, at: sortSection)
+        sut.filterSectionsManager.select(filter: cityFilter1, at: citySection)
+        sut.filterSectionsManager.select(filter: subcategoryFilter1, at: .subCategory)
+        selectedFilters = [sortFilter , cityFilter1 , subcategoryFilter1]
+        
+        return selectedFilters
+        
+    }
+    
+    
 }

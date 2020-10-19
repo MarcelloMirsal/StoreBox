@@ -10,14 +10,15 @@ import XCTest
 @testable import StoreBox
 
 class FilterSectionsManagerTests: XCTestCase {
-
+    
+    typealias SearchFilter = ProductSearchFiltersViewModel.SearchFilter
     var sut: FilterSectionsManager!
     
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         sut = FilterSectionsManager()
     }
-
+    
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
@@ -38,7 +39,7 @@ class FilterSectionsManagerTests: XCTestCase {
         sut.set(sectionFilters: sectionFilters, to: section)
         
         XCTAssertEqual(sectionFilters, sut.sectionFilters(for: section))
-
+        
     }
     
     func testSectionFiltersForSection_ShouldReturnFiltersEqualToTheSavedFilters() {
@@ -78,7 +79,7 @@ class FilterSectionsManagerTests: XCTestCase {
         
         sut.set(sectionFilters: sectionFilters, to: section)
         
-                
+        
         sut.select(filter: firstFilter, at: section)
         
         XCTAssertTrue(sut.isFilterSelected(filter: firstFilter, in: section))
@@ -93,7 +94,7 @@ class FilterSectionsManagerTests: XCTestCase {
         ], selectionType: .multiple)
         sut.set(sectionFilters: sectionFilters, to: section)
         
-                
+        
         sut.select(filter: firstFilter, at: section)
         sut.select(filter: firstFilter, at: section)
         
@@ -110,7 +111,7 @@ class FilterSectionsManagerTests: XCTestCase {
         ], selectionType: .multiple)
         sut.set(sectionFilters: sectionFilters, to: section)
         
-                
+        
         sut.select(filter: firstFilter, at: section) // selecting 1
         sut.select(filter: secondFilter, at: section) // selecting 2
         sut.select(filter: firstFilter, at: section) // selecting 1 // (deselection)
@@ -150,6 +151,107 @@ class FilterSectionsManagerTests: XCTestCase {
         XCTAssertFalse(isFilterSelected)
     }
     
+    func testDeselectAllFilters_SelectedFiltersShouldBeEmpty() {
+        _ = arrangeSutWithSelectedSearchFilterSections()
+        sut.deselectAllFilters()
+        XCTAssertTrue(sut.selectedFilters.isEmpty)
+    }
+    
+    // MARK:- SUT Delegate Tests
+    func testDelegateDidUpdateSection_ShouldBeCalledAfterSetSectionFilters() {
+        let exp = expectation(description: "testDelegateDidUpdateSection" )
+        let delegateSpy = FilterSectionsManagerDelegateSpy(exp: exp)
+        sut.delegate = delegateSpy
+        
+        sut.set(sectionFilters: .init(filters: [.init(name: "Filter")], selectionType: .signle), to: .cities)
+        
+        XCTAssertTrue(delegateSpy.didUpdateSection ?? false)
+        wait(for: [exp], timeout: 1)
+    }
+    
+    func testDelegateDidSelectFilter_ShouldBeCalledAfterSelectingASelectedFilter() {
+        let exp = expectation(description: "testDelegateDidSelectFilter" )
+        let delegateSpy = FilterSectionsManagerDelegateSpy(exp: exp)
+        let filter = arrangeSutWithSelectedSearchFilterSections().first!
+        sut.deselectAllFilters()
+        sut.delegate = delegateSpy
+        
+        sut.select(filter: filter, at: .cities)
+        
+        XCTAssertTrue(delegateSpy.didSelectFilter ?? false)
+        wait(for: [exp], timeout: 1)
+    }
+    
+    func testDelegateDidDeselectFilter_ShouldBeCalledAfterSelectingASelectedFilter() {
+        let exp = expectation(description: "testDelegateDidDeselectFilter" )
+        exp.isInverted = true
+        let delegateSpy = FilterSectionsManagerDelegateSpy(exp: exp)
+        let _ = arrangeSutWithSelectedSearchFilterSections()
+        sut.delegate = delegateSpy
+        
+        sut.select(filter: .init(name: "x"), at: .sortBy)
+        
+        XCTAssertTrue(delegateSpy.didDeselectFilter ?? false)
+        wait(for: [exp], timeout: 1)
+    }
     
     
+    
+    
+    
+    func arrangeSutWithSelectedSearchFilterSections() -> [ProductSearchFiltersViewModel.SearchFilter] {
+        var selectedFilters = [SearchFilter]()
+        let sortFilter = SearchFilter(name: "sortFilter", filterValue: "sortFilter")
+        let sortFilters: [SearchFilter] = [ sortFilter ]
+        let sortSection = ProductSearchFiltersViewModel.Section.sortBy
+        
+        let cityFilter1 = SearchFilter(name: "city1", filterValue: "city1")
+        let cityFilter2 = SearchFilter(name: "city1", filterValue: "city1")
+        let cityFilters: [SearchFilter] = [ cityFilter1 , cityFilter2 ]
+        let citySection = ProductSearchFiltersViewModel.Section.cities
+        
+        let subcategoryFilter1 = SearchFilter(name: "sub1", filterValue: "sub1")
+        
+        sut.set(sectionFilters: .init(filters: sortFilters, selectionType: .signle), to: sortSection)
+        sut.set(sectionFilters: .init(filters: cityFilters, selectionType: .multiple), to: citySection)
+        sut.set(sectionFilters: .init(filters: [subcategoryFilter1], selectionType: .multiple), to: .subCategory)
+        
+        
+        // selection
+        sut.select(filter: sortFilter, at: sortSection)
+        sut.select(filter: cityFilter1, at: citySection)
+        sut.select(filter: subcategoryFilter1, at: .subCategory)
+        selectedFilters = [sortFilter , cityFilter1 , subcategoryFilter1]
+        
+        return selectedFilters
+        
+    }
+    
+    
+}
+
+
+private class FilterSectionsManagerDelegateSpy: FilterSectionsManagerDelegate {
+    
+    let exp: XCTestExpectation
+    var didUpdateSection: Bool?
+    var didDeselectFilter: Bool?
+    var didSelectFilter: Bool?
+    
+    init(exp: XCTestExpectation) {
+        self.exp = exp
+    }
+    func filterSectionsManager(didDeselectFilter filter: FilterSectionsManager.SearchFilter) {
+        didDeselectFilter = true
+    }
+    
+    func filterSectionsManager(didSelectFilter filter: FilterSectionsManager.SearchFilter) {
+        didSelectFilter = true
+        exp.fulfill()
+    }
+    
+    func filterSectionsManager(didUpdateSection section: FilterSectionsManager.Section) {
+        didUpdateSection = true
+        exp.fulfill()
+    }
 }

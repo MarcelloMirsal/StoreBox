@@ -12,6 +12,8 @@ class ProductSearchFiltersViewModel {
     
     typealias Section = ProductSearchFiltersViewController.Section
     typealias SearchFilter = ProductSearchFiltersViewController.SearchFilter
+    typealias SearchFilterParams = ProductsSearchingService.SearchFiltersParams
+    typealias FilterSectionsSelectionType = FilterSectionsManager.SectionFilters.SelectionType
     
     let filterSectionsManager: FilterSectionsManager
     let listingService = ListingService()
@@ -29,6 +31,10 @@ class ProductSearchFiltersViewModel {
     
     func isFilterSelected(filter: SearchFilter, in section: Section) -> Bool {
         return filterSectionsManager.isFilterSelected(filter: filter, in: section)
+    }
+    
+    func removeAllSelectedFilters() {
+        filterSectionsManager.deselectAllFilters()
     }
 }
 
@@ -64,6 +70,24 @@ extension ProductSearchFiltersViewModel {
             filterSectionsManager.set(sectionFilters: sectionFilters, to: .cities)
         }
     }
+    
+    func getSearchFiltersParams() -> [SearchFilterParams: [SearchFilter] ] {
+        let filterSections = filterSectionsManager.filterSections
+        var searchParams: [SearchFilterParams : [SearchFilter] ] = [:]
+        
+        for selectedSection in filterSectionsManager.selectedFilters.keys {
+            let sectionSelectionType = filterSections[selectedSection]!.selectionType
+            let selectedFilters = filterSectionsManager.selectedFilters(at: selectedSection)
+            let searchFilterParam = SearchFilterParams(section: selectedSection)
+            switch sectionSelectionType {
+                case .signle, .multiple :
+                    searchParams[searchFilterParam] = selectedFilters
+            }
+        }
+        return searchParams
+    }
+    
+    
 }
 
 extension ListingService.Router {
@@ -75,6 +99,19 @@ extension ListingService.Router {
                 return self.citiesNetworkRequest.urlRequest!
             default:
                 return NetworkRequest(path: "").urlRequest!
+        }
+    }
+}
+
+fileprivate extension ProductsSearchingService.SearchFiltersParams {
+    init(section: ProductSearchFiltersViewModel.Section) {
+        switch section {
+            case .sortBy:
+                self = .sort
+            case .cities:
+                self = .city
+            case .subCategory:
+                self = .subcategories
         }
     }
 }

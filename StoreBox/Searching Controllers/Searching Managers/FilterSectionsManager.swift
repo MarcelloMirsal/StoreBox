@@ -19,7 +19,7 @@ protocol FilterSectionsManagerDataSource: class {
 }
 
 
-/// Managing search filters sections CRUD & selection, allowing a section to select a single or multiple filters and keep track of them
+/// Managing search filter sections addition  & selection, allowing a section to select a single or multiple filters and keep track of them
 class FilterSectionsManager {
     
     typealias Section = ProductSearchFiltersViewController.Section
@@ -28,7 +28,7 @@ class FilterSectionsManager {
     typealias SelectedSearchFilters = [Section : Set<SearchFilter> ]
     
     private(set) var filterSections: SearchFilterSection = [:]
-    private var selectedFilters: SelectedSearchFilters = [:]
+    private(set) var selectedFilters: SelectedSearchFilters = [:]
     weak var delegate: FilterSectionsManagerDelegate?
     
     var sections: [Section] {
@@ -59,6 +59,11 @@ class FilterSectionsManager {
         return filterSections[section]
     }
     
+    func selectedFilters(at section: Section) -> [SearchFilter] {
+        guard let filtersSet = selectedFilters[section] else { return [] }
+        return Array(filtersSet)
+    }
+    
     func isFilterSelected(filter: SearchFilter, in section: Section) -> Bool {
         guard selectedFilters[section]?.contains(filter) == true else {
             return false
@@ -76,6 +81,12 @@ class FilterSectionsManager {
             case .multiple:
                 handleMultipleSelection(selectedFilter: filter, at: section)
         }
+    }
+    
+    func deselectAllFilters() {
+        let selectedSections = selectedFilters.keys
+        selectedFilters = [:]
+        selectedSections.forEach({ delegate?.filterSectionsManager(didUpdateSection: $0) })
     }
     
     private func handleSingleSelection(selectedFilter: SearchFilter, at section: Section) {
