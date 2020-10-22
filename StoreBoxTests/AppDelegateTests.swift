@@ -16,6 +16,7 @@ class SceneDelegateTests: XCTestCase {
         sut = UIApplication.shared.connectedScenes.first!.delegate as? SceneDelegate
     }
     override func tearDown() {
+        UserAuthService.token = nil
     }
     
     func testSutWindowRootViewController_ShouldBeEqualToUserLoginViewControllerWhenTokenIsNil() {
@@ -34,6 +35,7 @@ class SceneDelegateTests: XCTestCase {
         sut.sceneDidBecomeActive(UIApplication.shared.connectedScenes.first!)
         UserAuthService.token = savedToken
         XCTAssertTrue(sut.window?.rootViewController is UITabBarController)
+        UserAuthService.token = nil
     }
     
     

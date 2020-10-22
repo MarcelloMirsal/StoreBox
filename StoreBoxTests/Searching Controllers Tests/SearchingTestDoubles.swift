@@ -30,22 +30,29 @@ class AutocompleteSearchViewModelDelegateSpy: AutocompleteSearchViewModelDelegat
 
 
 class ProductSearchViewModelDelegateSpy: ProductSearchViewModelDelegate {
-    let exp: XCTestExpectation
+    var exp: XCTestExpectation!
     
     init(exp: XCTestExpectation) {
         self.exp = exp
     }
     var isSearchFailed: Bool?
     var isSearchSuccess: Bool?
+    var isSearchDidBegin: Bool?
     
     func searchRequestFailed(message: String) {
         isSearchFailed = true
-        exp.fulfill()
+        exp?.fulfill()
     }
     
     func searchRequestSuccess() {
         isSearchSuccess = true
+        exp?.fulfill()
+    }
+    
+    func searchRequestDidBegin() {
+        isSearchDidBegin = true
         exp.fulfill()
+        exp = nil
     }
     
     

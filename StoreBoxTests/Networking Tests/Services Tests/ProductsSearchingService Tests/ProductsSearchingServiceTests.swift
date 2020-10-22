@@ -31,23 +31,22 @@ class ProductsSearchingServiceTests: XCTestCase {
     func testGetAutocompleteSearchRequest_SearchParamShouldBeEqualToPassedSearchQuery() {
         let searchQuery = "Product"
         let searchRequest = sut.getAutocompleteSearchRequest(searchQuery: searchQuery)
-        XCTAssertEqual(searchRequest.params?["search"], searchQuery)
+        guard let searchRequestQuery = searchRequest.params?.first?.value as? String else { XCTFail() ; return }
+        XCTAssertEqual(searchRequestQuery, searchQuery)
     }
     
     func testGetProductSearchRequest_SearchParamValueShouldBeEqualToPassedSearchQuery() {
         let searchQuery = "Product"
         let searchRequest = sut.getProductSearchRequest(searchQuery: searchQuery)
-        XCTAssertEqual(searchRequest.params?.first!.value, searchQuery)
+        guard let searchRequestQuery = searchRequest.params?.first?.value as? String else { XCTFail() ; return }
+        XCTAssertEqual(searchRequestQuery, searchQuery)
     }
     
     func testGetProductSearchRequestWithParams_SearchRequestParamsShouldContainAllSearchParams() {
         let searchQuery = "Product"
         let searchParams = ["page" : "1"]
         let searchRequest = sut.getProductSearchRequest(searchQuery: searchQuery,params: searchParams)
-        let isContainSearchParams = searchRequest.params?.contains(where: { (pair) -> Bool in
-            pair.key == searchParams.first?.key && pair.value == searchParams.first?.value
-        })
-        
+        let isContainSearchParams = searchRequest.params?.contains(where: {$0.key == searchParams.first!.key})
         XCTAssertTrue(isContainSearchParams ?? false)
     }
     
@@ -69,12 +68,12 @@ class ProductsSearchingServiceTests: XCTestCase {
         arrangeSutWithBadJSONResponse()
         let exp = expectation(description: "testAutocompleteSearchWithBadJSON")
         let searchQuery = "Product"
-
+        
         sut.autocompleteSearch(query: searchQuery) { (error, searchResults) in
             XCTAssertEqual(error, NetworkServiceError.jsonDecodingFailure )
             exp.fulfill()
         }
-
+        
         wait(for: [exp], timeout: 5)
     }
     
@@ -96,39 +95,39 @@ class ProductsSearchingServiceTests: XCTestCase {
         arrangeSutWithBadNetworkRequest()
         let exp = expectation(description: "testProductSearchWithBadNetwork")
         let searchQuery = "Product"
-
+        
         sut.productSearch(query: searchQuery) { (error, searchResults) in
             XCTAssertEqual(error, NetworkServiceError.badNetworkRequest(.unSpecified) )
             exp.fulfill()
         }
-
+        
         wait(for: [exp], timeout: 1)
     }
-
+    
     func testProductSearchWithBadJSON_ErrorShouldBeJSONDecodingFailure() {
         arrangeSutWithBadJSONResponse()
         let exp = expectation(description: "testProductSearchWithBadJSON")
         let searchQuery = "Product"
-
+        
         sut.productSearch(query: searchQuery) { (error, searchResults) in
             XCTAssertEqual(error, NetworkServiceError.jsonDecodingFailure )
             exp.fulfill()
         }
-
+        
         wait(for: [exp], timeout: 1)
     }
-
+    
     func testProductSearchWithSuccessfulResponse_SearchResultsShouldBeNotNil() {
         arrangeSutWithLocalSuccessfulResponse()
         let exp = expectation(description: "testProductSearchWithSuccessfulResponse")
         let searchQuery = "Product"
-
+        
         sut.productSearch(query: searchQuery) { (error, productsList) in
             XCTAssertNil(error)
             XCTAssertNotNil(productsList)
             exp.fulfill()
         }
-
+        
         wait(for: [exp], timeout: 1)
     }
     
@@ -161,5 +160,6 @@ extension ProductsSearchingServiceTests {
         XCTAssertEqual(searchFiltersParams.sort.rawValue, "sort")
         XCTAssertEqual(searchFiltersParams.subcategories.rawValue, "sub_category_id")
         XCTAssertEqual(searchFiltersParams.city.rawValue, "city_id")
+        XCTAssertEqual(searchFiltersParams.direction.rawValue, "direction")
     }
 }

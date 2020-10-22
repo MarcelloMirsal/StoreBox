@@ -8,8 +8,11 @@
 
 import Foundation
 
+protocol ProductSearchFiltersViewModelDelegate: class {
+    func productSearchFiltersViewModel(didSubmitFilters filters: [String : Any] )
+}
+
 class ProductSearchFiltersViewModel {
-    
     typealias Section = ProductSearchFiltersViewController.Section
     typealias SearchFilter = ProductSearchFiltersViewController.SearchFilter
     typealias SearchFilterParams = ProductsSearchingService.SearchFiltersParams
@@ -19,7 +22,7 @@ class ProductSearchFiltersViewModel {
     let listingService = ListingService()
     var sections: [Section] { return filterSectionsManager.sections }
     let sortedSections: [Section] = [.sortBy , .cities , .subCategory]
-    
+    weak var searchFiltersSubmitionDelegate: ProductSearchFiltersViewModelDelegate?
     
     init(filterSectionsManagerDelegate: FilterSectionsManagerDelegate? = nil) {
         self.filterSectionsManager = .init(delegate: filterSectionsManagerDelegate)
@@ -35,6 +38,37 @@ class ProductSearchFiltersViewModel {
     
     func removeAllSelectedFilters() {
         filterSectionsManager.deselectAllFilters()
+    }
+    
+    func getSearchFiltersParams() -> [String: Any] {
+        var searchParams: [String: Any ] = [:]
+        
+        for selectedSection in filterSectionsManager.selectedFilters.keys {
+            let selectedFilters = filterSectionsManager.selectedFilters(at: selectedSection)
+            let searchFilterParamKey = SearchFilterParams(section: selectedSection).rawValue
+            searchParams[searchFilterParamKey] = extractFiltersParams(from: selectedFilters)
+            let associatedFilter = extractAssociatedFilters(from: selectedFilters)
+            searchParams.merge(associatedFilter, uniquingKeysWith: { _,rhs in rhs})
+        }
+        return searchParams
+    }
+    
+    func extractFiltersParams(from filters: [SearchFilter]) -> [String] {
+        return filters.map({$0.filterValue})
+    }
+    
+    
+    func extractAssociatedFilters(from filters: [SearchFilter]) -> [String : String] {
+        return filters.reduce([String:String]()) { (results, filter) -> [String : String] in
+            // the dictionary will avoid any duplicated associated filter key, duplicated keyed means two CompositeSearchFilter shared the same associated filter key
+            results.merging(filter.assotiatedFilters) { (lhs, rhs) -> String in
+                return rhs
+            }
+        }
+    }
+    
+    func submitSearchFiltersParams() {
+        searchFiltersSubmitionDelegate?.productSearchFiltersViewModel(didSubmitFilters: getSearchFiltersParams())
     }
 }
 
@@ -71,24 +105,10 @@ extension ProductSearchFiltersViewModel {
         }
     }
     
-    func getSearchFiltersParams() -> [SearchFilterParams: [SearchFilter] ] {
-        let filterSections = filterSectionsManager.filterSections
-        var searchParams: [SearchFilterParams : [SearchFilter] ] = [:]
-        
-        for selectedSection in filterSectionsManager.selectedFilters.keys {
-            let sectionSelectionType = filterSections[selectedSection]!.selectionType
-            let selectedFilters = filterSectionsManager.selectedFilters(at: selectedSection)
-            let searchFilterParam = SearchFilterParams(section: selectedSection)
-            switch sectionSelectionType {
-                case .signle, .multiple :
-                    searchParams[searchFilterParam] = selectedFilters
-            }
-        }
-        return searchParams
-    }
-    
     
 }
+
+// MARK:- Default Search Filters
 
 extension ListingService.Router {
     func urlRequest(for section: ProductSearchFiltersViewModel.Section) -> URLRequest {
@@ -103,7 +123,7 @@ extension ListingService.Router {
     }
 }
 
-fileprivate extension ProductsSearchingService.SearchFiltersParams {
+ extension ProductsSearchingService.SearchFiltersParams {
     init(section: ProductSearchFiltersViewModel.Section) {
         switch section {
             case .sortBy:

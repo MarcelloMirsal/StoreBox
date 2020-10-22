@@ -42,7 +42,7 @@ class ProductsSearchingServiceFake: ProductsSearchingServiceProtocol {
         
     }
     
-    func productSearch(query: String, params: [String : String] = [:], completion: @escaping ProductsSearchingService.ProductSearchResponse) {
+    func productSearch(query: String, params: [String : Any] = [:], completion: @escaping ProductsSearchingService.ProductSearchResponse) {
         switch responseType {
             case .failed:
                 completion(.noDataFound, nil)

@@ -14,3 +14,4 @@ protocol SearchFilterConvertible {
 protocol SearchFiltersConvertible {
     func asSearchFilters() -> [ProductSearchFiltersViewController.SearchFilter]
 }
+

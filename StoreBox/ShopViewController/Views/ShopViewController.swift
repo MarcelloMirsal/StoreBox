@@ -29,15 +29,11 @@ final class ShopViewController: UITableViewController {
     
     
     func handleProductsSearchPresentation() {
-//        let autocompleteSearchViewController = UIStoryboard(name: "AutocompleteSearchViewController").getInitialViewController(of: AutocompleteSearchViewController.self)
-//        let nv = UINavigationController(rootViewController: autocompleteSearchViewController)
-//        nv.modalPresentationStyle = .fullScreen
-//        autocompleteSearchViewController.mainNavigationController = navigationController
-//        present(nv, animated: false)
-        
-        let x = ProductSearchViewController.initiate(for: " ")
-        navigationController?.pushViewController(x, animated: true)
-        
+        let autocompleteSearchViewController = UIStoryboard(name: "AutocompleteSearchViewController").getInitialViewController(of: AutocompleteSearchViewController.self)
+        let nv = UINavigationController(rootViewController: autocompleteSearchViewController)
+        nv.modalPresentationStyle = .fullScreen
+        autocompleteSearchViewController.mainNavigationController = navigationController
+        present(nv, animated: false)
     }
     
     // MARK:- View LifeCycle

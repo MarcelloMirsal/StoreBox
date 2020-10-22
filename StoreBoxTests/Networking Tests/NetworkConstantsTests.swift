@@ -61,6 +61,7 @@ class NetworkRequestTests: XCTestCase {
         let url = URL(string: "https://store-box-api.herokuapp.com/v1/path?params=data" )!
         let configuredURL = sut.getConfiguredURL()
         print(configuredURL.absoluteString)
+        
         XCTAssertEqual(url, configuredURL)
     }
     
@@ -84,6 +85,32 @@ class NetworkRequestTests: XCTestCase {
     
     func testSutAsURL_ShouldBeEqualToSetupURLReqest() {
         XCTAssertEqual(try? sut.asURLRequest(), sut.setupURLRequest(from: sut.getConfiguredURL()))
+    }
+    
+    func testSetupURLParamValues_ShouldReturnStringWithSepartorForMultipleValues() {
+        let filters = ["1","2","3"]
+        let filters2 = ["99"]
+        let filters3 = ["X"]
+        let filters4 = "Filter"
+        let filters5 = 100
+        let filters6 = 100.123456
+        let filters7 = [1 ,2 ,3]
+        
+        var filterStringValue = sut.setupURL(paramValue: filters)
+        XCTAssertEqual(filterStringValue, "1,2,3")
+        filterStringValue = sut.setupURL(paramValue: filters2)
+        XCTAssertEqual(filterStringValue, "99")
+        filterStringValue = sut.setupURL(paramValue: filters3)
+        XCTAssertEqual(filterStringValue, "X")
+        filterStringValue = sut.setupURL(paramValue: filters4)
+        XCTAssertEqual(filterStringValue, filters4)
+        filterStringValue = sut.setupURL(paramValue: filters5)
+        XCTAssertEqual(filterStringValue, "\(filters5)")
+        filterStringValue = sut.setupURL(paramValue: filters6)
+        XCTAssertEqual(filterStringValue, "\(filters6)")
+        filterStringValue = sut.setupURL(paramValue: filters7)
+        XCTAssertEqual(filterStringValue, "\(filters7)")
+        
     }
     
     func reducedDict(_ dict: [String: Any] ) -> String {

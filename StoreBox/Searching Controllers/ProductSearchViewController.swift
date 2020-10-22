@@ -29,6 +29,13 @@ class ProductSearchViewController: UICollectionViewController, UICollectionViewD
         return viewModel
     }()
     
+    private(set) lazy var productSearchFilterNavigationController: UINavigationController = {
+        let productSearchFilterViewController = ProductSearchFiltersViewController.initiate()
+        let nvController = UINavigationController(rootViewController: productSearchFilterViewController)
+        productSearchFilterViewController.viewModel.searchFiltersSubmitionDelegate = viewModel
+        return nvController
+    }()
+    
     
     // MARK: Factory
     static func initiate(for searchQuery: String) -> ProductSearchViewController {
@@ -44,20 +51,20 @@ class ProductSearchViewController: UICollectionViewController, UICollectionViewD
         navigationItem.largeTitleDisplayMode = .never
         setupSubViews()
         setupCollectionView()
+        setupCollectionViewDataSource()
         setupSearchFilterBarButton()
         requestProductSearch()
     }
     // MARK:- Actions
     @objc
     func handleFilterAction() {
-        let productSearchFilterViewController = ProductSearchFiltersViewController.initiate()
-        let nvController = UINavigationController(rootViewController: productSearchFilterViewController)
-        present(nvController, animated: true)
+        present(productSearchFilterNavigationController, animated: true)
     }
     
     func requestProductSearch() {
-//        guard let productName = title else { return }
-//        viewModel.productSearch(productName: productName)
+        loadingActivityIndicator.startAnimating()
+        guard let productName = title else { return }
+        viewModel.productSearch(productName: productName)
     }
     
     // MARK:- UI setup
@@ -76,7 +83,6 @@ class ProductSearchViewController: UICollectionViewController, UICollectionViewD
     private func setupCollectionView() {
         collectionView.backgroundColor = .systemGray6
         setupCollectionViewRegistration()
-        setupCollectionViewDataSource()
         collectionView.setCollectionViewLayout(getCollectionViewLayout(), animated: false)
     }
     
@@ -111,10 +117,6 @@ class ProductSearchViewController: UICollectionViewController, UICollectionViewD
             loadingActivityIndicator.centerXAnchor.constraint(equalTo: collectionView.centerXAnchor)
         ])
     }
-    
-    
-    
-    
 }
 
 // MARK:- CollectionView dataSource configuration
@@ -135,12 +137,14 @@ extension ProductSearchViewController {
     
     @discardableResult
      func updateDataSourceSnapshot() -> NSDiffableDataSourceSnapshot<Section, Product>  {
-        var snapshot = NSDiffableDataSourceSnapshot<Section, Product>()
-        snapshot.appendSections([.main])
-        snapshot.appendItems(viewModel.productsList.products, toSection: .main)
-        dataSource.apply(snapshot)
-        return snapshot
+        var freshSnapshot = NSDiffableDataSourceSnapshot<Section, Product>()
+        freshSnapshot.appendSections([.main])
+        freshSnapshot.appendItems(viewModel.productsList.products, toSection: .main)
+        dataSource.apply(freshSnapshot)
+        return freshSnapshot
     }
+    
+    
     
 }
 
@@ -155,13 +159,20 @@ extension ProductSearchViewController {
         let loadingFooterView = view as? UICollectionViewLoadingFooter
         loadingFooterView?.loadingActivityIndicator.isHidden = !viewModel.canLoadMoreData
         viewModel.loadMoreData(productName: title! )
-        print("load More")
     }
     
 }
 
 // MARK:- ViewModel Delegate Implementation
 extension ProductSearchViewController: ProductSearchViewModelDelegate {
+    
+    func searchRequestDidBegin() {
+        loadingActivityIndicator.startAnimating()
+        var snapshot = dataSource.snapshot()
+        snapshot.deleteAllItems()
+        dataSource.apply(snapshot)
+    }
+    
     func searchRequestFailed(message: String) {
         let alertController = UIAlertController.makeAlert(message, title: "Error")
         present(alertController, animated: true)

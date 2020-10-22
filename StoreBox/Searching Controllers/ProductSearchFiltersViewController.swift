@@ -8,9 +8,7 @@
 
 import UIKit
 
-
 class ProductSearchFiltersViewController: UITableViewController {
-    
     let cellId = "cellId"
     let headerId = "headerId"
     let activityIndicator: UIActivityIndicatorView = {
@@ -84,7 +82,7 @@ class ProductSearchFiltersViewController: UITableViewController {
     // MARK:- Action Handlers
     @objc
     func handleSubmitAction() {
-        print(viewModel.getSearchFiltersParams())
+        viewModel.submitSearchFiltersParams()
         dismiss(animated: true)
     }
     
@@ -192,14 +190,30 @@ extension ProductSearchFiltersViewController {
         case subCategory = "Category"
     }
     
-    struct SearchFilter: Hashable {
+    struct SearchFilter: Hashable, CompositeSearchFilterProtocol {
+        
         let uuid = UUID()
         let name: String
         var filterValue: String
+        let assotiatedFilters: [String : String]
         
-        init(name: String, filterValue: String = "") {
+        init(name: String, filterValue: String = "", assotiatedFilters: [String : String] = [:] ) {
             self.name = name
             self.filterValue = filterValue
+            self.assotiatedFilters = assotiatedFilters
         }
     }
+}
+
+
+protocol SearchFilterProtocol {
+    /// the main search filter parameter value, like sorting , categories and cities (standalone filter)
+    var filterValue: String { get set }
+}
+
+
+/// a Search filter that composite from multiple filters
+protocol CompositeSearchFilterProtocol: SearchFilterProtocol{
+    /// the secondary search filters used to specify presentation direction like ascending & descending
+    var assotiatedFilters: [String : String] { get }
 }

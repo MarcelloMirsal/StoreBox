@@ -26,6 +26,7 @@ class FilterSectionsManager {
     typealias SearchFilter = ProductSearchFiltersViewController.SearchFilter
     typealias SearchFilterSection =  [ Section : SectionFilters ]
     typealias SelectedSearchFilters = [Section : Set<SearchFilter> ]
+    typealias AssociatedFilters = ProductsSearchingService.AssociatedSearchFiltersParams
     
     private(set) var filterSections: SearchFilterSection = [:]
     private(set) var selectedFilters: SelectedSearchFilters = [:]
@@ -43,9 +44,10 @@ class FilterSectionsManager {
     private func getDefaultFilterSection() -> SearchFilterSection  {
         return [
             .sortBy : .init(filters: [
-                .init(name: "Price: low to hight") ,
-                .init(name: "Price: hight to low"),
-                .init(name: "Newest")
+                .init(name: "Price: low to hight", filterValue: "price", assotiatedFilters: AssociatedFilters.ascendingSorting() ) ,
+                .init(name: "Price: hight to low", filterValue: "price", assotiatedFilters: AssociatedFilters.descendingSorting() ),
+                .init(name: "Newest", filterValue: "created_at", assotiatedFilters: AssociatedFilters.descendingSorting() ),
+                .init(name: "Older", filterValue: "created_at", assotiatedFilters: AssociatedFilters.ascendingSorting())
             ], selectionType: .signle)
         ]
     }
@@ -122,6 +124,7 @@ extension FilterSectionsManager {
             case multiple
         }
     }
+    
+    
 }
-
 

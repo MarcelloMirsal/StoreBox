@@ -16,10 +16,11 @@ protocol ProductsSearchingServiceProtocol {
     
     func autocompleteSearch(query: String, completion: @escaping AutocompleteSearchResponse)
     
-    func productSearch(query: String, params: [String : String]  , completion: @escaping ProductSearchResponse)
+    func productSearch(query: String, params: [String: Any]  , completion: @escaping ProductSearchResponse)
 }
 
 class ProductsSearchingService: ProductsSearchingServiceProtocol {
+    
     
     let urlRequest: NetworkRequestProtocol
     let networkManager = NetworkManagerFacade()
@@ -52,8 +53,9 @@ class ProductsSearchingService: ProductsSearchingServiceProtocol {
         }
     }
     
-    func productSearch(query: String, params: [String : String] = [:] , completion: @escaping ProductsSearchingService.ProductSearchResponse) {
+    func productSearch(query: String, params: [String : Any ] = [:] , completion: @escaping ProductsSearchingService.ProductSearchResponse) {
         let searchRequest = getProductSearchRequest(searchQuery: query, params: params).urlRequest!
+        print(searchRequest)
         networkManager.json(searchRequest) { (requestError, data) in
             
             if let error = requestError {
@@ -77,11 +79,11 @@ class ProductsSearchingService: ProductsSearchingServiceProtocol {
         return searchRequest
     }
     
-    func getProductSearchRequest(searchQuery: String, params: [String : String] = [:] ) -> NetworkRequestProtocol {
+    func getProductSearchRequest(searchQuery: String, params: [String : Any ] = [:] ) -> NetworkRequestProtocol {
         var searchRequest = urlRequest
         var searchParams = params
         searchParams["search"] = searchQuery
-        searchRequest.set(params: searchParams)
+        searchRequest.set(params: searchParams )
         return searchRequest
     }
     
@@ -100,8 +102,25 @@ extension ProductsSearchingService {
     enum SearchFiltersParams: String {
         case city = "city_id"
         case subcategories = "sub_category_id"
-        case sort = "sort"
+        case sort
+        case direction
     }
+    
+    
+    enum AssociatedSearchFiltersParams: String {
+        case ascending = "asc"
+        case descending = "desc"
+        
+        static func ascendingSorting() -> [String : String] {
+            [SearchFiltersParams.direction.rawValue : AssociatedSearchFiltersParams.ascending.rawValue]
+        }
+        
+        static func descendingSorting() -> [String : String] {
+            [SearchFiltersParams.direction.rawValue : AssociatedSearchFiltersParams.descending.rawValue]
+        }
+    }
+    
+    
 }
 
 // MARK:- Helpers Types
