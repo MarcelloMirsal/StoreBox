@@ -8,10 +8,7 @@
 
 import Foundation
 @testable import StoreBox
-
 class ProductsSearchingServiceFake: ProductsSearchingServiceProtocol {
-    
-    
     
     enum FakeResponseType {
         case failed
@@ -36,8 +33,8 @@ class ProductsSearchingServiceFake: ProductsSearchingServiceProtocol {
             case .failed:
                 completion(.noDataFound, nil)
             case .success:
-                let searchResult: ProductAutocompleteSearchResult = .init(name: "name", subCategoryName: "category")
-                completion(nil , [searchResult] )
+                let searchResults: ProductsSearchingService.AutocompleteSearchResultListDTO = .init(products: [ .init(name: "1", subcategoryName: "name")])
+                completion(nil , searchResults )
         }
         
     }

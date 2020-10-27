@@ -15,41 +15,8 @@ class ProductsSearchingServiceTests: XCTestCase {
     let tokenId = "TokenId"
     
     override func setUp() {
-        sut = ProductsSearchingService(authToken: tokenId)
+        sut = ProductsSearchingService()
     }
-    
-    func testSutInit_urlRequestPathShouldBeEqualToPath() {
-        let path = "/products"
-        XCTAssertEqual(sut.urlRequest.path, path)
-    }
-    
-    func testSutInit_urlRequestAuthorizationHeaderShouldBeEqual() {
-        XCTAssertEqual(sut.urlRequest.headers!.first!.value, tokenId)
-    }
-    
-    
-    func testGetAutocompleteSearchRequest_SearchParamShouldBeEqualToPassedSearchQuery() {
-        let searchQuery = "Product"
-        let searchRequest = sut.getAutocompleteSearchRequest(searchQuery: searchQuery)
-        guard let searchRequestQuery = searchRequest.params?.first?.value as? String else { XCTFail() ; return }
-        XCTAssertEqual(searchRequestQuery, searchQuery)
-    }
-    
-    func testGetProductSearchRequest_SearchParamValueShouldBeEqualToPassedSearchQuery() {
-        let searchQuery = "Product"
-        let searchRequest = sut.getProductSearchRequest(searchQuery: searchQuery)
-        guard let searchRequestQuery = searchRequest.params?.first?.value as? String else { XCTFail() ; return }
-        XCTAssertEqual(searchRequestQuery, searchQuery)
-    }
-    
-    func testGetProductSearchRequestWithParams_SearchRequestParamsShouldContainAllSearchParams() {
-        let searchQuery = "Product"
-        let searchParams = ["page" : "1"]
-        let searchRequest = sut.getProductSearchRequest(searchQuery: searchQuery,params: searchParams)
-        let isContainSearchParams = searchRequest.params?.contains(where: {$0.key == searchParams.first!.key})
-        XCTAssertTrue(isContainSearchParams ?? false)
-    }
-    
     
     func testAutocompleteSearchWithBadNetwork_ErrorShouldBeBadNetworkRequest() {
         arrangeSutWithBadNetworkRequest()
@@ -78,7 +45,7 @@ class ProductsSearchingServiceTests: XCTestCase {
     }
     
     func testAutocompleteSearchWithSuccessfulResponse_SearchResultsShouldBeNotNil() {
-        arrangeSutWithLocalSuccessfulResponse()
+        arrangeSutWithLocalSuccessfulAutocompleteResponse()
         let exp = expectation(description: "testAutocompleteSearchWithSuccessfulResponse")
         let searchQuery = "Product"
         
@@ -108,12 +75,12 @@ class ProductsSearchingServiceTests: XCTestCase {
         arrangeSutWithBadJSONResponse()
         let exp = expectation(description: "testProductSearchWithBadJSON")
         let searchQuery = "Product"
-        
+
         sut.productSearch(query: searchQuery) { (error, searchResults) in
             XCTAssertEqual(error, NetworkServiceError.jsonDecodingFailure )
             exp.fulfill()
         }
-        
+
         wait(for: [exp], timeout: 1)
     }
     
@@ -121,39 +88,61 @@ class ProductsSearchingServiceTests: XCTestCase {
         arrangeSutWithLocalSuccessfulResponse()
         let exp = expectation(description: "testProductSearchWithSuccessfulResponse")
         let searchQuery = "Product"
-        
+
         sut.productSearch(query: searchQuery) { (error, productsList) in
             XCTAssertNil(error)
             XCTAssertNotNil(productsList)
             exp.fulfill()
         }
-        
+
         wait(for: [exp], timeout: 1)
     }
     
     func arrangeSutWithLocalSuccessfulResponse() {
         let jsonResponsesFilePath = Bundle(for: ProductsSearchingServiceTests.self).path(forResource: "ProductsSearchingServiceResponses", ofType: "json")!
         
-        sut = ProductsSearchingService(authToken: tokenId, urlRequest: NetworkRequestFake(path: jsonResponsesFilePath))
+        let fakeRequest = NetworkRequestFake(path: jsonResponsesFilePath)
+        let fakeRouter = ProductsSearchingService.Router(searchRequest: fakeRequest, autocompleteSearchRequest: NetworkRequestFake() )
+        sut = ProductsSearchingService(router: fakeRouter)
+    }
+    
+    func arrangeSutWithLocalSuccessfulAutocompleteResponse() {
+        let jsonResponsesFilePath = Bundle(for: ProductsSearchingServiceTests.self).path(forResource: "AutocompleteSearchSuccessfulResponse", ofType: "json")!
+
+        let fakeRequest = NetworkRequestFake(path: jsonResponsesFilePath)
+        let fakeRouter = ProductsSearchingService.Router(searchRequest: NetworkRequestFake() , autocompleteSearchRequest: fakeRequest )
+        sut = ProductsSearchingService(router: fakeRouter)
     }
     
     func arrangeSutWithBadJSONResponse() {
         let jsonResponsesFilePath = Bundle(for: ProductsSearchingServiceTests.self).path(forResource: "ProductsSearchingServiceBadJSON", ofType: "json")!
-        
-        sut = ProductsSearchingService(authToken: "TokenId", urlRequest: NetworkRequestFake(path: jsonResponsesFilePath))
+
+        let fakeRequest = NetworkRequestFake(path: jsonResponsesFilePath)
+        let fakeRouter = ProductsSearchingService.Router(searchRequest: fakeRequest, autocompleteSearchRequest: fakeRequest )
+        sut = ProductsSearchingService(router: fakeRouter)
     }
     
     func arrangeSutWithBadNetworkRequest() {
-        let jsonResponsesFilePath = Bundle(for: ProductsSearchingServiceTests.self).path(forResource: "ProductsSearchingServiceResponses", ofType: "json")!
-        
-        sut = ProductsSearchingService(authToken: tokenId, urlRequest: NetworkRequestFake(path: jsonResponsesFilePath + "BAD" ))
+        let fakeRequest = NetworkRequestFake(path: "/BAD")
         // BAD is the extra value in url which is cause a network error
+        let fakeRouter = ProductsSearchingService.Router(searchRequest: fakeRequest, autocompleteSearchRequest: fakeRequest )
+        sut = ProductsSearchingService(router: fakeRouter)
     }
     
 }
 
-// MARK:- ProductSearchFiltersParams Tests
 
+// MARK:- Service paths tests
+extension ProductsSearchingServiceTests {
+    func testServicePaths_ShouldBeEqualToLiteralValues() {
+        let searchPath = ProductsSearchingService.Paths.searchRequestPath.rawValue
+        let autocompleteSearchPath = ProductsSearchingService.Paths.autocompleteRequest.rawValue
+        XCTAssertEqual(searchPath, "/products")
+        XCTAssertEqual(autocompleteSearchPath, "/products/auto_complete")
+    }
+}
+
+// MARK:- ProductSearchFiltersParams Tests
 extension ProductsSearchingServiceTests {
     func testSearchFiltersParamsRawValues_ShouldBeEqual() {
         let searchFiltersParams = ProductsSearchingService.SearchFiltersParams.self
@@ -161,5 +150,6 @@ extension ProductsSearchingServiceTests {
         XCTAssertEqual(searchFiltersParams.subcategories.rawValue, "sub_category_id")
         XCTAssertEqual(searchFiltersParams.city.rawValue, "city_id")
         XCTAssertEqual(searchFiltersParams.direction.rawValue, "direction")
+        XCTAssertEqual(searchFiltersParams.search.rawValue, "search")
     }
 }

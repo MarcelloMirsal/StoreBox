@@ -14,13 +14,15 @@ class AutocompleteSearchViewControllerTests: XCTestCase {
     var sut: AutocompleteSearchViewController!
     
     override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-        sut = UIStoryboard(name: "AutocompleteSearchViewController").getInitialViewController(of: AutocompleteSearchViewController.self)
+        sut = AutocompleteSearchViewController.initiate(mainNavigationController: nil)
         _ = sut.view
     }
-
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    
+    func testStaticInitiate_ShouldReturnSutWithMainNavigationControllerEqualToPassed() {
+        let navigationController = UINavigationController()
+        let viewController = AutocompleteSearchViewController.initiate(mainNavigationController: navigationController)
+        
+        XCTAssertEqual(viewController.mainNavigationController, navigationController)
     }
     
     func testViewModelDelegate_ShouldBeEqualToSut() {
@@ -36,34 +38,43 @@ class AutocompleteSearchViewControllerTests: XCTestCase {
         XCTAssertTrue(sut.searchController.searchBar.delegate === sut)
     }
     
-    func testGetProductSearchViewControllerWithSearchQuery_SearchQueryShouldBePassedToSearchViewController() {
-        let productSearchQuery = "Bag"
-        let searchViewController = sut.getProductSearchViewController(for: productSearchQuery)
-        
-        XCTAssertEqual(searchViewController.title, productSearchQuery)
-    }
-    
-    
-    // MARK:- TableView delegate and DataSource Tests
-    func testRegisteredCell_ShouldBeNotNil() {
+    func testTableViewDataSouceCellProvider_ShouldDequeueNotNilCell() {
+        arrangeSutWithAutocompleteSearchResults()
         let indexPath = IndexPath(row: 0, section: 0)
-        let cell = sut.tableView.dequeueReusableCell(withIdentifier: sut.cellId, for: indexPath)
+        let cell = sut.viewModel.tableViewDataSource.tableView(sut.tableView, cellForRowAt: indexPath) as? AutocompleteSearchViewController.ResultTableViewCell
         XCTAssertNotNil(cell)
     }
     
-    func testCellForRow_ShouldReturnNotNilCell() {
-        let indexPath = IndexPath(row: 0, section: 0)
-        XCTAssertNotNil(sut.tableView(sut.tableView, cellForRowAt: indexPath))
+    func testPresentProductSearchViewControllerWithSearchQuery_SearchQueryShouldBePassedToSearchViewController() {
+        let productSearchQuery = "Bag"
+        let searchViewController = sut.presentProductSearchViewController(for: productSearchQuery)
+        XCTAssertEqual(searchViewController.title, productSearchQuery)
     }
-    
     
     // MARK: UI Details Tests
     func testViewDetails() {
+        arrangeSutWithAutocompleteSearchResults()
         sut.viewDidAppear(true)
         sut.searchBarCancelButtonClicked(.init())
         sut.searchBar(.init(), textDidChange: "Search Query")
         sut.autocompleteSearchSuccess()
         sut.autocompleteSearchFailed(message: "message")
         sut.tableView(sut.tableView, didSelectRowAt: IndexPath(row: 0, section: 0))
+    }
+    
+    
+    func arrangeSutWithAutocompleteSearchResults() {
+        var snapshot = sut.viewModel.tableViewDataSource.snapshot()
+        snapshot.appendSections([.main])
+        snapshot.appendItems([.init(item: .init(result: "res", detailsDescription: "desc"))], toSection: .main)
+        sut.viewModel.tableViewDataSource.apply(snapshot, animatingDifferences: false)
+    }
+}
+
+// MARK:- ResultTableViewCell tests
+extension AutocompleteSearchViewControllerTests {
+    func testAutocompleResultTableViewInit_ShouldReturnNilFromCoderInit() {
+        let cell = AutocompleteSearchViewController.ResultTableViewCell(coder: .init())
+        XCTAssertNil(cell , "required init should always return nil")
     }
 }

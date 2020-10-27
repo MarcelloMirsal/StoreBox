@@ -29,10 +29,9 @@ final class ShopViewController: UITableViewController {
     
     
     func handleProductsSearchPresentation() {
-        let autocompleteSearchViewController = UIStoryboard(name: "AutocompleteSearchViewController").getInitialViewController(of: AutocompleteSearchViewController.self)
+        let autocompleteSearchViewController = AutocompleteSearchViewController.initiate(mainNavigationController: navigationController)
         let nv = UINavigationController(rootViewController: autocompleteSearchViewController)
         nv.modalPresentationStyle = .fullScreen
-        autocompleteSearchViewController.mainNavigationController = navigationController
         present(nv, animated: false)
     }
     

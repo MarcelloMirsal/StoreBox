@@ -9,7 +9,7 @@
 import Alamofire
 
 protocol ProductsSearchingServiceProtocol {
-    typealias AutocompleteSearchResponse = (NetworkServiceError?,[ProductAutocompleteSearchResult]?) -> ()
+    typealias AutocompleteSearchResponse = (NetworkServiceError?,ProductsSearchingService.AutocompleteSearchResultListDTO?) -> ()
     
     typealias ProductSearchResponse = (NetworkServiceError?,ProductsList?) -> ()
     typealias SearchFilterListResponse<T> = (NetworkServiceError?,T?) -> ()
@@ -20,42 +20,23 @@ protocol ProductsSearchingServiceProtocol {
 }
 
 class ProductsSearchingService: ProductsSearchingServiceProtocol {
-    
-    
-    let urlRequest: NetworkRequestProtocol
     let networkManager = NetworkManagerFacade()
+    let listingService = ListingService()
+    let router: Router
     
-    init(authToken: String, urlRequest: NetworkRequestProtocol = NetworkRequest(path: "/products") ) {
-        var authedURLRequest = urlRequest
-        let authKey = NetworkConstants.authorizationKey.rawValue
-        authedURLRequest.set(headers: [ authKey : authToken ] )
-        self.urlRequest = authedURLRequest
+    init(router: Router = Router() ) {
+        self.router = router
     }
     
     func autocompleteSearch(query: String, completion: @escaping AutocompleteSearchResponse) {
-        let searchRequest = getAutocompleteSearchRequest(searchQuery: query).urlRequest!
-        
-        networkManager.json(searchRequest) { (requestError, data) in
-            
-            if let error = requestError {
-                completion(.badNetworkRequest(error), nil)
-                return
-            }
-            
-            do {
-                let parser = Parser()
-                let searchResponse: ProductAutocompleteSearchResponse = try parser.parse(from: data)
-                let searchResults = searchResponse.products
-                completion(nil, searchResults)
-            }
-            catch { completion(.jsonDecodingFailure, nil) }
-            
+        let searchRequest = router.autocompleteSearchRequest(withQuery: query).urlRequest!
+        listingService.getList(listType: AutocompleteSearchResultListDTO.self, searchRequest) { (serviceError, list) in
+            completion(serviceError, list)
         }
     }
     
     func productSearch(query: String, params: [String : Any ] = [:] , completion: @escaping ProductsSearchingService.ProductSearchResponse) {
-        let searchRequest = getProductSearchRequest(searchQuery: query, params: params).urlRequest!
-        print(searchRequest)
+        let searchRequest = router.searchRequest(withQuery: query, params: params).urlRequest!
         networkManager.json(searchRequest) { (requestError, data) in
             
             if let error = requestError {
@@ -72,21 +53,6 @@ class ProductsSearchingService: ProductsSearchingServiceProtocol {
         }
     }
     
-    
-    func getAutocompleteSearchRequest(searchQuery: String) -> NetworkRequestProtocol {
-        var searchRequest = urlRequest
-        searchRequest.set(params: [ "search" : searchQuery ])
-        return searchRequest
-    }
-    
-    func getProductSearchRequest(searchQuery: String, params: [String : Any ] = [:] ) -> NetworkRequestProtocol {
-        var searchRequest = urlRequest
-        var searchParams = params
-        searchParams["search"] = searchQuery
-        searchRequest.set(params: searchParams )
-        return searchRequest
-    }
-    
 }
 
 // MARK:- Service Parser
@@ -98,35 +64,99 @@ extension ProductsSearchingService {
             return jsonDecoder
         }()
     }
+}
+
+// MARK:- Service Router
+extension ProductsSearchingService {
+    class Router {
+    
+        let searchRequest: NetworkRequestProtocol
+        let autocompleteSearchRequest: NetworkRequestProtocol
+        
+        // used ti improve readability
+        convenience init() {
+            let searchRequest = NetworkRequest(path: Paths.searchRequestPath.rawValue )
+            let autocompleteSearchRequest = NetworkRequest(path: Paths.autocompleteRequest.rawValue )
+            
+            self.init(searchRequest: searchRequest, autocompleteSearchRequest: autocompleteSearchRequest)
+        }
+        
+        init(searchRequest: NetworkRequestProtocol, autocompleteSearchRequest: NetworkRequestProtocol) {
+            var authedSearchRequest = searchRequest
+            var authedAutocompleteSearchRequest = autocompleteSearchRequest
+            
+            let authParamKey = NetworkConstants.authorizationKey.rawValue
+            let authToken = UserAuthService.token ?? ""
+            
+            authedSearchRequest.set(headers: [authParamKey : authToken])
+            authedAutocompleteSearchRequest.set(headers: [authParamKey : authToken])
+            
+            self.searchRequest = authedSearchRequest
+            self.autocompleteSearchRequest = authedAutocompleteSearchRequest
+        }
+        
+        func searchRequest(withQuery query: String, params: [String : Any]) -> NetworkRequestProtocol {
+            var newSearchRequest = searchRequest
+            var searchRequestParams = params
+            let searchParamKey = SearchFiltersParams.search.rawValue
+            searchRequestParams[searchParamKey] = query
+            newSearchRequest.set(params: searchRequestParams)
+            return newSearchRequest
+        }
+        
+        func autocompleteSearchRequest(withQuery query: String) -> NetworkRequestProtocol {
+            var newSearchRequest = autocompleteSearchRequest
+            let searchParamKey = SearchFiltersParams.search.rawValue
+            newSearchRequest.set(params: [ searchParamKey : query ] )
+            return newSearchRequest
+        }
+        
+    }
+}
+
+// MARK:- Searchfiltering enums
+extension ProductsSearchingService {
+    
+    enum Paths: String {
+        case searchRequestPath = "/products"
+        case autocompleteRequest = "/products/auto_complete"
+    }
     
     enum SearchFiltersParams: String {
         case city = "city_id"
         case subcategories = "sub_category_id"
         case sort
         case direction
+        case search
     }
-    
-    
     enum AssociatedSearchFiltersParams: String {
         case ascending = "asc"
         case descending = "desc"
-        
         static func ascendingSorting() -> [String : String] {
             [SearchFiltersParams.direction.rawValue : AssociatedSearchFiltersParams.ascending.rawValue]
         }
-        
         static func descendingSorting() -> [String : String] {
             [SearchFiltersParams.direction.rawValue : AssociatedSearchFiltersParams.descending.rawValue]
         }
     }
-    
-    
 }
 
 // MARK:- Helpers Types
 extension ProductsSearchingService {
-    private struct ProductAutocompleteSearchResponse: Codable {
-        let products: [ProductAutocompleteSearchResult]
-        enum CodingKeyes: String, CodingKey { case products }
+    struct AutocompleteSearchResultDTO: Codable {
+        let name: String
+        // TODO: removing optional until api updated
+        let subcategoryName: String?
+        
+        enum CodingKeys: String, CodingKey {
+            case name
+            case subcategoryName = "subCategoryNameEn"
+        }
+    }
+    struct AutocompleteSearchResultListDTO: Codable {
+        let products: [AutocompleteSearchResultDTO]
+        enum CodingKeys: String, CodingKey {
+            case products
+        }
     }
 }

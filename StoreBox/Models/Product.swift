@@ -32,15 +32,6 @@ extension Product: Hashable {
     }
 }
 
-
-struct ProductAutocompleteSearchResult: Codable {
-    let name: String
-    let subCategoryName: String
-    enum CodingKeyes: String , CodingKey {
-        case name , subCategoryName = "sub_category_name"
-    }
-}
-
 struct ListPagination: Codable {
     let currentPage: Int
     let nextPage: Int?

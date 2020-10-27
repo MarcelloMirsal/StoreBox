@@ -12,14 +12,15 @@ class NetworkManagerFacade {
     
     typealias JSONDataResponse = (NetworkRequestError?, Data?) -> ()
     
-    func json(_ urlRequest: URLRequest, completion: @escaping JSONDataResponse ) {
+    @discardableResult
+    func json(_ urlRequest: URLRequest, completion: @escaping JSONDataResponse ) -> DataRequest {
         
-        AF.request(urlRequest).validate().responseJSON { jsonDataResponse in
+        let request = AF.request(urlRequest).validate().responseJSON { jsonDataResponse in
             let networkRequestError = AFErrorAdapter(aferror: jsonDataResponse.error)?.getNetworkRequestError()
             let data = jsonDataResponse.data
             completion(networkRequestError , data)
         }
-        
+        return request
     }
 }
 

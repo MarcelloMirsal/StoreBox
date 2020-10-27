@@ -43,8 +43,6 @@ class ListingService {
     
 }
 
-
-
 extension ListingService {
     class Parser: NetworkServiceParser {
         var decoder: JSONDecoder = {

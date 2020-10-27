@@ -41,6 +41,7 @@ protocol NetworkRequestProtocol: URLRequestConvertible {
 }
 
 extension NetworkRequestProtocol {
+    
     mutating func set(params: [String: Any ]? ) {
         self.params = params
     }
@@ -124,7 +125,7 @@ enum NetworkServiceError: Error, Equatable {
 
 
 enum NetworkRequestError: Error {
-    case badRequest
+    case badRequest // OR missing headers like auth
     case unauthorizedAccess
     case pathNotFound
     case timeout

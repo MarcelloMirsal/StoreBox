@@ -26,6 +26,10 @@ struct NetworkRequestFake: NetworkRequestProtocol {
         self.headers = headers
     }
     
+    init() {
+        self.init(path: "")
+    }
+    
     func asURLRequest() throws -> URLRequest {
         return setupURLRequest(from: getConfiguredURL())
     }

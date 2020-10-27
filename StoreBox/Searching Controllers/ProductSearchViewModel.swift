@@ -26,7 +26,7 @@ class ProductSearchViewModel {
         return true
     }
     
-    init(searchingService: ProductsSearchingServiceProtocol = ProductsSearchingService(authToken: UserAuthService.token ?? "")) {
+    init(searchingService: ProductsSearchingServiceProtocol = ProductsSearchingService() ) {
         self.searchingService = searchingService
     }
   

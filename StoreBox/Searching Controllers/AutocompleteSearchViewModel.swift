@@ -6,25 +6,41 @@
 //  Copyright © 2020 Mohammed Ahmed. All rights reserved.
 //
 
-import Foundation
-
-
+import UIKit
 protocol AutocompleteSearchViewModelDelegate: class {
     func autocompleteSearchFailed(message: String)
     func autocompleteSearchSuccess()
 }
+extension AutocompleteSearchViewModel {
+    typealias ViewDiffableDataSource = UITableViewDiffableDataSource<Section, ListItem<AutocompleteSearchResult>>
+    typealias AutocompleteResultsListDTO = ProductsSearchingService.AutocompleteSearchResultListDTO
+}
 
 class AutocompleteSearchViewModel {
     private let searchingService: ProductsSearchingServiceProtocol
+    private(set) var tableViewDataSource: ViewDiffableDataSource!
     weak var delegate: AutocompleteSearchViewModelDelegate?
-    private(set) var searchResults: [ProductAutocompleteSearchResult] = []
     
-    init(searchingService: ProductsSearchingServiceProtocol = ProductsSearchingService(authToken: UserAuthService.token ?? "")) {
+    init(searchingService: ProductsSearchingServiceProtocol = ProductsSearchingService()) {
         self.searchingService = searchingService
     }
     
-    func set(searchResults: [ProductAutocompleteSearchResult] ) {
-        self.searchResults = searchResults
+    func set(tableViewDataSource: ViewDiffableDataSource ) {
+        self.tableViewDataSource = tableViewDataSource
+    }
+    func map(autocompleteList: AutocompleteResultsListDTO?) -> [ ListItem<AutocompleteSearchResult> ] {
+        let mappedResults = autocompleteList?.products.map { (searchResult) -> AutocompleteSearchResult in
+            .init(result: searchResult.name, detailsDescription: "\(String(describing: searchResult.subcategoryName))")
+        }.map({ ListItem<AutocompleteSearchResult>(item: $0) })
+        return mappedResults ?? []
+    }
+    
+    func updateDataSourceSnapshot(from list: AutocompleteResultsListDTO?) {
+        let listItems = map(autocompleteList: list)
+        var freshSnapshot = NSDiffableDataSourceSnapshot<Section, ListItem<AutocompleteSearchResult> >()
+        freshSnapshot.appendSections([.main])
+        freshSnapshot.appendItems(listItems)
+        tableViewDataSource.apply(freshSnapshot)
     }
     
     func isValid(searchQuery: String) -> Bool {
@@ -35,16 +51,19 @@ class AutocompleteSearchViewModel {
     
     func autocompleteSearch(query: String) {
         guard isValid(searchQuery: query) else { return }
-        searchingService.autocompleteSearch(query: query) { [weak self] (serviceError, searchResults) in
-            
+        searchingService.autocompleteSearch(query: query) { [weak self] (serviceError, searchResultsList) in
             if let error = serviceError {
                 self?.delegate?.autocompleteSearchFailed(message: error.localizedDescription)
                 return
             }
-            self?.set(searchResults: searchResults ?? [])
+            self?.updateDataSourceSnapshot(from: searchResultsList)
             self?.delegate?.autocompleteSearchSuccess()
         }
     }
-    
-    
+}
+
+extension AutocompleteSearchViewModel {
+    enum Section {
+        case main
+    }
 }
