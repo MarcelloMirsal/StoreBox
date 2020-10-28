@@ -18,11 +18,11 @@ struct Product: Codable {
     let storeName: String
     let subCategoryName: String
     
-    enum CodingKeyes: String, CodingKey {
+    enum CodingKeys: String, CodingKey {
         case id, name, price, discount
-        case priceAfterDiscount = "price_after_discount"
-        case storeName = "store_name"
-        case subCategoryName = "sub_category_name"
+        case priceAfterDiscount = "priceAfterDiscount"
+        case storeName = "storeName"
+        case subCategoryName = "subCategoryName"
     }
 }
 
@@ -39,12 +39,12 @@ struct ListPagination: Codable {
     let totalPages: Int
     let totalEntries: Int
     
-    enum CodingKeyes: String, CodingKey {
-        case currentPage = "current_page"
-        case nextPage = "next_page"
-        case previousPage = "previous_page"
-        case totalPages = "total_pages"
-        case totalEntries = "total_entries"
+    enum CodingKeys: String, CodingKey {
+        case currentPage = "currentPage"
+        case nextPage = "nextPage"
+        case previousPage = "previousPage"
+        case totalPages = "totalPages"
+        case totalEntries = "totalEntries"
     }
     
     static func emptyListPagination() -> ListPagination {
@@ -68,7 +68,7 @@ struct ProductsList: Codable {
         return .init(products: [], pagination: .emptyListPagination())
     }
     
-    enum CodingKeyes: String , CodingKey {
+    enum CodingKeys: String , CodingKey {
         case products
         case pagination
     }
