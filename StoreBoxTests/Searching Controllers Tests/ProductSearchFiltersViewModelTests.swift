@@ -11,117 +11,151 @@ import XCTest
 
 class ProductSearchFiltersViewModelTests: XCTestCase {
     
-    typealias SearchFilter = ProductSearchFiltersViewModel.SearchFilter
     typealias AssociatedSearchFilterParams = ProductsSearchingService.AssociatedSearchFiltersParams
-
-
+    typealias Section = ProductSearchFiltersViewModel.Section
     var sut: ProductSearchFiltersViewModel!
+    let tableView = UITableView(frame: .init(x: 0, y: 0, width: 100, height: 100))
+    lazy var fakeTableViewDataSource: ProductSearchFiltersViewModel.ViewDataSource = .init(tableView: self.tableView, cellProvider: {_,_,_ in return .init()})
     
     override func setUp() {
         sut = ProductSearchFiltersViewModel()
+        sut.set(tableViewDataSource: fakeTableViewDataSource)
     }
     
+    // MARK:- test properties
+    func testFilterSectionsManagerDelegate_ShouldBeEqualToSUT() {
+        XCTAssertTrue(sut === sut.filterSectionsManager.delegate )
+    }
     func testSutSections_ShouldBeEqualToFilterSectionsManagerSections() {
         XCTAssertEqual(sut.filterSectionsManager.sections, sut.sections)
     }
     
-    func testSutGetSearchFiltersForStaticSection_ShouldReturnFiltersEqualToFilterSectionManager() {
-        let staticSection = ProductSearchFiltersViewController.Section.sortBy
-        let filters = sut.getSearchFilters(for: staticSection)
+    // MARK:- TableViewDataSource Tests
+    func testSetTableViewDataSource_TableViewDataSourceShouldBeNotNil() {
+        sut.set(tableViewDataSource: fakeTableViewDataSource)
+        XCTAssertNotNil(sut.tableViewDataSource)
+    }
+    
+    func testSetTableViewDataSource_SnapshotSectionsShouldEqualToSortedSections() {
+        sut.set(tableViewDataSource: fakeTableViewDataSource)
+        XCTAssertEqual(sut.sortedSections, sut.tableViewDataSource.snapshot().sectionIdentifiers)
+    }
+    
+    func testSetSearchFiltersToSection_ShouldSetSearchFiltersToDataSource() {
+        let searchFilters = [ListItem<SearchFilter>(item: .init(name: "Filter"))]
+        let section = Section.subCategory
         
-        let managerFilters = sut.filterSectionsManager.sectionFilters(for: staticSection)?.filters ?? []
-        print(managerFilters)
-        XCTAssertEqual(filters, managerFilters )
-    }
-    
-    func testIsFilterSelected_ShouldReturnFalseIfFilterDeSelected() {
-        let isFilterSelected = sut.isFilterSelected(filter: .init(name: "1"), in: .cities)
-        XCTAssertFalse(isFilterSelected)
-    }
-    
-    func testSutGetSearchFiltersForNoneExistSection_ShouldReturnEmptySearchFilters() {
-        let section = ProductSearchFiltersViewController.Section.cities
-        let filters = sut.getSearchFilters(for: section)
+        sut.set(searchFilters: searchFilters, to: section)
         
-        XCTAssertTrue(filters.isEmpty)
-    }
-    
-    func testSetSectionFiltersFromNilList_FilterSectionsShouldBeTheSame() {
-        let prevoiusFilterSections = sut.filterSectionsManager.filterSections
-        sut.setSectionFilters(from: nil)
-        let updatedFilterSections = sut.filterSectionsManager.filterSections
-        XCTAssertEqual(prevoiusFilterSections, updatedFilterSections)
-    }
-    
-    func testSetSectionFiltersFromSubcategoriesList_FilterSectionsShouldBeContainTheSubcategoriesFilter() {
-        let subcategories: [Subcategory] = .init(repeating: .init(id: 10, name: "name"), count: 3)
-        let subcategoriesList = SubcategoriesList(subCategories: subcategories, pagination: .emptyListPagination())
+        let passedSearchFilters = sut.tableViewDataSource.snapshot().itemIdentifiers(inSection: section).map({$0.item})
         
-        sut.setSectionFilters(from: subcategoriesList)
-        let isContainsSubcategoriesFilters = sut.filterSectionsManager.filterSections.contains(where: {$0.key == .subCategory})
-        XCTAssertTrue(isContainsSubcategoriesFilters)
-        XCTAssertNotNil(sut.filterSectionsManager.sectionFilters(for: .subCategory))
+        XCTAssertEqual(passedSearchFilters, searchFilters.map({$0.item}))
     }
     
-    func testSetSectionFiltersFromCitiesList_FilterSectionsShouldBeContainTheCitiesFilter() {
-        let cities: [City] = .init(repeating: .init(id: 10, name: "name"), count: 3)
-        let citiesList = CitiesList(cities: cities, pagination: .emptyListPagination())
+    // MARK:- loading default filterSections tests
+    func testLoadDefaultFilterSections_DataSourceShouldBeNotEmpty() {
+        sut.loadDefaultFilterSections()
+        let snapshot = sut.tableViewDataSource.snapshot()
+        let defaultSection = Section.sortBy
+        let searchFilters = snapshot.itemIdentifiers(inSection: defaultSection)
         
-        sut.setSectionFilters(from: citiesList)
-        let isContainsCitiesFilters = sut.filterSectionsManager.filterSections.contains(where: {$0.key == .cities})
+        sut.loadDefaultFilterSections()
         
-        XCTAssertTrue(isContainsCitiesFilters)
-        XCTAssertNotNil(sut.filterSectionsManager.sectionFilters(for: .cities))
+        XCTAssertTrue(searchFilters.isEmpty == false)
     }
     
-    func testHandleFetchingFilterSectionWithNilList() {
-        let subcategoriesList = SubcategoriesList(subCategories: [], pagination: .emptyListPagination())
-        sut.handleFetchingFilterSection(serviceError: nil, list: subcategoriesList)
-    }
-    
-    func testRemoveAllSelectedFilters_SelectedFiltersShouldBeEmpty() {
-        _ = arrangeSutWithSelectedSearchFilterSections()
-        sut.removeAllSelectedFilters()
-        XCTAssertTrue(sut.filterSectionsManager.selectedFilters.isEmpty)
-    }
-    
+    // MARK:- Fetching dynamic searchFilters tests
     func testFetchDynamicFilterSections() {
         sut.fetchDynamicFilterSections()
     }
     
+    func testDynamicFiltersResponseHandlerBlockWithNilFilters_FiltersAtPassedSectionShouldBeNil() {
+        let section = Section.cities
+        sut.dynamicFiltersResponseHandlerBlock(nil , nil,  section , .single)
+        
+        let filters = sut.filterSectionsManager.sectionFilters(for: section)
+        XCTAssertNil(filters)
+    }
+    
+    func testDynamicFiltersResponseHandlerBlockWithFilters_FiltersAtPassedSectionShouldBeNotNil() {
+        let section = Section.cities
+        let cityFilter = CityDTO(id: 10, name: "NAME")
+        
+        let dynamicFiltersList = CitiesListDTO(cities: [cityFilter], pagination: .emptyListPagination() )
+        
+        sut.dynamicFiltersResponseHandlerBlock(nil , dynamicFiltersList,  section , .single)
+        
+        XCTAssertNotNil(sut.filterSectionsManager.sectionFilters(for: section))
+    }
+    
+    // MARK:- Filter Selection tests
+    func testSelectFilterAtIndexPath_FilterAtIndexPathShouldBeSelected() {
+        let selectedFilter = arrangeSutWithSelectedSearchFilterSections().first!
+        let indexPath = sut.tableViewDataSource.indexPath(for: selectedFilter)!
+        let section = sut.tableViewDataSource.snapshot().sectionIdentifiers[indexPath.section]
+        
+        sut.selectFilter(at: indexPath)
+        let isFilterSelected = sut.isFilterSelected(filter: selectedFilter, in: section)
+        XCTAssertTrue(isFilterSelected)
+    }
+    func testSelectFilterAtIndexPath_FilterAtNotExistIndexPathShouldBeNil() {
+        let indexPath = IndexPath(row: 1000, section: 1000)
+        
+        sut.selectFilter(at: indexPath)
+        
+        let selectedFilter = sut.filterSectionsManager.selectedFilters(at: .sortBy)[at: indexPath.row]
+        XCTAssertNil(selectedFilter)
+    }
+    func testIsFilterSelected_ShouldReturnFalseIfFilterDeSelected() {
+        let isFilterSelected = sut.isFilterSelected(filter: .init(item: .init(name: "name")), in: .cities)
+        XCTAssertFalse(isFilterSelected)
+    }
+    func testRemoveAllSelectedFilter_SelectedFiltersShouldBeEmpty() {
+        _ = arrangeSutWithSelectedSearchFilterSections()
+    
+        sut.removeAllSelectedFilters()
+        
+        XCTAssertTrue(sut.filterSectionsManager.selectedFilters.isEmpty)
+    }
+    
+    // MARK:- Section info test
+    func testSectionAtIndex_ShouldReturnSectionRawValue() {
+        let index = 0
+        let rawValue: String = sut.section(at: index)
+        XCTAssertEqual(rawValue, sut.sortedSections[index].rawValue)
+    }
+    
+    
+    // MARK:- Get SearchFilters Params tests
     func testExtractFiltersParamsFromEmptyFilters_ShouldReturnEmptyFiltersValue() {
         let filtersValue = sut.extractFiltersParams(from: [])
         XCTAssertTrue(filtersValue.isEmpty)
     }
-    
     func testExtractFiltersParamsFromFilters_ShouldReturnFiltersValueEqualToExtractedFiltersValue() {
         let filters = arrangeSutWithSelectedSearchFilterSections()
-        let filtersValue = filters.map({$0.filterValue})
-        
+        let filtersValue = filters.map({$0.item.filterValue})
         let extractedFiltersValue = sut.extractFiltersParams(from: filters)
         XCTAssertEqual(filtersValue, extractedFiltersValue)
     }
-    
     func testExtractAssociatedFiltersFromEmptyFilters_ShouldReturnEmptyDict() {
         let associatedFiltersDict = sut.extractAssociatedFilters(from: [])
         XCTAssertTrue(associatedFiltersDict.isEmpty)
     }
-    
-    func testExtractAssociatedFiltersFilters_ShouldReturnDict() {
+    func testExtractAssociatedFilters_ShouldReturnDict() {
         let associatedFilter = ["KEY" : "VALUE" ]
-        let filter1 = SearchFilter(name: "name", filterValue: "NAME", assotiatedFilters: associatedFilter )
-        let filter2 = SearchFilter(name: "Id", filterValue: "123", assotiatedFilters: associatedFilter )
+        let filter1 = ListItem<SearchFilter>(item: SearchFilter(name: "name", filterValue: "NAME", assotiatedFilters: associatedFilter ))
+        let filter2 = ListItem<SearchFilter>(item: SearchFilter(name: "Id", filterValue: "123", assotiatedFilters: associatedFilter ))
         
         let filtersWithSameAssociatedFilter = [ filter1 , filter2  ]
         
         var associatedFilters: [String : String] = [:]
         
         associatedFilters = filtersWithSameAssociatedFilter.reduce([:]) { (result, filter) -> [String : String] in
-            result.merging(filter.assotiatedFilters, uniquingKeysWith: {_,lhs in lhs})
+            result.merging(filter.item.assotiatedFilters, uniquingKeysWith: {_,lhs in lhs})
         } // == ["KEY": "VALUE"]
         
         let extractedAssociatedFiltersDict = sut.extractAssociatedFilters(from: filtersWithSameAssociatedFilter)
-
+        
         XCTAssertEqual(extractedAssociatedFiltersDict , associatedFilters)
     }
     
@@ -136,7 +170,7 @@ class ProductSearchFiltersViewModelTests: XCTestCase {
         let selectedFiltersSections = filterManager.selectedFilters.keys
         
         let params = selectedFiltersSections.reduce([String : String]()) { (result, section) -> [String : String] in
-            let filtersValue = filterManager.selectedFilters(at: section).map({$0.filterValue})
+            let filtersValue = filterManager.selectedFilters(at: section).map({$0.item.filterValue})
             let filtersKey = ProductsSearchingService.SearchFiltersParams.init(section: section)
             return [filtersKey.rawValue : String(describing: filtersValue)].merging(result, uniquingKeysWith: {_,rhs in rhs})
         }.merging(associatedSearchFilters, uniquingKeysWith: {_ , rhs in rhs })
@@ -146,11 +180,26 @@ class ProductSearchFiltersViewModelTests: XCTestCase {
         print(searchFiltersParams , params)
     }
     
-    
-    func testURLRequestRouter_() {
-        _ = ListingService.Router().urlRequest(for: .sortBy)
+    func testGetSearchParams_DuplicatedSearchFiltersShouldReducedToOne() {
+        let duplicatedSearchFilter = SearchFilter(name: "name", filterValue: "value", assotiatedFilters: [ "KEY" : "VALUE" ])
+        
+        let listItem = ListItem<SearchFilter>(item: duplicatedSearchFilter)
+        let listItem2 = ListItem<SearchFilter>(item: duplicatedSearchFilter)
+        let section = Section.cities
+        let section2 = Section.subCategory
+        sut.filterSectionsManager.set(sectionFilters: .init(filters: [listItem], selectionType: .multiple), to: section)
+        sut.filterSectionsManager.set(sectionFilters: .init(filters: [listItem2], selectionType: .multiple), to: section2)
+        sut.filterSectionsManager.select(filter: listItem, at: section)
+        sut.filterSectionsManager.select(filter: listItem2, at: section2)
+        
+        let params = sut.getSearchFiltersParams()
+        let isContainingFilter = params.contains { (pair) -> Bool in
+            return pair.key == duplicatedSearchFilter.assotiatedFilters.first!.key && String(describing: pair.value) == duplicatedSearchFilter.assotiatedFilters.first!.value
+        }
+        XCTAssertTrue(isContainingFilter)
     }
     
+    // MARK:- test 
     func testSubmitSearchFiltersParams_FiltersSubmitionDelegateSpyShouldSubmitFilters() {
         let exp = expectation(description: "testSubmitSearchFiltersParams" )
         let delegateSpy = ProductSearchFiltersViewModelDelegateSpy(exp: exp)
@@ -161,24 +210,24 @@ class ProductSearchFiltersViewModelTests: XCTestCase {
         wait(for: [exp], timeout: 1)
     }
     
+    func testURLRequestRouter_() {
+        _ = ListingService.Router().urlRequest(for: .sortBy)
+    }
     
-    func arrangeSutWithSelectedSearchFilterSections() -> [ProductSearchFiltersViewModel.SearchFilter] {
-        var selectedFilters = [SearchFilter]()
-        let sortAssociatedFilter = AssociatedSearchFilterParams.descendingSorting()
-        let sortFilter = SearchFilter(name: "sortFilter", filterValue: "sortFilterValue" , assotiatedFilters: sortAssociatedFilter )
-        let sortFilters: [SearchFilter] = [ sortFilter ]
+    func arrangeSutWithSelectedSearchFilterSections() -> [ListItem<SearchFilter>] {
+        let sortFilter = ListItem<SearchFilter>(item: SearchFilter(name: "sortFilter", filterValue: "sortFilter"))
+        
+        let sortFilters = [ sortFilter ]
         let sortSection = ProductSearchFiltersViewModel.Section.sortBy
         
-        let cityFilter1 = SearchFilter(name: "city1", filterValue: "city1Value" , assotiatedFilters: AssociatedSearchFilterParams.descendingSorting()) // adding associated filter that alreardy exist in other(sortFilter above) filter within the selected filters, duplicated filters should not be placed on the search params only one is allowed
-        
-        
-        let cityFilter2 = SearchFilter(name: "city2", filterValue: "city2Value")
-        let cityFilters: [SearchFilter] = [ cityFilter1 , cityFilter2 ]
+        let cityFilter1 = ListItem<SearchFilter>(item:SearchFilter(name: "city1", filterValue: "city1") )
+        let cityFilter2 = ListItem<SearchFilter>(item: SearchFilter(name: "city1", filterValue: "city1"))
+        let cityFilters = [ cityFilter1 , cityFilter2 ]
         let citySection = ProductSearchFiltersViewModel.Section.cities
         
-        let subcategoryFilter1 = SearchFilter(name: "sub1", filterValue: "sub1Value")
+        let subcategoryFilter1 = ListItem<SearchFilter>(item: SearchFilter(name: "sub1", filterValue: "sub1"))
         
-        sut.filterSectionsManager.set(sectionFilters: .init(filters: sortFilters, selectionType: .signle), to: sortSection)
+        sut.filterSectionsManager.set(sectionFilters: .init(filters: sortFilters, selectionType: .single), to: sortSection)
         sut.filterSectionsManager.set(sectionFilters: .init(filters: cityFilters, selectionType: .multiple), to: citySection)
         sut.filterSectionsManager.set(sectionFilters: .init(filters: [subcategoryFilter1], selectionType: .multiple), to: .subCategory)
         
@@ -186,12 +235,9 @@ class ProductSearchFiltersViewModelTests: XCTestCase {
         // selection
         sut.filterSectionsManager.select(filter: sortFilter, at: sortSection)
         sut.filterSectionsManager.select(filter: cityFilter1, at: citySection)
-        sut.filterSectionsManager.select(filter: cityFilter2, at: citySection)
         sut.filterSectionsManager.select(filter: subcategoryFilter1, at: .subCategory)
-        selectedFilters = [sortFilter , cityFilter1 , cityFilter2, subcategoryFilter1]
         
-        return selectedFilters
-        
+        return [sortFilter , cityFilter1 , subcategoryFilter1]
     }
     
     

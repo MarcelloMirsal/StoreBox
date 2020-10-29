@@ -12,18 +12,16 @@ struct City: Codable {
     let name: String
 }
 extension City: SearchFilterConvertible {
-    func asSearchFilter() -> ProductSearchFiltersViewController.SearchFilter {
+    func asSearchFilter() -> SearchFilter {
         return .init(name: name, filterValue: "\(id)")
     }
 }
-
-
 struct CitiesList: Codable {
     let cities: [City]
     let pagination: ListPagination
 }
 extension CitiesList: SearchFiltersConvertible {
-    func asSearchFilters() -> [ProductSearchFiltersViewController.SearchFilter] {
+    func asSearchFilters() -> [SearchFilter] {
         return cities.map({$0.asSearchFilter()})
     }
 }

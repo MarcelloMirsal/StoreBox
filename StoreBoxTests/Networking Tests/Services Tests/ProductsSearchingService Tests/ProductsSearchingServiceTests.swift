@@ -98,6 +98,19 @@ class ProductsSearchingServiceTests: XCTestCase {
         wait(for: [exp], timeout: 1)
     }
     
+    func testDynamicSearchFiltersListFromSuccessfulJSONResponse_FiltersListShouldBeNotNil() {
+        let exp = expectation(description: "testDynamicSearchFiltersList")
+        let jsonResponsesFilePath = Bundle(for: ProductsSearchingServiceTests.self).path(forResource: "CitiesListSuccessfulJSONResponse", ofType: "json")!
+        let request = NetworkRequestFake(path: jsonResponsesFilePath).urlRequest!
+        
+        sut.dynamicSearchFiltersList(type: CitiesListDTO.self, urlRequest: request) { (serviceError, filtersList) in
+            XCTAssertNotNil(filtersList)
+            exp.fulfill()
+        }
+        
+        wait(for: [exp], timeout: 1)
+    }
+    
     func arrangeSutWithLocalSuccessfulResponse() {
         let jsonResponsesFilePath = Bundle(for: ProductsSearchingServiceTests.self).path(forResource: "ProductsSearchingServiceResponses", ofType: "json")!
         

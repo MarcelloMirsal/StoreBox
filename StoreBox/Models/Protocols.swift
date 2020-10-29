@@ -8,10 +8,3 @@
 
 import Foundation
 
-protocol SearchFilterConvertible {
-    func asSearchFilter() -> ProductSearchFiltersViewController.SearchFilter
-}
-protocol SearchFiltersConvertible {
-    func asSearchFilters() -> [ProductSearchFiltersViewController.SearchFilter]
-}
-

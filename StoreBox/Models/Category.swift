@@ -13,8 +13,8 @@ struct Subcategory: Codable {
     let name: String
 }
 extension Subcategory: SearchFilterConvertible {
-    func asSearchFilter() -> ProductSearchFiltersViewController.SearchFilter {
-        return ProductSearchFiltersViewController.SearchFilter(name: name, filterValue: "\(id)")
+    func asSearchFilter() -> SearchFilter {
+        return SearchFilter(name: name, filterValue: "\(id)")
     }
 }
 
@@ -23,7 +23,7 @@ struct SubcategoriesList: Codable {
     private(set) var pagination: ListPagination
 }
 extension SubcategoriesList: SearchFiltersConvertible {
-    func asSearchFilters() -> [ProductSearchFiltersViewController.SearchFilter] {
+    func asSearchFilters() -> [SearchFilter] {
         return subCategories.map({$0.asSearchFilter()})
     }
 }

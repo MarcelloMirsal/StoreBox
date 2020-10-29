@@ -37,19 +37,14 @@ class ProductsSearchingService: ProductsSearchingServiceProtocol {
     
     func productSearch(query: String, params: [String : Any ] = [:] , completion: @escaping ProductsSearchingService.ProductSearchResponse) {
         let searchRequest = router.searchRequest(withQuery: query, params: params).urlRequest!
-        networkManager.json(searchRequest) { (requestError, data) in
-            
-            if let error = requestError {
-                completion(.badNetworkRequest(error), nil)
-                return
-            }
-            
-            do {
-                let parser = Parser()
-                let productsList: ProductsList = try parser.parse(from: data)
-                completion(nil, productsList)
-            }
-            catch { completion(.jsonDecodingFailure, nil) }
+        listingService.getList(listType: ProductsList.self, searchRequest) { (serviceError, list) in
+            completion(serviceError, list)
+        }
+    }
+    
+    func dynamicSearchFiltersList<T>(type: T.Type, urlRequest: URLRequest, completion: @escaping (NetworkServiceError?, T?) -> () ) where T: Decodable, T: SearchFiltersConvertible {
+        listingService.getList(listType: type, urlRequest) { (serviceError, list) in
+            completion(serviceError, list )
         }
     }
     

@@ -48,7 +48,7 @@ struct ListPagination: Codable {
     }
     
     static func emptyListPagination() -> ListPagination {
-        return ListPagination(currentPage: 1, nextPage: nil, previousPage: nil, totalPages: 1, totalEntries: 0)
+        return .init(currentPage: 1, nextPage: nil, previousPage: nil, totalPages: 1, totalEntries: 0)
     }
 }
 

@@ -50,6 +50,8 @@
 		FB4379482513B722001C8863 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB4379472513B722001C8863 /* Product.swift */; };
 		FB43794A25157EB6001C8863 /* NetworkServiceParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB43794925157EB6001C8863 /* NetworkServiceParser.swift */; };
 		FB43794C2516582D001C8863 /* NetworkServiceParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB43794B2516582D001C8863 /* NetworkServiceParserTests.swift */; };
+		FB445A55254959DE00AEDA7E /* SharedDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB445A54254959DE00AEDA7E /* SharedDTO.swift */; };
+		FB445A57254ACBBA00AEDA7E /* CitiesListSuccessfulJSONResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = FB445A56254ACBBA00AEDA7E /* CitiesListSuccessfulJSONResponse.json */; };
 		FB44BD1E2535219C00B536CC /* ListingServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB44BD1D2535219C00B536CC /* ListingServiceTests.swift */; };
 		FB44BD20253521C100B536CC /* ListingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB44BD1F253521C100B536CC /* ListingService.swift */; };
 		FB44BD222535220900B536CC /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB44BD212535220900B536CC /* Category.swift */; };
@@ -188,6 +190,8 @@
 		FB4379472513B722001C8863 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		FB43794925157EB6001C8863 /* NetworkServiceParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceParser.swift; sourceTree = "<group>"; };
 		FB43794B2516582D001C8863 /* NetworkServiceParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceParserTests.swift; sourceTree = "<group>"; };
+		FB445A54254959DE00AEDA7E /* SharedDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedDTO.swift; sourceTree = "<group>"; };
+		FB445A56254ACBBA00AEDA7E /* CitiesListSuccessfulJSONResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = CitiesListSuccessfulJSONResponse.json; sourceTree = "<group>"; };
 		FB44BD1D2535219C00B536CC /* ListingServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingServiceTests.swift; sourceTree = "<group>"; };
 		FB44BD1F253521C100B536CC /* ListingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingService.swift; sourceTree = "<group>"; };
 		FB44BD212535220900B536CC /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
@@ -451,6 +455,7 @@
 				FB1842AB250821910006256C /* NetworkManager.swift */,
 				FB43794925157EB6001C8863 /* NetworkServiceParser.swift */,
 				FBF76FA324CEDA7500E03773 /* Services */,
+				FB445A54254959DE00AEDA7E /* SharedDTO.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -475,6 +480,7 @@
 				FBF8200724E9AE2C0050EA71 /* ProductsSearchingServiceResponses.json */,
 				FBA222492546BD9600BEC561 /* AutocompleteSearchSuccessfulResponse.json */,
 				FB2FF35D24EB281A001C30E6 /* ProductsSearchingServiceBadJSON.json */,
+				FB445A56254ACBBA00AEDA7E /* CitiesListSuccessfulJSONResponse.json */,
 				FBA2224B2547189D00BEC561 /* ProductSearchingServiceRouterTests.swift */,
 			);
 			path = "ProductsSearchingService Tests";
@@ -949,6 +955,7 @@
 				FB44BD27253539B800B536CC /* ProductsListWrongJSONResponse.json in Resources */,
 				FBA2224A2546BD9600BEC561 /* AutocompleteSearchSuccessfulResponse.json in Resources */,
 				FB17608824D88F0000BDBC66 /* UserAuthServiceResponses.json in Resources */,
+				FB445A57254ACBBA00AEDA7E /* CitiesListSuccessfulJSONResponse.json in Resources */,
 				FB44BD242535262C00B536CC /* ProductsListSuccessfulResponse.json in Resources */,
 				FBF8200824E9AE2C0050EA71 /* ProductsSearchingServiceResponses.json in Resources */,
 				FB2FC557250E9330000F80D9 /* UserAuthServiceWrongFormattedResponse.json in Resources */,
@@ -1069,6 +1076,7 @@
 				FBE7795624B32F3800034414 /* StoreDetailsViewController.swift in Sources */,
 				FBA0E67624845C91008C1F9C /* ProductTableViewCell.swift in Sources */,
 				FBA2224E2547505800BEC561 /* Search.swift in Sources */,
+				FB445A55254959DE00AEDA7E /* SharedDTO.swift in Sources */,
 				FB44BD20253521C100B536CC /* ListingService.swift in Sources */,
 				FBB105F224B1A4C100D3DF77 /* StoresViewController.swift in Sources */,
 				FB44E5FF25341DEA0092DD67 /* ProductSearchFiltersViewModel.swift in Sources */,

@@ -10,17 +10,11 @@ import XCTest
 @testable import StoreBox
 
 class FilterSectionsManagerTests: XCTestCase {
-    
-    typealias SearchFilter = ProductSearchFiltersViewModel.SearchFilter
     var sut: FilterSectionsManager!
     
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         sut = FilterSectionsManager()
-    }
-    
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
     
     func testSections_ShouldBeEqualToFilterSections() {
@@ -29,28 +23,78 @@ class FilterSectionsManagerTests: XCTestCase {
         XCTAssertEqual(sut.sections, filterSections)
     }
     
+    //MARK:- SectionFilters tests
     func testSetSectionFiltersToSection_ShouldSetFiltersToThePassedSection() {
         let sectionFilters = FilterSectionsManager.SectionFilters(filters: [
-            .init(name: "KSA"),
-            .init(name: "NY")
-        ], selectionType: .signle)
-        let section = ProductSearchFiltersViewController.Section.cities
+            .init(item: .init(name: "KSA"))
+        ], selectionType: .single)
+        let section = ProductSearchFiltersViewModel.Section.cities
         
         sut.set(sectionFilters: sectionFilters, to: section)
         
         XCTAssertEqual(sectionFilters, sut.sectionFilters(for: section))
-        
     }
     
     func testSectionFiltersForSection_ShouldReturnFiltersEqualToTheSavedFilters() {
-        let section = ProductSearchFiltersViewController.Section.sortBy
+        let section = ProductSearchFiltersViewModel.Section.sortBy
         let sectionFilters = sut.sectionFilters(for: section)
         
         XCTAssertEqual(sut.filterSections[section], sectionFilters)
     }
     
+    // MARK:- Filter selection tests
+    func testSelectedFiltersAtNotExistORNoSelectedFilterInSection_ShouldReturnEmptyFilters() {
+        let filters = sut.selectedFilters(at: .subCategory)
+        
+        XCTAssertTrue(filters.isEmpty)
+    }
+    func testSelectedFiltersAtSection_ShouldReturnSelectedFilters() {
+        let passedFilters = Set(arrangeSutWithSelectedSearchFilterSections())
+        let selectedFilters = Set(sut.selectedFilters(at: .sortBy))
+        
+        XCTAssertTrue(selectedFilters.isSubset(of: passedFilters))
+    }
+    
+    func testSelectFilterAtSection_FilterShouldBeSelected() {
+        let section = ProductSearchFiltersViewModel.Section.subCategory
+        let firstFilter = ListItem<SearchFilter>(item: .init(name: "name1"))
+        let sectionFilters = FilterSectionsManager.SectionFilters(filters: [
+            firstFilter
+        ], selectionType: .multiple)
+        sut.set(sectionFilters: sectionFilters, to: section)
+        
+        sut.select(filter: firstFilter, at: section)
+        
+        XCTAssertTrue(sut.isFilterSelected(filter: firstFilter, in: section))
+    }
+    
+    func testSelectFilterAtNoneExistSection_FilterShouldBeNotSelected() {
+        let section = ProductSearchFiltersViewModel.Section.cities
+        let firstFilter = ListItem<SearchFilter>(item: .init(name: "name1"))
+        
+        sut.select(filter: firstFilter, at: section)
+        
+        XCTAssertFalse(sut.isFilterSelected(filter: firstFilter, in: section))
+    }
+    
+    func testIsFilterSelected_ShouldReturnFalseIfFilterIsNotSelected() {
+        let section = FilterSectionsManager.Section.sortBy
+        let filter = ListItem<SearchFilter>(item: .init(name: "Filter"))
+        
+        let isFilterSelected = sut.isFilterSelected(filter: filter, in: section )
+        
+        XCTAssertFalse(isFilterSelected)
+    }
+    
+    func testDeselectAllFilters_SelectedFiltersShouldBeEmpty() {
+        _ = arrangeSutWithSelectedSearchFilterSections()
+        sut.deselectAllFilters()
+        XCTAssertTrue(sut.selectedFilters.isEmpty)
+    }
+    
+    // MARK:- Handling Section selection tests
     func testHandleSingleSelection_DeselectedFilterShouldBeSelected() {
-        let section = ProductSearchFiltersViewController.Section.sortBy
+        let section = ProductSearchFiltersViewModel.Section.sortBy
         let filter = sut.sectionFilters(for: section)!.filters.first!
         
         sut.select(filter: filter, at: section)
@@ -59,7 +103,7 @@ class FilterSectionsManagerTests: XCTestCase {
     }
     
     func testHandleSingleSelection_SelectedFilterShouldBeDeselected() {
-        let section = ProductSearchFiltersViewController.Section.sortBy
+        let section = ProductSearchFiltersViewModel.Section.sortBy
         let firstFilter = sut.sectionFilters(for: section)!.filters.first!
         let secondFilter = sut.sectionFilters(for: section)!.filters[at: 1]!
         sut.select(filter: firstFilter, at: section)
@@ -69,9 +113,9 @@ class FilterSectionsManagerTests: XCTestCase {
     }
     
     func testHandleMultipleSelection_DeselectedFilterShouldBeSelected() {
-        let section = ProductSearchFiltersViewController.Section.subCategory
-        let firstFilter = ProductSearchFiltersViewController.SearchFilter(name: "1")
-        let secondFilter = ProductSearchFiltersViewController.SearchFilter(name: "2")
+        let section = ProductSearchFiltersViewModel.Section.subCategory
+        let firstFilter = ListItem<SearchFilter>(item: .init(name: "Hello"))
+        let secondFilter = ListItem<SearchFilter>(item: .init(name: "2"))
         
         let sectionFilters = FilterSectionsManager.SectionFilters(filters: [
             firstFilter, secondFilter
@@ -86,9 +130,9 @@ class FilterSectionsManagerTests: XCTestCase {
     }
     
     func testHandleMultipleSelection_SelectedFilterShouldBeDeSelected() {
-        let section = ProductSearchFiltersViewController.Section.subCategory
-        let firstFilter = ProductSearchFiltersViewController.SearchFilter(name: "1")
-        let secondFilter = ProductSearchFiltersViewController.SearchFilter(name: "2")
+        let section = ProductSearchFiltersViewModel.Section.subCategory
+        let firstFilter = ListItem<SearchFilter>(item: .init(name: "name1"))
+        let secondFilter = ListItem<SearchFilter>(item: .init(name: "name2"))
         let sectionFilters = FilterSectionsManager.SectionFilters(filters: [
             firstFilter, secondFilter
         ], selectionType: .multiple)
@@ -103,9 +147,9 @@ class FilterSectionsManagerTests: XCTestCase {
     
     func testHandleMultipleSelection_AllSelectedFiltersShouldBeStillSelectedAfterDeselectingOtherFilters() {
         
-        let section = ProductSearchFiltersViewController.Section.subCategory
-        let firstFilter = ProductSearchFiltersViewController.SearchFilter(name: "1")
-        let secondFilter = ProductSearchFiltersViewController.SearchFilter(name: "2")
+        let section = ProductSearchFiltersViewModel.Section.subCategory
+        let firstFilter = ListItem<SearchFilter>(item: .init(name: "name1"))
+        let secondFilter = ListItem<SearchFilter>(item: .init(name: "name2"))
         let sectionFilters = FilterSectionsManager.SectionFilters(filters: [
             firstFilter, secondFilter
         ], selectionType: .multiple)
@@ -120,58 +164,10 @@ class FilterSectionsManagerTests: XCTestCase {
         
     }
     
-    func testSelectFilterAtSection_FilterShouldBeSelected() {
-        let section = ProductSearchFiltersViewController.Section.subCategory
-        let firstFilter = ProductSearchFiltersViewController.SearchFilter(name: "1")
-        let sectionFilters = FilterSectionsManager.SectionFilters(filters: [
-            firstFilter
-        ], selectionType: .multiple)
-        sut.set(sectionFilters: sectionFilters, to: section)
-        
-        sut.select(filter: firstFilter, at: section)
-        
-        XCTAssertTrue(sut.isFilterSelected(filter: firstFilter, in: section))
-    }
-    
-    func testSelectFilterAtNoneExistSection_FilterShouldBeNotSelected() {
-        let section = ProductSearchFiltersViewController.Section.cities
-        let firstFilter = ProductSearchFiltersViewController.SearchFilter(name: "1")
-        
-        sut.select(filter: firstFilter, at: section)
-        
-        XCTAssertFalse(sut.isFilterSelected(filter: firstFilter, in: section))
-    }
-    
-    func testIsFilterSelected_ShouldReturnFalseIfFilterIsNotSelected() {
-        let section = FilterSectionsManager.Section.sortBy
-        let filter = ProductSearchFiltersViewController.SearchFilter(name: "Filter")
-        
-        let isFilterSelected = sut.isFilterSelected(filter: filter, in: section )
-        
-        XCTAssertFalse(isFilterSelected)
-    }
-    
-    func testDeselectAllFilters_SelectedFiltersShouldBeEmpty() {
-        _ = arrangeSutWithSelectedSearchFilterSections()
-        sut.deselectAllFilters()
-        XCTAssertTrue(sut.selectedFilters.isEmpty)
-    }
-    
     // MARK:- SUT Delegate Tests
-    func testDelegateDidUpdateSection_ShouldBeCalledAfterSetSectionFilters() {
-        let exp = expectation(description: "testDelegateDidUpdateSection" )
-        let delegateSpy = FilterSectionsManagerDelegateSpy(exp: exp)
-        sut.delegate = delegateSpy
-        
-        sut.set(sectionFilters: .init(filters: [.init(name: "Filter")], selectionType: .signle), to: .cities)
-        
-        XCTAssertTrue(delegateSpy.didUpdateSection ?? false)
-        wait(for: [exp], timeout: 1)
-    }
-    
     func testDelegateDidSelectFilter_ShouldBeCalledAfterSelectingASelectedFilter() {
         let exp = expectation(description: "testDelegateDidSelectFilter" )
-        let delegateSpy = FilterSectionsManagerDelegateSpy(exp: exp)
+        let delegateSpy = FilterSectionsManagerDelegateSpy(selectionExp: exp, deSelectionExp: .init(), sectionUpdateExp: .init())
         let filter = arrangeSutWithSelectedSearchFilterSections().first!
         sut.deselectAllFilters()
         sut.delegate = delegateSpy
@@ -182,37 +178,33 @@ class FilterSectionsManagerTests: XCTestCase {
         wait(for: [exp], timeout: 1)
     }
     
-    func testDelegateDidDeselectFilter_ShouldBeCalledAfterSelectingASelectedFilter() {
+    func testDelegateDidDeselectFilters_ShouldBeCalledAfterSelectingASelectedFilter() {
         let exp = expectation(description: "testDelegateDidDeselectFilter" )
-        exp.isInverted = true
-        let delegateSpy = FilterSectionsManagerDelegateSpy(exp: exp)
+        let delegateSpy = FilterSectionsManagerDelegateSpy(selectionExp: .init(), deSelectionExp: exp, sectionUpdateExp: .init())
         let _ = arrangeSutWithSelectedSearchFilterSections()
         sut.delegate = delegateSpy
         
-        sut.select(filter: .init(name: "x"), at: .sortBy)
+        sut.select(filter: ListItem<SearchFilter>(item: .init(name: "Filter")) , at: .sortBy)
         
-        XCTAssertTrue(delegateSpy.didDeselectFilter ?? false)
+        XCTAssertTrue(delegateSpy.didDeselectFilters ?? false)
         wait(for: [exp], timeout: 1)
     }
     
-    
-    
-    
-    
-    func arrangeSutWithSelectedSearchFilterSections() -> [ProductSearchFiltersViewModel.SearchFilter] {
-        var selectedFilters = [SearchFilter]()
-        let sortFilter = SearchFilter(name: "sortFilter", filterValue: "sortFilter")
-        let sortFilters: [SearchFilter] = [ sortFilter ]
+    // MARK:- SUT Arranges
+    func arrangeSutWithSelectedSearchFilterSections() -> [ListItem<SearchFilter>] {
+        let sortFilter = ListItem<SearchFilter>(item: SearchFilter(name: "sortFilter", filterValue: "sortFilter"))
+        
+        let sortFilters = [ sortFilter ]
         let sortSection = ProductSearchFiltersViewModel.Section.sortBy
         
-        let cityFilter1 = SearchFilter(name: "city1", filterValue: "city1")
-        let cityFilter2 = SearchFilter(name: "city1", filterValue: "city1")
-        let cityFilters: [SearchFilter] = [ cityFilter1 , cityFilter2 ]
+        let cityFilter1 = ListItem<SearchFilter>(item:SearchFilter(name: "city1", filterValue: "city1") )
+        let cityFilter2 = ListItem<SearchFilter>(item: SearchFilter(name: "city1", filterValue: "city1"))
+        let cityFilters = [ cityFilter1 , cityFilter2 ]
         let citySection = ProductSearchFiltersViewModel.Section.cities
         
-        let subcategoryFilter1 = SearchFilter(name: "sub1", filterValue: "sub1")
+        let subcategoryFilter1 = ListItem<SearchFilter>(item: SearchFilter(name: "sub1", filterValue: "sub1"))
         
-        sut.set(sectionFilters: .init(filters: sortFilters, selectionType: .signle), to: sortSection)
+        sut.set(sectionFilters: .init(filters: sortFilters, selectionType: .single), to: sortSection)
         sut.set(sectionFilters: .init(filters: cityFilters, selectionType: .multiple), to: citySection)
         sut.set(sectionFilters: .init(filters: [subcategoryFilter1], selectionType: .multiple), to: .subCategory)
         
@@ -221,37 +213,36 @@ class FilterSectionsManagerTests: XCTestCase {
         sut.select(filter: sortFilter, at: sortSection)
         sut.select(filter: cityFilter1, at: citySection)
         sut.select(filter: subcategoryFilter1, at: .subCategory)
-        selectedFilters = [sortFilter , cityFilter1 , subcategoryFilter1]
         
-        return selectedFilters
+        return [sortFilter , cityFilter1 , subcategoryFilter1]
         
     }
-    
-    
 }
 
-
+// MARK:- Test Doubles
 private class FilterSectionsManagerDelegateSpy: FilterSectionsManagerDelegate {
-    
-    let exp: XCTestExpectation
+    let selectionExp: XCTestExpectation
+    let deSelectionExp: XCTestExpectation
+    let sectionUpdateExp: XCTestExpectation
     var didUpdateSection: Bool?
-    var didDeselectFilter: Bool?
+    var didDeselectFilters: Bool?
     var didSelectFilter: Bool?
     
-    init(exp: XCTestExpectation) {
-        self.exp = exp
+    init(selectionExp: XCTestExpectation, deSelectionExp: XCTestExpectation, sectionUpdateExp: XCTestExpectation) {
+        self.selectionExp = selectionExp
+        self.deSelectionExp = deSelectionExp
+        self.sectionUpdateExp = sectionUpdateExp
     }
-    func filterSectionsManager(didDeselectFilter filter: FilterSectionsManager.SearchFilter) {
-        didDeselectFilter = true
+    func filterSectionsManager(didDeselectFilters filters: [ListItem<SearchFilter>] ) {
+        didDeselectFilters = true
+        deSelectionExp.fulfill()
     }
     
-    func filterSectionsManager(didSelectFilter filter: FilterSectionsManager.SearchFilter) {
+    func filterSectionsManager(didSelectFilter filter: ListItem<SearchFilter>) {
         didSelectFilter = true
-        exp.fulfill()
+        selectionExp.fulfill()
     }
     
-    func filterSectionsManager(didUpdateSection section: FilterSectionsManager.Section) {
-        didUpdateSection = true
-        exp.fulfill()
+    func filterSectionManager(didAppendFiltersAtSection section: FilterSectionsManager.Section) {
     }
 }

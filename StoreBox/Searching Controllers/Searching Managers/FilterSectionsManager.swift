@@ -9,76 +9,71 @@
 import Foundation
 
 protocol FilterSectionsManagerDelegate: class {
-    func filterSectionsManager(didDeselectFilter filter: FilterSectionsManager.SearchFilter)
-    func filterSectionsManager(didSelectFilter filter: FilterSectionsManager.SearchFilter)
-    func filterSectionsManager(didUpdateSection section: FilterSectionsManager.Section)
+    func filterSectionsManager(didDeselectFilters filters: [ListItem<SearchFilter>])
+    func filterSectionsManager(didSelectFilter filter: ListItem<SearchFilter>)
+    func filterSectionManager(didAppendFiltersAtSection section: FilterSectionsManager.Section )
 }
-
 protocol FilterSectionsManagerDataSource: class {
     func filterSectionsManager()
 }
-
-
 /// Managing search filter sections addition  & selection, allowing a section to select a single or multiple filters and keep track of them
 class FilterSectionsManager {
-    
-    typealias Section = ProductSearchFiltersViewController.Section
-    typealias SearchFilter = ProductSearchFiltersViewController.SearchFilter
+    typealias Section = ProductSearchFiltersViewModel.Section
     typealias SearchFilterSection =  [ Section : SectionFilters ]
-    typealias SelectedSearchFilters = [Section : Set<SearchFilter> ]
+    typealias SelectedSearchFilters = [Section : Set< ListItem<SearchFilter> > ]
     typealias AssociatedFilters = ProductsSearchingService.AssociatedSearchFiltersParams
     
     private(set) var filterSections: SearchFilterSection = [:]
     private(set) var selectedFilters: SelectedSearchFilters = [:]
     weak var delegate: FilterSectionsManagerDelegate?
     
-    var sections: [Section] {
-        return filterSections.map({ $0.key})
-    }
+    var sections: [Section] { return filterSections.map({ $0.key}) }
     
     init(delegate: FilterSectionsManagerDelegate? = nil) {
         self.filterSections = self.getDefaultFilterSection()
         self.delegate = delegate
     }
     
+    // MARK:- Default search filters
     private func getDefaultFilterSection() -> SearchFilterSection  {
-        return [
-            .sortBy : .init(filters: [
-                .init(name: "Price: low to hight", filterValue: "price", assotiatedFilters: AssociatedFilters.ascendingSorting() ) ,
-                .init(name: "Price: hight to low", filterValue: "price", assotiatedFilters: AssociatedFilters.descendingSorting() ),
-                .init(name: "Newest", filterValue: "created_at", assotiatedFilters: AssociatedFilters.descendingSorting() ),
-                .init(name: "Older", filterValue: "created_at", assotiatedFilters: AssociatedFilters.ascendingSorting())
-            ], selectionType: .signle)
-        ]
+        let sortSearchFilters = [
+            .init(name: "Price: low to high", filterValue: "price", assotiatedFilters: AssociatedFilters.ascendingSorting() ) ,
+            .init(name: "Price: hight to low", filterValue: "price", assotiatedFilters: AssociatedFilters.descendingSorting() ),
+            .init(name: "Newest", filterValue: "created_at", assotiatedFilters: AssociatedFilters.descendingSorting() ),
+            .init(name: "Older", filterValue: "created_at", assotiatedFilters: AssociatedFilters.ascendingSorting())
+        ].map({ListItem<SearchFilter>(item: $0)})
+        return [ .sortBy : .init(filters: sortSearchFilters, selectionType: .single) ]
     }
     
+    // MARK:- SectionFilters setting & getting
     func set(sectionFilters: SectionFilters, to section: Section) {
         filterSections[section] = sectionFilters
-        delegate?.filterSectionsManager(didUpdateSection: section)
+        delegate?.filterSectionManager(didAppendFiltersAtSection: section)
     }
     
     func sectionFilters(for section: Section) -> SectionFilters? {
         return filterSections[section]
     }
     
-    func selectedFilters(at section: Section) -> [SearchFilter] {
+    // MARK:- filter selection
+    func selectedFilters(at section: Section) -> [ListItem<SearchFilter>] {
         guard let filtersSet = selectedFilters[section] else { return [] }
         return Array(filtersSet)
     }
     
-    func isFilterSelected(filter: SearchFilter, in section: Section) -> Bool {
+    func isFilterSelected(filter: ListItem<SearchFilter>, in section: Section) -> Bool {
         guard selectedFilters[section]?.contains(filter) == true else {
             return false
         }
         return true
     }
     
-    func select(filter: SearchFilter , at section: Section) {
+    func select(filter: ListItem<SearchFilter> , at section: Section) {
         guard let sectionSelectionType = filterSections[section]?.selectionType else {
             return
         }
         switch sectionSelectionType {
-            case .signle:
+            case .single:
                 handleSingleSelection(selectedFilter: filter, at: section)
             case .multiple:
                 handleMultipleSelection(selectedFilter: filter, at: section)
@@ -86,24 +81,27 @@ class FilterSectionsManager {
     }
     
     func deselectAllFilters() {
-        let selectedSections = selectedFilters.keys
+        let deSelectedFilters = Array(selectedFilters.values).reduce([]) { (result, sectionFilters) -> [ListItem<SearchFilter>]  in
+            return result + Array(sectionFilters)
+        }
         selectedFilters = [:]
-        selectedSections.forEach({ delegate?.filterSectionsManager(didUpdateSection: $0) })
+        delegate?.filterSectionsManager(didDeselectFilters: deSelectedFilters)
     }
     
-    private func handleSingleSelection(selectedFilter: SearchFilter, at section: Section) {
+    // MARK:- Selection handling
+    private func handleSingleSelection(selectedFilter: ListItem<SearchFilter>, at section: Section) {
         if let previousSelectedFilter = selectedFilters[section]?.first {
             selectedFilters[section] = []
-            delegate?.filterSectionsManager(didDeselectFilter: previousSelectedFilter)
+            delegate?.filterSectionsManager(didDeselectFilters: [previousSelectedFilter])
         }
         selectedFilters[section] = [selectedFilter]
-        delegate?.filterSectionsManager(didDeselectFilter: selectedFilter)
+        delegate?.filterSectionsManager(didSelectFilter: selectedFilter)
     }
     
-    private func handleMultipleSelection(selectedFilter: SearchFilter, at section: Section) {
+    private func handleMultipleSelection(selectedFilter: ListItem<SearchFilter>, at section: Section) {
         if selectedFilters[section]?.contains(selectedFilter) ?? false {
             selectedFilters[section]?.remove(selectedFilter)
-            delegate?.filterSectionsManager(didDeselectFilter: selectedFilter)
+            delegate?.filterSectionsManager(didDeselectFilters: [selectedFilter])
             return
         }
         var updateSelectedFiltersSet = Set(selectedFilters[section] ?? [])
@@ -116,15 +114,12 @@ class FilterSectionsManager {
 // MARK:- Helpers models
 extension FilterSectionsManager {
     struct SectionFilters: Equatable {
-        var filters: [SearchFilter]
+        var filters: [ListItem<SearchFilter>]
         let selectionType: SelectionType
-        
-        enum SelectionType {
-            case signle
-            case multiple
-        }
     }
-    
-    
+    enum SelectionType {
+        case single
+        case multiple
+    }
 }
 
