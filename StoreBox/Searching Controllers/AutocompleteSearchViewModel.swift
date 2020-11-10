@@ -43,6 +43,7 @@ class AutocompleteSearchViewModel {
         tableViewDataSource.apply(freshSnapshot)
     }
     
+    
     func isValid(searchQuery: String) -> Bool {
         let isTrimmingTextEmpty = searchQuery.trimmingCharacters(in: .whitespaces).isEmpty
         let isSearchQueryCountIsLess = searchQuery.count < 3

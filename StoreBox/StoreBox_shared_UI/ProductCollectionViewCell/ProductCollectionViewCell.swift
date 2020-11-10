@@ -9,8 +9,7 @@
 import UIKit
 
 class ProductCollectionViewCell: UICollectionViewCell {
-    
-
+    static let id = "ProductCollectionViewCellId"
     @IBOutlet weak var nameLabel: UILabel!
     
     

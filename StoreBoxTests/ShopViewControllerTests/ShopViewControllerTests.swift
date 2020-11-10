@@ -9,23 +9,24 @@
 import XCTest
 @testable import StoreBox
 class ShopViewControllerTests: XCTestCase {
-
+    
     var sut: ShopViewController!
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        let rootSut = (UIStoryboard(name: "ShopViewController").getInitialViewController(of: UINavigationController.self).topViewController as! ShopViewController)
-        let nv = UINavigationController(rootViewController: rootSut)
-        sut = nv.topViewController as? ShopViewController
+        sut = ShopViewController(collectionViewLayout: .init())
         _ = sut.view
     }
-
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    
+    
+    // MARK:- Setup collectionView dataSource tests
+    func testSetupCollectionViewDataSource_CollectionViewDataSourceShouldBeNotNil() {
+        
     }
     
-    
-    
-    
-    
+    func testDataSourceCellProviderBlock_ShouldReturnNotNilRegisteredCell() {
+        let indexPath = IndexPath(item: 0, section: 0)
+        let cell = sut.dataSourceCellProvider(sut.collectionView, indexPath, .init(item: "name"))
+        XCTAssertNotNil(cell)
+    }
 }
 

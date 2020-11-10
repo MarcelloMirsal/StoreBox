@@ -74,7 +74,7 @@ extension StoresViewController {
         let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier:
             headerId) as! DetailsTableViewHeader
         headerView.contentView.backgroundColor = tableView.backgroundColor
-        headerView.sectionLabel.text = items[section].0
+//        headerView.sectionLabel.text = items[section].0
         return headerView
     }
     

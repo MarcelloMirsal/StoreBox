@@ -12,13 +12,6 @@ import UIKit
 class AutocompleteSearchViewController: UITableViewController {
     let cellId = "cellId"
     var searchTask: DispatchWorkItem?
-    let searchController: UISearchController = {
-        let searchController = UISearchController()
-        searchController.searchBar.placeholder = "Search for products"
-        searchController.obscuresBackgroundDuringPresentation = false
-        searchController.isActive = true
-        return searchController
-    }()
     private(set) weak var mainNavigationController: UINavigationController?
     private(set) lazy var viewModel: AutocompleteSearchViewModel = {
         let viewModel = AutocompleteSearchViewModel()
@@ -37,25 +30,13 @@ class AutocompleteSearchViewController: UITableViewController {
     // MARK:- View's Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupSearchController()
         setupTableView()
         setupTableViewDataSource()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        DispatchQueue.main.async {
-            self.searchController.searchBar.searchTextField.becomeFirstResponder()
-        }
     }
     
     // MARK:- setup views
     func setupTableView() {
         tableView.register(ResultTableViewCell.self, forCellReuseIdentifier: cellId)
-    }
-    func setupSearchController() {
-        searchController.searchBar.delegate = self
-        navigationItem.searchController = searchController
     }
     
     // MARK:- setup ViewModel with tableViewDatasource
@@ -72,13 +53,10 @@ class AutocompleteSearchViewController: UITableViewController {
     // MARK:- Presentation
     @discardableResult
     func presentProductSearchViewController(for productSearchQuery: String) -> ProductSearchViewController {
-        let viewController = ProductSearchViewController.initiate(for: productSearchQuery)
-        viewController.navigationItem.largeTitleDisplayMode = .never
-        mainNavigationController?.pushViewController(viewController, animated: false)
-        searchController.dismiss(animated: false) {
-            self.dismiss(animated: true)
-        }
-        return viewController
+        let productSearchViewController = ProductSearchViewController.initiate(for: productSearchQuery)
+        productSearchViewController.navigationItem.largeTitleDisplayMode = .never
+        mainNavigationController?.pushViewController(productSearchViewController, animated: true)
+        return productSearchViewController
     }
 }
 

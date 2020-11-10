@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DetailsTableViewHeader: ShopTableViewHeaderSection {
+class DetailsTableViewHeader: UITableViewHeaderFooterView {
     
     let button: UIButton = {
         let btn = UIButton(type: .system)

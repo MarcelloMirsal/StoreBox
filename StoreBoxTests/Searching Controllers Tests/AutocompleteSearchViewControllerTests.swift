@@ -29,15 +29,6 @@ class AutocompleteSearchViewControllerTests: XCTestCase {
         XCTAssertTrue(sut.viewModel.delegate === sut)
     }
     
-    func testSetupSearchController_NavigationItemSearchControllerShouldBeNotNil() {
-        sut.setupSearchController()
-        XCTAssertNotNil(sut.navigationItem.searchController)
-    }
-    
-    func testSearchControllerBarDelegate_ShouldBeEqualToSut() {
-        XCTAssertTrue(sut.searchController.searchBar.delegate === sut)
-    }
-    
     func testTableViewDataSouceCellProvider_ShouldDequeueNotNilCell() {
         arrangeSutWithAutocompleteSearchResults()
         let indexPath = IndexPath(row: 0, section: 0)

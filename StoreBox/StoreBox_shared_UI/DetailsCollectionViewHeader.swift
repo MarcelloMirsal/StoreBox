@@ -9,18 +9,20 @@
 import UIKit
 
 final class DetailsCollectionViewHeader: UICollectionReusableView {
+    static let id = "headerId"
     
     let sectionTitle: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "AvenirNext-Bold", size: UIFont.labelFontSize+4 )
+        label.font = .preferredFont(forTextStyle: .title2)
         return label
     }()
     
     let detailsButton: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.titleLabel?.font = UIFont(name: "AvenirNext-Bold", size: UIFont.labelFontSize )
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.titleLabel?.font = .preferredFont(forTextStyle: .callout)
         button.setTitleColor(.systemBlue, for: .normal)
         return button
     }()
@@ -28,14 +30,18 @@ final class DetailsCollectionViewHeader: UICollectionReusableView {
     
     override func didMoveToSuperview() {
         super.didMoveToSuperview()
-        let stackView = UIStackView(arrangedSubviews: [ sectionTitle, detailsButton ])
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(stackView)
+        addSubview(sectionTitle)
+        addSubview(detailsButton)
+        
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: topAnchor),
-            stackView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            stackView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            stackView.bottomAnchor.constraint(equalTo: bottomAnchor)
+            detailsButton.firstBaselineAnchor.constraint(equalTo: sectionTitle.firstBaselineAnchor),
+            sectionTitle.topAnchor.constraint(equalTo: topAnchor),
+            sectionTitle.leadingAnchor.constraint(equalTo: leadingAnchor),
+            sectionTitle.bottomAnchor.constraint(equalTo: bottomAnchor),
+            
+            detailsButton.topAnchor.constraint(equalTo: topAnchor),
+            detailsButton.trailingAnchor.constraint(equalTo: trailingAnchor),
+            detailsButton.bottomAnchor.constraint(equalTo: bottomAnchor),
         ])
     }
     
