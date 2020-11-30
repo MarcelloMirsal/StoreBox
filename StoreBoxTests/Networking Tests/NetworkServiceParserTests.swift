@@ -63,9 +63,9 @@ class NetworkServiceParserTests: XCTestCase {
     }
     
     func testParseSuccessfulDataResponse_ParsedProductsShouldBeNotNil() {
-        let product1 = Product(id: 1, name: "0", price: 0, discount: 0, priceAfterDiscount: 0, storeName: "", subCategoryName: "")
+        let product1 = Product(id: 1, name: "0", price: 0, discount: 0, priceAfterDiscount: 0,hasDiscount: true, storeName: "")
         
-        let product2 = Product(id: 1, name: "0", price: 0, discount: 0, priceAfterDiscount: 0, storeName: "", subCategoryName: "")
+        let product2 = Product(id: 1, name: "0", price: 0, discount: 0, priceAfterDiscount: 0,hasDiscount: true, storeName: "")
         
         let responseDict = [ product1, product2  ]
         

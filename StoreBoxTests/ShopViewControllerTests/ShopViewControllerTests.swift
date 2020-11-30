@@ -13,20 +13,11 @@ class ShopViewControllerTests: XCTestCase {
     var sut: ShopViewController!
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        sut = ShopViewController(collectionViewLayout: .init())
+        sut = UIStoryboard(name: "ShopViewController").getInitialViewController(of: UINavigationController.self).topViewController as? ShopViewController
         _ = sut.view
     }
     
-    
-    // MARK:- Setup collectionView dataSource tests
-    func testSetupCollectionViewDataSource_CollectionViewDataSourceShouldBeNotNil() {
-        
-    }
-    
-    func testDataSourceCellProviderBlock_ShouldReturnNotNilRegisteredCell() {
-        let indexPath = IndexPath(item: 0, section: 0)
-        let cell = sut.dataSourceCellProvider(sut.collectionView, indexPath, .init(item: "name"))
-        XCTAssertNotNil(cell)
+    func testViewModelDelegate_ShouldBeEqualToSUT() {
+        XCTAssertTrue(sut.viewModel.delegate === sut)
     }
 }
-

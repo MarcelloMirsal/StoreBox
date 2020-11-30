@@ -69,7 +69,7 @@ class ProductSearchViewControllerTests: XCTestCase {
     }
     
     func arrangeSutCollectionViewFakeProducts() {
-        let product = Product(id: 100, name: "NAME", price: 1.0, discount: 0.0, priceAfterDiscount: 1.0, storeName: "STORE", subCategoryName: "CATEGORY")
+        let product = Product(id: 100, name: "NAME", price: 1.0, discount: 0.0, priceAfterDiscount: 1.0,hasDiscount: false, storeName: "STORE")
         
         var snapshot = NSDiffableDataSourceSnapshot<ProductSearchViewController.Section, Product>()
         snapshot.appendSections([.main])

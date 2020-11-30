@@ -44,7 +44,7 @@ class ProductsSearchingServiceFake: ProductsSearchingServiceProtocol {
             case .failed:
                 completion(.noDataFound, nil)
             case .success:
-                let product = Product(id: 20, name: "name", price: 10, discount: 1, priceAfterDiscount: 9, storeName: "store", subCategoryName: "Category")
+                let product = Product(id: 20, name: "name", price: 10, discount: 1, priceAfterDiscount: 9,hasDiscount: true, storeName: "store")
                 let productsList = ProductsList(products: [product], pagination: .emptyListPagination() )
                 completion(nil ,  productsList)
                 break

@@ -15,28 +15,4 @@ class SceneDelegateTests: XCTestCase {
     override  func setUp() {
         sut = UIApplication.shared.connectedScenes.first!.delegate as? SceneDelegate
     }
-    override func tearDown() {
-        UserAuthService.token = nil
-    }
-    
-    func testSutWindowRootViewController_ShouldBeEqualToUserLoginViewControllerWhenTokenIsNil() {
-        let savedToken = UserAuthService.token
-        UserAuthService.token = nil
-        
-        sut.sceneDidBecomeActive(UIApplication.shared.connectedScenes.first!)
-        UserAuthService.token = savedToken
-        
-        XCTAssertTrue(sut.window?.rootViewController?.presentedViewController is UserLoginViewController)
-    }
-    
-    func testSutWindowRootViewController_ShouldBeEqualToMainTabBarControllerWhenTokenIsNotNil() {
-        let savedToken = UserAuthService.token
-        UserAuthService.token = "TokenId"
-        sut.sceneDidBecomeActive(UIApplication.shared.connectedScenes.first!)
-        UserAuthService.token = savedToken
-        XCTAssertTrue(sut.window?.rootViewController is UITabBarController)
-        UserAuthService.token = nil
-    }
-    
-    
 }

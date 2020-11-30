@@ -1,0 +1,237 @@
+{
+    "message": "Data found",
+    "banner_ads": [
+        {
+            "id": 1,
+            "ad_type": 1,
+            "ad_type_text": "store ad",
+            "image_url": ""
+        },
+        {
+            "id": 2,
+            "ad_type": 1,
+            "ad_type_text": "store ad",
+            "image_url": ""
+        },
+        {
+            "id": 3,
+            "ad_type": 2,
+            "ad_type_text": "product ad",
+            "image_url": ""
+        },
+        {
+            "id": 4,
+            "ad_type": 2,
+            "ad_type_text": "product ad",
+            "image_url": ""
+        }
+    ],
+    "product_ads": [
+        {
+            "id": 1,
+            "description": "عرض مغري جداً ولمدة أسبوع فقط",
+            "product_id": 8,
+            "name": "بنطلون أزرق نسائي",
+            "price": 3200,
+            "has_discount": false,
+            "discount": 0,
+            "price_after_discount": 3200
+        },
+        {
+            "id": 2,
+            "description": "عرض مغري جداً ولمدة أسبوع فقط",
+            "product_id": 9,
+            "name": "شنطة جلدية",
+            "price": 3500,
+            "has_discount": false,
+            "discount": 0,
+            "price_after_discount": 3500
+        },
+        {
+            "id": 3,
+            "description": "عرض مغري جداً ولمدة أسبوع فقط",
+            "product_id": 10,
+            "name": "بنطلون جينز أزرق",
+            "price": 4800,
+            "has_discount": false,
+            "discount": 0,
+            "price_after_discount": 4800
+        },
+        {
+            "id": 4,
+            "description": "عرض مغري جداً ولمدة أسبوع فقط",
+            "product_id": 11,
+            "name": "أحذية جلدية نسائية",
+            "price": 3600,
+            "has_discount": false,
+            "discount": 0,
+            "price_after_discount": 3600
+        },
+        {
+            "id": 5,
+            "description": "عرض مغري جداً ولمدة أسبوع فقط",
+            "product_id": 12,
+            "name": "تي شيرت بناتي",
+            "price": 2000,
+            "has_discount": false,
+            "discount": 0,
+            "price_after_discount": 2000
+        },
+        {
+            "id": 6,
+            "description": "عرض مغري جداً ولمدة أسبوع فقط",
+            "product_id": 13,
+            "name": "أحذية بني",
+            "price": 8700,
+            "has_discount": false,
+            "discount": 0,
+            "price_after_discount": 8700
+        }
+    ],
+    "categories": [
+        {
+            "id": 1,
+            "name": "Men Clothes"
+        },
+        {
+            "id": 2,
+            "name": "Women Clothes"
+        },
+        {
+            "id": 3,
+            "name": "Boys Clothes"
+        },
+        {
+            "id": 4,
+            "name": "Girls Clothes"
+        },
+        {
+            "id": 5,
+            "name": "Babies Clothes"
+        },
+        {
+            "id": 6,
+            "name": "Health & beauty"
+        },
+        {
+            "id": 7,
+            "name": "Women accessories"
+        },
+        {
+            "id": 8,
+            "name": "Women Shoes & Bags"
+        },
+        {
+            "id": 9,
+            "name": "Electronics"
+        },
+        {
+            "id": 10,
+            "name": "Food"
+        }
+    ],
+    "products_for_user": [
+        {
+            "id": 5,
+            "name": "summer offers",
+            "products": [
+                {
+                    "id": 10,
+                    "name": "بنطلون جينز أزرق",
+                    "price": 4800,
+                    "has_discount": false,
+                    "discount": 0,
+                    "price_after_discount": 4800,
+                    "store_name": "متجر السلام"
+                },
+                {
+                    "id": 9,
+                    "name": "شنطة جلدية",
+                    "price": 3500,
+                    "has_discount": false,
+                    "discount": 0,
+                    "price_after_discount": 3500,
+                    "store_name": "متجر حمدي"
+                },
+                {
+                    "id": 1,
+                    "name": "Heavy gray pants",
+                    "price": 11000,
+                    "has_discount": false,
+                    "discount": 0,
+                    "price_after_discount": 11000,
+                    "store_name": "متجر حمدي"
+                },
+                {
+                    "id": 3,
+                    "name": "Cotton jacket",
+                    "price": 5000,
+                    "has_discount": false,
+                    "discount": 0,
+                    "price_after_discount": 5000,
+                    "store_name": "متجر السلام"
+                },
+                {
+                    "id": 13,
+                    "name": "أحذية بني",
+                    "price": 8700,
+                    "has_discount": false,
+                    "discount": 0,
+                    "price_after_discount": 8700,
+                    "store_name": "متجر عبدالله"
+                }
+            ]
+        },
+        {
+            "id": 6,
+            "name": "top recent",
+            "products": [
+                {
+                    "id": 6,
+                    "name": "Leather Bag",
+                    "price": 4500,
+                    "has_discount": false,
+                    "discount": 0,
+                    "price_after_discount": 4500,
+                    "store_name": "متجر السيؤني"
+                },
+                {
+                    "id": 8,
+                    "name": "بنطلون أزرق نسائي",
+                    "price": 3200,
+                    "has_discount": false,
+                    "discount": 0,
+                    "price_after_discount": 3200,
+                    "store_name": "متجر عبدالله"
+                },
+                {
+                    "id": 11,
+                    "name": "أحذية جلدية نسائية",
+                    "price": 3600,
+                    "has_discount": false,
+                    "discount": 0,
+                    "price_after_discount": 3600,
+                    "store_name": "متجر عبدالله"
+                },
+                {
+                    "id": 14,
+                    "name": "شنطة سوداء",
+                    "price": 7200,
+                    "has_discount": false,
+                    "discount": 0,
+                    "price_after_discount": 7200,
+                    "store_name": "متجر عبدالله"
+                },
+                {
+                    "id": 9,
+                    "name": "شنطة جلدية",
+                    "price": 3500,
+                    "has_discount": false,
+                    "discount": 0,
+                    "price_after_discount": 3500,
+                    "store_name": "متجر حمدي"
+                }
+            ]
+        }
+    ]
+}

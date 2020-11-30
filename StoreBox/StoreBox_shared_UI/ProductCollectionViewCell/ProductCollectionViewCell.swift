@@ -10,8 +10,10 @@ import UIKit
 
 class ProductCollectionViewCell: UICollectionViewCell {
     static let id = "ProductCollectionViewCellId"
-    @IBOutlet weak var nameLabel: UILabel!
     
+    @IBOutlet weak var storeNameLabel: UILabel!
+    
+    @IBOutlet weak var nameLabel: UILabel!
     
     @IBOutlet weak var purchasePriceLabel: UILabel!
     

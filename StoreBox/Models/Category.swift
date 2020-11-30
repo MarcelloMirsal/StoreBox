@@ -8,6 +8,11 @@
 
 import Foundation
 
+struct Category {
+    let id: Int
+    let name: String
+}
+
 struct Subcategory: Codable {
     let id: Int
     let name: String

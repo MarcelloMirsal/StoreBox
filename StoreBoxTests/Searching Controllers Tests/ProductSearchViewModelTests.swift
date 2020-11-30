@@ -17,7 +17,7 @@ class ProductSearchViewModelTests: XCTestCase {
     }
     
     func testSetProductsList_ShouldSetProductsList() {
-        let product = Product(id: 1, name: "", price: 10, discount: 1, priceAfterDiscount: 9, storeName: "", subCategoryName: "")
+        let product = Product(id: 1, name: "", price: 10, discount: 1, priceAfterDiscount: 9,hasDiscount: true, storeName: "")
         let newProductsList = ProductsList(products: [product], pagination: .emptyListPagination())
         
         sut.set(productList: newProductsList)
@@ -28,7 +28,7 @@ class ProductSearchViewModelTests: XCTestCase {
     }
     
     func testUpdateProductList_ShouldSetNewProductListWhenListIsEmpty() {
-        let product = Product(id: 1, name: "", price: 10, discount: 1, priceAfterDiscount: 9, storeName: "", subCategoryName: "")
+        let product = Product(id: 1, name: "", price: 10, discount: 1, priceAfterDiscount: 9,hasDiscount: true, storeName: "")
         let newProductsList = ProductsList(products: [product], pagination: .emptyListPagination())
         
         sut.update(fetchedProductsList: newProductsList)
@@ -38,10 +38,10 @@ class ProductSearchViewModelTests: XCTestCase {
     }
     
     func testUpdateProductList_ShouldAppendNewProductListWhenListIsNotEmpty() {
-        let currentProduct = Product(id: 1, name: "", price: 10, discount: 1, priceAfterDiscount: 9, storeName: "", subCategoryName: "")
+        let currentProduct = Product(id: 1, name: "", price: 10, discount: 1, priceAfterDiscount: 9,hasDiscount: true, storeName: "")
         let currentProductsList = ProductsList(products: [currentProduct], pagination: .emptyListPagination())
         sut.set(productList: currentProductsList)
-        let newProduct = Product(id: 10, name: "", price: 10, discount: 1, priceAfterDiscount: 9, storeName: "", subCategoryName: "")
+        let newProduct = Product(id: 10, name: "", price: 10, discount: 1, priceAfterDiscount: 9,hasDiscount: false, storeName: "")
         
         let newPagination = ListPagination(currentPage: 2, nextPage: 3, previousPage: 1, totalPages: 10, totalEntries: 10)
         let newProductsList = ProductsList(products: [newProduct], pagination: newPagination)
@@ -77,7 +77,7 @@ class ProductSearchViewModelTests: XCTestCase {
     }
     
     func testProductSearch_ShouldSetProductListToEmpty() {
-        let product = Product(id: 10, name: "name", price: 12, discount: 12, priceAfterDiscount: 12, storeName: "", subCategoryName: "")
+        let product = Product(id: 10, name: "name", price: 12, discount: 12, priceAfterDiscount: 12,hasDiscount: true, storeName: "")
         let pagination = ListPagination(currentPage: 1, nextPage: 2, previousPage: nil, totalPages: 10, totalEntries: 10)
         sut.set(productList: .init(products: [product], pagination: pagination))
         

@@ -31,4 +31,9 @@ class ShopViewModelTests: XCTestCase {
         XCTAssertEqual(dataSource, sut.collectionViewDataSource)
     }
     
+//    func testSetShoppingPromotions_
+    
+    // MARK:- service requests handler tests
+//    func testHandleShoppingPromotionsResponse_
+    
 }

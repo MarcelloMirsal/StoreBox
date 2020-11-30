@@ -13,17 +13,9 @@ struct Product: Codable {
     let name: String
     let price: Double
     let discount: Double
-
     let priceAfterDiscount: Double
+    let hasDiscount: Bool
     let storeName: String
-    let subCategoryName: String
-    
-    enum CodingKeys: String, CodingKey {
-        case id, name, price, discount
-        case priceAfterDiscount = "priceAfterDiscount"
-        case storeName = "storeName"
-        case subCategoryName = "subCategoryName"
-    }
 }
 
 extension Product: Hashable {

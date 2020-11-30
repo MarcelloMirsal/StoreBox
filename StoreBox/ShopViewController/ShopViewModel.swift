@@ -8,71 +8,117 @@
 
 import UIKit
 
+protocol ShopViewModelDelegate: class {
+    func loadShoppingPromotionsDidFailed()
+    func loadShoppingPromotionsDidSuccess()
+}
+
 extension ShopViewModel {
-    typealias ViewDataSource = UICollectionViewDiffableDataSource<Section, ListItem<String>>
+    typealias ViewDataSource = UICollectionViewDiffableDataSource<Section, ListItem<Any>>
 }
 
 final class ShopViewModel {
     private(set) var collectionViewDataSource: ViewDataSource!
+    let shopViewLayoutManager = ShopViewSectionLayoutManager()
+    let promotionsService = PromotionsService()
+    weak var delegate: ShopViewModelDelegate?
+    
+    private(set) var sections: [Section] = [
+        .bannerAds,
+        .productAds,
+        .categories
+    ]
+    
+    func section(atIndex index: Int) -> Section? {
+        return sections[at: index]
+    }
+    
+    func append(section: Section) {
+        sections.append(section)
+    }
     
     // MARK:- Setup collectionViewDataSource
     func set(collectionViewDataSource: ViewDataSource) {
         self.collectionViewDataSource = collectionViewDataSource
-        setFakeDataSourceItems()
+    }
+    
+    func set(shoppingPromotions: ShoppingPromotions) {
+        var newSnapshot = collectionViewDataSource.snapshot()
+        
+        let bannerAds = shoppingPromotions.bannerAds.map(mapToListItem(item:))
+        let productAds = shoppingPromotions.productAds.map(mapToListItem(item:))
+        let categories = shoppingPromotions.categories.map(mapToListItem(item:))
+        
+        newSnapshot.appendSections(sections)
+        newSnapshot.appendItems(bannerAds, toSection: .bannerAds)
+        newSnapshot.appendItems(productAds, toSection: .productAds)
+        newSnapshot.appendItems(categories, toSection: .categories )
+
+        for recommendedProductsSection in shoppingPromotions.recommendedProductsSections {
+            let recommendedProducts = recommendedProductsSection.products.map(mapToListItem(item:))
+            
+            let sectionDescription = recommendedProductsSection.name
+            let recommendedProductsSection = Section.productRecommendation(sectionTitle: sectionDescription)
+            append(section: recommendedProductsSection)
+            newSnapshot.appendSections([recommendedProductsSection])
+            newSnapshot.appendItems(recommendedProducts, toSection: recommendedProductsSection)
+        }
+        collectionViewDataSource.apply(newSnapshot, animatingDifferences: false)
+    }
+    
+    func mapToListItem(item: Any) -> ListItem<Any> {
+        return ListItem<Any>(item: item)
+    }
+    
+    func  layoutForSection(atIndex index: Int) -> NSCollectionLayoutSection? {
+        switch self.section(atIndex: index) {
+            case .bannerAds:
+                return ShopViewSectionLayoutManager.bannerAdsLayout()
+            case .productAds:
+                return ShopViewSectionLayoutManager.productsAdsLayout()
+            case .categories:
+                return ShopViewSectionLayoutManager.categoriesLayout()
+            case .productRecommendation(_):
+                return ShopViewSectionLayoutManager.productsRecommendationLayout()
+            default:
+                return nil
+        }
+    }
+    
+    // MARK:- service requests
+    func loadShoppingPromotions() {
+        promotionsService.shoppingPromotions(completion: handleShoppingPromotionsResponse)
+    }
+    
+    private(set) lazy var handleShoppingPromotionsResponse = { [weak self] (serviceError: NetworkServiceError?, shoppingPromotionsDTO: ShoppingPromotionsDTO?) in
+        if let shoppingPromotions = shoppingPromotionsDTO?.mapObject() {
+            self?.set(shoppingPromotions: shoppingPromotions)
+            self?.delegate?.loadShoppingPromotionsDidSuccess()
+        } else {
+            self?.delegate?.loadShoppingPromotionsDidFailed()
+        }
     }
     
     
-    func setFakeDataSourceItems() {
-        var currnetSnapshot = NSDiffableDataSourceSnapshot<ShopViewModel.Section, ListItem<String>>()
-        
-        let listItem1: ListItem<String> = .init(item: "1")
-        let listItem2: ListItem<String> = .init(item: "2")
-        let listItem3: ListItem<String> = .init(item: "3")
-        
-        let listItemA: ListItem<String> = .init(item: "A")
-        let listItemB: ListItem<String> = .init(item: "B")
-        let listItemC: ListItem<String> = .init(item: "C")
-        
-        let listItemX: ListItem<String> = .init(item: "A")
-        let listItemY: ListItem<String> = .init(item: "B")
-        let listItemZ: ListItem<String> = .init(item: "C")
-        
-        let listItemQ: ListItem<String> = .init(item: "Q")
-        let listItemW: ListItem<String> = .init(item: "W")
-        let listItemE: ListItem<String> = .init(item: "E")
-        
-        let listItem00: ListItem<String> = .init(item: "Tools & Electronics")
-        let listItem01: ListItem<String> = .init(item: "Shoes")
-        let listItem10: ListItem<String> = .init(item: "Smart Phones")
-        let listItem11: ListItem<String> = .init(item: "Cloths")
-        
-        currnetSnapshot.appendSections([.bannerAds,.productAds , .newProducts , .recommendedProducts , .categories])
-        
-        currnetSnapshot.appendItems([listItem1 , listItem2 , listItem3], toSection: .bannerAds)
-        
-        currnetSnapshot.appendItems([ listItemA, listItemB, listItemC ], toSection: .productAds)
-        
-        currnetSnapshot.appendItems([ listItemX, listItemY, listItemZ ], toSection:.newProducts )
-        
-        currnetSnapshot.appendItems([ listItemQ, listItemW, listItemE ], toSection:  .recommendedProducts)
-        
-        currnetSnapshot.appendItems([listItem00, listItem01, listItem10 , listItem11], toSection: .categories)
-        
-        collectionViewDataSource.apply(currnetSnapshot)
-    }
 }
 
 
 extension ShopViewModel {
-    enum Section: String {
+    enum Section: Hashable {
         case bannerAds
         case productAds
-        case newProducts = "New Product"
-        case recommendedProducts = "Recommended Product"
-        case categories = "Categories"
+        case categories
+        case productRecommendation(sectionTitle: String)
         
-        static func description(for section: Section) -> String {
-            return section.rawValue
+        func title() -> String {
+            switch self {
+                case .categories:
+                    return "Categories"
+                case .productRecommendation(let title):
+                    return title
+                default:
+                    return ""
+            }
         }
     }
 }

@@ -14,15 +14,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
     
     func sceneDidBecomeActive(_ scene: UIScene) {
-        if let _ = UserAuthService.token {
-            
-        } else {
-            guard let windowScene = (scene as? UIWindowScene) else { return }
-            let window = windowScene.windows.first!
-            let loginVC = UIStoryboard(name: "UserLoginViewController").getInitialViewController(of: UserLoginViewController.self)
-            loginVC.modalPresentationStyle = .fullScreen
-            window.rootViewController?.present(loginVC, animated: true)
-        }
+//        if let _ = UserAuthService.token {
+//            
+//        } else {
+//            guard let windowScene = (scene as? UIWindowScene) else { return }
+//            let window = windowScene.windows.first!
+//            let loginVC = UIStoryboard(name: "UserLoginViewController").getInitialViewController(of: UserLoginViewController.self)
+//            loginVC.modalPresentationStyle = .fullScreen
+//            window.rootViewController?.present(loginVC, animated: true)
+//        }
     }
     
 }

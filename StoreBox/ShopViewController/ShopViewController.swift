@@ -9,17 +9,42 @@
 import UIKit
 
 final class ShopViewController: UICollectionViewController {
-    
     let viewModel =  ShopViewModel()
-    
+    let loadingIndicatorView = LoadingIndicatorView()
+    var searchController: UISearchController!
     
     // MARK:- View's life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupViewModel()
+        setupLoadingIndicatorView()
+        setupSearchController()
         setupCollectionView()
         setupCollectionLayouts()
         setupCollectionViewDataSource()
+        loadShoppingPromotions()
+    }
+    
+    // MARK:- ViewModel setup
+    func setupViewModel() {
+        viewModel.delegate = self
+    }
+    
+    // MARK:- setup LoadingIndicatorView
+    private func setupLoadingIndicatorView() {
+        let handleLoadingAgainSelector = #selector(handleLoadingAgaing)
+        loadingIndicatorView.setLoadingButtonAction(selector: handleLoadingAgainSelector, for: self)
         
+        view.addSubview(loadingIndicatorView)
+        
+        loadingIndicatorView.topAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        loadingIndicatorView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        loadingIndicatorView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        loadingIndicatorView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+    }
+    
+    // MARK:- SearchController setup
+    private func setupSearchController() {
         let autocompleteSearchController = AutocompleteSearchViewController.initiate(mainNavigationController: navigationController)
         
         let searchController = UISearchController(searchResultsController: autocompleteSearchController)
@@ -30,12 +55,8 @@ final class ShopViewController: UICollectionViewController {
     }
     
     // MARK:- Setup collectionView
-
-    func setupCollectionView() {
-        
-        collectionView.backgroundColor = .systemGray6
-        
-        collectionView.register(AdsCollectionViewCell.self, forCellWithReuseIdentifier: AdsCollectionViewCell.id)
+    private func tableViewRegistration() {
+        collectionView.register(BannerAdCollectionViewCell.self, forCellWithReuseIdentifier: BannerAdCollectionViewCell.id)
         
         collectionView.register(ProductAdCollectionViewCell.self, forCellWithReuseIdentifier: ProductAdCollectionViewCell.id)
         
@@ -46,56 +67,97 @@ final class ShopViewController: UICollectionViewController {
         
         collectionView.register(DetailsCollectionViewHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: DetailsCollectionViewHeader.id)
     }
+
+    private func setupCollectionView() {
+        collectionView.backgroundColor = .systemGray6
+        collectionView.contentInset.bottom = 32
+        tableViewRegistration()
+    }
     
     // MARK:- Setup collectionView layouts
-    func setupCollectionLayouts() {
-        let sectionLayoutManager = ShopViewLayoutManager()
-        
+    private func setupCollectionLayouts() {
         let sectionConfiguartion = UICollectionViewCompositionalLayoutConfiguration()
         sectionConfiguartion.interSectionSpacing = 16
-        
-        let layout = UICollectionViewCompositionalLayout(sectionProvider: { (sectionIndex, env) -> NSCollectionLayoutSection? in
-            if sectionIndex == 0 { return sectionLayoutManager.bannerAdsLayout() }
-            else if sectionIndex == 1 { return sectionLayoutManager.productsAds() }
-            else if sectionIndex == 2 || sectionIndex == 3 { return sectionLayoutManager.productsRecommendation() }
-            else if sectionIndex == 4 { return sectionLayoutManager.categoriesSection() }
-            else { return nil }
+        let layout = UICollectionViewCompositionalLayout(sectionProvider: { [weak self] (index, env) -> NSCollectionLayoutSection? in
+            return self?.viewModel.layoutForSection(atIndex: index)
         }, configuration: sectionConfiguartion)
-        
         collectionView.setCollectionViewLayout(layout, animated: false)
     }
-
     
     // MARK:- Setup CollectionView DataSource
-    func setupCollectionViewDataSource() {
+    private func setupCollectionViewDataSource() {
         let dataSource = ShopViewModel.ViewDataSource(collectionView: collectionView, cellProvider: dataSourceCellProvider)
+        
         dataSource.supplementaryViewProvider = dataSourceSupplementaryViewProvider
         viewModel.set(collectionViewDataSource: dataSource)
     }
     
-    lazy var dataSourceCellProvider: (UICollectionView, IndexPath, ListItem<String>) -> UICollectionViewCell? = { (collectionView, indexPath, listItem) in
-        if indexPath.section == 0 {
-            return collectionView.dequeueReusableCell(withReuseIdentifier: AdsCollectionViewCell.id, for: indexPath) as? AdsCollectionViewCell
-        }
-        else if indexPath.section == 1 {
-            return collectionView.dequeueReusableCell(withReuseIdentifier: ProductAdCollectionViewCell.id, for: indexPath) as? ProductAdCollectionViewCell
-        }
-        else if  indexPath.section == 2 || indexPath.section == 3 {
-            return collectionView.dequeueReusableCell(withReuseIdentifier: ProductCollectionViewCell.id, for: indexPath) as? ProductCollectionViewCell
-        } else if indexPath.section == 4 {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCollectionViewCell.id, for: indexPath) as? CategoryCollectionViewCell
-            cell?.nameLabel.text = listItem.item
-            return cell
-        }
-        else {return nil}
+    private let bannerAdCellConfiguration = {  (collectionView: UICollectionView, indexPath: IndexPath, listItem: BannerAd) -> BannerAdCollectionViewCell? in
+        return collectionView.dequeueReusableCell(withReuseIdentifier: BannerAdCollectionViewCell.id, for: indexPath) as? BannerAdCollectionViewCell
     }
     
-    lazy var dataSourceSupplementaryViewProvider: (UICollectionView, String, IndexPath) -> UICollectionReusableView? = { (collectionView, elementKind, indexPath) in
+    private let productAdCellConfiguration = {  (collectionView: UICollectionView, indexPath: IndexPath, listItem: ProductAd) -> ProductAdCollectionViewCell? in
+        return collectionView.dequeueReusableCell(withReuseIdentifier: ProductAdCollectionViewCell.id, for: indexPath) as? ProductAdCollectionViewCell
+    }
+    
+    private let categoryCellConfiguration = {  (collectionView: UICollectionView, indexPath: IndexPath, listItem: Category) -> CategoryCollectionViewCell? in
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCollectionViewCell.id, for: indexPath) as? CategoryCollectionViewCell
+        cell?.nameLabel.text = listItem.name
+        return cell
+    }
+    
+    private let productCellConfiguration = {  (collectionView: UICollectionView, indexPath: IndexPath, listItem: Product) -> ProductCollectionViewCell? in
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProductCollectionViewCell.id, for: indexPath) as? ProductCollectionViewCell
+        return cell
+    }
+    
+    lazy var dataSourceCellProvider: (UICollectionView, IndexPath, ListItem<Any>) -> UICollectionViewCell? = { [weak self] (collectionView, indexPath, listItem) in
+        guard let section = self?.viewModel.section(atIndex: indexPath.section) else {
+            return nil
+        }
+        switch section {
+            case .bannerAds:
+                return self?.bannerAdCellConfiguration(collectionView, indexPath, listItem.item as! BannerAd)
+            case .productAds:
+                return self?.productAdCellConfiguration(collectionView, indexPath, listItem.item as! ProductAd)
+            case .categories:
+                return self?.categoryCellConfiguration(collectionView, indexPath, listItem.item as! Category)
+            case .productRecommendation(_):
+                return self?.productCellConfiguration(collectionView, indexPath, listItem.item as! Product)
+        }
+    }
+    
+    lazy var dataSourceSupplementaryViewProvider: (UICollectionView, String, IndexPath) -> UICollectionReusableView? = { [weak self] (collectionView, elementKind, indexPath) in
         let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: DetailsCollectionViewHeader.id, for: indexPath) as? DetailsCollectionViewHeader
-        let section = self.viewModel.collectionViewDataSource.snapshot().sectionIdentifiers[indexPath.section]
-        let description = ShopViewModel.Section.description(for: section)
+        guard let section = self?.viewModel.collectionViewDataSource.snapshot().sectionIdentifiers[indexPath.section] else { return nil }
+        
+        let description = section.title()
         headerView?.set(sectionTitle: description, buttonTitle: "" )
         return headerView
+    }
+    
+    // MARK:- Handlers
+    func loadShoppingPromotions() {
+        viewModel.loadShoppingPromotions()
+    }
+    
+    @objc
+    func handleLoadingAgaing() {
+        loadShoppingPromotions()
+        loadingIndicatorView.toggleLoadingButton()
+    }
+}
+
+// MARK:- ViewModel delegate
+extension ShopViewController: ShopViewModelDelegate {
+    func loadShoppingPromotionsDidSuccess() {
+        loadingIndicatorView.isHidden = true
+        // TODO: possible bug in iOS 13 -> orthogonal section cells not centered at first time
+        collectionView.reloadData()
+    }
+    
+    func loadShoppingPromotionsDidFailed() {
+        loadingIndicatorView.toggleLoadingButton()
     }
 }
 
@@ -192,7 +254,7 @@ class ProductAdCollectionViewCell: UICollectionViewCell {
     
     func setupLayers() {
         contentView.backgroundColor = .systemBackground
-        contentView.layer.cornerRadius = 6
+        contentView.layer.cornerRadius = 8
         contentView.layer.masksToBounds = true
         
         layer.shadowOpacity = 0.25
@@ -209,7 +271,7 @@ class ProductAdCollectionViewCell: UICollectionViewCell {
             nameLabel.topAnchor.constraint(equalTo: topAnchor, constant: 8),
             nameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
             nameLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
-            nameLabel.heightAnchor.constraint(equalToConstant: 34),
+            nameLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 32),
             
             descriptionLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 4),
             descriptionLabel.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor),
@@ -219,16 +281,13 @@ class ProductAdCollectionViewCell: UICollectionViewCell {
             imageView.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor),
             imageView.trailingAnchor.constraint(equalTo: nameLabel.trailingAnchor),
             imageView.bottomAnchor.constraint(equalTo: bottomAnchor)
-            
-            
-            
         ])
         
     }
 }
 
 
-class AdsCollectionViewCell: UICollectionViewCell {
+class BannerAdCollectionViewCell: UICollectionViewCell {
     static let id = "AdsCollectionViewCellId"
     let bannerImageView: UIImageView = {
        let imgView = UIImageView(image: #imageLiteral(resourceName: "headerImage"))
@@ -263,4 +322,69 @@ class AdsCollectionViewCell: UICollectionViewCell {
     }
     
     
+}
+
+class LoadingIndicatorView: UIView {
+    
+    private let activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView(style: .medium)
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.startAnimating()
+        return activityIndicator
+    }()
+    
+    private let loadingButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.titleLabel?.textAlignment = .center
+        button.titleLabel?.font = UIFont.preferredFont(forTextStyle: .subheadline)
+        button.setTitleColor(.systemGray, for: .normal)
+        button.setTitleColor(.systemGray, for: .disabled)
+        button.setTitle("Tap here to load data again", for: .normal)
+        button.setTitle("Loading...", for: .disabled)
+        button.isEnabled = false
+        return button
+    }()
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        translatesAutoresizingMaskIntoConstraints = false
+        setupViews()
+    }
+    
+    required init?(coder: NSCoder) {
+        return nil
+    }
+    
+    @discardableResult
+    func toggleLoadingButton() -> Bool {
+        loadingButton.isEnabled = loadingButton.isEnabled ? false : true
+        if loadingButton.isEnabled {
+            activityIndicator.stopAnimating()
+        } else {
+            activityIndicator.startAnimating()
+        }
+        return loadingButton.isEnabled
+    }
+    
+    private func setupViews() {
+        addSubview(activityIndicator)
+        addSubview(loadingButton)
+        NSLayoutConstraint.activate([
+            activityIndicator.topAnchor.constraint(equalTo: topAnchor),
+            activityIndicator.leadingAnchor.constraint(equalTo: leadingAnchor),
+            activityIndicator.trailingAnchor.constraint(equalTo: trailingAnchor)
+        ])
+    
+        NSLayoutConstraint.activate([
+            loadingButton.topAnchor.constraint(equalTo: activityIndicator.bottomAnchor, constant: 4),
+            loadingButton.leadingAnchor.constraint(equalTo: leadingAnchor),
+            loadingButton.trailingAnchor.constraint(equalTo: trailingAnchor)
+        ])
+        
+    }
+    
+    func setLoadingButtonAction(selector: Selector, for target: Any) {
+        loadingButton.addTarget(target, action: selector, for: .touchUpInside)
+    }
 }

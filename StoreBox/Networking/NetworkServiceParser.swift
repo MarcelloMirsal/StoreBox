@@ -15,7 +15,20 @@ protocol NetworkServiceParser {
 extension NetworkServiceParser {
     func parse<T: Decodable>(from jsonData: Data?) throws -> T {
         guard let data = jsonData else { throw NetworkServiceError.noDataFound }
-        guard let decodedType = try? decoder.decode(T.self, from: data) else { throw NetworkServiceError.jsonDecodingFailure }
-        return decodedType
+        let decodedObject: T
+        do {
+            decodedObject = try decoder.decode(T.self, from: data)
+        } catch {
+            print(error as NSError)
+            throw NetworkServiceError.jsonDecodingFailure
+        }
+        return decodedObject
+    }
+}
+
+extension JSONDecoder {
+    convenience init(keyDecodingStrategy: KeyDecodingStrategy) {
+        self.init()
+        self.keyDecodingStrategy = keyDecodingStrategy
     }
 }

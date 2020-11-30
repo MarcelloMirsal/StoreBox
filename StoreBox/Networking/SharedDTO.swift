@@ -32,6 +32,15 @@ struct ListPaginationDTO: Codable {
     }
 }
 
+
+struct CategoryDTO: Codable {
+    let id: Int
+    let name: String
+    func mapObject() -> Category {
+        return Category(id: id, name: name)
+    }
+}
+
 struct SubcategoryDTO: Codable, SearchFilterConvertible {
     let id: Int
     let name: String

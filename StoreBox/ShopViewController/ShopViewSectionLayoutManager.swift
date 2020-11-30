@@ -8,19 +8,20 @@
 
 import UIKit
 
-class ShopViewLayoutManager {
-    func bannerAdsLayout() -> NSCollectionLayoutSection {
+class ShopViewSectionLayoutManager {
+    
+    static func bannerAdsLayout() -> NSCollectionLayoutSection {
         let bannerItem = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1)))
         bannerItem.contentInsets = .init(top: 0, leading: 4, bottom: 0, trailing: 4)
         
-        let bannerGroup = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .fractionalWidth(0.95), heightDimension: .fractionalWidth(9/16)), subitems: [bannerItem])
+        let bannerGroup = NSCollectionLayoutGroup.vertical(layoutSize: .init(widthDimension: .fractionalWidth(0.93), heightDimension: .fractionalWidth(9/16)), subitems: [bannerItem])
         
         let section = NSCollectionLayoutSection(group: bannerGroup)
         section.orthogonalScrollingBehavior = .groupPagingCentered
         return section
     }
     
-    func productsRecommendation() -> NSCollectionLayoutSection {
+    static func productsRecommendationLayout() -> NSCollectionLayoutSection {
         let productItem = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1/2), heightDimension:  .fractionalHeight(3/4) ))
         productItem.contentInsets = .init(top: 0, leading: 4, bottom: 0, trailing: 4)
         
@@ -37,7 +38,7 @@ class ShopViewLayoutManager {
         return section
     }
     
-    func productsAds() -> NSCollectionLayoutSection {
+    static func productsAdsLayout() -> NSCollectionLayoutSection {
         let productItem = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension:  .fractionalHeight(1) ))
         productItem.contentInsets = .init(top: 0, leading: 4, bottom: 0, trailing: 4)
 
@@ -48,7 +49,7 @@ class ShopViewLayoutManager {
         return section
     }
     
-    func categoriesSection() -> NSCollectionLayoutSection {
+    static func categoriesLayout() -> NSCollectionLayoutSection {
         let spacing: CGFloat = 12
         let categoryItem = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(0.5), heightDimension:  .fractionalWidth(0.5) ))
         
@@ -60,7 +61,7 @@ class ShopViewLayoutManager {
         section.contentInsets = .init(top: 8, leading: spacing, bottom: spacing, trailing: spacing)
         
         let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .absolute(42)), elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
-        sectionHeader.contentInsets = .init(top: 0, leading: 16, bottom: 0, trailing: 16)
+        sectionHeader.contentInsets = .init(top: 0, leading: 8, bottom: 0, trailing: 8)
 
         section.boundarySupplementaryItems = [sectionHeader]
         return section
